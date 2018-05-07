@@ -24,7 +24,7 @@
                     <Image url="Images/batton.png" />
                 </image>    
             </ImageView>        
-            <Button styleClass="btn"  layoutX="32" layoutY="310" prefWidth="316" prefHeight="111" text="Jouer" onAction="#clicJouer">       
+            <Button styleClass="btn"  layoutX="32" layoutY="310" prefWidth="316" prefHeight="111"  onAction="#clicJouer">       
                   <graphic>
                      <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                             <image>
@@ -34,7 +34,7 @@
                     </graphic>
             </Button>
             
-            <Button styleClass="btn" layoutX="32" layoutY="430" prefWidth="250" text="Créer une partie en réseau" onAction="#clicCreerReseau">           
+            <Button styleClass="btn" layoutX="32" layoutY="430" prefWidth="250" onAction="#clicCreerReseau">           
                                          
                   <graphic>
                      <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
@@ -46,7 +46,7 @@
             </Button>
             
             
-            <Button styleClass="btn" layoutX="430" layoutY="430" prefWidth="430" text="Rejoindre une partie en réseau" onAction="#clicRejoindreReseau">                             
+            <Button styleClass="btn" layoutX="380" layoutY="430" prefWidth="430"  onAction="#clicRejoindreReseau">                             
                   <graphic>
                      <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                             <image>
@@ -56,7 +56,7 @@
                     </graphic>
             </Button>
             
-            <Button styleClass="btn" layoutX="430" layoutY="310" prefWidth="250" text="Charger une partie" onAction="#clicChargerPartie">                     
+            <Button styleClass="btn" layoutX="430" layoutY="310" prefWidth="250" onAction="#clicChargerPartie">                     
                   <graphic>
                      <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                             <image>
@@ -66,7 +66,7 @@
                     </graphic>
             </Button>
             
-            <Button styleClass="btn" layoutX="75" layoutY="520" prefWidth="240" text="Tutoriel" onAction="#clicTutoriel">         
+            <Button styleClass="btn" layoutX="75" layoutY="520" prefWidth="240" onAction="#clicTutoriel">         
                   <graphic>
                      <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                             <image>
@@ -76,7 +76,7 @@
                     </graphic>
             </Button>
             
-            <Button styleClass="btn" layoutX="460" layoutY="520" prefWidth="250" text="Crédits" onAction="#clicCredits">                          
+            <Button styleClass="btn" layoutX="460" layoutY="520" prefWidth="250" onAction="#clicCredits">                          
                   <graphic>
                      <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                             <image>

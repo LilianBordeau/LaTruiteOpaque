@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 public class ControleurMenuPrincipal  extends ControleurBase
@@ -12,10 +14,13 @@ public class ControleurMenuPrincipal  extends ControleurBase
     public AnchorPane anchorPane;
     
     @FXML
+    public Label labelTitre;
+    
+    @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {        
-        
+        labelTitre.setAlignment(Pos.CENTER);
     }
     
     @FXML

@@ -5,11 +5,64 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
 <AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurChoixJoueurs"-->
         <children>
+                <HBox alignment="CENTER" >
+                <Button fx:id="precedentRouge" mnemonicParsing="false" onMouseClicked="#changerJoueur"  >
+                  <font>
+                    <Font size="30.0" />
+                  </font>
+                  <graphic>
+                     <ImageView  fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                            <image>
+                              <Image url="Images/arriere.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <VBox  alignment="CENTER" >
+                    <StackPane  fx:id="imagesRouge" blendMode="SRC_OVER" cache="false"  layoutX="40.0" layoutY="79.0" minHeight="160.0" minWidth="160.0" pickOnBounds="true" prefHeight="324.0" prefWidth="325.0">
+                     <children>
+                       <ImageView fx:id="joueur" fitHeight="282.0" fitWidth="177.0" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                         <image>
+                           <Image url="Images/pingouinRouge.png" />
+                         </image>
+                       </ImageView>
+                       <ImageView fx:id="IA" fitHeight="298.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="CENTER">
+                         <image>
+                           <Image url="Images/pingouinRougeDifficile.png" />
+                         </image>
+                       </ImageView>
+                     </children>
+                    </StackPane> 
+                    <StackPane  fx:id="nomRouge" blendMode="SRC_OVER" cache="false"  layoutX="40.0" layoutY="79.0" pickOnBounds="true" >
+                        <children>
+                            <TextField layoutX="115.0" layoutY="78.0" visible="true"   />
+                            <Text  text="Joueur 1" visible="false"/>      
+                        </children>
+                    </StackPane> 
+                </VBox>
+                <Button fx:id="suivantRouge" mnemonicParsing="false" onMouseClicked="#changerJoueur">
+                    <font>
+                        <Font size="30.0" />
+                    </font>
+                    <graphic>
+                        <ImageView  fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                            <image>
+                                <Image url="Images/avant.png" />
+                           </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+    
+    
+    
+        
             <Label layoutX="0" layoutY="0" text="Choix des joueurs" />
             <Button layoutX="0" layoutY="50" text="Commencer" onAction="#clicCommencer"/>
             <Button layoutX="0" layoutY="100" text="Retour au menu" onAction="#retourMenu"/>

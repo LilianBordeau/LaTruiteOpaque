@@ -1,7 +1,7 @@
 <?php
 // pour tester ce script sans rien installer : http://rextester.com/l/php_online_compiler
-$ratioHauteurPlateau=0.6; // premiere valeur a changer : part de la hauteur de la fenetre occupee par le plateau
-$ratioLargeurPlateau=0.6; // deuxieme valeur a changer : part de la largeur de la fenetre occupee par le plateau
+$ratioHauteurPlateau=0.8; // premiere valeur a changer : part de la hauteur de la fenetre occupee par le plateau
+$ratioLargeurPlateau=0.7122; // deuxieme valeur a changer : part de la largeur de la fenetre occupee par le plateau
 $largeur="800.0";
 $hauteur="600.0";
 echo('<?xml version="1.0" encoding="UTF-8"?>

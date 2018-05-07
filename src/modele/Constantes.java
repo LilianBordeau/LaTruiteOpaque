@@ -13,7 +13,8 @@ public class Constantes
         }
         else
         {
-            return DOSSIERIMAGES+"/hexagone"+uneCase.nbPoissons+"Poisson"+((uneCase.nbPoissons >= 2)?"s":"")+".png";
+            int randomInt = (int) (Math.random() * 3) + 1; 
+            return DOSSIERIMAGES+"/tuile"+uneCase.nbPoissons+"_"+randomInt+((uneCase.nbPoissons >= 2)?"":"")+".png";
         }
     }
     
@@ -28,7 +29,5 @@ public class Constantes
         {
             throw new RuntimeException("image manquante");
         }
-    }
-            
-        
+    }        
 }

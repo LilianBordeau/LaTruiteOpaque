@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurCredits"-->
         <children>
-            <Label layoutX="0" layoutY="0" text="Crédits" />
-            <Button layoutX="0" layoutY="50" text="Retour au menu" onAction="#retourMenu"/>
+            <Label fx:id="labelTitre" layoutX="275" layoutY="50"   prefWidth="250" text="Crédits" />
+            <Button layoutX="10" layoutY="550" prefWidth="150" text="Retour au menu" onAction="#retourMenu"/>
         </children>
 </AnchorPane>

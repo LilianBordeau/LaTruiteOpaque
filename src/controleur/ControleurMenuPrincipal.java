@@ -20,7 +20,7 @@ public class ControleurMenuPrincipal  extends ControleurBase
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {        
-        labelTitre.setAlignment(Pos.CENTER);
+        //labelTitre.setAlignment(Pos.CENTER);
     }
     
     @FXML

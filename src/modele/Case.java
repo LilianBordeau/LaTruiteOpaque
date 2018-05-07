@@ -56,5 +56,11 @@ public class Case
     {
         return numJoueurPingouin == numJoueur;
     }
+
+    void enleverPingouin()
+    {
+        nbPoissons = eau().nbPoissons;
+        numJoueurPingouin = eau().numJoueurPingouin;
+    }
     
 }

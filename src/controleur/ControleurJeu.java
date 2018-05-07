@@ -1,6 +1,7 @@
 package controleur;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ public class ControleurJeu  extends ControleurBase {
     private static final String SEPARATEURID = "_";
     public ImageView[][] pingouins;
     public ImageView[][] tuiles;
+    public Point pingouinSel;
     
     @FXML
     public AnchorPane anchorPane;
@@ -62,20 +64,55 @@ public class ControleurJeu  extends ControleurBase {
     
     @FXML
     private void clicTuile(MouseEvent event)
-    {        
-        
+    {                
         ImageView tuileGraphique = (ImageView)event.getSource();
         Point coordonnees = idToIndices(tuileGraphique.getId()); 
-        if(navigation.moteur.jouer(coordonnees.ligne, coordonnees.colonne))
-        {            
-            String idPingouin = indicesToId(coordonnees.ligne, coordonnees.colonne, DEBUTIDPINGOUIN);        
-            ImageView pingouinGraphique = (ImageView)anchorPane.getScene().lookup("#"+idPingouin);
-            String nomImage = Constantes.nomImagePingouin(navigation.moteur.plateau.plateau[coordonnees.ligne][coordonnees.colonne]);
-            pingouinGraphique.setImage(new Image(nomImage));
+        if(!navigation.moteur.pingouinsPlaces())
+        {        
+            if(navigation.moteur.placerPingouin(coordonnees.ligne, coordonnees.colonne))
+            {
+                String idPingouin = indicesToId(coordonnees.ligne, coordonnees.colonne, DEBUTIDPINGOUIN);        
+                ImageView pingouinGraphique = (ImageView)anchorPane.getScene().lookup("#"+idPingouin);
+                String nomImage = Constantes.nomImagePingouin(navigation.moteur.plateau.plateau[coordonnees.ligne][coordonnees.colonne]);
+                pingouinGraphique.setImage(new Image(nomImage));
+            }   
+            else
+            {
+                System.out.println("Cette case ne peut pas accueillir de pingouin");
+            }
         }        
         else
         {
-            System.out.println("Cette case ne peut pas accueillir de pingouin");
+              
+            if(navigation.moteur.contientJoueurCourant(coordonnees.ligne,coordonnees.colonne))
+            {
+                pingouinSel = new Point(coordonnees.ligne,coordonnees.colonne);
+                System.out.println("pingouin selectionne : "+pingouinSel);
+                ArrayList<Point> deplacements = navigation.moteur.deplacementsPossibles(coordonnees.ligne, coordonnees.colonne);
+                for(Point depl : deplacements)
+                {
+                    System.out.println(depl);
+                    String idTuile = indicesToId(depl.ligne, depl.colonne, DEBUTIDTUILE);        
+                    ImageView tuileDepl = (ImageView)anchorPane.getScene().lookup("#"+idTuile);
+                    //tuileDepl.setImage(null);
+                }
+            }
+            else if(pingouinSel != null)
+            {
+                int ancienNumJoueur = navigation.moteur.joueurCourant;             
+                if(navigation.moteur.deplacerPingouin(pingouinSel.ligne, pingouinSel.colonne, coordonnees.ligne, coordonnees.colonne))
+                {
+                    String idSource = indicesToId(pingouinSel.ligne, pingouinSel.colonne, DEBUTIDPINGOUIN);        
+                    ImageView tuileSource = (ImageView)anchorPane.getScene().lookup("#"+idSource);
+                    tuileSource.setImage(null);
+                    String idDest = indicesToId(coordonnees.ligne, coordonnees.colonne, DEBUTIDPINGOUIN);        
+                    ImageView tuileDest = (ImageView)anchorPane.getScene().lookup("#"+idDest);
+                    tuileDest.setImage(new Image(Constantes.nomImagePingouin(new Case(1,ancienNumJoueur))));
+                    pingouinSel = null;
+                }
+            }
+            
+            
         }
         /*ImageViewPane tuileGraphique = (ImageViewPane)event.getSource();
         Image image = tuileGraphique.getImageView().getImage();

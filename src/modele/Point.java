@@ -9,4 +9,24 @@ public class Point
         this.ligne = ligne;
         this.colonne = colonne;
     }
+    
+    @Override
+    public String toString()
+    {
+        return "("+ligne+","+colonne+")";
+    }
+    
+    @Override
+    public boolean equals(Object that)
+    {
+        if(that instanceof Point)
+        {
+            Point point = ((Point) that);
+            return ligne==point.ligne && colonne==point.colonne;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

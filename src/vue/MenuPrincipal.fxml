@@ -9,17 +9,23 @@
 <?import javafx.scene.image.ImageView?>
 <?import java.net.*?>
 
-<AnchorPane fx:id="anchorPane" styleClass="anchor" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="950.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" ><!--fx:controller="controleur.ControleurMenuPrincipal"-->
+<AnchorPane fx:id="anchorPane"  maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" ><!--fx:controller="controleur.ControleurMenuPrincipal"-->
    
     <children>
-            <Label fx:id="labelTitre" layoutX="275" layoutY="50"   prefWidth="250" />
-            <ImageView layoutX="200" layoutY="347">
+        <ImageView layoutX="0" layoutY="0" fitHeight="600" fitWidth="800">
+                <image>
+                    <Image url="Images/background.png" />
+                </image>    
+        </ImageView>
+     
+           
+            <ImageView layoutX="200" layoutY="360">
                 <image>
                     <Image url="Images/batton.png" />
                 </image>    
             </ImageView>
             
-            <ImageView layoutX="570" layoutY="400">
+            <ImageView layoutX="570" layoutY="360">
                 <image>
                     <Image url="Images/batton.png" />
                 </image>    

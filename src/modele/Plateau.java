@@ -15,7 +15,7 @@ public class Plateau
             nbCases1Poisson = 0;
             for(int i = 0 ; i < plateau.length ; i++)
             {
-                for(int j = 0 ; j < (((i%2)==0)?(plateau.length-1):plateau.length) ; j++)
+                for(int j = 0 ; j < nbTuilesLigne(i) ; j++)
                 {
                     plateau[i][j] = new Case(random.nextInt(3)+1);
                     if(plateau[i][j].nbPoissons == 1)
@@ -25,5 +25,12 @@ public class Plateau
                 }
             }
         }
+    }
+    
+    
+    
+    public static int nbTuilesLigne(int i)
+    {
+        return (i%2==0)?7:8;
     }
 }

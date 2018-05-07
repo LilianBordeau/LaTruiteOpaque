@@ -7,38 +7,40 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 public class ControleurChoixJoueurs extends ControleurBase
 {    
-    @FXML
-    private void clicCommencer(ActionEvent event)
-    {
-        navigation.changerVue(ControleurJeu.class);
-    }
+   
     
-    @FXML
-    private void retourMenu(ActionEvent event)
-    {
-        navigation.changerVue(ControleurMenuPrincipal.class);
-    }
-    
-    int ROUGE = 0;int BLEU = 2;
-    int VERT = 1;int JAUNE = 3;
-    String[] TYPEJOUEUR = {"JOUEUR", "IA1"};
+    int ROUGE = 0;
+    int VERT = 1;
+    int BLEU = 2;
+    int JAUNE = 3;
+    String[] TYPEJOUEUR = {"JOUEUR", "IA1","AUCUN"};
     String[] COULEUR = {"ROUGE","VERT","BLEU","JAUNE"};
+    int JOUEURREEL = 0;    
+    int IA1 = 1;
+    int AUCUNJOUEUR = 2;
+    
     
     @FXML
-    private Button precedentRouge,suivantRouge,precedentVert,suivantVert;
+    private Button btnCommencer;
     @FXML
-    private StackPane imagesRouge ,nomRouge,imagesVert,nomVert;
+    private Label labelMessage;
     
-    StackPane[] imagesJoueur = new StackPane[2];
+    @FXML
+    private Button precedentRouge,suivantRouge,precedentVert,suivantVert,precedentBleu,suivantBleu,precedentJaune,suivantJaune;
+    @FXML
+    private StackPane imagesRouge ,nomRouge,imagesVert,nomVert,imagesBleu,nomBleu,imagesJaune,nomJaune;
     
-    StackPane[] nomsJoueur = new StackPane[2];
-    int[] typesJoueur = new int[2];
+    StackPane[] imagesJoueur = new StackPane[4];
+    
+    StackPane[] nomsJoueur = new StackPane[4];
+    int[] typesJoueur = new int[4];
    
     
     @Override
@@ -50,17 +52,26 @@ public class ControleurChoixJoueurs extends ControleurBase
         textfield.setVisible(true);
         textfield.setAlignment(Pos.CENTER);
         textfield.setText("Joueur " + " " + COULEUR[ROUGE]);      
-        typesJoueur[ROUGE] = 0;
+        typesJoueur[ROUGE] = JOUEURREEL;
+   
         
-        /*
         imagesJoueur[VERT] = imagesVert;  
         nomsJoueur[VERT] = nomVert;
         textfield = (TextField) nomVert.getChildren().get(0); 
         textfield.setVisible(true);
         textfield.setAlignment(Pos.CENTER);
         textfield.setText("Joueur " + " " + COULEUR[VERT]);   
-        typesJoueur[VERT] = 0;
-   */
+        typesJoueur[VERT] = JOUEURREEL;
+        
+        imagesJoueur[BLEU] = imagesBleu;  
+        nomsJoueur[BLEU] = nomBleu; 
+        typesJoueur[BLEU] = AUCUNJOUEUR;
+   
+        
+        imagesJoueur[JAUNE] = imagesJaune;  
+        nomsJoueur[JAUNE] = nomJaune;  
+        typesJoueur[JAUNE] = AUCUNJOUEUR;
+   
     
     }
     
@@ -83,26 +94,56 @@ public class ControleurChoixJoueurs extends ControleurBase
            System.out.println("precedent rouge");
            couleur = ROUGE;
            rotation = -1;
-       } else if(button == precedentVert)
+       } 
+       else if(button == precedentVert)
        {
            System.out.println("precedent vert");
            couleur = VERT;
            rotation = -1;
-       } else if(button == suivantVert)
+       } 
+       else if(button == suivantVert)
        {
-           System.out.println("precedent vert");
+           System.out.println("suivant vert");
            couleur = VERT;
            rotation = 1;
        }
-       
-       changerAffichage(couleur,rotation);
+       else if(button == suivantBleu)
+       {
+           System.out.println("suivant bleu");
+           couleur = BLEU;
+           rotation = 1;
+       }  
+       else if(button == precedentBleu)
+       {
+           System.out.println("precedent bleu");
+           couleur = BLEU;
+           rotation = -1;
+       }
+        else if(button == suivantJaune)
+       {
+           System.out.println("suivant jaune");
+           couleur = JAUNE;
+           rotation = 1;
+       }  
+       else if(button == precedentJaune)
+       {
+           System.out.println("precedent jaune");
+           couleur = JAUNE;
+           rotation = -1;
+       }  
+       if(couleur != -1)
+       {
+            changerAffichage(couleur,rotation);
+            estPartieConforme();
+       }
+      
     }
 
     private void changerAffichage(int couleur, int rotation) {
         
         StackPane images = imagesJoueur[couleur];
-        typesJoueur[couleur] =  (typesJoueur[couleur] + rotation) % 2;
-        if(typesJoueur[couleur] <0){ typesJoueur[couleur] = 1;}
+        typesJoueur[couleur] =  (typesJoueur[couleur] + rotation) % TYPEJOUEUR.length;
+        if(typesJoueur[couleur] <0){ typesJoueur[couleur] = TYPEJOUEUR.length-1;}
         for (int i = 0; i< images.getChildren().size() ; i++){
     		if (i==typesJoueur[couleur]){
     			images.getChildren().get(i).setVisible(true);
@@ -112,18 +153,57 @@ public class ControleurChoixJoueurs extends ControleurBase
     	}
         
         StackPane nom = nomsJoueur[couleur];
-        if(typesJoueur[couleur] == 0)
+          
+        if(typesJoueur[couleur] == JOUEURREEL)
         {
             TextField textfield = (TextField) nom.getChildren().get(0); 
             textfield.setVisible(true);
             textfield.setText("Joueur " + " " + COULEUR[couleur]);
             nom.getChildren().get(1).setVisible(false);
-        }else
+            
+        }
+        else             
         {
+            String message =  TYPEJOUEUR[ typesJoueur[couleur] ];
             nom.getChildren().get(0).setVisible(false);
+            if(typesJoueur[couleur] == IA1)
+            { 
+                message += " " +  COULEUR[couleur]  ; 
+            }
             Text text = (Text) nom.getChildren().get(1);
             text.setVisible(true);
-            text.setText(TYPEJOUEUR[ typesJoueur[couleur] ] + " " + COULEUR[couleur]);   
+            text.setText(message);   
+        }
+    }
+    
+    @FXML
+    private void clicCommencer(ActionEvent event)
+    {
+        navigation.changerVue(ControleurJeu.class);
+    }
+    
+    @FXML
+    private void retourMenu(ActionEvent event)
+    {
+        navigation.changerVue(ControleurMenuPrincipal.class);
+    }
+
+    private void estPartieConforme() {
+        int nbJoueurs = 0;
+        for(int i=0; i < typesJoueur.length;i++ )
+        {
+            if(typesJoueur[i] != AUCUNJOUEUR )
+            {
+                nbJoueurs++;
+            }
+        }
+        if(nbJoueurs < 2 ) //nombre de joueur minimum non ok 
+        {
+            btnCommencer.setDisable(true);
+             labelMessage.setVisible(true);
+        }else{
+            labelMessage.setVisible(false);
+            btnCommencer.setDisable(false);
         }
     }
     

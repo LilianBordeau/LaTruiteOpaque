@@ -12,8 +12,8 @@
     <children>
             <Label fx:id="labelTitre" layoutX="275" layoutY="50"   prefWidth="250" text="Menu principal" />
             <Button layoutX="275" layoutY="100" prefWidth="250" text="Jouer" onAction="#clicJouer"/> 
-            <Button layoutX="275" layoutY="150" prefWidth="250" text="Créer une partie en réseau" onAction="#clicCreerReseau"/>           
-            <Button layoutX="275" layoutY="200" prefWidth="250" text="Rejoindre une partie en réseau" onAction="#clicRejoindreReseau"/>
+            <Button layoutX="275" layoutY="150" prefWidth="250" text="Créer une partie en ligne" onAction="#clicCreerReseau"/>           
+            <Button layoutX="275" layoutY="200" prefWidth="250" text="Rejoindre une partie en ligne" onAction="#clicRejoindreReseau"/>
             <Button layoutX="275" layoutY="250" prefWidth="250" text="Charger une partie" onAction="#clicChargerPartie"/>
             <Button layoutX="275" layoutY="300" prefWidth="250" text="Tutoriel" onAction="#clicTutoriel"/>
             <Button layoutX="275" layoutY="350" prefWidth="250" text="Crédits" onAction="#clicCredits"/>

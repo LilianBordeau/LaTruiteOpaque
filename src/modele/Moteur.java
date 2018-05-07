@@ -1,6 +1,7 @@
 package modele;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Moteur implements Serializable
 {
@@ -75,6 +76,24 @@ public class Moteur implements Serializable
                 return false;
             }*/
         }
+    }
+    
+    public Point[] deplacementsPossibles(int ligne, int colonne)
+    {
+        ArrayList<Point> deplacements = new ArrayList<>();
+        // utiliser classe Limite
+        /*for(int j = colonne-1 ; j>=0 ; j--)
+        {
+            if(plateau.plateau[ligne][j].peutDeplacerPingouin())
+            {
+                //deplacements.add(new Point(li))
+            }
+            else
+            {
+                break;
+            }
+        }*/
+        return (Point[])deplacements.toArray();
     }
     
 

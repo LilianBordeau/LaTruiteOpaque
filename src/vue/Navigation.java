@@ -28,7 +28,7 @@ public class Navigation
     public Navigation(Group noeudRacine)
     {
         this.noeudRacine = noeudRacine;
-        Joueur[] joueurs = new Joueur[]{new JoueurHumain(), new JoueurHumain()};
+        Joueur[] joueurs = new Joueur[]{new JoueurHumain(), new JoueurHumain(), new JoueurHumain(), new JoueurHumain()};
         moteur = new Moteur(joueurs);
         vuesEtControleurs = new Hashtable<>();
         initialiserVue(ControleurChoixJoueurs.class);

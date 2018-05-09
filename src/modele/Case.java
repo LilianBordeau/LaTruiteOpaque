@@ -1,5 +1,8 @@
 package modele;
-public class Case
+
+import java.io.Serializable;
+
+public class Case implements Serializable
 {
     /*POISSON1(1,-1),POISSON2(2,-1),POISSON3(3,-1),
     POISSON1J0(1,0),POISSON2J0(2,0),POISSON3J0(3,0),
@@ -9,22 +12,35 @@ public class Case
     EAU(0,-1);*/
     
     public int nbPoissons;
-    public int numJoueurPingouin;
+    public transient Pingouin pingouin;
+    private int ligne;
+    private int colonne;
     
-    public Case(int nbPoissons, int numJoueurPingouin)
+    public int numJoueurPingouin()
+    {
+        return (pingouin == null) ? -1 : pingouin.numJoueur;
+    }
+    
+    /*public Case(int nbPoissons, int numJoueurPingouin)
     {
         this.nbPoissons = nbPoissons;
         this.numJoueurPingouin = numJoueurPingouin;
-    }
+    }*/
     
-    public Case(int nbPoissons) // case sans pingouin
+    public Case(int nbPoissons, int ligne, int colonne)
     {
-        this(nbPoissons,-1);
-    }
-    
-    public static Case eau()
-    {
-        return new Case(0);
+        if(nbPoissons <= -1 || nbPoissons >= 4)
+        {
+            throw new RuntimeException("tentative d'instanciation d'une case avec un nombre invalide de poisson ("+nbPoissons+")");
+        }
+        else if(ligne <= -1 || ligne >= 8 ||colonne <= -1 || colonne >= Plateau.nbTuilesLigne(ligne))
+        {
+            throw new RuntimeException("tentative d'instanciation d'une case avec des coordonnees invalides "+new Point(ligne, colonne));
+        }
+        this.nbPoissons = nbPoissons;
+        this.pingouin = null;
+        this.ligne = ligne;
+        this.colonne = colonne;
     }
     
     public boolean peutPlacerPingouin()
@@ -39,7 +55,7 @@ public class Case
     
     public boolean estOccupee()
     {
-        return numJoueurPingouin >= 0;
+        return numJoueurPingouin() >= 0;
     }
     
     public boolean estCoulee()
@@ -47,20 +63,25 @@ public class Case
         return nbPoissons == 0;
     }
 
-    void ajouterPingouin(int numJoueurPingouin)
+    public void ajouterPingouin(Pingouin pingouin)
     {
-        this.numJoueurPingouin = numJoueurPingouin;
+        this.pingouin = pingouin;
+        this.pingouin.ligne = ligne;
+        this.pingouin.colonne = colonne;
     }
 
-    boolean contientPingouin(int numJoueur)
+    public boolean contientPingouin(int numJoueur)
     {
-        return numJoueurPingouin == numJoueur;
+        return numJoueurPingouin() == numJoueur;
     }
 
-    void enleverPingouin()
+    public Case enleverPingouin()
     {
-        nbPoissons = eau().nbPoissons;
-        numJoueurPingouin = eau().numJoueurPingouin;
+        Case ancienneCase = new Case(nbPoissons, ligne, colonne);
+        ancienneCase.pingouin = pingouin;
+        nbPoissons = 0;
+        pingouin = null;
+        return ancienneCase;
     }
     
 }

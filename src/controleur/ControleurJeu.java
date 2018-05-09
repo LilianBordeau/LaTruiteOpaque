@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import modele.Case;
 import modele.Constantes;
+import modele.Joueur;
 import modele.Plateau;
 import modele.Point;
 
@@ -26,6 +28,9 @@ public class ControleurJeu  extends ControleurBase {
     public AnchorPane anchorPane;
     
     @FXML
+    public Label infosJeu;
+
+    @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
@@ -35,11 +40,10 @@ public class ControleurJeu  extends ControleurBase {
         {
             for(int j = 0 ; j < Plateau.nbTuilesLigne(i) ; j++)
             {
-                ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDTUILE));
-                String nomImage = Constantes.nomImageCase(plateau[i][j]);
-                tuileGraphique.setImage(new Image(nomImage));                    
+                miseAJourTuile(i,j);                   
             }
         }
+        miseAJourInfoJeu();
     }
     
     @FXML
@@ -67,14 +71,13 @@ public class ControleurJeu  extends ControleurBase {
     {                
         ImageView tuileGraphique = (ImageView)event.getSource();
         Point coordonnees = idToIndices(tuileGraphique.getId()); 
+        ArrayList<Point> nouveauxPingouinsBloques = null;
         if(!navigation.moteur.pingouinsPlaces())
         {        
-            if(navigation.moteur.placerPingouin(coordonnees.ligne, coordonnees.colonne))
+            nouveauxPingouinsBloques = navigation.moteur.placerPingouin(coordonnees.ligne, coordonnees.colonne);
+            if(nouveauxPingouinsBloques != null)
             {
-                String idPingouin = indicesToId(coordonnees.ligne, coordonnees.colonne, DEBUTIDPINGOUIN);        
-                ImageView pingouinGraphique = (ImageView)anchorPane.getScene().lookup("#"+idPingouin);
-                String nomImage = Constantes.nomImagePingouin(navigation.moteur.plateau.plateau[coordonnees.ligne][coordonnees.colonne]);
-                pingouinGraphique.setImage(new Image(nomImage));
+                miseAJourPingouin(coordonnees.ligne, coordonnees.colonne);
             }   
             else
             {
@@ -91,29 +94,32 @@ public class ControleurJeu  extends ControleurBase {
                 ArrayList<Point> deplacements = navigation.moteur.deplacementsPossibles(coordonnees.ligne, coordonnees.colonne);
                 for(Point depl : deplacements)
                 {
-                    System.out.println(depl);
                     String idTuile = indicesToId(depl.ligne, depl.colonne, DEBUTIDTUILE);        
                     ImageView tuileDepl = (ImageView)anchorPane.getScene().lookup("#"+idTuile);
                     //tuileDepl.setImage(null);
                 }
             }
             else if(pingouinSel != null)
-            {
-                int ancienNumJoueur = navigation.moteur.joueurCourant;             
-                if(navigation.moteur.deplacerPingouin(pingouinSel.ligne, pingouinSel.colonne, coordonnees.ligne, coordonnees.colonne))
+            {       
+                nouveauxPingouinsBloques = navigation.moteur.deplacerPingouin(pingouinSel.ligne, pingouinSel.colonne, coordonnees.ligne, coordonnees.colonne);
+                if(nouveauxPingouinsBloques != null)
                 {
-                    String idSource = indicesToId(pingouinSel.ligne, pingouinSel.colonne, DEBUTIDPINGOUIN);        
-                    ImageView tuileSource = (ImageView)anchorPane.getScene().lookup("#"+idSource);
-                    tuileSource.setImage(null);
-                    String idDest = indicesToId(coordonnees.ligne, coordonnees.colonne, DEBUTIDPINGOUIN);        
-                    ImageView tuileDest = (ImageView)anchorPane.getScene().lookup("#"+idDest);
-                    tuileDest.setImage(new Image(Constantes.nomImagePingouin(new Case(1,ancienNumJoueur))));
+                    miseAJourPingouin(pingouinSel.ligne, pingouinSel.colonne);
+                    miseAJourTuile(pingouinSel.ligne, pingouinSel.colonne); 
+                    miseAJourPingouin(coordonnees.ligne, coordonnees.colonne);
                     pingouinSel = null;
                 }
             }
-            
-            
         }
+        if(nouveauxPingouinsBloques != null)
+        {
+            for(Point point : nouveauxPingouinsBloques)
+            {
+                miseAJourPingouin(point.ligne, point.colonne);
+                miseAJourTuile(point.ligne, point.colonne);
+            }
+        }
+        miseAJourInfoJeu();
         /*ImageViewPane tuileGraphique = (ImageViewPane)event.getSource();
         Image image = tuileGraphique.getImageView().getImage();
         PixelReader reader = image.getPixelReader();
@@ -195,13 +201,57 @@ public class ControleurJeu  extends ControleurBase {
             }
         });
     }
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
-        //paneTuiles.pickOnBoundsProperty().set(true);
-    }    
     */
+
+    private void miseAJourInfoJeu()
+    {
+        String texteInfoJeu = null;
+        if(navigation.moteur.estPartieTerminee())
+        {
+            texteInfoJeu = "Partie terminée ! Gagnant(s) : ";
+            for(Joueur joueur : navigation.moteur.joueursGagnants())
+            {
+                texteInfoJeu += "J"+joueur.numero+" ("+joueur.scorePoisson+"p et "+joueur.scoreTuile+"t), ";
+            }            
+        }
+        else
+        {
+            texteInfoJeu = "Tour du joueur "+navigation.moteur.joueurCourant+"(";
+            for(Joueur joueur : navigation.moteur.joueurs)
+            {
+                texteInfoJeu += "J"+joueur.numero+" : "+joueur.scorePoisson+"p et "+joueur.scoreTuile+"t, ";
+            }
+            texteInfoJeu += ")";
+        }
+        infosJeu.setText(texteInfoJeu);
+        
+    }
+
+    private void miseAJourTuile(int i, int j)
+    {
+        ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDTUILE));
+        Case tuile = navigation.moteur.plateau.plateau[i][j];
+        Image image = null;
+        if(!tuile.estCoulee())
+        {
+            image = new Image(Constantes.nomImageCase(tuile));
+        }
+        tuileGraphique.setImage(image);
+    }
+
+    private void miseAJourPingouin(int i, int j)
+    {
+        String idPingouin = indicesToId(i, j, DEBUTIDPINGOUIN);        
+        ImageView pingouinGraphique = (ImageView)anchorPane.getScene().lookup("#"+idPingouin);
+        Case tuile = navigation.moteur.plateau.plateau[i][j];
+        Image image = null;
+        if(tuile.estOccupee() && !tuile.pingouin.estBloque)
+        {
+            String nomImage = Constantes.nomImagePingouin(navigation.moteur.joueurs[tuile.numJoueurPingouin()]);
+            image = new Image(nomImage);
+        }
+        pingouinGraphique.setImage(image);
+    }
 
     
 }

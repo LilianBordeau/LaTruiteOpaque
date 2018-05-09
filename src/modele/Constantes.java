@@ -18,16 +18,25 @@ public class Constantes
         }
     }
     
-    public static String nomImagePingouin(Case uneCase)
+    public static String nomImagePingouin(Joueur joueur)
     {
-        String nomImage = null;
-        if(uneCase.estOccupee())
+        String couleurJoueur = null;
+        if(joueur.numero == 0)
         {
-            return DOSSIERIMAGES+"/pingouin"+(uneCase.numJoueurPingouin+1)+".png";
+            couleurJoueur = "Bleu";
         }
-        else
+        else if(joueur.numero == 1)
         {
-            throw new RuntimeException("image manquante");
+            couleurJoueur = "Jaune";
         }
-    }        
+        else if(joueur.numero == 2)
+        {
+            couleurJoueur = "Rouge";
+        }
+        else // if(joueur.numero == 3)
+        {
+            couleurJoueur = "Vert";
+        }
+        return DOSSIERIMAGES+"/pingouin"+couleurJoueur+".png";
+    }       
 }

@@ -11,7 +11,8 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #304d93;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurJeu"-->
         <children>           
-           <Button layoutX="0" layoutY="50" text="Retour au menu" onAction="#retourMenu"/>
+           <Button layoutX="0" layoutY="0" text="Retour au menu" onAction="#retourMenu"/>
+           <Label fx:id="infosJeu" layoutX="0" layoutY="35" />
            <ImageView fx:id="c0_0" fitHeight="76.8" fitWidth="71.22" layoutX="150.73" layoutY="60" pickOnBounds="false" onMouseClicked="#clicTuile" />
            <ImageView fx:id="c0_1" fitHeight="76.8" fitWidth="71.22" layoutX="221.95" layoutY="60" pickOnBounds="false" onMouseClicked="#clicTuile" />
            <ImageView fx:id="c0_2" fitHeight="76.8" fitWidth="71.22" layoutX="293.17" layoutY="60" pickOnBounds="false" onMouseClicked="#clicTuile" />

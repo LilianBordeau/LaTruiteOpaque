@@ -19,6 +19,6 @@ public class Constantes
     
     public static String nomImagePingouin(Joueur joueur)
     {
-        return DOSSIERIMAGES+"/pingouins/"+joueur.numero+"_0_6.png";
+        return DOSSIERIMAGES+"/pingouins/"+joueur.couleur+"_0_6.png";
     }       
 }

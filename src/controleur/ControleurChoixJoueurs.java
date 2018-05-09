@@ -211,6 +211,8 @@ public class ControleurChoixJoueurs extends ControleurBase
                     joueurs[i] = new JoueurHumain();
                     TextField tf = (TextField) nomsJoueur[j].getChildren().get(0);
                     joueurs[i].nom = tf.getText();
+                    joueurs[i].couleur = j;
+
                 }
                 else if(typeJoueur == IAFACILE)
                 {

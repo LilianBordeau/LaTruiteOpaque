@@ -15,13 +15,18 @@ public class Moteur implements Serializable
     
     public Moteur(Joueur[] joueurs)
     {
+        nbPingouinsPlaces = 0;
+        joueurCourant = 0; 
+        plateau = new Plateau();  
+        setJoueurs(joueurs);
+    }
+    
+    public void setJoueurs(Joueur[] joueurs)
+    {
         if(joueurs.length<=1||joueurs.length>=5)
         {
             throw new RuntimeException("Le nombre de joueur doit etre compris entre 2 et 4");
         }
-        nbPingouinsPlaces = 0;
-        joueurCourant = 0; 
-        plateau = new Plateau();
         this.joueurs = joueurs;
         nbJoueursInit = joueurs.length;
         for(int i = 0 ; i < this.joueurs.length ; i++)

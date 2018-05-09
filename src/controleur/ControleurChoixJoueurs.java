@@ -11,6 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import modele.Joueur;
+import modele.JoueurHumain;
+import modele.JoueurIAAleatoire;
+import modele.JoueurIADifficile;
+import modele.JoueurIAMoyenne;
 
 public class ControleurChoixJoueurs extends ControleurBase
 {    
@@ -23,9 +28,12 @@ public class ControleurChoixJoueurs extends ControleurBase
     String[] TYPEJOUEUR = {"JOUEUR", "IA FACILE", "IA MOYENNE", "IA DIFFICILE", "AUCUN"};
     String[] COULEUR = {"ROUGE","VERT","BLEU","JAUNE"};
     int JOUEURREEL = 0;    
-    int IA1 = 1;
-    int AUCUNJOUEUR = 2;
+    int IAFACILE = 1;
+    int IAMOYENNE = 2;
+    int IADIFFICILE = 3;
+    int AUCUNJOUEUR = 4;
     
+    int nombreDeJoueurs = 2;
     
     @FXML
     private Button btnCommencer;
@@ -167,7 +175,7 @@ public class ControleurChoixJoueurs extends ControleurBase
         {
             String message =  TYPEJOUEUR[ typesJoueur[couleur] ];
             nom.getChildren().get(0).setVisible(false);
-            if(typesJoueur[couleur] == IA1)
+            if(typesJoueur[couleur] == IAFACILE)
             { 
                 message += " " +  COULEUR[couleur]  ; 
             }
@@ -180,6 +188,46 @@ public class ControleurChoixJoueurs extends ControleurBase
     @FXML
     private void clicCommencer(ActionEvent event)
     {
+        /*int nbJoueurs = 0;
+        for(int typeJoueur : typesJoueur)
+        {
+            if(typeJoueur != AUCUNJOUEUR)
+            {
+                nbJoueurs++;
+            }
+        }*/ 
+        Joueur[] joueurs = new Joueur[nombreDeJoueurs];
+        int i = 0;
+        for(int j = 0; j < typesJoueur.length;j++)
+        {
+            
+            int typeJoueur  = typesJoueur[j];
+            if(typeJoueur != AUCUNJOUEUR)
+            {
+
+                
+                if(typeJoueur == JOUEURREEL)
+                {
+                    joueurs[i] = new JoueurHumain();
+                    TextField tf = (TextField) nomsJoueur[j].getChildren().get(0);
+                    joueurs[i].nom = tf.getText();
+                }
+                else if(typeJoueur == IAFACILE)
+                {
+                   joueurs[i] = new JoueurIAAleatoire();
+                }
+                else if(typeJoueur == IAMOYENNE)
+                {
+                    joueurs[i] = new JoueurIAMoyenne();
+                }
+                else if(typeJoueur == IADIFFICILE)
+                {
+                    joueurs[i] = new JoueurIADifficile();
+                }
+                i++;
+            }
+        }
+        navigation.moteur.setJoueurs(joueurs);
         navigation.changerVue(ControleurJeu.class);
     }
     
@@ -198,10 +246,11 @@ public class ControleurChoixJoueurs extends ControleurBase
                 nbJoueurs++;
             }
         }
+        nombreDeJoueurs = nbJoueurs ;
         if(nbJoueurs < 2 ) //nombre de joueur minimum non ok 
         {
             btnCommencer.setDisable(true);
-             labelMessage.setVisible(true);
+            labelMessage.setVisible(true);
         }else{
             labelMessage.setVisible(false);
             btnCommencer.setDisable(false);

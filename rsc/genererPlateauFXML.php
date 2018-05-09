@@ -42,7 +42,7 @@ for( $i=0 ; $i<=7 ; $i++ )
     for( $j=0 ; $j<=(($i%2==0)?6:7) ; $j++ )
     {
         $x=$xPlateau+$j*$largeurCase+(($i%2==0)?$largeurCase/2.0:0);
-        echo('           <ImageView fx:id="p'.$i.'_'.$j.'" fitHeight="'.($hauteurCase/2).'" fitWidth="'.($largeurCase/2.0).'" layoutX="'.$x.'" layoutY="'.$y.'" pickOnBounds="false" onMouseClicked="#clicTuile" />
+        echo('           <ImageView fx:id="p'.$i.'_'.$j.'" fitHeight="'.($hauteurCase/2).'" fitWidth="'.($largeurCase/2.0).'" layoutX="'.($x+($largeurCase/4.0)).'" layoutY="'.$y.'" pickOnBounds="false" onMouseClicked="#clicTuile" />
 ');
     }
 }

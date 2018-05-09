@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public abstract class Joueur implements Serializable
 {
+    public String nom;
     public int numero;
     public Moteur moteur;
     public int scorePoisson;

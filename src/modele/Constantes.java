@@ -20,23 +20,6 @@ public class Constantes
     
     public static String nomImagePingouin(Joueur joueur)
     {
-        String couleurJoueur = null;
-        if(joueur.numero == 0)
-        {
-            couleurJoueur = "Bleu";
-        }
-        else if(joueur.numero == 1)
-        {
-            couleurJoueur = "Jaune";
-        }
-        else if(joueur.numero == 2)
-        {
-            couleurJoueur = "Rouge";
-        }
-        else // if(joueur.numero == 3)
-        {
-            couleurJoueur = "Vert";
-        }
-        return DOSSIERIMAGES+"/pingouin"+couleurJoueur+".png";
+        return DOSSIERIMAGES+"/pingouins/"+joueur.numero+"_0_6.png";
     }       
 }

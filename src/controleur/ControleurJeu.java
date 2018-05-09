@@ -266,7 +266,7 @@ public class ControleurJeu  extends ControleurBase {
         
         String idAccessible = indicesToId(depl.ligne,depl.colonne,"a");
         ImageView caseAccessible = (ImageView)anchorPane.getScene().lookup("#"+idAccessible);
-        Image image = new Image("Images/accessible.png");
+        Image image = new Image("Images/accessible" + navigation.moteur.joueurCourant + ".png");
         caseAccessible.setImage(image);
         casesAccessibles.add(depl);
         

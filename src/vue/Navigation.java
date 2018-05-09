@@ -64,9 +64,12 @@ public class Navigation
     
     public void changerVue(Class<? extends ControleurBase> classeControleur)
     {
-        Couple<Node,ControleurBase> vueEtControleur = vuesEtControleurs.get(classeControleur.getSimpleName());
+        
+        Couple<Node,ControleurBase> vueEtControleur = vuesEtControleurs.get(classeControleur.getSimpleName()); 
+        vueEtControleur.second.onAppearing();
         noeudRacine.getChildren().clear();
         noeudRacine.getChildren().add(vueEtControleur.premier);
+       
         
     }
 }

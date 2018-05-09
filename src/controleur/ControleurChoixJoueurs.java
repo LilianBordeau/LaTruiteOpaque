@@ -19,12 +19,11 @@ import modele.JoueurIAMoyenne;
 
 public class ControleurChoixJoueurs extends ControleurBase
 {    
-   
     
-    int ROUGE = 0;
-    int VERT = 1;
-    int BLEU = 2;
-    int JAUNE = 3;
+    int BLEU = 0;
+    int JAUNE = 1;
+    int ROUGE = 2;
+    int VERT = 3;
     String[] TYPEJOUEUR = {"JOUEUR", "IA FACILE", "IA MOYENNE", "IA DIFFICILE", "AUCUN"};
     String[] COULEUR = {"BLEU","JAUNE","ROUGE","VERT"};
     int JOUEURREEL = 0;    
@@ -51,36 +50,73 @@ public class ControleurChoixJoueurs extends ControleurBase
     int[] typesJoueur = new int[4];
    
     
+    public void setJoueur(int couleur, StackPane imagesCouleur,StackPane nomCouleur,int typeJoueur)
+    {
+        TextField textfield = null;
+        Text text = null;
+        
+        imagesJoueur[couleur] = imagesCouleur; 
+        typesJoueur[couleur] = typeJoueur;
+        nomsJoueur[couleur] = nomCouleur;
+        setImage(imagesCouleur,typeJoueur);
+        
+        if(typeJoueur == JOUEURREEL){
+            textfield = (TextField) nomCouleur.getChildren().get(0); 
+            textfield.setVisible(true);
+            textfield.setAlignment(Pos.CENTER);
+            textfield.setText("Joueur " + " " + COULEUR[couleur]);  
+
+            text = (Text) nomCouleur.getChildren().get(1); 
+            text.setVisible(false);
+        }
+        else{
+            String message =  TYPEJOUEUR[ typesJoueur[couleur] ];
+            nomCouleur.getChildren().get(0).setVisible(false);
+            if(typesJoueur[couleur] == IAFACILE || typesJoueur[couleur] == IAMOYENNE || typesJoueur[couleur] == IADIFFICILE )
+            { 
+                message += " " +  COULEUR[couleur]  ; 
+            }
+            
+            text = (Text) nomCouleur.getChildren().get(1); 
+            text.setText(message);
+            text.setVisible(true);
+        }
+     
+    }    
+    @Override
+    public void onAppearing()
+    {  
+        nombreDeJoueurs = 2;
+        
+        setJoueur(BLEU,imagesBleu,nomBleu,JOUEURREEL);
+        setJoueur(JAUNE,imagesJaune,nomJaune,JOUEURREEL);
+        setJoueur(ROUGE,imagesRouge,nomRouge,AUCUNJOUEUR);
+        setJoueur(VERT,imagesVert,nomVert,AUCUNJOUEUR);
+       
+    }
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {     
-        imagesJoueur[ROUGE] = imagesRouge;  
-        nomsJoueur[ROUGE] = nomRouge;
-        TextField textfield = (TextField) nomRouge.getChildren().get(0); 
-        textfield.setVisible(true);
-        textfield.setAlignment(Pos.CENTER);
-        textfield.setText("Joueur " + " " + COULEUR[ROUGE]);      
-        typesJoueur[ROUGE] = JOUEURREEL;
-   
-        
-        imagesJoueur[VERT] = imagesVert;  
-        nomsJoueur[VERT] = nomVert;
-        textfield = (TextField) nomVert.getChildren().get(0); 
-        textfield.setVisible(true);
-        textfield.setAlignment(Pos.CENTER);
-        textfield.setText("Joueur " + " " + COULEUR[VERT]);   
-        typesJoueur[VERT] = JOUEURREEL;
-        
-        imagesJoueur[BLEU] = imagesBleu;  
-        nomsJoueur[BLEU] = nomBleu; 
-        typesJoueur[BLEU] = AUCUNJOUEUR;
-   
-        
-        imagesJoueur[JAUNE] = imagesJaune;  
-        nomsJoueur[JAUNE] = nomJaune;  
-        typesJoueur[JAUNE] = AUCUNJOUEUR;
-   
+        onAppearing();
+       
+    }
     
+    
+    public void setImage(StackPane imagesJoueurCouleur, int typeJoueur)
+    {
+        for(int i =0;i<imagesJoueurCouleur.getChildren().size();i++)
+        {
+            if( i == typeJoueur)
+            {
+                imagesJoueurCouleur.getChildren().get(i).setVisible(true);
+            }         
+            else
+            {
+                imagesJoueurCouleur.getChildren().get(i).setVisible(false);
+            }
+        }
     }
     
     
@@ -149,53 +185,19 @@ public class ControleurChoixJoueurs extends ControleurBase
 
     private void changerAffichage(int couleur, int rotation) {
         
-        StackPane images = imagesJoueur[couleur];
-        typesJoueur[couleur] =  (typesJoueur[couleur] + rotation) % TYPEJOUEUR.length;
-        if(typesJoueur[couleur] <0){ typesJoueur[couleur] = TYPEJOUEUR.length-1;}
-        for (int i = 0; i< images.getChildren().size() ; i++){
-    		if (i==typesJoueur[couleur]){
-    			images.getChildren().get(i).setVisible(true);
-    		}else{
-    			images.getChildren().get(i).setVisible(false);
-    		}
-    	}
         
-        StackPane nom = nomsJoueur[couleur];
-          
-        if(typesJoueur[couleur] == JOUEURREEL)
-        {
-            TextField textfield = (TextField) nom.getChildren().get(0); 
-            textfield.setVisible(true);
-            textfield.setAlignment(Pos.CENTER);
-            textfield.setText("Joueur " + " " + COULEUR[couleur]);
-            nom.getChildren().get(1).setVisible(false);
-            
-        }
-        else             
-        {
-            String message =  TYPEJOUEUR[ typesJoueur[couleur] ];
-            nom.getChildren().get(0).setVisible(false);
-            if(typesJoueur[couleur] == IAFACILE)
-            { 
-                message += " " +  COULEUR[couleur]  ; 
-            }
-            Text text = (Text) nom.getChildren().get(1);
-            text.setVisible(true);
-            text.setText(message);   
-        }
+        int nouveauType =  (typesJoueur[couleur] + rotation) % TYPEJOUEUR.length;
+        
+        if(nouveauType < 0){ nouveauType = TYPEJOUEUR.length-1;}
+        
+        setJoueur(couleur,imagesJoueur[couleur],nomsJoueur[couleur],nouveauType);
+        
     }
     
     @FXML
     private void clicCommencer(ActionEvent event)
     {
-        /*int nbJoueurs = 0;
-        for(int typeJoueur : typesJoueur)
-        {
-            if(typeJoueur != AUCUNJOUEUR)
-            {
-                nbJoueurs++;
-            }
-        }*/ 
+
         Joueur[] joueurs = new Joueur[nombreDeJoueurs];
         int i = 0;
         for(int j = 0; j < typesJoueur.length;j++)
@@ -217,14 +219,17 @@ public class ControleurChoixJoueurs extends ControleurBase
                 else if(typeJoueur == IAFACILE)
                 {
                    joueurs[i] = new JoueurIAAleatoire();
+                    joueurs[i].couleur = j;
                 }
                 else if(typeJoueur == IAMOYENNE)
                 {
                     joueurs[i] = new JoueurIAMoyenne();
+                     joueurs[i].couleur = j;
                 }
                 else if(typeJoueur == IADIFFICILE)
                 {
                     joueurs[i] = new JoueurIADifficile();
+                     joueurs[i].couleur = j;
                 }
                 i++;
             }

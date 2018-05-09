@@ -17,4 +17,10 @@ public class ControleurBase implements Initializable
         
     }
     
+    
+    public void onAppearing()
+    {
+        
+    }
+    
 }

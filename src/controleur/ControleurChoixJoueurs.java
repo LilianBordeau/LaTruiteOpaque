@@ -20,7 +20,7 @@ public class ControleurChoixJoueurs extends ControleurBase
     int VERT = 1;
     int BLEU = 2;
     int JAUNE = 3;
-    String[] TYPEJOUEUR = {"JOUEUR", "IA1","AUCUN"};
+    String[] TYPEJOUEUR = {"JOUEUR", "IA FACILE", "IA MOYENNE", "IA DIFFICILE", "AUCUN"};
     String[] COULEUR = {"ROUGE","VERT","BLEU","JAUNE"};
     int JOUEURREEL = 0;    
     int IA1 = 1;
@@ -158,6 +158,7 @@ public class ControleurChoixJoueurs extends ControleurBase
         {
             TextField textfield = (TextField) nom.getChildren().get(0); 
             textfield.setVisible(true);
+            textfield.setAlignment(Pos.CENTER);
             textfield.setText("Joueur " + " " + COULEUR[couleur]);
             nom.getChildren().get(1).setVisible(false);
             

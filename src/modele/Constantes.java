@@ -13,8 +13,7 @@ public class Constantes
         }
         else
         {
-            int randomInt = (int) (Math.random() * 3) + 1; 
-            return DOSSIERIMAGES+"/tuile"+uneCase.nbPoissons+"_"+randomInt+((uneCase.nbPoissons >= 2)?"":"")+".png";
+            return DOSSIERIMAGES+"/tuile"+uneCase.nbPoissons+((uneCase.nbPoissons >= 2)?"":"")+".png";
         }
     }
     

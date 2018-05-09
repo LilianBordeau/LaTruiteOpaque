@@ -26,7 +26,7 @@ public class ControleurChoixJoueurs extends ControleurBase
     int BLEU = 2;
     int JAUNE = 3;
     String[] TYPEJOUEUR = {"JOUEUR", "IA FACILE", "IA MOYENNE", "IA DIFFICILE", "AUCUN"};
-    String[] COULEUR = {"ROUGE","VERT","BLEU","JAUNE"};
+    String[] COULEUR = {"BLEU","JAUNE","ROUGE","VERT"};
     int JOUEURREEL = 0;    
     int IAFACILE = 1;
     int IAMOYENNE = 2;

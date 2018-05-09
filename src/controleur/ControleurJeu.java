@@ -109,9 +109,9 @@ public class ControleurJeu  extends ControleurBase {
             else if(pingouinSel != null)
             {       
                 nouveauxPingouinsBloques = navigation.moteur.deplacerPingouin(pingouinSel.ligne, pingouinSel.colonne, coordonnees.ligne, coordonnees.colonne);
-                suprimerCasesAccessible();
                 if(nouveauxPingouinsBloques != null)
                 {
+                    suprimerCasesAccessible();
                     miseAJourPingouin(pingouinSel.ligne, pingouinSel.colonne);
                     miseAJourTuile(pingouinSel.ligne, pingouinSel.colonne); 
                     miseAJourPingouin(coordonnees.ligne, coordonnees.colonne);

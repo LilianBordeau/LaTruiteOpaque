@@ -2,6 +2,7 @@ package controleur;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +24,8 @@ public class ControleurJeu  extends ControleurBase {
     public ImageView[][] pingouins;
     public ImageView[][] tuiles;
     public Point pingouinSel;
-    
+    public ArrayList<Point> casesAccessibles;
+
     @FXML
     public AnchorPane anchorPane;
     
@@ -43,6 +45,8 @@ public class ControleurJeu  extends ControleurBase {
                 miseAJourTuile(i,j);                   
             }
         }
+        casesAccessibles = new ArrayList<>();
+
         miseAJourInfoJeu();
     }
     
@@ -89,6 +93,7 @@ public class ControleurJeu  extends ControleurBase {
               
             if(navigation.moteur.contientJoueurCourant(coordonnees.ligne,coordonnees.colonne))
             {
+                suprimerCasesAccessible();
                 pingouinSel = new Point(coordonnees.ligne,coordonnees.colonne);
                 System.out.println("pingouin selectionne : "+pingouinSel);
                 ArrayList<Point> deplacements = navigation.moteur.deplacementsPossibles(coordonnees.ligne, coordonnees.colonne);
@@ -97,11 +102,14 @@ public class ControleurJeu  extends ControleurBase {
                     String idTuile = indicesToId(depl.ligne, depl.colonne, DEBUTIDTUILE);        
                     ImageView tuileDepl = (ImageView)anchorPane.getScene().lookup("#"+idTuile);
                     //tuileDepl.setImage(null);
+                    afficherCaseAccessible(depl);
+
                 }
             }
             else if(pingouinSel != null)
             {       
                 nouveauxPingouinsBloques = navigation.moteur.deplacerPingouin(pingouinSel.ligne, pingouinSel.colonne, coordonnees.ligne, coordonnees.colonne);
+                suprimerCasesAccessible();
                 if(nouveauxPingouinsBloques != null)
                 {
                     miseAJourPingouin(pingouinSel.ligne, pingouinSel.colonne);
@@ -253,5 +261,28 @@ public class ControleurJeu  extends ControleurBase {
         pingouinGraphique.setImage(image);
     }
 
+    
+    private void afficherCaseAccessible(Point depl) {
+        
+        String idAccessible = indicesToId(depl.ligne,depl.colonne,"a");
+        ImageView caseAccessible = (ImageView)anchorPane.getScene().lookup("#"+idAccessible);
+        Image image = new Image("Images/accessible.png");
+        caseAccessible.setImage(image);
+        casesAccessibles.add(depl);
+        
+
+    }
+
+    private void suprimerCasesAccessible() {
+                Iterator it = casesAccessibles.iterator();
+                while(it.hasNext())
+                {   
+                   Point depl = (Point) it.next();
+                   String idAccessible = indicesToId(depl.ligne,depl.colonne,"a");
+                   ImageView pingouinGraphique = (ImageView)anchorPane.getScene().lookup("#"+idAccessible);
+                   pingouinGraphique.setImage(null);
+                   it.remove();
+                }    
+    }
     
 }

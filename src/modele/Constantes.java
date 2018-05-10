@@ -3,6 +3,7 @@ package modele;
 public class Constantes
 {
     public static final String DOSSIERIMAGES = "Images";
+    public static final String DOSSIERSONS = "rsc/Sons/";
             
     public static String nomImageCase(Case uneCase)
     {
@@ -21,4 +22,16 @@ public class Constantes
     {
         return DOSSIERIMAGES+"/pingouins/"+joueur.couleur+"_0_6.png";
     }       
+
+    
+    public static final int CLIQUEBOUTON = 1;
+    
+    public static String[] SONS = {"Superboy.mp3","bruitBouton.mp3"};
+    
+    
+    
+    public static String cheminSon(int i)
+    {
+        return DOSSIERSONS+SONS[i];
+    }    
 }

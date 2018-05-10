@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import modele.SonManager;
 import vue.Navigation;
 
 public class App extends Application {
@@ -21,8 +22,10 @@ public class App extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        Group noeudRacine = new Group();        
+        Group noeudRacine = new Group();   
         Navigation navigation = new Navigation(noeudRacine);
+        navigation.sonManager = new SonManager();
+        navigation.sonManager.jouerMusique();
         Scene scene = new Scene(noeudRacine);
         primaryStage.setScene(scene);
         primaryStage.show();

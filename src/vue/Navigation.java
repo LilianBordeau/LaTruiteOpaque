@@ -13,10 +13,13 @@ import java.util.Hashtable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import util.Couple;
 import modele.Joueur;
 import modele.JoueurHumain;
 import modele.Moteur;
+import modele.SonManager;
 
 public class Navigation
 {
@@ -24,7 +27,7 @@ public class Navigation
     public Hashtable<String, Couple<Node,ControleurBase>> vuesEtControleurs;
     private Group noeudRacine;
     public Moteur moteur;
-    
+    public SonManager sonManager;
     public Navigation(Group noeudRacine)
     {
         this.noeudRacine = noeudRacine;
@@ -72,4 +75,10 @@ public class Navigation
        
         
     }
+    
+   public void setFullScreen()
+   {
+              Stage stage = (Stage) noeudRacine.getScene().getWindow();
+              stage.setFullScreen(!stage.isFullScreen());
+   }
 }

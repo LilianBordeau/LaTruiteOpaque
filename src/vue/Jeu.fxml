@@ -150,66 +150,66 @@
         <ImageView fx:id="a7_6" fitHeight="76.8" fitWidth="71.22" layoutX="542.44" layoutY="463.2" onMouseClicked="#clicTuile"  />
         <ImageView fx:id="c7_7" fitHeight="76.8" fitWidth="71.22" layoutX="613.66" layoutY="463.2" pickOnBounds="false" onMouseClicked="#clicTuile"  />
         <ImageView fx:id="a7_7" fitHeight="76.8" fitWidth="71.22" layoutX="613.66" layoutY="463.2" onMouseClicked="#clicTuile"  />
-        <ImageView fx:id="p0_0" fitHeight="57.6" fitWidth="35.61" layoutX="169.93" layoutY="60" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p0_1" fitHeight="57.6" fitWidth="35.61" layoutX="241.15" layoutY="60" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p0_2" fitHeight="57.6" fitWidth="35.61" layoutX="312.37" layoutY="60" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p0_3" fitHeight="57.6" fitWidth="35.61" layoutX="383.59" layoutY="60" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p0_4" fitHeight="57.6" fitWidth="35.61" layoutX="454.81" layoutY="60" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p0_5" fitHeight="57.6" fitWidth="35.61" layoutX="526.03" layoutY="60" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p0_6" fitHeight="57.6" fitWidth="35.61" layoutX="597.25" layoutY="60" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p1_0" fitHeight="57.6" fitWidth="35.61" layoutX="134.32" layoutY="117.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p1_1" fitHeight="57.6" fitWidth="35.61" layoutX="205.54" layoutY="117.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p1_2" fitHeight="57.6" fitWidth="35.61" layoutX="276.76" layoutY="117.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p1_3" fitHeight="57.6" fitWidth="35.61" layoutX="347.98" layoutY="117.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p1_4" fitHeight="57.6" fitWidth="35.61" layoutX="419.2" layoutY="117.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p1_5" fitHeight="57.6" fitWidth="35.61" layoutX="490.42" layoutY="117.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p1_6" fitHeight="57.6" fitWidth="35.61" layoutX="561.64" layoutY="117.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p1_7" fitHeight="57.6" fitWidth="35.61" layoutX="632.86" layoutY="117.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p2_0" fitHeight="57.6" fitWidth="35.61" layoutX="169.93" layoutY="175.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p2_1" fitHeight="57.6" fitWidth="35.61" layoutX="241.15" layoutY="175.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p2_2" fitHeight="57.6" fitWidth="35.61" layoutX="312.37" layoutY="175.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p2_3" fitHeight="57.6" fitWidth="35.61" layoutX="383.59" layoutY="175.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p2_4" fitHeight="57.6" fitWidth="35.61" layoutX="454.81" layoutY="175.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p2_5" fitHeight="57.6" fitWidth="35.61" layoutX="526.03" layoutY="175.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p2_6" fitHeight="57.6" fitWidth="35.61" layoutX="597.25" layoutY="175.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p3_0" fitHeight="57.6" fitWidth="35.61" layoutX="134.32" layoutY="232.8" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p3_1" fitHeight="57.6" fitWidth="35.61" layoutX="205.54" layoutY="232.8" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p3_2" fitHeight="57.6" fitWidth="35.61" layoutX="276.76" layoutY="232.8" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p3_3" fitHeight="57.6" fitWidth="35.61" layoutX="347.98" layoutY="232.8" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p3_4" fitHeight="57.6" fitWidth="35.61" layoutX="419.2" layoutY="232.8" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p3_5" fitHeight="57.6" fitWidth="35.61" layoutX="490.42" layoutY="232.8" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p3_6" fitHeight="57.6" fitWidth="35.61" layoutX="561.64" layoutY="232.8" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p3_7" fitHeight="57.6" fitWidth="35.61" layoutX="632.86" layoutY="232.8" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p4_0" fitHeight="57.6" fitWidth="35.61" layoutX="169.93" layoutY="290.4" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p4_1" fitHeight="57.6" fitWidth="35.61" layoutX="241.15" layoutY="290.4" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p4_2" fitHeight="57.6" fitWidth="35.61" layoutX="312.37" layoutY="290.4" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p4_3" fitHeight="57.6" fitWidth="35.61" layoutX="383.59" layoutY="290.4" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p4_4" fitHeight="57.6" fitWidth="35.61" layoutX="454.81" layoutY="290.4" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p4_5" fitHeight="57.6" fitWidth="35.61" layoutX="526.03" layoutY="290.4" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p4_6" fitHeight="57.6" fitWidth="35.61" layoutX="597.25" layoutY="290.4" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p5_0" fitHeight="57.6" fitWidth="35.61" layoutX="134.32" layoutY="348" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p5_1" fitHeight="57.6" fitWidth="35.61" layoutX="205.54" layoutY="348" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p5_2" fitHeight="57.6" fitWidth="35.61" layoutX="276.76" layoutY="348" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p5_3" fitHeight="57.6" fitWidth="35.61" layoutX="347.98" layoutY="348" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p5_4" fitHeight="57.6" fitWidth="35.61" layoutX="419.2" layoutY="348" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p5_5" fitHeight="57.6" fitWidth="35.61" layoutX="490.42" layoutY="348" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p5_6" fitHeight="57.6" fitWidth="35.61" layoutX="561.64" layoutY="348" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p5_7" fitHeight="57.6" fitWidth="35.61" layoutX="632.86" layoutY="348" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p6_0" fitHeight="57.6" fitWidth="35.61" layoutX="169.93" layoutY="405.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p6_1" fitHeight="57.6" fitWidth="35.61" layoutX="241.15" layoutY="405.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p6_2" fitHeight="57.6" fitWidth="35.61" layoutX="312.37" layoutY="405.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p6_3" fitHeight="57.6" fitWidth="35.61" layoutX="383.59" layoutY="405.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p6_4" fitHeight="57.6" fitWidth="35.61" layoutX="454.81" layoutY="405.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p6_5" fitHeight="57.6" fitWidth="35.61" layoutX="526.03" layoutY="405.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p6_6" fitHeight="57.6" fitWidth="35.61" layoutX="597.25" layoutY="405.6" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p7_0" fitHeight="57.6" fitWidth="35.61" layoutX="134.32" layoutY="463.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p7_1" fitHeight="57.6" fitWidth="35.61" layoutX="205.54" layoutY="463.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p7_2" fitHeight="57.6" fitWidth="35.61" layoutX="276.76" layoutY="463.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p7_3" fitHeight="57.6" fitWidth="35.61" layoutX="347.98" layoutY="463.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p7_4" fitHeight="57.6" fitWidth="35.61" layoutX="419.2" layoutY="463.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p7_5" fitHeight="57.6" fitWidth="35.61" layoutX="490.42" layoutY="463.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p7_6" fitHeight="57.6" fitWidth="35.61" layoutX="561.64" layoutY="463.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
-        <ImageView fx:id="p7_7" fitHeight="57.6" fitWidth="35.61" layoutX="632.86" layoutY="463.2" pickOnBounds="false"  smooth="true" preserveRatio="true" onMouseClicked="#clicTuile" />
+        <ImageView fx:id="p0_0" fitWidth="71.22" layoutX="150.73" layoutY="40.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p0_1" fitWidth="71.22" layoutX="221.95" layoutY="40.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p0_2" fitWidth="71.22" layoutX="293.17" layoutY="40.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p0_3" fitWidth="71.22" layoutX="364.39" layoutY="40.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p0_4" fitWidth="71.22" layoutX="435.61" layoutY="40.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p0_5" fitWidth="71.22" layoutX="506.83" layoutY="40.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p0_6" fitWidth="71.22" layoutX="578.05" layoutY="40.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p1_0" fitWidth="71.22" layoutX="115.12" layoutY="98.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p1_1" fitWidth="71.22" layoutX="186.34" layoutY="98.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p1_2" fitWidth="71.22" layoutX="257.56" layoutY="98.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p1_3" fitWidth="71.22" layoutX="328.78" layoutY="98.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p1_4" fitWidth="71.22" layoutX="400" layoutY="98.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p1_5" fitWidth="71.22" layoutX="471.22" layoutY="98.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p1_6" fitWidth="71.22" layoutX="542.44" layoutY="98.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p1_7" fitWidth="71.22" layoutX="613.66" layoutY="98.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p2_0" fitWidth="71.22" layoutX="150.73" layoutY="156" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p2_1" fitWidth="71.22" layoutX="221.95" layoutY="156" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p2_2" fitWidth="71.22" layoutX="293.17" layoutY="156" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p2_3" fitWidth="71.22" layoutX="364.39" layoutY="156" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p2_4" fitWidth="71.22" layoutX="435.61" layoutY="156" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p2_5" fitWidth="71.22" layoutX="506.83" layoutY="156" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p2_6" fitWidth="71.22" layoutX="578.05" layoutY="156" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p3_0" fitWidth="71.22" layoutX="115.12" layoutY="213.6" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p3_1" fitWidth="71.22" layoutX="186.34" layoutY="213.6" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p3_2" fitWidth="71.22" layoutX="257.56" layoutY="213.6" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p3_3" fitWidth="71.22" layoutX="328.78" layoutY="213.6" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p3_4" fitWidth="71.22" layoutX="400" layoutY="213.6" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p3_5" fitWidth="71.22" layoutX="471.22" layoutY="213.6" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p3_6" fitWidth="71.22" layoutX="542.44" layoutY="213.6" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p3_7" fitWidth="71.22" layoutX="613.66" layoutY="213.6" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p4_0" fitWidth="71.22" layoutX="150.73" layoutY="271.2" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p4_1" fitWidth="71.22" layoutX="221.95" layoutY="271.2" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p4_2" fitWidth="71.22" layoutX="293.17" layoutY="271.2" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p4_3" fitWidth="71.22" layoutX="364.39" layoutY="271.2" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p4_4" fitWidth="71.22" layoutX="435.61" layoutY="271.2" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p4_5" fitWidth="71.22" layoutX="506.83" layoutY="271.2" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p4_6" fitWidth="71.22" layoutX="578.05" layoutY="271.2" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p5_0" fitWidth="71.22" layoutX="115.12" layoutY="328.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p5_1" fitWidth="71.22" layoutX="186.34" layoutY="328.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p5_2" fitWidth="71.22" layoutX="257.56" layoutY="328.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p5_3" fitWidth="71.22" layoutX="328.78" layoutY="328.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p5_4" fitWidth="71.22" layoutX="400" layoutY="328.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p5_5" fitWidth="71.22" layoutX="471.22" layoutY="328.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p5_6" fitWidth="71.22" layoutX="542.44" layoutY="328.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p5_7" fitWidth="71.22" layoutX="613.66" layoutY="328.8" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p6_0" fitWidth="71.22" layoutX="150.73" layoutY="386.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p6_1" fitWidth="71.22" layoutX="221.95" layoutY="386.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p6_2" fitWidth="71.22" layoutX="293.17" layoutY="386.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p6_3" fitWidth="71.22" layoutX="364.39" layoutY="386.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p6_4" fitWidth="71.22" layoutX="435.61" layoutY="386.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p6_5" fitWidth="71.22" layoutX="506.83" layoutY="386.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p6_6" fitWidth="71.22" layoutX="578.05" layoutY="386.4" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p7_0" fitWidth="71.22" layoutX="115.12" layoutY="444" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p7_1" fitWidth="71.22" layoutX="186.34" layoutY="444" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p7_2" fitWidth="71.22" layoutX="257.56" layoutY="444" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p7_3" fitWidth="71.22" layoutX="328.78" layoutY="444" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p7_4" fitWidth="71.22" layoutX="400" layoutY="444" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p7_5" fitWidth="71.22" layoutX="471.22" layoutY="444" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p7_6" fitWidth="71.22" layoutX="542.44" layoutY="444" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
+                <ImageView fx:id="p7_7" fitWidth="71.22" layoutX="613.66" layoutY="444" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
      </children>
 </AnchorPane>
 

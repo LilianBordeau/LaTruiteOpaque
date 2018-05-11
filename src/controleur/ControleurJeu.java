@@ -4,13 +4,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import modele.Case;
 import modele.Constantes;
 import modele.Joueur;
@@ -24,6 +27,7 @@ public class ControleurJeu  extends ControleurBase {
     public ImageView[][] pingouins;
     public ImageView[][] tuiles;
     public Point pingouinSel;
+    public ImageView pingouinMvt;
     public ArrayList<Point> casesAccessibles;
 
     @FXML
@@ -36,6 +40,8 @@ public class ControleurJeu  extends ControleurBase {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        pingouinMvt =  new ImageView();
+        anchorPane.getChildren().add(pingouinMvt);
         anchorPane.getId(); // a supprimer
         Case[][] plateau = navigation.moteur.plateau.plateau;
         for(int i = 0 ; i < plateau.length ; i++)
@@ -111,10 +117,12 @@ public class ControleurJeu  extends ControleurBase {
                 nouveauxPingouinsBloques = navigation.moteur.deplacerPingouin(pingouinSel.ligne, pingouinSel.colonne, coordonnees.ligne, coordonnees.colonne);
                 if(nouveauxPingouinsBloques != null)
                 {
+                    onTranslateDuPinguoin(coordonnees.ligne, coordonnees.colonne);
+
                     suprimerCasesAccessible();
                     miseAJourPingouin(pingouinSel.ligne, pingouinSel.colonne);
                     miseAJourTuile(pingouinSel.ligne, pingouinSel.colonne); 
-                    miseAJourPingouin(coordonnees.ligne, coordonnees.colonne);
+               //     miseAJourPingouin(coordonnees.ligne, coordonnees.colonne);
                     pingouinSel = null;
                 }
             }
@@ -283,6 +291,65 @@ public class ControleurJeu  extends ControleurBase {
                    pingouinGraphique.setImage(null);
                    it.remove();
                 }    
+    }
+
+    private void onTranslateDuPinguoin(int ligne, int colonne) {
+        String idPingouin = indicesToId(pingouinSel.ligne, pingouinSel.colonne,DEBUTIDPINGOUIN);
+        ImageView pingouinGraphique = (ImageView)anchorPane.getScene().lookup("#"+idPingouin);
+        
+        
+        String idCaseDest = indicesToId(ligne, colonne,DEBUTIDPINGOUIN);
+        ImageView caseDest = (ImageView)anchorPane.getScene().lookup("#"+idCaseDest);
+        
+        
+        
+        Case tuile = navigation.moteur.plateau.plateau[ligne][colonne];
+        String nomImage = Constantes.nomImagePingouin(navigation.moteur.joueurs[tuile.numJoueurPingouin()]);
+        Image image = new Image(nomImage);
+       
+        
+        
+        pingouinMvt.setLayoutX(pingouinGraphique.getLayoutX());
+        pingouinMvt.setLayoutY(pingouinGraphique.getLayoutY());
+        pingouinMvt.setFitHeight(pingouinGraphique.getFitHeight());
+        pingouinMvt.setFitWidth(pingouinGraphique.getFitWidth());
+        pingouinMvt.setPreserveRatio(true);
+        pingouinMvt.setVisible(true);
+        pingouinMvt.setImage(image);
+        
+        
+        TranslateTransition animation = new TranslateTransition(
+                Duration.seconds(0.7), pingouinMvt
+        );
+     
+        Double  distanceY = caseDest.getLayoutY() - pingouinMvt.getLayoutY();
+        Double  distanceX = caseDest.getLayoutX() - pingouinMvt.getLayoutX();
+        animation.setFromX(0);
+        animation.setFromY(0);
+        animation.setToY(distanceY);
+        animation.setToX(distanceX);
+        animation.setAutoReverse(true);
+        animation.play();
+        
+        
+        
+        animation.setOnFinished(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                pingouinMvt.setImage(null);
+                pingouinMvt.setVisible(false);
+                miseAJourPingouin(ligne, colonne);
+            }
+        });
+
+        
+               
+        
+        
+        
+
+  
     }
     
 }

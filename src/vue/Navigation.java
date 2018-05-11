@@ -81,4 +81,11 @@ public class Navigation
               Stage stage = (Stage) noeudRacine.getScene().getWindow();
               stage.setFullScreen(!stage.isFullScreen());
    }
+   
+   
+   public boolean isFullScreen()
+   {
+        Stage stage = (Stage) noeudRacine.getScene().getWindow();
+        return stage.isFullScreen();
+   }
 }

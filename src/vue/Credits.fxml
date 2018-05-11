@@ -14,14 +14,14 @@
         <children>
                 
             
-            <ImageView  fx:id="screenProportion" layoutX="0" layoutY="100" fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#changeScreenProportion" />
+            <ImageView  fx:id="screenProportion" layoutX="2" layoutY="250" fitHeight="30" fitWidth="30" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#changeScreenProportion" />
 
-            <Slider fx:id="sliderMusique" layoutX="50" layoutY="300" visible="false"/>
-            <ImageView  fx:id="imageMusique" layoutX="0" layoutY="300" fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#showSliderMusique" />
+            <Slider fx:id="sliderMusique" layoutX="35" layoutY="292" visible="false"/>
+            <ImageView  fx:id="imageMusique" layoutX="2" layoutY="285" fitHeight="30" fitWidth="30" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#showSliderMusique" />
 
             
-            <Slider fx:id="sliderSon" layoutX="50" layoutY="400" visible="false"/>
-            <ImageView  fx:id="imageSon" layoutX="0" layoutY="400" fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#showSliderSon" />
+            <Slider fx:id="sliderSon" layoutX="35" layoutY="327" visible="false"/>
+            <ImageView  fx:id="imageSon" layoutX="2" layoutY="320" fitHeight="30" fitWidth="30" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#showSliderSon" />
             
             <Label fx:id="labelTitre" layoutX="275" layoutY="50"   prefWidth="250" text="Crédits" />
             <Button layoutX="10" layoutY="550" prefWidth="150" text="Retour au menu" onAction="#retourMenu"/>

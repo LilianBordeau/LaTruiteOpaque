@@ -28,6 +28,14 @@ public class ControleurCredits extends ControleurBase
     @FXML
     public Label labelTitre;
     
+    boolean fullscreen;
+    
+    public void initSlider(Slider slider)
+    {
+        slider.setMin(0);
+        slider.setMax(100);
+        slider.setBlockIncrement(10);
+    }
     
     
     
@@ -37,47 +45,29 @@ public class ControleurCredits extends ControleurBase
     {        
         labelTitre.setAlignment(Pos.CENTER);
         
-        
-        sliderMusique.setMin(0);
-        sliderMusique.setMax(100);
-        sliderMusique.setBlockIncrement(10);
-        imageMusique.setImage( new Image("Images/Sons/music_on.png"));
+        initSlider(sliderMusique);
+        initSlider(sliderSon);
 
-          sliderMusique.valueProperty().addListener(new ChangeListener() {
+        setImageSlider(imageMusique,Constantes.nomImageSon(Constantes.OFF,Constantes.MUSIQUE),Constantes.nomImageSon(Constantes.ON,Constantes.MUSIQUE),sliderMusique.getValue());
+        setImageSlider(imageSon,Constantes.nomImageSon(Constantes.OFF,Constantes.SON),Constantes.nomImageSon(Constantes.ON,Constantes.SON),sliderSon.getValue());
+        
+
+        sliderMusique.valueProperty().addListener(new ChangeListener() {
 
             @Override
             public void changed(ObservableValue arg0, Object arg1, Object arg2) {
           //      System.out.println( String.valueOf((int) sliderMusique.getValue()));
-                if(sliderMusique.getValue() == 0 )
-                {
-                    imageMusique.setImage( new Image("Images/Sons/music_off.png"));
-                }
-                else
-                {
-                    imageMusique.setImage( new Image("Images/Sons/music_on.png"));
-                }
+               setImageSlider(imageMusique,Constantes.nomImageSon(Constantes.OFF,Constantes.MUSIQUE),Constantes.nomImageSon(Constantes.ON,Constantes.MUSIQUE),sliderMusique.getValue());
                 navigation.sonManager.setVolumeMusique(sliderMusique.getValue());
             }
         });
-        
-        sliderSon.setMin(0);
-        sliderSon.setMax(100);
-        sliderSon.setBlockIncrement(10);
-        imageSon.setImage( new Image("Images/Sons/volume_faible.png"));
-        
+               
         sliderSon.valueProperty().addListener(new ChangeListener() {
 
             @Override
             public void changed(ObservableValue arg0, Object arg1, Object arg2) {
                System.out.println( String.valueOf((int) sliderSon.getValue()));
-                if(sliderSon.getValue() == 0 )
-                {
-                    imageSon.setImage( new Image("Images/Sons/volume_off.png"));
-                }
-                else
-                {
-                    imageSon.setImage( new Image("Images/Sons/volume_faible.png"));
-                }
+                setImageSlider(imageSon,Constantes.nomImageSon(Constantes.OFF,Constantes.SON),Constantes.nomImageSon(Constantes.ON,Constantes.SON),sliderSon.getValue());
                 navigation.sonManager.setVolumeSon(sliderSon.getValue());
             }
         });
@@ -89,7 +79,18 @@ public class ControleurCredits extends ControleurBase
     
     @Override
     public void onAppearing()
-    {        
+    {         
+        
+        
+        if(navigation.isFullScreen())
+        {
+              screenProportion.setImage(new Image("Images/notfullscreen.png"));
+        }else{
+              screenProportion.setImage(new Image("Images/fullscreen.png"));
+        }
+        sliderMusique.setVisible(false);
+        sliderSon.setVisible(false);
+
         sliderMusique.setValue((int)navigation.sonManager.volumeMusique);
         sliderSon.setValue((int)navigation.sonManager.volumeSon);
 
@@ -123,6 +124,24 @@ public class ControleurCredits extends ControleurBase
     public void changeScreenProportion(MouseEvent event)
     {
         navigation.setFullScreen();
+        if(navigation.isFullScreen())
+        {
+              screenProportion.setImage(new Image("Images/notfullscreen.png"));
+        }else{
+              screenProportion.setImage(new Image("Images/fullscreen.png"));
+        }
+        
+    }
+
+    private void setImageSlider(ImageView image, String imageOff, String imageOn, double value) {
+        if(value == 0 )
+        {
+            image.setImage( new Image(imageOff));
+        }
+        else
+        {
+            image.setImage( new Image(imageOn));
+        }    
     }
      
    

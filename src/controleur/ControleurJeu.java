@@ -47,6 +47,7 @@ public class ControleurJeu  extends ControleurBase {
     {
         pingouinMvt =  new ImageView();
         lineFantome = new Line();
+        lineFantome.setMouseTransparent(true);
         lineFantome.setOpacity(0.35);
         lineFantome.setStrokeWidth(5);
         anchorPane.getChildren().add(lineFantome);

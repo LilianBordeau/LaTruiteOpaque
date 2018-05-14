@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import java.net.*?>
+<?import vue.PanelSonManager?>
+
+<AnchorPane fx:id="anchorPane"  maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" ><!--fx:controller="controleur.ControleurMenuPrincipal"-->
+   
+    <children>
+        <ImageView layoutX="0" layoutY="0" fitHeight="600" fitWidth="800">
+                <image>
+                    <Image url="Images/background.png" />
+                </image>    
+        </ImageView>
+     
+           
+            <ImageView layoutX="200" layoutY="360">
+                <image>
+                    <Image url="Images/batton.png" />
+                </image>    
+            </ImageView>
+            
+            <ImageView layoutX="570" layoutY="360">
+                <image>
+                    <Image url="Images/batton.png" />
+                </image>    
+            </ImageView>        
+            <Button  fx:id="nouvelle" styleClass="btn"  layoutX="32" layoutY="310" prefWidth="316" prefHeight="111"  onAction="#clicJouer">       
+                  <graphic>
+                     <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                            <image>
+                              <Image url="Images/nouvelle.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+            </Button>
+            
+            <Button fx:id="creer"  styleClass="btn" layoutX="32" layoutY="430" prefWidth="250" onAction="#clicCreerReseau">           
+                                         
+                  <graphic>
+                     <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                            <image>
+                              <Image url="Images/creer.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+            </Button>
+            
+            
+            <Button fx:id="rejoindre" styleClass="btn" layoutX="380" layoutY="430" prefWidth="430"  onAction="#clicRejoindreReseau">                             
+                  <graphic>
+                     <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                            <image>
+                              <Image url="Images/rejoindre.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+            </Button>
+            
+            <Button fx:id="charger" styleClass="btn" layoutX="430" layoutY="310" prefWidth="250" onAction="#clicChargerPartie">                     
+                  <graphic>
+                     <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                            <image>
+                              <Image url="Images/charger.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+            </Button>
+            
+            <Button fx:id="tutoriel" styleClass="btn" layoutX="75" layoutY="520" prefWidth="240" onAction="#clicTutoriel">         
+                  <graphic>
+                     <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                            <image>
+                              <Image url="Images/tutoriel.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+            </Button>
+            
+            <Button fx:id="credits" styleClass="btn" layoutX="460" layoutY="520" prefWidth="250" onAction="#clicCredits">                          
+                  <graphic>
+                     <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                            <image>
+                              <Image url="Images/credits.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+            </Button>
+        <PanelSonManager fx:id="panelSonManager"/>
+
+    </children>
+        
+    <stylesheets>
+    <URL value="@application.css" />
+    </stylesheets>
+</AnchorPane>

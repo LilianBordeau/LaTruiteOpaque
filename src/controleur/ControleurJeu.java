@@ -225,7 +225,6 @@ public class ControleurJeu  extends ControleurBase {
             desaturate.setSaturation(-0.75);
             colored.setSaturation(0);
             ImageView tb2 = (ImageView) anchorPane.lookup("#"+joueurPrec+"_gui");
-            tb2.setStyle("-fx-scale-x:0.9;");
             tb2.setEffect(desaturate);
             tb2.setImage(new Image("Images/"+joueurPrec+"_gui_afk.png"));
             if(joueurPrec%2==0)
@@ -238,11 +237,9 @@ public class ControleurJeu  extends ControleurBase {
             }
             //System.out.println(texteInfoJeu);
             ImageView tb = (ImageView) anchorPane.lookup("#"+navigation.moteur.joueurCourant+"_gui");
-            tb.setStyle("-fx-scale-x:2.5;");
-             tb.setStyle("-fx-scale-y:1.2;");
             
-             tb.setEffect(colored);
-             tb.setImage(new Image("Images/"+navigation.moteur.joueurCourant+"_gui_active.png"));
+            tb.setEffect(colored);
+            tb.setImage(new Image("Images/"+navigation.moteur.joueurCourant+"_gui_active.png"));
             joueurPrec = navigation.moteur.joueurCourant;
             
             for(int i=0;i< navigation.moteur.joueurs.length ;i++)
@@ -642,13 +639,13 @@ public class ControleurJeu  extends ControleurBase {
         
         String idCaseSource = indicesToId(dep.ligneSrc, dep.colonneSrc,DEBUTIDTUILE);
         tuileFantome = (ImageView)anchorPane.getScene().lookup("#"+idCaseSource);
-        Image image = new Image("Images/tuileCoule.png") ;
+        Image image = new Image("Images/fantomes/tuilevierge.png") ;
         
         tuileFantome.setImage(image);
         
         String idCaseSourcePinguouin = indicesToId(dep.ligneSrc, dep.colonneSrc,DEBUTIDPINGOUIN);
         pingouinFantome = (ImageView)anchorPane.getScene().lookup("#"+idCaseSourcePinguouin);
-        Image image2 = new  Image("Images/pingouins/fantome.png") ;        
+        Image image2 = new  Image("Images/fantomes/" + navigation.moteur.joueurPrecedent + "_0_6.png") ;        
         pingouinFantome.setImage(image2);
 
         

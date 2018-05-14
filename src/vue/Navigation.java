@@ -1,6 +1,7 @@
 package vue;
 
 import controleur.ControleurBase;
+import controleur.ControleurChargerPartie;
 import controleur.ControleurChoixJoueurs;
 import controleur.ControleurCredits;
 import controleur.ControleurJeu;
@@ -37,6 +38,7 @@ public class Navigation
         initialiserVue(ControleurChoixJoueurs.class);
         initialiserVue(ControleurJeu.class);
         initialiserVue(ControleurMenuPrincipal.class);
+    //    initialiserVue(ControleurChargerPartie.class);
         initialiserVue(ControleurRejoindreReseau.class);
         initialiserVue(ControleurTutoriel.class);
         initialiserVue(ControleurCredits.class);

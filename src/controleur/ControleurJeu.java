@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Line;
 import javafx.util.Duration;
 import modele.Case;
 import modele.Constantes;
@@ -29,6 +31,9 @@ public class ControleurJeu  extends ControleurBase {
     public Point pingouinSel;
     public ImageView pingouinMvt;
     public ArrayList<Point> casesAccessibles;
+    ImageView pingouinFantome;
+    ImageView tuileFantome;    
+    Line lineFantome;
 
     @FXML
     public AnchorPane anchorPane;
@@ -41,6 +46,10 @@ public class ControleurJeu  extends ControleurBase {
     public void initialize(URL location, ResourceBundle resources)
     {
         pingouinMvt =  new ImageView();
+        lineFantome = new Line();
+        lineFantome.setOpacity(0.35);
+        lineFantome.setStrokeWidth(5);
+        anchorPane.getChildren().add(lineFantome);
         anchorPane.getChildren().add(pingouinMvt);
         anchorPane.getId(); // a supprimer
         Case[][] plateau = navigation.moteur.plateau.plateau;
@@ -294,6 +303,14 @@ public class ControleurJeu  extends ControleurBase {
     }
 
     private void onTranslateDuPinguoin(int ligne, int colonne) {
+        if(pingouinFantome != null)
+        {
+            pingouinFantome.setImage(null);  
+            pingouinFantome.setVisible(false);
+            tuileFantome.setImage(null); 
+            tuileFantome.setVisible(false);
+            lineFantome.setVisible(false);
+        }
         String idPingouin = indicesToId(pingouinSel.ligne, pingouinSel.colonne,DEBUTIDPINGOUIN);
         ImageView pingouinGraphique = (ImageView)anchorPane.getScene().lookup("#"+idPingouin);
         
@@ -301,13 +318,12 @@ public class ControleurJeu  extends ControleurBase {
         String idCaseDest = indicesToId(ligne, colonne,DEBUTIDPINGOUIN);
         ImageView caseDest = (ImageView)anchorPane.getScene().lookup("#"+idCaseDest);
         
-        
+        Point coordonnees = idToIndices(pingouinGraphique.getId());   
         
         Case tuile = navigation.moteur.plateau.plateau[ligne][colonne];
         String nomImage = Constantes.nomImagePingouin(navigation.moteur.joueurs[tuile.numJoueurPingouin()]);
         Image image = new Image(nomImage);
-       
-        
+      
         
         pingouinMvt.setLayoutX(pingouinGraphique.getLayoutX());
         pingouinMvt.setLayoutY(pingouinGraphique.getLayoutY());
@@ -340,16 +356,48 @@ public class ControleurJeu  extends ControleurBase {
                 pingouinMvt.setImage(null);
                 pingouinMvt.setVisible(false);
                 miseAJourPingouin(ligne, colonne);
+                montrerDernierCoup(coordonnees.ligne, coordonnees.colonne,ligne,colonne);
+
+
             }
         });
-
-        
-               
-        
-        
-        
-
   
     }
-    
+
+    private void  montrerDernierCoup(int xSource,int ySource, int xDest, int yDest)
+    {
+        
+        String idCasePinguoin = indicesToId(xDest, yDest,DEBUTIDTUILE);
+        ImageView pingouinCourant = (ImageView)anchorPane.getScene().lookup("#"+idCasePinguoin);
+        
+        
+        String idCaseSource = indicesToId(xSource, ySource,DEBUTIDTUILE);
+        tuileFantome = (ImageView)anchorPane.getScene().lookup("#"+idCaseSource);
+        Image image = new Image("Images/tuileCoule.png") ;
+        
+        tuileFantome.setImage(image);
+        
+        String idCaseSourcePinguouin = indicesToId(xSource, ySource,DEBUTIDPINGOUIN);
+        pingouinFantome = (ImageView)anchorPane.getScene().lookup("#"+idCaseSourcePinguouin);
+        Image image2 = new  Image("Images/pingouins/fantome.png") ;        
+        pingouinFantome.setImage(image2);
+
+        
+        
+        double xDep = pingouinCourant.getLayoutX() + pingouinCourant.getFitWidth()/2;
+        double yDep = pingouinCourant.getLayoutY() + pingouinCourant.getFitHeight()/2;
+        double xArr = tuileFantome.getLayoutX() + tuileFantome.getFitWidth()/2;
+        double yArr = tuileFantome.getLayoutY() + tuileFantome.getFitHeight()/2;
+        
+
+        lineFantome.setStartX(xDep);
+        lineFantome.setStartY(yDep);
+        lineFantome.setEndX(xArr);
+        lineFantome.setEndY(yArr);
+               lineFantome.setVisible(true);
+        
+        
+        
+        
+    }
 }

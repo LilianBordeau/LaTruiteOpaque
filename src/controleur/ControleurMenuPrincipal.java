@@ -44,6 +44,7 @@ public class ControleurMenuPrincipal  extends ControleurBase
     @FXML
     private void clicChargerPartie(ActionEvent event)
     {
+        navigation.changerVue(ControleurChargerPartie.class);
         System.out.print("choisir fichier sauvegarde (classe FileChooser)");
     }
     

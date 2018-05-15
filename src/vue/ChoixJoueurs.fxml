@@ -26,8 +26,8 @@
 
 
         <!-- <Label layoutX="342.0" layoutY="33.0" text="Choix des joueurs" /> -->
-        <Line endX="300.0" layoutX="400.0" layoutY="300.0" startX="-300.0" />
-        <Line endY="200.0" layoutX="400.0" layoutY="300.0" startY="-200.0" />
+        <Line endX="300.0" layoutX="400.0" layoutY="290" startX="-300.0" />
+        <Line endY="200.0" layoutX="400.0" layoutY="290" startY="-200.0" />
 
         
        
@@ -38,17 +38,17 @@
           
         
         <!-- JOUEUR 1 ROUGE -->
-        <StackPane fx:id="imagesBleu" layoutX="175.0" layoutY="50.0" prefHeight="200.0" prefWidth="150.0" >
+        <StackPane fx:id="imagesBleu" layoutX="175.0" layoutY="40" prefHeight="200.0" prefWidth="150.0" >
             <children>
-                <SimpleImageView  url="Images/pingouins/0_0_0.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" StackPane.alignment="CENTER"/>
-                <SimpleImageView  url="Images/pingouins/0_1_0.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
-                <SimpleImageView  url="Images/pingouins/0_2_0.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
-                <SimpleImageView  url="Images/pingouins/0_3_0.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
-                <SimpleImageView  url="Images/aucunJoueur.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="CENTER"/>
-                <SimpleImageView  url="Images/pingouins/connection.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="CENTER"/>
+                <SimpleImageView  url="Images/pingouins/0_0_0.png" layoutX="175.0" layoutY="40" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" StackPane.alignment="CENTER"/>
+                <SimpleImageView  url="Images/pingouins/0_1_0.png" layoutX="175.0" layoutY="40" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
+                <SimpleImageView  url="Images/pingouins/0_2_0.png" layoutX="175.0" layoutY="40" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
+                <SimpleImageView  url="Images/pingouins/0_3_0.png" layoutX="175.0" layoutY="40" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
+                <SimpleImageView  url="Images/aucunJoueur.png" layoutX="175.0" layoutY="40" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="CENTER"/>
+                <SimpleImageView  url="Images/pingouins/connection.png" layoutX="175.0" layoutY="40" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="CENTER"/>
             </children>
         </StackPane>
-        <StackPane fx:id="nomBleu" layoutX="175.0" layoutY="263.0" prefHeight="25.0" prefWidth="150.0" >
+        <StackPane fx:id="nomBleu" layoutX="175.0" layoutY="253" prefHeight="25.0" prefWidth="150.0" >
               <children>
                 <TextField layoutX="115.0" layoutY="78.0" visible="true"   />
                 <Text  text="Joueur 1" visible="false"/>      
@@ -56,13 +56,13 @@
         </StackPane>
         
         
-        <Button fx:id="precedentBleu" layoutX="110.0" layoutY="185.0" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
+        <Button fx:id="precedentBleu" layoutX="110.0" layoutY="175" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
             <graphic>
                 <SimpleImageView fitHeight="30" fitWidth="30" url="Images/arriere.png"  pickOnBounds="true" preserveRatio="true"/>
             </graphic>
         </Button>
         
-        <Button fx:id="suivantBleu" layoutX="340.0" layoutY="185.0"  prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
+        <Button fx:id="suivantBleu" layoutX="340.0" layoutY="175"  prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
            <graphic>
                 <SimpleImageView fitHeight="30" fitWidth="30" url="Images/avant.png"  pickOnBounds="true" preserveRatio="true"/>
             </graphic>
@@ -78,18 +78,18 @@
         
         <!-- JOUEUR 2 VERT -->
         
-        <StackPane fx:id="imagesJaune" layoutX="476.0" layoutY="50.0" prefHeight="150.0" prefWidth="150.0" >
+        <StackPane fx:id="imagesJaune" layoutX="476.0" layoutY="40" prefHeight="150.0" prefWidth="150.0" >
             <children>
-                <SimpleImageView  url="Images/pingouins/1_0_0.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" StackPane.alignment="CENTER"/>
-                <SimpleImageView  url="Images/pingouins/1_1_0.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
-                <SimpleImageView  url="Images/pingouins/1_2_0.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
-                <SimpleImageView  url="Images/pingouins/1_3_0.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
-                <SimpleImageView  url="Images/aucunJoueur.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="CENTER"/>
-                <SimpleImageView  url="Images/pingouins/connection.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="CENTER"/>
+                <SimpleImageView  url="Images/pingouins/1_0_0.png" layoutX="175.0" layoutY="40" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" StackPane.alignment="CENTER"/>
+                <SimpleImageView  url="Images/pingouins/1_1_0.png" layoutX="175.0" layoutY="40" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
+                <SimpleImageView  url="Images/pingouins/1_2_0.png" layoutX="175.0" layoutY="40" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
+                <SimpleImageView  url="Images/pingouins/1_3_0.png" layoutX="175.0" layoutY="40" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
+                <SimpleImageView  url="Images/aucunJoueur.png" layoutX="175.0" layoutY="40" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="CENTER"/>
+                <SimpleImageView  url="Images/pingouins/connection.png" layoutX="175.0" layoutY="40" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="CENTER"/>
             </children>
         </StackPane>
         
-        <StackPane fx:id="nomJaune" layoutX="476.0" layoutY="263.0" prefHeight="25.0" prefWidth="150.0"  >
+        <StackPane fx:id="nomJaune" layoutX="476.0" layoutY="253" prefHeight="25.0" prefWidth="150.0"  >
             <children>
                 <TextField layoutX="115.0" layoutY="78.0" visible="true"   />
                 <Text  text="Joueur 2" visible="false"/>      
@@ -97,12 +97,12 @@
         </StackPane>
         
         
-        <Button fx:id="precedentJaune"  layoutX="411.0" layoutY="185.0" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
+        <Button fx:id="precedentJaune"  layoutX="411.0" layoutY="175" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
             <graphic>
                    <SimpleImageView fitHeight="30" fitWidth="30" url="Images/arriere.png"  pickOnBounds="true" preserveRatio="true"/>
            </graphic>
         </Button>
-        <Button fx:id="suivantJaune" layoutX="640.0" layoutY="185.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
+        <Button fx:id="suivantJaune" layoutX="640.0" layoutY="175" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
         <graphic>
                 <SimpleImageView fitHeight="30" fitWidth="30" url="Images/avant.png"  pickOnBounds="true" preserveRatio="true"/>
             </graphic>
@@ -112,7 +112,7 @@
 
 
         <!-- JOUEUR 3 BLEU --> 
-        <StackPane fx:id="imagesRouge" layoutX="175.0" layoutY="311.0" prefHeight="150.0" prefWidth="150.0"  >
+        <StackPane fx:id="imagesRouge" layoutX="175.0" layoutY="301" prefHeight="150.0" prefWidth="150.0"  >
             <children>
                 <SimpleImageView  url="Images/pingouins/2_0_0.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
                 <SimpleImageView  url="Images/pingouins/2_1_0.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
@@ -123,21 +123,21 @@
             </children>
         </StackPane>
         
-        <StackPane fx:id="nomRouge" layoutX="175.0" layoutY="524.0" prefHeight="25.0" prefWidth="150.0">
+        <StackPane fx:id="nomRouge" layoutX="175.0" layoutY="514" prefHeight="25.0" prefWidth="150.0">
             <children>
                 <TextField layoutX="115.0" layoutY="78.0" visible="false"   />
                 <Text  text="Aucun" visible="true"/>      
             </children>
         </StackPane>
         
-        <Button fx:id="precedentRouge" layoutX="110.0" layoutY="396.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
+        <Button fx:id="precedentRouge" layoutX="110.0" layoutY="386" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
             <graphic>
                    <SimpleImageView fitHeight="30" fitWidth="30" url="Images/arriere.png"  pickOnBounds="true" preserveRatio="true"/>
            </graphic>
         </Button>
         
         
-        <Button  fx:id="suivantRouge" layoutX="340.0" layoutY="396.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0"  onMouseClicked="#changerJoueur">
+        <Button  fx:id="suivantRouge" layoutX="340.0" layoutY="386" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0"  onMouseClicked="#changerJoueur">
         <graphic>
                 <SimpleImageView fitHeight="30" fitWidth="30" url="Images/avant.png"  pickOnBounds="true" preserveRatio="true"/>
             </graphic>
@@ -147,7 +147,7 @@
         
         <!-- JOUEUR 4 JAUNE-->       
         
-        <StackPane fx:id="imagesVert" layoutX="476.0" layoutY="311.0" prefHeight="150.0" prefWidth="150.0" >
+        <StackPane fx:id="imagesVert" layoutX="476.0" layoutY="301" prefHeight="150.0" prefWidth="150.0" >
             <children>
                 <SimpleImageView  url="Images/pingouins/3_0_0.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
                 <SimpleImageView  url="Images/pingouins/3_1_0.png" layoutX="175.0" layoutY="50.0" fitHeight="200" fitWidth="150" pickOnBounds="true" preserveRatio="true" visible="false" smooth="true" StackPane.alignment="CENTER"/>
@@ -158,20 +158,20 @@
             </children>
         </StackPane>
         
-        <StackPane  fx:id="nomVert" layoutX="476.0" layoutY="524.0" prefHeight="25.0" prefWidth="150.0"  >
+        <StackPane  fx:id="nomVert" layoutX="476.0" layoutY="514" prefHeight="25.0" prefWidth="150.0"  >
         <children>
                 <TextField layoutX="115.0" layoutY="78.0" visible="false"   />
                  <Text  text="Aucun" visible="true"/>     
             </children>
         </StackPane>
         
-        <Button fx:id="precedentVert" layoutX="411.0" layoutY="396.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
+        <Button fx:id="precedentVert" layoutX="411.0" layoutY="386" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
             <graphic>
                 <SimpleImageView fitHeight="30" fitWidth="30" url="Images/arriere.png"  pickOnBounds="true" preserveRatio="true"/>
             </graphic>
         </Button>
         
-        <Button fx:id="suivantVert" layoutX="661.0" layoutY="396.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur" >
+        <Button fx:id="suivantVert" layoutX="661.0" layoutY="386" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur" >
             <graphic>
                 <SimpleImageView fitHeight="30" fitWidth="30" url="Images/avant.png"  pickOnBounds="true" preserveRatio="true"/>
             </graphic>

@@ -217,14 +217,16 @@ public class ControleurJeu  extends ControleurBase {
                     System.out.println("J"+joueur.numero+"("+joueur.getClass().getSimpleName()+") : "+joueur.scorePoisson+"p et "+joueur.scoreTuile+"t, ");
             }
         }
-        else
+        /*else
         {
-           /* texteInfoJeu = "Tour du joueur "+navigation.moteur.joueurCourant+"(";
+            texteInfoJeu = "Tour du joueur "+navigation.moteur.joueurCourant+"(";
             for(Joueur joueur : navigation.moteur.joueurs)
             {
                 texteInfoJeu += "J"+joueur.numero+"("+joueur.getClass().getSimpleName()+") : "+joueur.scorePoisson+"p et "+joueur.scoreTuile+"t, ";
             }
-            texteInfoJeu += ")"; */
+            texteInfoJeu += ")";
+        }*/        
+            infosJeu.setText(texteInfoJeu);
             int joueurPrec = ((navigation.moteur.joueurPrecedent==-1)?0:navigation.moteur.joueurPrecedent);
             ColorAdjust desaturate = new ColorAdjust();
             ColorAdjust colored = new ColorAdjust();
@@ -260,8 +262,6 @@ public class ControleurJeu  extends ControleurBase {
                 label2.setText(Integer.toString(navigation.moteur.joueurs[i].scoreTuile));
                
             }
-        }
-        infosJeu.setText(texteInfoJeu);
         
     }
 
@@ -509,8 +509,9 @@ public class ControleurJeu  extends ControleurBase {
         if(!navigation.moteur.coupJoues.isEmpty())
         {
             jeuInterrompu = true;
-            Coup dernierCoupJoue = navigation.moteur.dernierCoupJoue;
-            navigation.moteur.coupAnnules.push(navigation.moteur.clone());    
+            Coup dernierCoupJoue = navigation.moteur.dernierCoupJoue;   
+            navigation.moteur.coupAnnules.push(navigation.moteur.clone());         
+            navigation.moteur.dernierCoupJoue = null;
             navigation.moteur = navigation.moteur.coupJoues.pop();
             miseAJourAnnulerRefaire(dernierCoupJoue);
             jeuInterrompu = false;

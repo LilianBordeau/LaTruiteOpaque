@@ -18,6 +18,7 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
@@ -56,13 +57,16 @@ public class ControleurJeu  extends ControleurBase {
  	ImageView pingouinFantome;
     ImageView tuileFantome;    
     Line lineFantome;
+    
+    @FXML
+    Group groupEnPause;
 
     @FXML
     public AnchorPane anchorPane;
     
     @FXML
     public Label infosJeu;
-    
+     
     @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -503,6 +507,7 @@ public class ControleurJeu  extends ControleurBase {
         pingouinFantome = null;
         miseAJourPlateau();
         jeuInterrompu = false;
+        groupEnPause.setVisible(false);
         tourSuivant();
     }
     
@@ -517,7 +522,6 @@ public class ControleurJeu  extends ControleurBase {
             navigation.moteur.dernierCoupJoue = null;
             navigation.moteur = navigation.moteur.coupJoues.pop();
             miseAJourAnnulerRefaire(dernierCoupJoue);
-            lineFantome.setVisible(false);            
             /*jeuInterrompu = false;
             tourSuivant();*/
         }
@@ -538,7 +542,6 @@ public class ControleurJeu  extends ControleurBase {
             navigation.moteur.coupJoues.push(navigation.moteur.clone());    
             navigation.moteur = navigation.moteur.coupAnnules.pop();    
             miseAJourAnnulerRefaire(navigation.moteur.dernierCoupJoue);
-            lineFantome.setVisible(false);
             /*jeuInterrompu = false;
             tourSuivant();*/
         }
@@ -546,6 +549,14 @@ public class ControleurJeu  extends ControleurBase {
         {
             System.out.println("aucun coup a refaire");
         }  
+    }
+    
+    @FXML
+    private void clicReprendre(ActionEvent event)
+    {
+        jeuInterrompu = false;
+        groupEnPause.setVisible(false);
+        tourSuivant();  
     }
     
     private void miseAJourPlateau()
@@ -566,6 +577,12 @@ public class ControleurJeu  extends ControleurBase {
 
     private void miseAJourAnnulerRefaire(Coup dernierCoupJoue)
     {
+        lineFantome.setVisible(false); 
+        if(pingouinMvt != null)
+        {
+            pingouinMvt.setImage(null);
+        }
+        groupEnPause.setVisible(true);
         ArrayList<Point> points = new ArrayList<>();
         if(dernierCoupJoue instanceof Point)
         {
@@ -644,7 +661,6 @@ public class ControleurJeu  extends ControleurBase {
         animation.setToX(distanceX);
         animation.setAutoReverse(true);
         animation.play();
-        
         
         
         animation.setOnFinished(new EventHandler<ActionEvent>() {

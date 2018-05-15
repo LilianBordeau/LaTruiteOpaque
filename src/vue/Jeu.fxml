@@ -9,6 +9,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import vue.SimpleImageView?>
 <?import vue.PanelSonManager?>
+<?import javafx.scene.shape.Line?>
+
 <AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0"  minWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #304d93;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurJeu"-->
       <children>
     
@@ -232,7 +234,13 @@
         <Button text="Retour au menu" layoutX="450.0" layoutY="560.0" onAction="#retourMenu" />
         <Button text="Annuler" layoutX="600.0" layoutY="560.0" onAction="#clicAnnuler" />
         <Button text="Refaire" layoutX="700.0" layoutY="560.0" onAction="#clicRefaire" />
-        
+        <Group fx:id="groupEnPause" visible="false">
+            <children>
+                <Line opacity="0.65" strokeWidth="25" startX="350" startY="200" endX="350" endY="400" />
+                <Line opacity="0.65" strokeWidth="25" startX="425" startY="200" endX="425" endY="400" />
+                <Button text="Reprendre" layoutX="350.0" layoutY="420.0" onAction="#clicReprendre" />
+            </children>
+        </Group>
         <PanelSonManager fx:id="panelSonManager"/>
       </children>
 </AnchorPane>

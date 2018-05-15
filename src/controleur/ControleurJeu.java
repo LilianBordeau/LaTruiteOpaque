@@ -39,6 +39,7 @@ import modele.Moteur;
 import modele.Plateau;
 import modele.Point;
 import thread.MyThread;
+import util.Couple;
 
 public class ControleurJeu  extends ControleurBase {
     private static final String DEBUTIDTUILE = "c";
@@ -514,8 +515,9 @@ public class ControleurJeu  extends ControleurBase {
             navigation.moteur.dernierCoupJoue = null;
             navigation.moteur = navigation.moteur.coupJoues.pop();
             miseAJourAnnulerRefaire(dernierCoupJoue);
-            jeuInterrompu = false;
-            tourSuivant();
+            lineFantome.setVisible(false);            
+            /*jeuInterrompu = false;
+            tourSuivant();*/
         }
         else
         {
@@ -526,14 +528,17 @@ public class ControleurJeu  extends ControleurBase {
     @FXML
     private void clicRefaire(ActionEvent event)
     {
+        /*jeuInterrompu = false;
+        tourSuivant();*/
         if(!navigation.moteur.coupAnnules.isEmpty())
         {            
             jeuInterrompu = true;
             navigation.moteur.coupJoues.push(navigation.moteur.clone());    
             navigation.moteur = navigation.moteur.coupAnnules.pop();    
             miseAJourAnnulerRefaire(navigation.moteur.dernierCoupJoue);
-            jeuInterrompu = false;
-            tourSuivant();
+            lineFantome.setVisible(false);
+            /*jeuInterrompu = false;
+            tourSuivant();*/
         }
         else
         {
@@ -592,9 +597,14 @@ public class ControleurJeu  extends ControleurBase {
         if(pingouinFantome != null)
         {
             pingouinFantome.setImage(null);  
-            pingouinFantome.setVisible(false);
+            //pingouinFantome.setVisible(false);
             tuileFantome.setImage(null); 
-            tuileFantome.setVisible(false);
+            Point coordonneesTuile = idToIndices(tuileFantome.getId());
+            miseAJourTuile(coordonneesTuile.ligne, coordonneesTuile.colonne);
+            Point coordonneesPingouin = idToIndices(pingouinFantome.getId());
+            miseAJourPingouin(coordonneesPingouin.ligne, coordonneesPingouin.colonne);
+            /*tuileFantome.setImage(null); 
+            tuileFantome.setVisible(false);*/
             lineFantome.setVisible(false);
         }
          montrerDernierCoup(dep);

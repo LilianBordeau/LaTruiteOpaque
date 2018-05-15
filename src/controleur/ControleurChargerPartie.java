@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,88 +18,20 @@ import modele.Joueur;
 import modele.Moteur;
 import modele.Pingouin;
 
-public class ControleurChargerPartie extends ControleurBase
+public class ControleurChargerPartie extends ControleurSauvegarde
 {
-   
-    int NBSAUVEGARDES = 3;
-    Moteur[] moteurs;
-    File[] files;
     @FXML
-    public AnchorPane anchorPane;
-    @FXML
-    public ImageView trash0,trash1,trash2;
-    
-    @FXML
-    @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
-        moteurs = new Moteur[NBSAUVEGARDES];
-        files = new File[NBSAUVEGARDES];
-    }
-    
-    
-    
+    public Button btnCommencer;
     
     @Override
     public void onAppearing()
     {
-        scanSaveFolder();
-    }
-    
-    private String indicesToId(int ligne, int colonne, String prefixeId)
-    {
-        return prefixeId+ligne+"_"+colonne;
-    }
-    public static int nbTuilesLigne(int i)
-    {
-        return (i%2==0)?7:8;
+        super.onAppearing();
+        btnCommencer.setDisable(true);
+        setMessage("Veuillez choisir une sauvegarde !");
     }
     
     
-    
-    
-    @FXML
-    public void showSave(MouseEvent event)
-    {
-        ImageView image = (ImageView) event.getTarget();
-        String id = image.getId();
-        
-        Case[][] plateau = navigation.moteur.plateau.plateau;
-        for(int i = 0 ; i < plateau.length ; i++)
-        {
-            for(int j =0 ; j < nbTuilesLigne(i) ; j++)
-            {
-               int nbPoissons  = plateau[i][j].nbPoissons;
-               ImageView imagePlateau = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, "c"));
-               
-               if( nbPoissons == 0 )
-               {
-                   imagePlateau.setVisible(false);
-                   imagePlateau.setImage(null);
-               }else
-               {
-                   imagePlateau.setVisible(true);
-                   String pathImage = Constantes.nomImageCase(plateau[i][j]);
-                imagePlateau.setImage(new Image(pathImage));
-               }
-            }  
-        }
-        Joueur[] joueurs =  navigation.moteur.joueurs;
-        for(int i = 0 ; i < joueurs.length ; i++)
-        {
-            
-            ArrayList<Pingouin> pingouins = joueurs[i].pingouins;
-            for(Pingouin p : pingouins)
-            {
-                ImageView imagePingouin = (ImageView)anchorPane.lookup("#"+indicesToId(p.ligne,p.colonne, "p"));
-                String pathImagePingouin = Constantes.nomImagePingouin(joueurs[i]);
-                imagePingouin.setImage(new Image(pathImagePingouin));
-                
-            }
-        }    
-        
-    }
-    /*
     public void showSave(int nbPartie)
     {
      
@@ -114,14 +47,16 @@ public class ControleurChargerPartie extends ControleurBase
                if( nbPoissons == 0 )
                {
                    imagePlateau.setImage(null);
+                   
                }else
                {
                    String pathImage = Constantes.nomImageCase(plateau[i][j]);
-                imagePlateau.setImage(new Image(pathImage));
+                   imagePlateau.setVisible(true);
+                   imagePlateau.setImage(new Image(pathImage));
                }
             }  
         }
-        Joueur[] joueurs =  navigation.moteur.joueurs;
+        Joueur[] joueurs =  moteurs[nbPartie].joueurs;
         for(int j = 0 ; j < joueurs.length ; j++)
         {
             
@@ -131,132 +66,60 @@ public class ControleurChargerPartie extends ControleurBase
                 ImageView imagePingouin = (ImageView)anchorPane.lookup("#"+indicesToId(p.ligne,p.colonne, "p"));
                 String pathImagePingouin = Constantes.nomImagePingouin(joueurs[j]);
                 imagePingouin.setImage(new Image(pathImagePingouin));
-                
+                imagePingouin.setVisible(true);
             }
         }    
         
     }
     
+   
+    @FXML
+    private void selectEmplacement(MouseEvent event)
+    {
+        ImageView b =  (ImageView) event.getTarget();
+        int indice =  Character.getNumericValue(b.getId().charAt(b.getId().length()-1));
+        if(moteurs[indice] != null)
+        {
+                btnCommencer.setDisable(false);
+                tuileSelectionne = indice;
+                showSave(tuileSelectionne);
+                System.out.println("TUILE "+ tuileSelectionne+" selectionnee");
+                setMessage("");
+        }else
+        {
+            clearPlateau();
+            btnCommencer.setDisable(true);
+            setMessage("Veuillez choisir une sauvegarde !");
+            tuileSelectionne = -1;
+            System.out.println("Pas de sauvegarde" + indice);
+        }
     
+       
+    }
     
-    */
-    
+             
+    @FXML
+    private void commencer(ActionEvent event)
+    {
+        
+        
+        if(tuileSelectionne != -1)
+        {
+            System.out.println("commencerPartie");
+            
+            navigation.moteur = moteurs[tuileSelectionne];
+             navigation.changerVue(ControleurJeu.class);
+             
+
+        }else{
+            System.out.println("Pas de selection valide ");
+        }
+    }
     
      @FXML
     private void retourMenu(ActionEvent event)
     {
         navigation.changerVue(ControleurMenuPrincipal.class);
     }
-    
-    private String getNomId(int i)
-    {
-        return "nom"+i;
-    }
-    private String getDateId(int i)
-    {
-        return "date"+i;
-    }
-    private String getBinId(int i) {
-            return "trash"+i;
-    }
-    private String getRedCrossId(int i) {
-            return "cross"+i;
-    }
-   
-    public void trashIt(MouseEvent event)
-    {
-        ImageView bin = (ImageView) event.getTarget();
-        int indice;
-        if(bin == trash0)
-        {
-            indice = 0;
-        }else if(bin == trash1)
-        {
-            indice = 1;
-        }else
-        {
-            indice = 2;
-        }
-     
-        if(deleteSave(indice))
-        {
-              showTuileEmpty(indice);
-        }
-      
-       
-    }
-             
-    
-    private void showTuile(int i,String[] params)
-    {
-            Text nom = (Text)anchorPane.lookup("#"+getNomId(i));
-            nom.setText("Nom : " + params[0]);
-            nom.setVisible(true);
-            Text date = (Text)anchorPane.lookup("#"+getDateId(i));
-            date.setText("Date : " + params[1].replace(":", "/")); 
-            date.setVisible(true);
-            ImageView bin = (ImageView) anchorPane.lookup("#"+getBinId(i));
-            bin.setVisible(true);
-            ImageView redCross = (ImageView) anchorPane.lookup("#"+getRedCrossId(i));
-            redCross.setVisible(false);
-    }
-    
-    
-    private void showTuileEmpty(int i)
-    {
-        Text nom = (Text)anchorPane.lookup("#"+getNomId(i));
-        nom.setVisible(false);
-        Text date = (Text)anchorPane.lookup("#"+getDateId(i));
-        date.setVisible(false);
-        ImageView bin = (ImageView) anchorPane.lookup("#"+getBinId(i));
-        bin.setVisible(false);
-        ImageView redCross = (ImageView) anchorPane.lookup("#"+getRedCrossId(i));
-        redCross.setVisible(true);
-    }
-    
-    
-    
-    
-    
-
-    private void scanSaveFolder() {
-        File folder =  new File("Sauvegardes");
-        if(folder.exists() == false )
-        {
-          boolean res = (folder.mkdirs()); 
-        }
-        File[] filestmp = folder.listFiles();
-        int i= 0;
-        if(filestmp != null)
-        {
-            while( i < filestmp.length  )
-            {
-                files[i] = filestmp[i];
-                String[] params = filestmp[i].getName().split("_");
-                showTuile(i,params);
-                i++;
-            }
-        }
-        
-        if(i < NBSAUVEGARDES)
-        {
-            for(int j = i ; j < NBSAUVEGARDES ; j++)
-            {
-               showTuileEmpty(j);
-            
-            }
-        }
-    }
-
-    private boolean deleteSave(int indice) {
-        moteurs[indice] = null;
-        boolean res = files[indice].delete();
-        if(res)
-        {
-            files[indice] = null;
-        }
-        return res;
-    }
-
     
 }

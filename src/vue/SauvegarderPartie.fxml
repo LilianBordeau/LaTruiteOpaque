@@ -16,7 +16,7 @@
     <children>
         
     <SimpleImageView  fx:id="image0" url="Images/tuilevierge.png" layoutX="50" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#selectEmplacement"/>
-    <Text fx:id="date0" layoutX="60" layoutY="95" text="Date : " mouseTransparent="true"/>
+    <Text fx:id="date0" layoutX="60" layoutY="95" text="Date : " mouseTransparent="true" />
     <Text fx:id="nom0" layoutX="60" layoutY="125" text="Nom : " mouseTransparent="true"/>
     <SimpleImageView fx:id="trash0" url="Images/trash.png" layoutX="138" layoutY="150" fitHeight="25" fitWidth="25" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#trashIt"/>
     <SimpleImageView fx:id="cross0" url="Images/redCross.png" layoutX="112" layoutY="80" fitHeight="70" fitWidth="70" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" mouseTransparent="true" />
@@ -38,7 +38,7 @@
     <SimpleImageView fx:id="cross2" url="Images/redCross.png" layoutX="612" layoutY="80" fitHeight="70" fitWidth="70" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" mouseTransparent="true" />
 
     
-
+    
     <SimpleImageView  url="Images/tuilevierge.png" fx:id="c0_0" fitHeight="46.08" fitWidth="60" layoutX="190" layoutY="206" pickOnBounds="false" visible="false" />
     <SimpleImageView  url="Images/tuilevierge.png" fx:id="c0_1" fitHeight="46.08" fitWidth="60" layoutX="250" layoutY="206" pickOnBounds="false" visible="false" />
     <SimpleImageView  url="Images/tuilevierge.png" fx:id="c0_2" fitHeight="46.08" fitWidth="60" layoutX="310" layoutY="206" pickOnBounds="false" visible="false" />
@@ -159,10 +159,17 @@
     <ImageView fx:id="p7_5" fitWidth="60" layoutX="469.52" layoutY="422.92" pickOnBounds="false" smooth="true" preserveRatio="true" />
     <ImageView fx:id="p7_6" fitWidth="60" layoutX="529.52" layoutY="422.92" pickOnBounds="false" smooth="true" preserveRatio="true" />
     <ImageView fx:id="p7_7" fitWidth="60" layoutX="589.52" layoutY="422.92" pickOnBounds="false" smooth="true" preserveRatio="true" />
-    <Button layoutX="10.0" layoutY="550.0" mnemonicParsing="false" prefWidth="150.0" text="Retour au menu" onAction="#retourMenu" />
-    <Button fx:id="btnCommencer" layoutX="640.0" layoutY="550.0" mnemonicParsing="false" prefWidth="150.0" text="Commencer"  onAction="#commencer"/>
-    <Text fx:id="message" layoutX="275" layoutY="575" />
+    
 
+    
+    
+    <SimpleImageView  fx:id="nouvelleTuile" url="Images/tuilevierge.png" layoutX="200" layoutY="250" fitHeight="400" fitWidth="400" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#showSave"/>
+    <Text fx:id="nouvelleDateText" layoutX="250" layoutY="350" text="Date : " />
+    <Text fx:id="nouveauNomText" layoutX="250" layoutY="400" text="Nom : " />
+    <TextField fx:id="nouveauNomInput" layoutX="300" layoutY="380" text="" />
+    <Text fx:id="message" layoutX="275" layoutY="575" />
+    <Button layoutX="10.0" layoutY="550.0" mnemonicParsing="false" prefWidth="150.0" text="Retour au jeu" onAction="#retourJeu" />
+    <Button fx:id="btnSauvegarder" layoutX="640.0" layoutY="550.0" mnemonicParsing="false" prefWidth="150.0" text="Sauvegarder" onAction="#sauvegarder" />
     <PanelSonManager fx:id="panelSonManager"/>
     </children>
 </AnchorPane>

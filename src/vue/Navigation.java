@@ -7,6 +7,8 @@ import controleur.ControleurCredits;
 import controleur.ControleurJeu;
 import controleur.ControleurMenuPrincipal;
 import controleur.ControleurRejoindreReseau;
+import controleur.ControleurSauvegarde;
+import controleur.ControleurSauvegarderPartie;
 import controleur.ControleurTutoriel;
 import java.io.IOException;
 import java.net.URL;
@@ -45,6 +47,7 @@ public class Navigation
         initialiserVue(ControleurChoixJoueurs.class);
         initialiserVue(ControleurJeu.class);
         initialiserVue(ControleurChargerPartie.class);
+        initialiserVue(ControleurSauvegarderPartie.class);
         initialiserVue(ControleurMenuPrincipal.class);
         initialiserVue(ControleurRejoindreReseau.class);
         initialiserVue(ControleurTutoriel.class);

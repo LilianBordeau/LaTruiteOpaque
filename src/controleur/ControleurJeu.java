@@ -470,8 +470,10 @@ public class ControleurJeu  extends ControleurBase {
         {
             throw new RuntimeException(e);
         }
+        
+        
+        navigation.changerVue(ControleurSauvegarderPartie.class);    
     }
-    
     @FXML
     private void clicCharger(ActionEvent event)
     {
@@ -692,7 +694,7 @@ public class ControleurJeu  extends ControleurBase {
         lineFantome.setStartY(yDep);
         lineFantome.setEndX(xArr);
         lineFantome.setEndY(yArr);
-               lineFantome.setVisible(true);
+        lineFantome.setVisible(true);
         
         
         

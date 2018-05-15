@@ -58,7 +58,6 @@ public class ControleurSauvegarde extends ControleurBase
     public void onAppearing()
     {
         tuileSelectionne = -1;
-        clearPlateau();
         scanSaveFolder();
        
     }

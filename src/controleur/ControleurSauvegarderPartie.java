@@ -85,7 +85,7 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
        
     }
     
-     @FXML
+    @FXML
     private void retourJeu(ActionEvent event)
     {
         navigation.changerVue(ControleurJeu.class);
@@ -113,7 +113,7 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
                throw new RuntimeException(ex);
             }
            
-           
+           navigation.changerVue(ControleurJeu.class);
        }
     }
 }

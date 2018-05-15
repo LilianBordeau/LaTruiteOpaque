@@ -345,8 +345,7 @@ public class ControleurJeu  extends ControleurBase {
                                 public void run()
                                 {
                                     if(!jeuInterrompu)
-                                    {                                        
-                                        System.out.println(lePlacement);
+                                    {                                      
                                         ArrayList<Point> nouveauxPingouinsBloques = navigation.moteur.placerPingouin(lePlacement.ligne, lePlacement.colonne);
                                         if(nouveauxPingouinsBloques != null)
                                         {
@@ -406,7 +405,8 @@ public class ControleurJeu  extends ControleurBase {
 
     private void finDuTour(ArrayList<Point> nouveauxPingouinsBloques)
     {
-        Coup coup = navigation.moteur.dernierCoupJoue;        
+        Coup coup = navigation.moteur.dernierCoupJoue;   
+        System.out.println(coup);
         Thread thread = new Thread()
         {
             @Override
@@ -497,6 +497,7 @@ public class ControleurJeu  extends ControleurBase {
         System.out.println(navigation.moteur.plateau.plateau[0][0] == navigation.moteur.sauvegardeDebutPartie.plateau.plateau[0][0]);
         navigation.moteur = navigation.moteur.sauvegardeDebutPartie;
         navigation.moteur.sauvegarderDebutPartie();
+        pingouinFantome = null;
         miseAJourPlateau();
         jeuInterrompu = false;
         tourSuivant();

@@ -659,13 +659,13 @@ public class ControleurJeu  extends ControleurBase {
         
         String idCaseSource = indicesToId(dep.ligneSrc, dep.colonneSrc,DEBUTIDTUILE);
         tuileFantome = (ImageView)anchorPane.getScene().lookup("#"+idCaseSource);
-        Image image = new Image("Images/tuileCoule.png") ;
+        Image image = new Image("Images/fantomes/tuilevierge.png") ;
         
         tuileFantome.setImage(image);
         
         String idCaseSourcePinguouin = indicesToId(dep.ligneSrc, dep.colonneSrc,DEBUTIDPINGOUIN);
         pingouinFantome = (ImageView)anchorPane.getScene().lookup("#"+idCaseSourcePinguouin);
-        Image image2 = new  Image("Images/pingouins/fantome.png") ;        
+        Image image2 = new  Image("Images/fantomes/" + navigation.moteur.joueurPrecedent + "_0_6.png") ;        
         pingouinFantome.setImage(image2);
 
         

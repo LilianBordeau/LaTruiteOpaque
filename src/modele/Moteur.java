@@ -82,6 +82,55 @@ public class Moteur implements Serializable,Cloneable
         return deplacementsPossiblesEtDirection(ligne, colonne).premier;
     }
     
+    private void ajouterDeplacementsHorizontaux(ArrayList<Point> deplacements, ArrayList<Integer> indicesDirections, int ligne, int debut, int apresFin, int pas)
+    {
+        for(int j = debut ; j!=apresFin ; j+=pas)
+        {
+            if(plateau.plateau[ligne][j].peutDeplacerPingouin())
+            {
+                deplacements.add(new Point(ligne,j));
+            }
+            else
+            {
+                break;
+            }
+        }
+        indicesDirections.add(deplacements.size());
+    }
+    
+    private void ajouterDeplacementsDiagonale(ArrayList<Point> deplacements, ArrayList<Integer> indicesDirections, int ligne, int debut, int apresFin, int pas, int numDiagonale, int colonne)
+    {
+        int j = -1;
+        for(int i = debut ; i!=apresFin ; i+=pas)
+        {
+            if(numDiagonale == 0)
+            {
+                j = colonne-(ligne-i-(ligne%2))/2-(ligne%2);
+            }
+            else if(numDiagonale == 1)
+            {
+                j = colonne+(ligne-i-((ligne+1)%2))/2+((ligne+1)%2);
+            }
+            else if(numDiagonale == 2)
+            {
+                j = colonne-(i-ligne-(ligne%2))/2-(ligne%2);
+            }
+            else if(numDiagonale == 3)
+            {
+                j = colonne+(i-ligne-((ligne+1)%2))/2+((ligne+1)%2);
+            }            
+            if(j>=0 && j<Plateau.nbTuilesLigne(i) && plateau.plateau[i][j].peutDeplacerPingouin())
+            {
+                deplacements.add(new Point(i,j));
+            }
+            else
+            {
+                break;
+            }
+        }
+        indicesDirections.add(deplacements.size());
+    }
+    
     /* renvoie la liste des deplacements possible en partant du pingouin ligne colonne et un tableau contenant les indices
     de cette liste ou la direction (GAUCHE,DROITE, BAS GAUCHE, HAUT GAUCHE, BAS DROITE ou HAUT DROITE) change
     (les deplacements dans la meme direction sont a des indices qui se suivent dans le tableau) */
@@ -91,82 +140,12 @@ public class Moteur implements Serializable,Cloneable
         ArrayList<Integer> indicesDirections = new ArrayList<>();
         if(plateau.plateau[ligne][colonne].contientPingouin(joueurCourant))
         {    
-            for(int j = colonne-1 ; j>=0 ; j--)
-            {
-                if(plateau.plateau[ligne][j].peutDeplacerPingouin())
-                {
-                    deplacements.add(new Point(ligne,j));
-                }
-                else
-                {
-                    break;
-                }
-            }
-            indicesDirections.add(deplacements.size());
-            for(int j = colonne+1 ; j<Plateau.nbTuilesLigne(ligne) ; j++)
-            {
-                if(plateau.plateau[ligne][j].peutDeplacerPingouin())
-                {
-                    deplacements.add(new Point(ligne,j));
-                }
-                else
-                {
-                    break;
-                }
-            }
-            indicesDirections.add(deplacements.size());
-            for(int i = ligne-1 ; i>=0 ; i--)
-            {
-                int j = colonne-(ligne-i-(ligne%2))/2-(ligne%2);
-                if(j>=0 && plateau.plateau[i][j].peutDeplacerPingouin())
-                {
-                    deplacements.add(new Point(i,j));
-                }
-                else
-                {
-                    break;
-                }
-            }
-            indicesDirections.add(deplacements.size());
-            for(int i = ligne-1 ; i>=0 ; i--)
-            {
-                int j = colonne+(ligne-i-((ligne+1)%2))/2+((ligne+1)%2);
-                if(j<Plateau.nbTuilesLigne(i) && plateau.plateau[i][j].peutDeplacerPingouin())
-                {
-                    deplacements.add(new Point(i,j));
-                }
-                else
-                {
-                    break;
-                }
-            }
-            indicesDirections.add(deplacements.size());
-            for(int i = ligne+1 ; i<plateau.plateau.length ; i++)
-            {
-                int j = colonne-(i-ligne-(ligne%2))/2-(ligne%2);
-                if(j>=0 && plateau.plateau[i][j].peutDeplacerPingouin())
-                {
-                    deplacements.add(new Point(i,j));
-                }
-                else
-                {
-                    break;
-                }
-            }
-            indicesDirections.add(deplacements.size());
-            for(int i = ligne+1 ; i<plateau.plateau.length ; i++)
-            {
-                int j = colonne+(i-ligne-((ligne+1)%2))/2+((ligne+1)%2);
-                if(j<Plateau.nbTuilesLigne(i) && plateau.plateau[i][j].peutDeplacerPingouin())
-                {
-                    deplacements.add(new Point(i,j));
-                }
-                else
-                {
-                    break;
-                }
-            }
-            indicesDirections.add(deplacements.size());
+            ajouterDeplacementsHorizontaux(deplacements, indicesDirections, ligne, colonne-1, -1, -1);
+            ajouterDeplacementsHorizontaux(deplacements, indicesDirections, ligne, colonne+1, Plateau.nbTuilesLigne(ligne), 1);
+            ajouterDeplacementsDiagonale(deplacements, indicesDirections, ligne, ligne-1, -1, -1, 0, colonne);
+            ajouterDeplacementsDiagonale(deplacements, indicesDirections, ligne, ligne-1, -1, -1, 1, colonne);
+            ajouterDeplacementsDiagonale(deplacements, indicesDirections, ligne, ligne+1, plateau.plateau.length, 1, 2, colonne);
+            ajouterDeplacementsDiagonale(deplacements, indicesDirections, ligne, ligne+1, plateau.plateau.length, 1, 3, colonne);
         }
         return new Couple<>(deplacements,indicesDirections);
     }

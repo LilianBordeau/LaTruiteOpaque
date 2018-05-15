@@ -16,7 +16,7 @@
             <name>LaTruiteOpaque</name>
             <source-roots>
                 <root id="src.rsc.dir"/>
-                <root id="src.dir"/>
+                <root id="src.dir" name="src"/>
             </source-roots>
             <test-roots>
                 <root id="test.src.dir"/>

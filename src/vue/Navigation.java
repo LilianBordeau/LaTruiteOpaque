@@ -11,10 +11,12 @@ import controleur.ControleurTutoriel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Hashtable;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import util.Couple;
 import modele.Joueur;
 import modele.JoueurHumain;
@@ -72,7 +74,13 @@ public class Navigation
     
     public void changerVue(Class<? extends ControleurBase> classeControleur)
     {
-        Couple<Node,ControleurBase> vueEtControleur = vuesEtControleurs.get(classeControleur.getSimpleName()); 
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setDuration(Duration.millis(750));
+        Couple<Node,ControleurBase> vueEtControleur = vuesEtControleurs.get(classeControleur.getSimpleName());
+        fadeTransition.setNode(noeudRacine);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
         noeudRacine.getChildren().clear();
         noeudRacine.getChildren().add(vueEtControleur.premier);
         vueEtControleur.second.onAppearing();

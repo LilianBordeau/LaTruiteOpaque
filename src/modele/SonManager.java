@@ -8,6 +8,7 @@ package modele;
 import java.io.File;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 /**
  *  
@@ -59,6 +60,11 @@ public class SonManager {
             mediaPlayerMusique = new MediaPlayer(sons[0]);
         }
         mediaPlayerMusique.setVolume(volumeMusique/100);
+        mediaPlayerMusique.setOnEndOfMedia(new Runnable() {
+            public void run() {
+              mediaPlayerMusique.seek(Duration.ZERO);
+            }
+        });
         mediaPlayerMusique.play();
     }
     

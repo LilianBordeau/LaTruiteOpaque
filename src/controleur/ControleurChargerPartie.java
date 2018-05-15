@@ -27,6 +27,7 @@ public class ControleurChargerPartie extends ControleurSauvegarde
     public void onAppearing()
     {
         super.onAppearing();
+        clearPlateau();
         btnCommencer.setDisable(true);
         setMessage("Veuillez choisir une sauvegarde !");
     }

@@ -1,6 +1,7 @@
 package vue;
 
 import controleur.ControleurBase;
+import controleur.ControleurChargerPartie;
 import controleur.ControleurChoixJoueurs;
 import controleur.ControleurCredits;
 import controleur.ControleurJeu;
@@ -39,6 +40,7 @@ public class Navigation
         vuesEtControleurs = new Hashtable<>();
         initialiserVue(ControleurChoixJoueurs.class);
         initialiserVue(ControleurJeu.class);
+        initialiserVue(ControleurChargerPartie.class);
         initialiserVue(ControleurMenuPrincipal.class);
         initialiserVue(ControleurRejoindreReseau.class);
         initialiserVue(ControleurTutoriel.class);
@@ -70,7 +72,6 @@ public class Navigation
     
     public void changerVue(Class<? extends ControleurBase> classeControleur)
     {
-        
         Couple<Node,ControleurBase> vueEtControleur = vuesEtControleurs.get(classeControleur.getSimpleName()); 
         noeudRacine.getChildren().clear();
         noeudRacine.getChildren().add(vueEtControleur.premier);
@@ -78,11 +79,11 @@ public class Navigation
         vueEtControleur.second.onAppearingCommun();
     }
     
-     public void setFullScreen()
-   {
-              Stage stage = (Stage) noeudRacine.getScene().getWindow();
-              stage.setFullScreen(!stage.isFullScreen());
-   }
+    public void setFullScreen()
+    {
+               Stage stage = (Stage) noeudRacine.getScene().getWindow();
+               stage.setFullScreen(!stage.isFullScreen());
+    }
    
    
    public boolean isFullScreen()

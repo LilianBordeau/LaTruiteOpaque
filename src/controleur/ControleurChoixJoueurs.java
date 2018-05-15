@@ -1,6 +1,7 @@
 package controleur;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ import modele.JoueurReseau;
 import modele.JoueurServeur;
 import reseau.Connexion;
 import reseau.ConnexionServeur;
+import util.Couple;
 
 public class ControleurChoixJoueurs extends ControleurBase
 {    
@@ -30,13 +32,16 @@ public class ControleurChoixJoueurs extends ControleurBase
     int JAUNE = 1;
     int ROUGE = 2;
     int VERT = 3;
-    String[] TYPEJOUEUR = {"JOUEUR", "IA FACILE", "IA MOYENNE", "IA DIFFICILE", "AUCUN"};
+    String[] TYPEJOUEURHORSRESEAU = {"JOUEUR", "IA FACILE", "IA MOYENNE", "IA DIFFICILE", "AUCUN"};
+    String[] TYPEJOUEURENRESEAU = {"JOUEUR", "IA FACILE", "IA MOYENNE", "IA DIFFICILE", "AUCUN","JOUEUR EN RESEAU"};
+    String[] TYPEJOUEUR;
     String[] COULEUR = {"BLEU","JAUNE","ROUGE","VERT"};
     int JOUEURREEL = 0;    
     int IAFACILE = 1;
     int IAMOYENNE = 2;
     int IADIFFICILE = 3;
     int AUCUNJOUEUR = 4;
+    int JOUEURRESEAU = 5;
     
     
     int nombreDeJoueurs = 2;
@@ -48,8 +53,11 @@ public class ControleurChoixJoueurs extends ControleurBase
     
     @FXML
     private Button precedentRouge,suivantRouge,precedentVert,suivantVert,precedentBleu,suivantBleu,precedentJaune,suivantJaune;
+    
     @FXML
     private StackPane imagesRouge ,nomRouge,imagesVert,nomVert,imagesBleu,nomBleu,imagesJaune,nomJaune;
+    
+    HashMap<Button,Couple<Integer,Integer>> deplacements;
     
     StackPane[] imagesJoueur = new StackPane[4];
     
@@ -67,6 +75,7 @@ public class ControleurChoixJoueurs extends ControleurBase
         imagesJoueur[couleur] = imagesCouleur; 
         typesJoueur[couleur] = typeJoueur;
         nomsJoueur[couleur] = nomCouleur;
+        
         setImage(imagesCouleur,typeJoueur);
         
         if(typeJoueur == JOUEURREEL){
@@ -95,13 +104,34 @@ public class ControleurChoixJoueurs extends ControleurBase
     @Override
     public void onAppearing()
     {  
+        
+        if(navigation.enReseau)
+        {
+            TYPEJOUEUR = TYPEJOUEURENRESEAU;
+            setJoueur(JAUNE,imagesJaune,nomJaune,JOUEURRESEAU);
+        }
+        else
+        {
+            TYPEJOUEUR = TYPEJOUEURHORSRESEAU;
+            setJoueur(JAUNE,imagesJaune,nomJaune,JOUEURREEL);
+        }
         nombreDeJoueurs = 2;
+        deplacements =  new HashMap<>();
+        deplacements.put(precedentBleu,     new Couple(0,-1));
+        deplacements.put(suivantBleu,       new Couple(0,1));
+        deplacements.put(precedentJaune,    new Couple(1,-1));
+        deplacements.put(suivantJaune,      new Couple(1,1));
+        deplacements.put(precedentRouge,    new Couple(2,-1));
+        deplacements.put(suivantRouge,      new Couple(2,1));
+        deplacements.put(precedentVert,     new Couple(3,-1));
+        deplacements.put(suivantVert,       new Couple(3,1));
+
+        
         
         setJoueur(BLEU,imagesBleu,nomBleu,JOUEURREEL);
-        setJoueur(JAUNE,imagesJaune,nomJaune,JOUEURREEL);
         setJoueur(ROUGE,imagesRouge,nomRouge,AUCUNJOUEUR);
         setJoueur(VERT,imagesVert,nomVert,AUCUNJOUEUR);
-       
+        estPartieConforme();
     }
     
     
@@ -135,62 +165,14 @@ public class ControleurChoixJoueurs extends ControleurBase
     {
        //QUELLE BOUTON EST CLIQUÉ 
        Button button = (Button) event.getTarget();
-       int couleur = -1;
-       int rotation = -1;
-       if(button == suivantRouge)
-       {
-           System.out.println("suivant rouge");
-           couleur = ROUGE;
-           rotation = 1;
-           
-       }
-       else if(button == precedentRouge)
-       {
-           System.out.println("precedent rouge");
-           couleur = ROUGE;
-           rotation = -1;
-       } 
-       else if(button == precedentVert)
-       {
-           System.out.println("precedent vert");
-           couleur = VERT;
-           rotation = -1;
-       } 
-       else if(button == suivantVert)
-       {
-           System.out.println("suivant vert");
-           couleur = VERT;
-           rotation = 1;
-       }
-       else if(button == suivantBleu)
-       {
-           System.out.println("suivant bleu");
-           couleur = BLEU;
-           rotation = 1;
-       }  
-       else if(button == precedentBleu)
-       {
-           System.out.println("precedent bleu");
-           couleur = BLEU;
-           rotation = -1;
-       }
-        else if(button == suivantJaune)
-       {
-           System.out.println("suivant jaune");
-           couleur = JAUNE;
-           rotation = 1;
-       }  
-       else if(button == precedentJaune)
-       {
-           System.out.println("precedent jaune");
-           couleur = JAUNE;
-           rotation = -1;
-       }  
-       if(couleur != -1)
-       {
-            changerAffichage(couleur,rotation);
-            estPartieConforme();
-       }
+     
+       Couple<Integer,Integer> deplacement = deplacements.get(button);
+       int couleur = deplacement.premier;
+       int rotation = deplacement.second;
+
+        changerAffichage(couleur,rotation);
+        estPartieConforme();
+     
       
     }
 
@@ -211,6 +193,7 @@ public class ControleurChoixJoueurs extends ControleurBase
 
         Joueur[] joueurs = new Joueur[nombreDeJoueurs];
         int i = 0;
+        nbJoueursReseauAAttendre = 0;
         for(int j = 0; j < typesJoueur.length;j++)
         {
             
@@ -241,22 +224,17 @@ public class ControleurChoixJoueurs extends ControleurBase
                 {
                     joueurs[i] = new JoueurIADifficile();
                      joueurs[i].couleur = j;
+                }else if(typeJoueur == JOUEURRESEAU)
+                {
+                    nbJoueursReseauAAttendre++;
+                    joueurs[i] = new JoueurServeur();
+                    joueurs[i].couleur = j;
                 }
+                
                 i++;
             }
         }
-        nbJoueursReseauAAttendre = 0;
-        for(int j = 0 ; j < joueurs.length ; j++)
-        {
-            if(joueurs[j] instanceof JoueurIAAleatoire)
-            {
-                Joueur ancienJoueur = joueurs[j];
-                joueurs[j] = new JoueurServeur();
-                joueurs[j].couleur = ancienJoueur.couleur;
-                joueurs[j].nom = ancienJoueur.nom;
-                nbJoueursReseauAAttendre++;
-            }
-        }
+       
         nbJoueursReseau = nbJoueursReseauAAttendre;
         navigation.moteur.setJoueurs(joueurs);
         if(nbJoueursReseauAAttendre >= 1)

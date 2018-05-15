@@ -30,10 +30,12 @@ public class Navigation
     private Group noeudRacine;
     public Moteur moteur;
     public SonManager sonManager;
+    public Boolean enReseau;
 
     
     public Navigation(Group noeudRacine)
     {
+        enReseau = false;
         sonManager =  new SonManager();
         sonManager.jouerMusique();
         this.noeudRacine = noeudRacine;

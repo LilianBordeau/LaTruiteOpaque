@@ -25,12 +25,14 @@ public class ControleurMenuPrincipal  extends ControleurBase
     @FXML
     private void clicJouer(ActionEvent event)
     {
+        navigation.enReseau = false;
         navigation.changerVue(ControleurChoixJoueurs.class);
     }
     
     @FXML
     private void clicCreerReseau(ActionEvent event)
     {
+        navigation.enReseau = true;
         navigation.changerVue(ControleurChoixJoueurs.class);
     }
     

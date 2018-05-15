@@ -70,12 +70,14 @@ public class ControleurChargerPartie extends ControleurBase
             {
                int nbPoissons  = plateau[i][j].nbPoissons;
                ImageView imagePlateau = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, "c"));
-            
+               
                if( nbPoissons == 0 )
                {
+                   imagePlateau.setVisible(false);
                    imagePlateau.setImage(null);
                }else
                {
+                   imagePlateau.setVisible(true);
                    String pathImage = Constantes.nomImageCase(plateau[i][j]);
                 imagePlateau.setImage(new Image(pathImage));
                }
@@ -218,15 +220,22 @@ public class ControleurChargerPartie extends ControleurBase
     
 
     private void scanSaveFolder() {
-        File folder =  new File("rsc/Sauvegardes");
+        File folder =  new File("Sauvegardes");
+        if(folder.exists() == false )
+        {
+          boolean res = (folder.mkdirs()); 
+        }
         File[] filestmp = folder.listFiles();
         int i= 0;
-        while(i < filestmp.length )
+        if(filestmp != null)
         {
-            files[i] = filestmp[i];
-            String[] params = filestmp[i].getName().split("_");
-            showTuile(i,params);
-            i++;
+            while( i < filestmp.length  )
+            {
+                files[i] = filestmp[i];
+                String[] params = filestmp[i].getName().split("_");
+                showTuile(i,params);
+                i++;
+            }
         }
         
         if(i < NBSAUVEGARDES)

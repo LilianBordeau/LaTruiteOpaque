@@ -38,6 +38,7 @@ public class ControleurChoixJoueurs extends ControleurBase
     int IADIFFICILE = 3;
     int AUCUNJOUEUR = 4;
     
+    
     int nombreDeJoueurs = 2;
     
     @FXML
@@ -107,6 +108,8 @@ public class ControleurChoixJoueurs extends ControleurBase
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {     
+        
+        
         onAppearing();
        
     }

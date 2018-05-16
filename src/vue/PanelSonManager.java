@@ -58,6 +58,7 @@ public class PanelSonManager extends Group {
         sliderSon = new Slider();
         sliderSon.setLayoutX(35);
         sliderSon.setLayoutY(327);
+        
         this.getChildren().addAll(screen,imageMusique,sliderMusique,imageSon,sliderSon);
     }
     

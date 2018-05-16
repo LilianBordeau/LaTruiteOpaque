@@ -242,6 +242,8 @@
                 <Button text="Reprendre" layoutX="350.0" layoutY="420.0" onAction="#clicReprendre" />
             </children>
         </Group>
+        
+        <Button layoutX="10" layoutY="500" prefWidth="150" text="Fin de partie" onAction="#goFinPartie"/>
         <PanelSonManager fx:id="panelSonManager"/>
       </children>
 </AnchorPane>

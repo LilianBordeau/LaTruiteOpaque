@@ -56,9 +56,10 @@
         </StackPane>
         
         
+        
         <Button fx:id="precedentBleu" layoutX="110.0" layoutY="175" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
             <graphic>
-                <SimpleImageView fitHeight="30" fitWidth="30" url="Images/arriere.png"  pickOnBounds="true" preserveRatio="true"/>
+                <SimpleImageView layoutX="110.0" layoutY="175" fitHeight="30" fitWidth="30" url="Images/arriere.png"  pickOnBounds="true" preserveRatio="true"/>
             </graphic>
         </Button>
         

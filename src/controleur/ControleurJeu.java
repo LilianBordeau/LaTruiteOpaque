@@ -7,26 +7,43 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Stack;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.MapValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.Duration;
+import javafx.util.StringConverter;
 import modele.Case;
 import modele.Constantes;
 import modele.Coup;
@@ -222,6 +239,8 @@ public class ControleurJeu  extends ControleurBase {
             {
                     System.out.println("J"+joueur.numero+"("+joueur.getClass().getSimpleName()+") : "+joueur.scorePoisson+"p et "+joueur.scoreTuile+"t, ");
             }
+            
+            showFinPartie();
         }
         /*else
         {
@@ -737,7 +756,7 @@ public class ControleurJeu  extends ControleurBase {
   
     }
 
-	 private void  montrerDernierCoup(Deplacement dep)
+    private void  montrerDernierCoup(Deplacement dep)
     {
         
         String idCasePinguoin = indicesToId(dep.ligneDest, dep.colonneDest,DEBUTIDTUILE);
@@ -773,4 +792,42 @@ public class ControleurJeu  extends ControleurBase {
         
         
     }
-}
+         
+         
+     
+    public static final String Column1MapKey = "A";
+    public static final String Column2MapKey = "B";
+    public static final String Column3MapKey = "C";
+    public static final String Column4MapKey = "D";
+      
+    @FXML
+    private void goFinPartie(ActionEvent event)
+    {        
+       showFinPartie();
+    }
+
+    private void showFinPartie() {
+ ArrayList<Joueur>  classementJoueurs = navigation.moteur.getClassement();
+
+        
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        VBox dialogVbox = new VBox(20);
+        dialogVbox.getChildren().add(new Text("Fin de partie"));
+         Text text;
+        for(int i= 0; i<classementJoueurs.size();i++ )
+        {
+            String ligne= "";
+            
+            ligne = Integer.toString(i+1) + " | " + classementJoueurs.get(i).nom + " | " +
+                    Integer.toString(classementJoueurs.get(i).scorePoisson) +" | "  +Integer.toString(classementJoueurs.get(i).scoreTuile );
+             text= new Text(ligne);
+             dialogVbox.getChildren().add(text);
+        }
+ 
+        Scene dialogScene = new Scene(dialogVbox, 300, 200);
+        dialog.setScene(dialogScene);
+        dialog.show();
+    }
+
+    }

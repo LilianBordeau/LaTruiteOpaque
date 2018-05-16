@@ -281,30 +281,47 @@ public class Moteur implements Serializable,Cloneable
         return true;
     }
     
+    
+    
+    private class ComparatorJoueur implements Comparator<Joueur> {
+        
+ 
+       @Override
+       public int compare(Joueur j1, Joueur j2)
+       {
+           if(j1.scorePoisson == j2.scorePoisson)
+           {
+               return -new Integer(j1.scoreTuile).compareTo(j2.scoreTuile);
+           }
+           else
+           {
+               return -new Integer(j1.scorePoisson).compareTo(j2.scorePoisson);
+           }
+       }
+    
+    }
+    
+    
+    
     public ArrayList<Joueur> joueursGagnants()
     {
-        ArrayList<Joueur> lesGagnants = new ArrayList<>(Arrays.asList(joueurs));
-        Comparator comparator = new Comparator<Joueur>()
-                         {
-                            @Override
-                            public int compare(Joueur j1, Joueur j2)
-                            {
-                                if(j1.scorePoisson == j2.scorePoisson)
-                                {
-                                    return -new Integer(j1.scoreTuile).compareTo(j2.scoreTuile);
-                                }
-                                else
-                                {
-                                    return -new Integer(j1.scorePoisson).compareTo(j2.scorePoisson);
-                                }
-                            }
-                         };
-        lesGagnants.sort(comparator);  
-        for(int i = lesGagnants.size()-1 ; i >= 0 && comparator.compare(lesGagnants.get(i), lesGagnants.get(0)) > 0  ; i--)
+        ComparatorJoueur comparatorJoueur = new ComparatorJoueur();
+        ArrayList<Joueur> lesGagnants = getClassement();
+        
+        for(int i = lesGagnants.size()-1 ; i >= 0 && comparatorJoueur.compare(lesGagnants.get(i), lesGagnants.get(0)) > 0  ; i--)
         {
             lesGagnants.remove(i);
         }
         return lesGagnants;
+    }
+    
+    public ArrayList<Joueur> getClassement()
+    {
+        ComparatorJoueur comparatorJoueur = new ComparatorJoueur();
+        ArrayList<Joueur> joueursClassement = new ArrayList<>(Arrays.asList(joueurs));
+                         
+        joueursClassement.sort(comparatorJoueur);  
+        return joueursClassement;
     }
 
     /* renvoie la liste des nouveaux pingouins bloques apres placement ou deplacement d'un pingouin (methode appelee par placerPingouin et 

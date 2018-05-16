@@ -13,6 +13,9 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Stack;
 import javafx.animation.Animation;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -468,9 +471,7 @@ public class ControleurJeu  extends ControleurBase {
                                 onTranslateDuPinguoin((Deplacement)coup, nouveauxPingouinsBloques);
                             }else
                             {
-                                miseAjourPoints(nouveauxPingouinsBloques);         
-                                miseAJourInfoJeu();
-                                tourSuivant();  
+                                onCouleDuPingouin(nouveauxPingouinsBloques);   
                             }
                         }
                     }
@@ -597,7 +598,7 @@ public class ControleurJeu  extends ControleurBase {
         }
         else
         {
-            System.out.println("aucun coup a refaire");
+            System.out.println("aucun coup a refaire ou refaire desactive (pour le jeu en reseau)");
         }  
     }
     
@@ -712,7 +713,50 @@ public class ControleurJeu  extends ControleurBase {
         }
     }
 
+    private void onCouleDuPingouin(ArrayList<Point> nouveauxPingouinsBloques){
+        estEnAttente = true;
+        miseAjourPoints(nouveauxPingouinsBloques);   
+        ParallelTransition parallelTransition = new ParallelTransition();
+        for(Point point : nouveauxPingouinsBloques)
+        {            
+            Case tuile = navigation.moteur.plateau.plateau[point.ligne][point.colonne];
+            String nomImage = Constantes.nomImagePingouin(navigation.moteur.joueurs[tuile.numJoueurPingouin()]);
+            System.out.println(nomImage);
+            ImageView pingouinGraphique2 = null;
+            pingouinGraphique2 = (ImageView)anchorPane.getScene().lookup("#"+indicesToId(point.ligne,point.colonne,DEBUTIDPINGOUIN));
+            System.out.println(pingouinGraphique2);
+            ImageView pingouinFondu = new ImageView(new Image(nomImage));
+            anchorPane.getChildren().add(pingouinFondu);
+            pingouinFondu.setLayoutX(pingouinGraphique2.getLayoutX());
+            pingouinFondu.setLayoutY(pingouinGraphique2.getLayoutY());
+            pingouinFondu.setFitHeight(pingouinGraphique2.getFitHeight());
+            pingouinFondu.setFitWidth(pingouinGraphique2.getFitWidth());
+            pingouinFondu.setPreserveRatio(true);
+            pingouinFondu.setVisible(true);
+            ScaleTransition scaleTransitionMax = new ScaleTransition(Duration.seconds(0.5), pingouinFondu);
+            scaleTransitionMax.setFromX(1);
+            scaleTransitionMax.setToX(1.5);
+            ScaleTransition scaleTransitionMin = new ScaleTransition(Duration.seconds(0.5), pingouinFondu);
+            scaleTransitionMin.setFromX(1.5);
+            scaleTransitionMin.setToX(0);
+            scaleTransitionMin.setFromY(1);
+            scaleTransitionMin.setToY(0);
+            SequentialTransition sequentialTransition = new SequentialTransition(scaleTransitionMax, scaleTransitionMin);
+            parallelTransition.getChildren().add(sequentialTransition);
+        }
+        parallelTransition.setOnFinished(new EventHandler<ActionEvent>() {
 
+            @Override
+            public void handle(ActionEvent event) {
+                miseAjourPoints(nouveauxPingouinsBloques);         
+                miseAJourInfoJeu();
+                estEnAttente = false;
+                tourSuivant();
+
+            }
+        });
+        parallelTransition.play();
+    }
 
 	private void onTranslateDuPinguoin(Deplacement dep, ArrayList<Point> nouveauxPingouinsBloques) {
         estEnAttente = true;
@@ -753,31 +797,42 @@ public class ControleurJeu  extends ControleurBase {
         pingouinMvt.setImage(image);
         
         
-        TranslateTransition animation = new TranslateTransition(
-                Duration.seconds(0.7), pingouinMvt
-        );
-     
+        TranslateTransition animationPingouin = new TranslateTransition(Duration.seconds(0.7), pingouinMvt);
+        
         Double  distanceY = caseDest.getLayoutY() - pingouinMvt.getLayoutY();
         Double  distanceX = caseDest.getLayoutX() - pingouinMvt.getLayoutX();
-        animation.setFromX(0);
-        animation.setFromY(0);
-        animation.setToY(distanceY);
-        animation.setToX(distanceX);
-        animation.setAutoReverse(true);
-        animation.play();
+        animationPingouin.setFromX(0);
+        animationPingouin.setFromY(0);
+        animationPingouin.setToY(distanceY);
+        animationPingouin.setToX(distanceX);
+        animationPingouin.setAutoReverse(true);
+        
+        ScaleTransition animationLine = new ScaleTransition(Duration.seconds(0.7), lineFantome);
+        animationLine.setFromX(0);
+        animationLine.setFromY(0);
+        animationLine.setToY(1);
+        animationLine.setToX(1);
+        
+        TranslateTransition translateLine = new TranslateTransition(Duration.seconds(0.7), lineFantome);
+        translateLine.setFromX(-distanceX/2.0);
+        translateLine.setFromY(-distanceY/2.0);
+        translateLine.setToX(0);
+        translateLine.setToY(0);
+        
+        ParallelTransition parallelTransition = new ParallelTransition(animationPingouin, animationLine, translateLine);
+        lineFantome.setVisible(true);
+        parallelTransition.play();
         
         
-        animation.setOnFinished(new EventHandler<ActionEvent>() {
+        
+        parallelTransition.setOnFinished(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
                 pingouinMvt.setImage(null);
                 pingouinMvt.setVisible(false);
                 miseAJourPingouin(dep.ligneDest, dep.colonneDest);
-                miseAjourPoints(nouveauxPingouinsBloques);         
-                miseAJourInfoJeu();
-                estEnAttente = false;
-                tourSuivant();
+                onCouleDuPingouin(nouveauxPingouinsBloques);                
 
             }
         });

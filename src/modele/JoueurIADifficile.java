@@ -25,11 +25,11 @@ public class JoueurIADifficile extends JoueurAAttendre implements Serializable,C
         int nbCaseLibres = moteur.nbTuilesLibres();
         if (nbCaseLibres <= 13)
         {
-            profondeur = 13;
+            profondeur = 10;
         }
         else if (nbCaseLibres <= 20)
         {
-            profondeur = 8;
+            profondeur = 7;
         }
         else if (nbCaseLibres <= 30)
         {

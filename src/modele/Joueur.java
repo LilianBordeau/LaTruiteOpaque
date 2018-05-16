@@ -133,7 +133,7 @@ public abstract class Joueur implements Serializable,Cloneable
     {
         /* le gagnant est celui qui a le plus de tuile ou le plus de poissons parmi ceux qui ont le nombre maximal
         de tuile en cas d'egalite (avec cette formule 1 poisson apporte plus de points (1000) que le nombre maximal de tuile (60)) */
-        return 1000*nbPoissons+nbTuiles;
+        return 3*4*(1000*nbPoissons+nbTuiles);
     }
     
     public static int nbAppels = 0;
@@ -228,28 +228,27 @@ public abstract class Joueur implements Serializable,Cloneable
         }
         else
         {
-            int gainJoueurCourant = gain(moteur.joueurs[joueurCour], pingouinsIsoles);
+            int gainJoueurCourant = gain(moteur.joueurs[joueurCour]);
             for(Joueur joueur : moteur.joueurs)
             {
                 if(joueur.numero != joueurCour)
                 {
-                    heur += gainJoueurCourant-gain(joueur, pingouinsIsoles);
+                    heur += gainJoueurCourant-gain(joueur);
                 }
             }
         }        
         return new ReelEtendu(heur);
     }
 
-    private int gain(Joueur joueur, boolean pingouinsIsoles)
+    private int gain(Joueur joueur)
     {
         int heur = score(joueur.scorePoisson, joueur.scoreTuile);
         boolean[][] sommetsVisites = new boolean[moteur.plateau.plateau.length][moteur.plateau.plateau.length];
         for(Pingouin pingouin : joueur.pingouins)
-        {                       
+        {     
+            HashMap<Integer, Boolean> autresJoueursComposante = new HashMap<>();
             Case casePingouin = moteur.plateau.plateau[pingouin.ligne][pingouin.colonne];             
             heur += score(casePingouin.nbPoissons, 1);
-            if(pingouinsIsoles)
-            {
                 Stack<Point> pileSommets = new Stack<>();
                 pileSommets.push(new Point(pingouin.ligne,pingouin.colonne));
                 sommetsVisites[pingouin.ligne][pingouin.colonne] = true;
@@ -272,15 +271,15 @@ public abstract class Joueur implements Serializable,Cloneable
                             }
                             else if(caseCourante.estOccupee() && !caseCourante.contientPingouin(joueur.numero))
                             {
-                                continuer = false;
+                                autresJoueursComposante.put(caseCourante.numJoueurPingouin(), true);
+                                /*continuer = false;
                                 gainComposante = 0;
-                                break;
+                                break;*/
                             }
                         }
                     }
                 }
-                heur += gainComposante;
-            }
+                heur += gainComposante/(autresJoueursComposante.size()+1);
         }
         /*sommetsVisites = new boolean[moteur.plateau.plateau.length][moteur.plateau.plateau.length];
         for(Joueur ennemi : moteur.joueurs)

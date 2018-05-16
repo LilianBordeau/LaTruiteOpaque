@@ -556,10 +556,10 @@ public class ControleurJeu  extends ControleurBase {
                 navigation.moteur.dernierCoupJoue = null;
                 navigation.moteur = navigation.moteur.coupJoues.pop();            
                 miseAJourAnnulerRefaire(dernierCoupJoue, null);
-            } while(!navigation.moteur.queDesIA && !(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain));
+            } while(!navigation.moteur.queDesIA && !navigation.moteur.coupJoues.isEmpty() && !(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain));
             if(!navigation.moteur.queDesIA)
             {
-                jeuInterrompu = false;
+                reprendre();
             }
             /*jeuInterrompu = false;
             tourSuivant();*/
@@ -593,7 +593,7 @@ public class ControleurJeu  extends ControleurBase {
             } while(!navigation.moteur.queDesIA && !(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain));
             if(!navigation.moteur.queDesIA)
             {
-                jeuInterrompu = false;
+                reprendre();
             }
         }
         else

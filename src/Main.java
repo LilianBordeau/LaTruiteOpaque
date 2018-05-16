@@ -44,13 +44,12 @@ public class Main extends Application {
             ParallelTransition transition = new ParallelTransition(noeudRacine, scale, translate);
             transition.play();
         });
-        primaryStage.setWidth(LARGEURFENETREFXML); // remplacer par LARGEURFENETREINIT avant le rendu
-        primaryStage.setHeight(HAUTEURFENETREFXML); // remplacer par HAUTEURFENETREINIT avant le rendu 
-        /*primaryStage.setWidth(LARGEURFENETREINIT);
-        primaryStage.setHeight(HAUTEURFENETREINIT);*/
+        //primaryStage.setWidth(LARGEURFENETREFXML); // remplacer par LARGEURFENETREINIT avant le rendu
+        //primaryStage.setHeight(HAUTEURFENETREFXML); // remplacer par HAUTEURFENETREINIT avant le rendu 
+        primaryStage.setWidth(LARGEURFENETREINIT);
+        primaryStage.setHeight(HAUTEURFENETREINIT);
         primaryStage.centerOnScreen();        
         navigation.changerVue(ControleurMenuPrincipal.class);
-        //primaryStage.setFullScreen(true);
     }
         
     public static void main(String[] args)

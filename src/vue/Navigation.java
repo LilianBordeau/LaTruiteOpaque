@@ -68,7 +68,7 @@ public class Navigation
         }
     }
     
-    public static String nomFichierFXML(Class<?> classeControleur)
+    public static String nomFichierFXML(Class<? extends ControleurBase> classeControleur)
     {
         String nomControleur = classeControleur.getSimpleName();
         String resultat = /*"vue/"+*/nomControleur.substring(DEBUTNOMSCONTROLEURS.length(), nomControleur.length())+".fxml";
@@ -103,4 +103,11 @@ public class Navigation
         Stage stage = (Stage) noeudRacine.getScene().getWindow();
         return stage.isFullScreen();
    }
+   
+   public ControleurBase getController(Class<? extends ControleurBase> classeControleur)
+   {
+       return vuesEtControleurs.get(classeControleur.getSimpleName()).second;
+       
+   }
+   
 }

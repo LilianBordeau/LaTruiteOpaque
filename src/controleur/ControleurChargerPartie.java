@@ -107,7 +107,8 @@ public class ControleurChargerPartie extends ControleurSauvegarde
         if(tuileSelectionne != -1)
         {
             System.out.println("commencerPartie");
-            
+            ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
+            controleurJeu.lineFantome.setVisible(false);
             navigation.moteur = moteurs[tuileSelectionne];
              navigation.changerVue(ControleurJeu.class);
              

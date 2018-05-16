@@ -276,6 +276,8 @@ public class ControleurChoixJoueurs extends ControleurBase
         }
         else
         {
+            ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
+            controleurJeu.lineFantome.setVisible(false);
             navigation.changerVue(ControleurJeu.class);
         }
     }
@@ -328,7 +330,9 @@ public class ControleurChoixJoueurs extends ControleurBase
             Platform.runLater(new Runnable(){
                 @Override
                 public void run()
-                {                    
+                {         
+                    ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
+                    controleurJeu.lineFantome.setVisible(false);
                     navigation.changerVue(ControleurJeu.class);
                 }
             });

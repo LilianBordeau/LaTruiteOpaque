@@ -52,10 +52,10 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
     @Override
     public void onAppearing()
     {
-       super.onAppearing();
+        super.onAppearing();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
-        dateString = dateFormat.format(date).toString().replace("/",":");
+        dateString = dateFormat.format(date).toString().replace("/","-");
         nouvelleDateText.setText("Date : " + dateFormat.format(date));
 
        btnSauvegarder.setDisable(true);

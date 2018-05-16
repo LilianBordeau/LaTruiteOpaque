@@ -21,6 +21,7 @@ import modele.JoueurIADifficile;
 import modele.JoueurIAMoyenne;
 import modele.JoueurReseau;
 import modele.JoueurServeur;
+import modele.Moteur;
 import reseau.Connexion;
 import reseau.ConnexionServeur;
 import util.Couple;
@@ -190,7 +191,9 @@ public class ControleurChoixJoueurs extends ControleurBase
     @FXML
     private void clicCommencer(ActionEvent event)
     {
-
+        
+        
+        
         Joueur[] joueurs = new Joueur[nombreDeJoueurs];
         int i = 0;
         nbJoueursReseauAAttendre = 0;
@@ -235,6 +238,7 @@ public class ControleurChoixJoueurs extends ControleurBase
             }
         }
        
+        navigation.moteur = new Moteur(joueurs);
         nbJoueursReseau = nbJoueursReseauAAttendre;
         navigation.moteur.setJoueurs(joueurs);
         if(nbJoueursReseauAAttendre >= 1)

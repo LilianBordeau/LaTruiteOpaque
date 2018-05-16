@@ -90,7 +90,8 @@ public class ControleurJeu  extends ControleurBase {
         {
             for(int j = 0 ; j < Plateau.nbTuilesLigne(i) ; j++)
             {
-                miseAJourTuile(i,j);                   
+                miseAJourTuile(i,j);
+                miseAJourPingouin(i,j);   
             }
         }
         
@@ -594,11 +595,29 @@ public class ControleurJeu  extends ControleurBase {
             points.add(new Point(deplacement.ligneSrc, deplacement.colonneSrc));
             points.add(new Point(deplacement.ligneDest, deplacement.colonneDest));
         }
+        /*
+        boolean test = true;
+        for(int i =0; i<navigation.moteur.joueurs.length && test ; i++ )
+        {
+            if(navigation.moteur.joueurs[i] instanceof JoueurAAttendre)
+            {
+                test = false;
+            }
+        }
+        
+        if(test)
+        {
+            
+        }
+        */
+        
+        
         suprimerCasesAccessible();
         miseAjourPoints(points);
         miseAjourPoints(dernierCoupJoue.nouveauxPingouinsBloques);
         miseAJourInfoJeu();
     }
+    
     private void miseAjourPoints(ArrayList<Point> points)
     {
         for(Point point : points)

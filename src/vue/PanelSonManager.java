@@ -37,8 +37,6 @@ public class PanelSonManager extends Group {
         screen.setFitWidth(30);
         screen.setFitHeight(30);
     
-
-        
         imageMusique = new ImageView();
         imageMusique.setPickOnBounds(true);
         imageMusique.setLayoutX(2);

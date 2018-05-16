@@ -191,7 +191,7 @@ public class ControleurSauvegarde extends ControleurBase
             nom.setText("Nom : " + params[1]);
             nom.setVisible(true);
             Text date = (Text)anchorPane.lookup("#"+getDateId(i));
-            String dateText = params[2].replace(":", "/");
+            String dateText = params[2].replace("-", "/");
             dateText = dateText.replaceFirst("[.][^.]+$", "");
             date.setText("Date : " + dateText ); 
             date.setVisible(true);

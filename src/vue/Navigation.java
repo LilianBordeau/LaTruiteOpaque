@@ -40,8 +40,6 @@ public class Navigation
         sonManager =  new SonManager();
         sonManager.jouerMusique();
         this.noeudRacine = noeudRacine;
-        Joueur[] joueurs = new Joueur[]{new JoueurHumain(), new JoueurHumain(), new JoueurHumain(), new JoueurHumain()};
-        moteur = new Moteur(joueurs);
         vuesEtControleurs = new Hashtable<>();
         initialiserVue(ControleurChoixJoueurs.class);
         initialiserVue(ControleurJeu.class);

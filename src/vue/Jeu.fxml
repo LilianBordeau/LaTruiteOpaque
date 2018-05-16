@@ -234,6 +234,7 @@
         <Button text="Retour au menu" layoutX="450.0" layoutY="560.0" onAction="#retourMenu" />
         <Button text="Annuler" layoutX="600.0" layoutY="560.0" onAction="#clicAnnuler" />
         <Button text="Refaire" layoutX="700.0" layoutY="560.0" onAction="#clicRefaire" />
+        <Button text="Pause" layoutX="730.0" layoutY="400.0" onAction="#clicPause" />
         <Group fx:id="groupEnPause" visible="false">
             <children>
                 <Line opacity="0.65" strokeWidth="25" startX="350" startY="200" endX="350" endY="400" />

@@ -21,6 +21,8 @@ public class Moteur implements Serializable,Cloneable
     public Coup dernierCoupJoue;
     public int joueurPrecedent;
     public boolean sauvegarderCoupJoues;
+    public boolean estEnReseau;
+    public boolean queDesIA;
     
     public Moteur(Joueur[] joueurs)
     {
@@ -42,10 +44,21 @@ public class Moteur implements Serializable,Cloneable
         joueurPrecedent = -1;
         this.joueurs = joueurs;
         nbJoueursInit = joueurs.length;
+        estEnReseau = false;
+        queDesIA = true;
         for(int i = 0 ; i < this.joueurs.length ; i++)
         {            
             joueurs[i].numero = i;
             joueurs[i].nbPingouinsAPlacer = nbPingouinsTotal()/joueurs.length;
+            if(joueurs[i] instanceof JoueurHumain)
+            {
+                queDesIA = false;
+            }
+            else if(joueurs[i] instanceof JoueurReseau)
+            {
+                estEnReseau = true;
+                queDesIA = false;
+            }
         }
         sauvegarderDebutPartie();
     }

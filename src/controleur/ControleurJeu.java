@@ -508,28 +508,39 @@ public class ControleurJeu  extends ControleurBase {
         pingouinFantome = null;
         miseAJourPlateau();
         jeuInterrompu = false;
-        groupEnPause.setVisible(false);
+        reprendre(); 
         tourSuivant();
     }
     
     @FXML
     private void clicAnnuler(ActionEvent event)
-    {        
-        if(!navigation.moteur.coupJoues.isEmpty())
+    {    
+        if(!navigation.moteur.coupJoues.isEmpty() && !navigation.moteur.estEnReseau)
         {
-            jeuInterrompu = true;
-            Coup dernierCoupJoue = navigation.moteur.dernierCoupJoue;   
-            navigation.moteur.coupAnnules.push(navigation.moteur.clone());         
-            navigation.moteur.dernierCoupJoue = null;
-            navigation.moteur = navigation.moteur.coupJoues.pop();
-            miseAJourAnnulerRefaire(dernierCoupJoue);
+            jeuInterrompu = true;            
+            if(navigation.moteur.queDesIA)
+            {
+                pause();
+            }
+            do
+            {                
+                Coup dernierCoupJoue = navigation.moteur.dernierCoupJoue;   
+                navigation.moteur.coupAnnules.push(navigation.moteur.clone());         
+                navigation.moteur.dernierCoupJoue = null;
+                navigation.moteur = navigation.moteur.coupJoues.pop();            
+                miseAJourAnnulerRefaire(dernierCoupJoue);
+            } while(!navigation.moteur.queDesIA && !(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain));
+            if(!navigation.moteur.queDesIA)
+            {
+                jeuInterrompu = false;
+            }
             /*jeuInterrompu = false;
             tourSuivant();*/
         }
         else
         {
-            System.out.println("aucun coup a annuler");
-        }        
+            System.out.println("aucun coup a annuler ou annule desactive (pour le jeu en reseau)");
+        }       
     }
     
     @FXML
@@ -537,14 +548,25 @@ public class ControleurJeu  extends ControleurBase {
     {
         /*jeuInterrompu = false;
         tourSuivant();*/
-        if(!navigation.moteur.coupAnnules.isEmpty())
+        if(!navigation.moteur.coupAnnules.isEmpty()  && !navigation.moteur.estEnReseau)
         {            
             jeuInterrompu = true;
-            navigation.moteur.coupJoues.push(navigation.moteur.clone());    
-            navigation.moteur = navigation.moteur.coupAnnules.pop();    
-            miseAJourAnnulerRefaire(navigation.moteur.dernierCoupJoue);
-            /*jeuInterrompu = false;
-            tourSuivant();*/
+            if(navigation.moteur.queDesIA)
+            {
+                pause();
+            }
+            do
+            {                
+                navigation.moteur.coupJoues.push(navigation.moteur.clone());    
+                navigation.moteur = navigation.moteur.coupAnnules.pop();    
+                miseAJourAnnulerRefaire(navigation.moteur.dernierCoupJoue);
+                /*jeuInterrompu = false;
+                tourSuivant();*/
+            } while(!navigation.moteur.queDesIA && !(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain));
+            if(!navigation.moteur.queDesIA)
+            {
+                jeuInterrompu = false;
+            }
         }
         else
         {
@@ -553,11 +575,28 @@ public class ControleurJeu  extends ControleurBase {
     }
     
     @FXML
+    private void clicPause(ActionEvent event)
+    {
+        pause();  
+    }
+    
+    private void pause()
+    {
+        jeuInterrompu = true;
+        groupEnPause.setVisible(true);
+    }
+    
+    @FXML
     private void clicReprendre(ActionEvent event)
     {
+        reprendre();          
+    }
+    
+    private void reprendre()
+    {        
         jeuInterrompu = false;
         groupEnPause.setVisible(false);
-        tourSuivant();  
+        tourSuivant();
     }
     
     private void miseAJourPlateau()
@@ -583,7 +622,6 @@ public class ControleurJeu  extends ControleurBase {
         {
             pingouinMvt.setImage(null);
         }
-        groupEnPause.setVisible(true);
         ArrayList<Point> points = new ArrayList<>();
         if(dernierCoupJoue instanceof Point)
         {

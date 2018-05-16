@@ -14,9 +14,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import modele.Case;
 import modele.Constantes;
+import modele.Deplacement;
 import modele.Joueur;
 import modele.Moteur;
 import modele.Pingouin;
+import modele.Plateau;
 
 public class ControleurChargerPartie extends ControleurSauvegarde
 {
@@ -40,7 +42,7 @@ public class ControleurChargerPartie extends ControleurSauvegarde
         Case[][] plateau = moteurs[nbPartie].plateau.plateau;
         for(int i = 0 ; i < plateau.length ; i++)
         {
-            for(int j =0 ; j < nbTuilesLigne(i) ; j++)
+            for(int j =0 ; j < Plateau.nbTuilesLigne(i) ; j++)
             {
                int nbPoissons  = plateau[i][j].nbPoissons;
                ImageView imagePlateau = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, "c"));
@@ -109,9 +111,12 @@ public class ControleurChargerPartie extends ControleurSauvegarde
             System.out.println("commencerPartie");
             ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
             controleurJeu.lineFantome.setVisible(false);
-            navigation.moteur = moteurs[tuileSelectionne];
-             navigation.changerVue(ControleurJeu.class);
-             
+            navigation.moteur = moteurs[tuileSelectionne];          
+            navigation.changerVue(ControleurJeu.class);            
+            if(navigation.moteur.dernierCoupJoue != null && navigation.moteur.dernierCoupJoue instanceof Deplacement)
+            {
+                controleurJeu.montrerDernierCoup((Deplacement)navigation.moteur.dernierCoupJoue);
+            }
 
         }else{
             System.out.println("Pas de selection valide ");

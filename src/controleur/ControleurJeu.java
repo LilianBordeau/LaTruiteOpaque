@@ -547,7 +547,7 @@ public class ControleurJeu  extends ControleurBase {
                 navigation.moteur.coupAnnules.push(navigation.moteur.clone());         
                 navigation.moteur.dernierCoupJoue = null;
                 navigation.moteur = navigation.moteur.coupJoues.pop();            
-                miseAJourAnnulerRefaire(dernierCoupJoue);
+                miseAJourAnnulerRefaire(dernierCoupJoue, null);
             } while(!navigation.moteur.queDesIA && !(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain));
             if(!navigation.moteur.queDesIA)
             {
@@ -574,11 +574,12 @@ public class ControleurJeu  extends ControleurBase {
             {
                 pause();
             }
+            Coup coupRefaire = navigation.moteur.dernierCoupJoue;
             do
             {                
                 navigation.moteur.coupJoues.push(navigation.moteur.clone());    
                 navigation.moteur = navigation.moteur.coupAnnules.pop();    
-                miseAJourAnnulerRefaire(navigation.moteur.dernierCoupJoue);
+                miseAJourAnnulerRefaire(navigation.moteur.dernierCoupJoue, coupRefaire);
                 /*jeuInterrompu = false;
                 tourSuivant();*/
             } while(!navigation.moteur.queDesIA && !(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain));
@@ -634,7 +635,7 @@ public class ControleurJeu  extends ControleurBase {
         miseAJourInfoJeu();
     }
 
-    private void miseAJourAnnulerRefaire(Coup dernierCoupJoue)
+    private void miseAJourAnnulerRefaire(Coup dernierCoupJoue, Coup coupRefaire)
     {
         lineFantome.setVisible(false); 
         if(pingouinMvt != null)
@@ -673,6 +674,18 @@ public class ControleurJeu  extends ControleurBase {
         miseAjourPoints(points);
         miseAjourPoints(dernierCoupJoue.nouveauxPingouinsBloques);
         miseAJourInfoJeu();
+        if(coupRefaire!= null && coupRefaire instanceof Deplacement)
+        {
+            Deplacement deplRefaire = (Deplacement)coupRefaire;
+            Point coordonneesTuile = idToIndices(tuileFantome.getId());
+            miseAJourTuile(deplRefaire.ligneSrc, deplRefaire.colonneSrc);
+            Point coordonneesPingouin = idToIndices(pingouinFantome.getId());
+            miseAJourPingouin(deplRefaire.ligneSrc, deplRefaire.colonneSrc);
+        } 
+        if(navigation.moteur.dernierCoupJoue != null && navigation.moteur.dernierCoupJoue instanceof Deplacement)
+        {
+                montrerDernierCoup((Deplacement)navigation.moteur.dernierCoupJoue);
+        }
     }
     
     private void miseAjourPoints(ArrayList<Point> points)
@@ -756,7 +769,7 @@ public class ControleurJeu  extends ControleurBase {
   
     }
 
-    private void  montrerDernierCoup(Deplacement dep)
+    public void  montrerDernierCoup(Deplacement dep)
     {
         
         String idCasePinguoin = indicesToId(dep.ligneDest, dep.colonneDest,DEBUTIDTUILE);

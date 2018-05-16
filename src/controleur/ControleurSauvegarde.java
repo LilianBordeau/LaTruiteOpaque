@@ -5,7 +5,6 @@
  */
 package controleur;
 
-import static controleur.ControleurSauvegarderPartie.nbTuilesLigne;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,6 +24,7 @@ import modele.Constantes;
 import modele.Joueur;
 import modele.Moteur;
 import modele.Pingouin;
+import modele.Plateau;
 
 /**
  *
@@ -67,7 +67,7 @@ public class ControleurSauvegarde extends ControleurBase
     {
          for(int i = 0 ; i < 8 ; i++)
         {
-            for(int j =0 ; j < nbTuilesLigne(i) ; j++)
+            for(int j =0 ; j < Plateau.nbTuilesLigne(i) ; j++)
             {
               
                ImageView imagePlateau;
@@ -118,10 +118,10 @@ public class ControleurSauvegarde extends ControleurBase
         return prefixeId+ligne+"_"+colonne;
     }
     
-    public static int nbTuilesLigne(int i)
+    /*public static int nbTuilesLigne(int i)
     {
         return (i%2==0)?7:8;
-    }
+    }*/
     
     
         
@@ -134,7 +134,7 @@ public class ControleurSauvegarde extends ControleurBase
         Case[][] plateau = navigation.moteur.plateau.plateau;
         for(int i = 0 ; i < plateau.length ; i++)
         {
-            for(int j =0 ; j < nbTuilesLigne(i) ; j++)
+            for(int j =0 ; j < Plateau.nbTuilesLigne(i) ; j++)
             {
                int nbPoissons  = plateau[i][j].nbPoissons;
                ImageView imagePlateau = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, "c"));

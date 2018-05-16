@@ -582,9 +582,10 @@ public class ControleurJeu  extends ControleurBase {
             {
                 pause();
             }
-            Coup coupRefaire = navigation.moteur.dernierCoupJoue;
+            Coup coupRefaire = null;
             do
-            {                
+            {      
+                coupRefaire = navigation.moteur.dernierCoupJoue;
                 navigation.moteur.coupJoues.push(navigation.moteur.clone());    
                 navigation.moteur = navigation.moteur.coupAnnules.pop();    
                 miseAJourAnnulerRefaire(navigation.moteur.dernierCoupJoue, coupRefaire);

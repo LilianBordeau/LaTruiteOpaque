@@ -519,16 +519,23 @@ public class ControleurJeu  extends ControleurBase {
     @FXML
     private void clicRecommencer(ActionEvent event)
     {
-        jeuInterrompu = true;
-        System.out.println(navigation.moteur.plateau.plateau == navigation.moteur.sauvegardeDebutPartie.plateau.plateau);
-        System.out.println(navigation.moteur.plateau.plateau[0][0] == navigation.moteur.sauvegardeDebutPartie.plateau.plateau[0][0]);
-        navigation.moteur = navigation.moteur.sauvegardeDebutPartie;
-        navigation.moteur.sauvegarderDebutPartie();
-        pingouinFantome = null;
-        miseAJourPlateau();
-        jeuInterrompu = false;
-        reprendre(); 
-        tourSuivant();
+        if(!navigation.moteur.estEnReseau)
+        {
+            jeuInterrompu = true;
+            System.out.println(navigation.moteur.plateau.plateau == navigation.moteur.sauvegardeDebutPartie.plateau.plateau);
+            System.out.println(navigation.moteur.plateau.plateau[0][0] == navigation.moteur.sauvegardeDebutPartie.plateau.plateau[0][0]);
+            navigation.moteur = navigation.moteur.sauvegardeDebutPartie;
+            navigation.moteur.sauvegarderDebutPartie();
+            pingouinFantome = null;
+            miseAJourPlateau();
+            jeuInterrompu = false;
+            reprendre(); 
+            tourSuivant();
+        }
+        else
+        {
+            System.out.println("impossible de recommencer une partie lorsque l'on joue en réseau");
+        }
     }
     
     @FXML
@@ -597,11 +604,19 @@ public class ControleurJeu  extends ControleurBase {
     @FXML
     private void clicPause(ActionEvent event)
     {
-        pause();  
+        if(!navigation.moteur.estEnReseau)
+        {
+            pause();  
+        }
+        else
+        {
+            System.out.println("impossible de mettre une partie en pause lorsque l'on joue en réseau");
+        }
+        
     }
     
     private void pause()
-    {
+    {        
         jeuInterrompu = true;
         groupEnPause.setVisible(true);
     }

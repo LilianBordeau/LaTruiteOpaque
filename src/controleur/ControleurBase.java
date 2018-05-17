@@ -7,6 +7,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,12 +40,10 @@ public abstract class ControleurBase implements Initializable
         initSlider(panelSonManager.sliderMusique);
         initSlider(panelSonManager.sliderSon);
 
-        
-        
-        
        
         panelSonManager.background.setImage(new Image("Images/soundboard.png"));
-        panelSonManager.screen.setImage(new Image("Images/fullscreen.png"));
+        panelSonManager.screen.setGraphic(new ImageView("Images/fullscreen.png"));
+        //panelSonManager.screen.setImage());
     }
     
     
@@ -81,13 +80,25 @@ public abstract class ControleurBase implements Initializable
             }
         });
         
+        
+       
+        Image img;
         if(navigation.isFullScreen())
-        {
-              panelSonManager.screen.setImage(new Image("Images/notfullscreen.png"));
+        {       
+            img  = new Image("Images/notfullscreen.png");
+            
         }else{
-              panelSonManager.background.setImage(new Image("Images/soundboard.png"));
-              panelSonManager.screen.setImage(new Image("Images/fullscreen.png"));
+            img  = new Image("Images/fullscreen.png");            
         }
+        
+        
+        ImageView image = new ImageView();
+        image.setFitHeight(30); 
+        image.setFitWidth(30);
+        image.setImage(img);
+        panelSonManager.screen.setGraphic(image);
+        
+        panelSonManager.background.setImage(new Image("Images/soundboard.png"));
         panelSonManager.sliderMusique.setVisible(false);
         panelSonManager.sliderSon.setVisible(false);
 
@@ -118,24 +129,41 @@ public abstract class ControleurBase implements Initializable
     public void changeScreenProportion(MouseEvent event)
     {
         navigation.setFullScreen();
+          Image img;
         if(navigation.isFullScreen())
-        {
-              panelSonManager.screen.setImage(new Image("Images/notfullscreen.png"));
+        {       
+            img  = new Image("Images/notfullscreen.png");
+            
         }else{
-              panelSonManager.screen.setImage(new Image("Images/fullscreen.png"));
+            img  = new Image("Images/fullscreen.png");            
         }
+        
+        
+        ImageView image = new ImageView();
+        image.setFitHeight(30); 
+        image.setFitWidth(30);
+        image.setImage(img);
+        panelSonManager.screen.setGraphic(image);
         
     }
 
-    private void setImageSlider(ImageView image, String imageOff, String imageOn, double value) {
+    private void setImageSlider(Button btn, String imageOff, String imageOn, double value) {
+        Image img;
         if(value == 0 )
         {
-            image.setImage( new Image(imageOff));
+           img = new Image(imageOff);
         }
         else
         {
-            image.setImage( new Image(imageOn));
+            img = new Image(imageOn);
         }    
+        
+        ImageView image = new ImageView();
+        image.setFitHeight(30); 
+        image.setFitWidth(30);
+        image.setImage(img);
+        
+        btn.setGraphic(image);
     }
     
 }

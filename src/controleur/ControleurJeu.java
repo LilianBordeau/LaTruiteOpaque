@@ -106,7 +106,9 @@ public class ControleurJeu  extends ControleurBase {
         lineFantome.setStrokeWidth(5);
         anchorPane.getChildren().add(pingouinMvt);
         anchorPane.getChildren().add(lineFantome);
-        casesAccessibles = new ArrayList<>();        
+        casesAccessibles = new ArrayList<>();      
+        
+        
     }
     
     @Override

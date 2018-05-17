@@ -50,6 +50,7 @@ public class ControleurMenuPrincipal  extends ControleurBase
     @FXML
     private void clicJouer(ActionEvent event)
     {
+        navigation.sonManager.cliqueBouton();
         navigation.enReseau = false;
         navigation.changerVue(ControleurChoixJoueurs.class);
     }
@@ -57,6 +58,7 @@ public class ControleurMenuPrincipal  extends ControleurBase
     @FXML
     private void clicCreerReseau(ActionEvent event)
     {
+        navigation.sonManager.cliqueBouton();
         navigation.enReseau = true;
         navigation.changerVue(ControleurChoixJoueurs.class);
     }
@@ -64,24 +66,28 @@ public class ControleurMenuPrincipal  extends ControleurBase
     @FXML
     private void clicRejoindreReseau(ActionEvent event)
     {
+        navigation.sonManager.cliqueBouton();
         navigation.changerVue(ControleurRejoindreReseau.class);
     }
     
     @FXML
     private void clicChargerPartie(ActionEvent event)
     {
+        navigation.sonManager.cliqueBouton();
         navigation.changerVue(ControleurChargerPartie.class);
     }
     
     @FXML
     private void clicTutoriel(ActionEvent event)
     {
+        navigation.sonManager.cliqueBouton();
         navigation.changerVue(ControleurTutoriel.class);
     }
     
     @FXML
     private void clicCredits(ActionEvent event)
     {
+        navigation.sonManager.cliqueBouton();
         navigation.changerVue(ControleurCredits.class);
     }
     

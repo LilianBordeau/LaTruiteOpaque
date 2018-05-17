@@ -78,7 +78,7 @@ public class SonManager {
      
      
      
-    public void jouerSon(int i)
+    private void jouerSon(int i)
     {
         if(sons[i] != null)
         {
@@ -90,6 +90,11 @@ public class SonManager {
     }
      
   
+    
+    public void  cliqueBouton()
+    {
+        jouerSon(Constantes.CLIQUEBOUTON);
+    }
 
 
     

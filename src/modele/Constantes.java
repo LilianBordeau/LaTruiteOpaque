@@ -37,7 +37,7 @@ public class Constantes
     public static final int OFF = 0;
     
     
-    public static String[] SONS = {"Superboy.mp3","bruitBouton.mp3"};
+    public static String[] SONS = {"Superboy.mp3","toc.mp3"};
     
     
     

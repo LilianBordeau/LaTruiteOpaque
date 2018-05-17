@@ -50,7 +50,7 @@ public class ControleurCredits extends ControleurBase
     @FXML
     private void retourMenu(ActionEvent event)
     {
-        navigation.sonManager.jouerSon(Constantes.CLIQUEBOUTON);
+        navigation.sonManager.cliqueBouton();
         navigation.changerVue(ControleurMenuPrincipal.class);
     }
     

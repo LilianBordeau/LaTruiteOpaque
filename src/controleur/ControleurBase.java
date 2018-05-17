@@ -7,11 +7,16 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import modele.Constantes;
 import vue.Navigation;
 import vue.PanelSonManager;
@@ -164,6 +169,28 @@ public abstract class ControleurBase implements Initializable
         image.setImage(img);
         
         btn.setGraphic(image);
+    }
+    
+     protected void erreur(String message)
+    {
+        navigation.changerVue(ControleurMenuPrincipal.class);
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        VBox dialogVbox = new VBox(20);
+        dialogVbox.getChildren().add(new Text(message));
+        Scene dialogScene = new Scene(dialogVbox, 300, 200);
+        dialog.setScene(dialogScene);
+        dialog.show();
+    }
+    
+    protected void erreurReseau()
+    {
+        erreur("Connexion perdue");
+    }
+    
+    protected void erreurAdresseDejaUtilisee()
+    {
+        erreur("Un thread utilise la meme adresse IP que ce jeu");
     }
     
 }

@@ -13,6 +13,7 @@ import modele.Joueur;
 import modele.JoueurClient;
 import modele.JoueurHumain;
 import modele.JoueurReseau;
+import modele.Moteur;
 import reseau.Connexion;
 import reseau.ConnexionClient;
 import reseau.ConnexionServeur;
@@ -64,7 +65,6 @@ public class ControleurRejoindreReseau extends ControleurBase
                                     {
                                         if(donneesDebutPartie != null)
                                         {                            
-                                            navigation.moteur.plateau = donneesDebutPartie.plateau;
                                             Joueur[] joueurs = new Joueur[donneesDebutPartie.joueurs.length];
                                             for(int i = 0 ; i < joueurs.length ; i++)
                                             {
@@ -72,7 +72,8 @@ public class ControleurRejoindreReseau extends ControleurBase
                                                 joueurs[i].couleur = donneesDebutPartie.joueurs[i].couleur;
                                                 joueurs[i].nom = donneesDebutPartie.joueurs[i].nom;
                                             }
-                                            navigation.moteur.setJoueurs(joueurs);
+                                            navigation.moteur = new Moteur(joueurs);
+                                            navigation.moteur.plateau = donneesDebutPartie.plateau;
                                             navigation.changerVue(ControleurJeu.class);
                                         }
                                     }

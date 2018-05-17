@@ -6,31 +6,20 @@
 package controleur;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import modele.Case;
-import modele.Constantes;
-import modele.Joueur;
-import modele.Moteur;
-import modele.Pingouin;
+
 
 /**
  *
@@ -52,14 +41,15 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
     @Override
     public void onAppearing()
     {
+        tuileSelectionne = -1;
         super.onAppearing();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         dateString = dateFormat.format(date).toString().replace("/","-");
         nouvelleDateText.setText("Date : " + dateFormat.format(date));
+        setMessage("Veuillez choisir un emplacement de sauvegarde !");
+        disableSaisie();
 
-       btnSauvegarder.setDisable(true);
-       setMessage("Veuillez choisir un emplacement de sauvegarde !");
     }
     
     
@@ -69,16 +59,27 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
         ImageView b =  (ImageView) event.getTarget();
         int indice =  Character.getNumericValue(b.getId().charAt(b.getId().length()-1));
         
+        if(tuileSelectionne != -1)
+         {
+             ImageView imageSelectedPrec = (ImageView) anchorPane.lookup("#"+getSelectedId(tuileSelectionne));
+             imageSelectedPrec.setVisible(false);
+             showTuileEmpty(tuileSelectionne);
+         }
+        
+        
         if(moteurs[indice] == null)
         {
-            btnSauvegarder.setDisable(false);
-            tuileSelectionne = indice;
-             setMessage("");
+            tuileSelectionne = indice;          
+            ImageView imageSelected = (ImageView) anchorPane.lookup("#"+getSelectedId(tuileSelectionne));
+            imageSelected.setVisible(true);
+            enableSaisie();
+            clearMessage();
             System.out.println("TUILE "+ tuileSelectionne+" selectionnee");
-        }else
+        } else
         {
+            tuileSelectionne = -1;
             setMessage("Veuillez choisir un emplacement de sauvegarde valide ! ");
-            btnSauvegarder.setDisable(true);
+            disableSaisie();
             System.out.println("Tuile occupée");
         }
     
@@ -94,9 +95,15 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
     @FXML
     private void sauvegarder(ActionEvent event) 
     {
-               
-       if( tuileSelectionne  != - 1)
-       {
+              
+        if( nouveauNomInput.getText().trim().isEmpty())
+        {
+            super.setMessage("Nom de sauvegarde incorrect");
+        }
+        else
+        {
+            if( tuileSelectionne  != - 1)
+            {
            
             String nomSauvegarde = tuileSelectionne + "_"+nouveauNomInput.getText().trim()+"_"+dateString+".txt";
                     
@@ -113,7 +120,28 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
                throw new RuntimeException(ex);
             }
            
-           navigation.changerVue(ControleurJeu.class);
-       }
+            navigation.changerVue(ControleurJeu.class);
+            super.setMessage("");
+            }
+        }
+        
+       
+        
+       
+    }
+    
+    
+    
+    private void disableSaisie()
+    {
+        nouveauNomInput.setDisable(true);
+        btnSauvegarder.setDisable(true);
+
+        
+    }
+    private void enableSaisie()
+    {
+        btnSauvegarder.setDisable(false);
+        nouveauNomInput.setDisable(false);
     }
 }

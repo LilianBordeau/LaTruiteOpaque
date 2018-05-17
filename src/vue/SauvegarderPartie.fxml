@@ -15,11 +15,18 @@
 <AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurChoixJoueurs"-->
     <children>
         
+        
+    <ImageView layoutX="0" layoutY="0" fitHeight="600" fitWidth="800">
+           <image>        
+
+               <Image url="Images/cj_background.png" />
+           </image>    
+   </ImageView>
     <SimpleImageView  fx:id="image0" url="Images/tuilevierge.png" layoutX="50" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#selectEmplacement"/>
     <Text fx:id="date0" layoutX="60" layoutY="95" text="Date : " mouseTransparent="true" />
     <Text fx:id="nom0" layoutX="60" layoutY="125" text="Nom : " mouseTransparent="true"/>
     <SimpleImageView fx:id="trash0" url="Images/trash.png" layoutX="138" layoutY="150" fitHeight="25" fitWidth="25" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#trashIt"/>
-    <SimpleImageView fx:id="cross0" url="Images/redCross.png" layoutX="112" layoutY="80" fitHeight="70" fitWidth="70" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" mouseTransparent="true" />
+    <SimpleImageView fx:id="selected0" url="Images/accessible3.png" layoutX="50" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" smooth="true" visible="false" />
 
 
 
@@ -27,18 +34,17 @@
     <Text  fx:id="date1" layoutX="310" layoutY="95" text="Date : " mouseTransparent="true"/>   
     <Text fx:id="nom1" layoutX="310" layoutY="125" text="Nom : " mouseTransparent="true"/>
     <SimpleImageView fx:id="trash1" url="Images/trash.png" layoutX="388" layoutY="150" fitHeight="25" fitWidth="25" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#trashIt"/>
-    <SimpleImageView fx:id="cross1" url="Images/redCross.png" layoutX="362" layoutY="80" fitHeight="70" fitWidth="70" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" mouseTransparent="true" />
-
+    <SimpleImageView fx:id="selected1" url="Images/accessible3.png" layoutX="300" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true"  smooth="true" visible="false" />
 
 
     <SimpleImageView fx:id="image2" url="Images/tuilevierge.png" layoutX="550" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#selectEmplacement"/>
     <Text fx:id="date2" layoutX="560" layoutY="95" text="Date : " mouseTransparent="true"/>     
     <Text fx:id="nom2" layoutX="560" layoutY="125" text="Nom : " mouseTransparent="true"/>
     <SimpleImageView fx:id="trash2" url="Images/trash.png" layoutX="638" layoutY="150" fitHeight="25" fitWidth="25" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#trashIt" />
-    <SimpleImageView fx:id="cross2" url="Images/redCross.png" layoutX="612" layoutY="80" fitHeight="70" fitWidth="70" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" mouseTransparent="true" />
+    <SimpleImageView fx:id="selected2" url="Images/accessible3.png" layoutX="550" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true"  smooth="true" visible="false" />
 
   
-    <SimpleImageView  fx:id="nouvelleTuile" url="Images/tuilevierge.png" layoutX="200" layoutY="250" fitHeight="400" fitWidth="400" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#showSave"/>
+    <SimpleImageView  fx:id="nouvelleTuile" url="Images/tuilevierge.png" layoutX="200" layoutY="250" fitHeight="400" fitWidth="400" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" />
     <Text fx:id="nouvelleDateText" layoutX="250" layoutY="350" text="Date : " />
     <Text fx:id="nouveauNomText" layoutX="250" layoutY="400" text="Nom : " />
     <TextField fx:id="nouveauNomInput" layoutX="300" layoutY="380" text="" />

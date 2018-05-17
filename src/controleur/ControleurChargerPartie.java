@@ -14,11 +14,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import modele.Case;
 import modele.Constantes;
-import modele.Deplacement;
 import modele.Joueur;
 import modele.Moteur;
 import modele.Pingouin;
-import modele.Plateau;
 
 public class ControleurChargerPartie extends ControleurSauvegarde
 {
@@ -34,15 +32,24 @@ public class ControleurChargerPartie extends ControleurSauvegarde
         setMessage("Veuillez choisir une sauvegarde !");
     }
     
+    public String indicesToId(int ligne, int colonne, String prefixeId)
+    {
+        return prefixeId+ligne+"_"+colonne;
+    }
+    
+    public static int nbTuilesLigne(int i)
+    {
+        return (i%2==0)?7:8;
+    }
+    
+    
     
     public void showSave(int nbPartie)
-    {
-     
-        
+    {   
         Case[][] plateau = moteurs[nbPartie].plateau.plateau;
         for(int i = 0 ; i < plateau.length ; i++)
         {
-            for(int j =0 ; j < Plateau.nbTuilesLigne(i) ; j++)
+            for(int j =0 ; j < nbTuilesLigne(i) ; j++)
             {
                int nbPoissons  = plateau[i][j].nbPoissons;
                ImageView imagePlateau = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, "c"));
@@ -71,8 +78,7 @@ public class ControleurChargerPartie extends ControleurSauvegarde
                 imagePingouin.setImage(new Image(pathImagePingouin));
                 imagePingouin.setVisible(true);
             }
-        }    
-        
+        }     
     }
     
    
@@ -81,15 +87,27 @@ public class ControleurChargerPartie extends ControleurSauvegarde
     {
         ImageView b =  (ImageView) event.getTarget();
         int indice =  Character.getNumericValue(b.getId().charAt(b.getId().length()-1));
-        if(moteurs[indice] != null)
+        
+        if(tuileSelectionne != -1)
         {
-                btnCommencer.setDisable(false);
-                tuileSelectionne = indice;
-                showSave(tuileSelectionne);
-                System.out.println("TUILE "+ tuileSelectionne+" selectionnee");
-                setMessage("");
+            ImageView imageSelectedPrec = (ImageView) anchorPane.lookup("#"+getSelectedId(tuileSelectionne));
+            imageSelectedPrec.setVisible(false);
+        }
+                  
+        if(moteurs[indice] != null)
+        {  
+            tuileSelectionne = indice;
+            ImageView imageSelected = (ImageView) anchorPane.lookup("#"+getSelectedId(tuileSelectionne));
+            imageSelected.setVisible(true);
+            
+            btnCommencer.setDisable(false);
+            showSave(tuileSelectionne);
+            
+            System.out.println("TUILE "+ tuileSelectionne+" selectionnee");
+            clearMessage();
         }else
         {
+           
             clearPlateau();
             btnCommencer.setDisable(true);
             setMessage("Veuillez choisir une sauvegarde !");
@@ -100,23 +118,35 @@ public class ControleurChargerPartie extends ControleurSauvegarde
        
     }
     
-             
+
+    public void clearPlateau()
+    {
+         for(int i = 0 ; i < 8 ; i++)
+        {
+            for(int j =0 ; j < nbTuilesLigne(i) ; j++)
+            {
+              
+               ImageView imagePlateau;
+               imagePlateau = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, "c"));
+               imagePlateau.setImage(null);
+               imagePlateau.setVisible(false);
+               imagePlateau = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, "p"));
+               imagePlateau.setImage(null);
+               imagePlateau.setVisible(false);
+            }  
+        }
+    }
+    
+    
     @FXML
     private void commencer(ActionEvent event)
     {
-        
-        
         if(tuileSelectionne != -1)
         {
             System.out.println("commencerPartie");
-            ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
-            controleurJeu.lineFantome.setVisible(false);
-            navigation.moteur = moteurs[tuileSelectionne];          
-            navigation.changerVue(ControleurJeu.class);            
-            if(navigation.moteur.dernierCoupJoue != null && navigation.moteur.dernierCoupJoue instanceof Deplacement)
-            {
-                controleurJeu.montrerDernierCoup((Deplacement)navigation.moteur.dernierCoupJoue);
-            }
+            navigation.moteur = moteurs[tuileSelectionne];
+            navigation.changerVue(ControleurJeu.class);
+             
 
         }else{
             System.out.println("Pas de selection valide ");
@@ -128,5 +158,6 @@ public class ControleurChargerPartie extends ControleurSauvegarde
     {
         navigation.changerVue(ControleurMenuPrincipal.class);
     }
+  
     
 }

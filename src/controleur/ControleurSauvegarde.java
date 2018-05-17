@@ -24,7 +24,6 @@ import modele.Constantes;
 import modele.Joueur;
 import modele.Moteur;
 import modele.Pingouin;
-import modele.Plateau;
 
 /**
  *
@@ -47,7 +46,6 @@ public class ControleurSauvegarde extends ControleurBase
     int tuileSelectionne;
     
     @FXML
-    @Override
     public void initialize(URL location, ResourceBundle resources)
     {
         moteurs = new Moteur[NBSAUVEGARDES];
@@ -63,23 +61,7 @@ public class ControleurSauvegarde extends ControleurBase
     }
     
     
-    public void clearPlateau()
-    {
-         for(int i = 0 ; i < 8 ; i++)
-        {
-            for(int j =0 ; j < Plateau.nbTuilesLigne(i) ; j++)
-            {
-              
-               ImageView imagePlateau;
-               imagePlateau = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, "c"));
-               imagePlateau.setImage(null);
-               imagePlateau.setVisible(false);
-               imagePlateau = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, "p"));
-               imagePlateau.setImage(null);
-               imagePlateau.setVisible(false);
-            }  
-        }
-    }
+    
     
     private void scanSaveFolder()  {
         File folder =  new File("Sauvegardes");
@@ -97,8 +79,7 @@ public class ControleurSauvegarde extends ControleurBase
             showTuile(indice,params);
             
            moteurs[indice] = getMoteurFromFile(file);
-         
-            
+
            
         }
         
@@ -112,61 +93,6 @@ public class ControleurSauvegarde extends ControleurBase
         }
       
     }
-    
-    public String indicesToId(int ligne, int colonne, String prefixeId)
-    {
-        return prefixeId+ligne+"_"+colonne;
-    }
-    
-    /*public static int nbTuilesLigne(int i)
-    {
-        return (i%2==0)?7:8;
-    }*/
-    
-    
-        
-    @FXML
-    public void showSave(MouseEvent event)
-    {
-        ImageView image = (ImageView) event.getTarget();
-        String id = image.getId();
-        
-        Case[][] plateau = navigation.moteur.plateau.plateau;
-        for(int i = 0 ; i < plateau.length ; i++)
-        {
-            for(int j =0 ; j < Plateau.nbTuilesLigne(i) ; j++)
-            {
-               int nbPoissons  = plateau[i][j].nbPoissons;
-               ImageView imagePlateau = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, "c"));
-               
-               if( nbPoissons == 0 )
-               {
-                   imagePlateau.setVisible(false);
-                   imagePlateau.setImage(null);
-               }else
-               {
-                   imagePlateau.setVisible(true);
-                   String pathImage = Constantes.nomImageCase(plateau[i][j]);
-                imagePlateau.setImage(new Image(pathImage));
-               }
-            }  
-        }
-        Joueur[] joueurs =  navigation.moteur.joueurs;
-        for(int i = 0 ; i < joueurs.length ; i++)
-        {
-            
-            ArrayList<Pingouin> pingouins = joueurs[i].pingouins;
-            for(Pingouin p : pingouins)
-            {
-                ImageView imagePingouin = (ImageView)anchorPane.lookup("#"+indicesToId(p.ligne,p.colonne, "p"));
-                String pathImagePingouin = Constantes.nomImagePingouin(joueurs[i]);
-                imagePingouin.setImage(new Image(pathImagePingouin));
-                
-            }
-        }    
-        
-    }
-    
     
     
     
@@ -186,7 +112,7 @@ public class ControleurSauvegarde extends ControleurBase
     
     
     private void showTuile(int i,String[] params)
-    {
+    { 
             Text nom = (Text)anchorPane.lookup("#"+getNomId(i));
             nom.setText("Nom : " + params[1]);
             nom.setVisible(true);
@@ -197,12 +123,16 @@ public class ControleurSauvegarde extends ControleurBase
             date.setVisible(true);
             ImageView bin = (ImageView) anchorPane.lookup("#"+getBinId(i));
             bin.setVisible(true);
-            ImageView redCross = (ImageView) anchorPane.lookup("#"+getRedCrossId(i));
-            redCross.setVisible(false);
+            ImageView selected = (ImageView) anchorPane.lookup("#"+getSelectedId(i));
+            selected.setVisible(false);
+            ImageView imageTuile = (ImageView) anchorPane.lookup("#"+getImageId(i));
+            imageTuile.opacityProperty().setValue(1);
+           
     }
     
     
-    private void showTuileEmpty(int i)
+   
+    public void showTuileEmpty(int i)
     {
         Text nom = (Text)anchorPane.lookup("#"+getNomId(i));
         nom.setVisible(false);
@@ -210,24 +140,34 @@ public class ControleurSauvegarde extends ControleurBase
         date.setVisible(false);
         ImageView bin = (ImageView) anchorPane.lookup("#"+getBinId(i));
         bin.setVisible(false);
-        ImageView redCross = (ImageView) anchorPane.lookup("#"+getRedCrossId(i));
-        redCross.setVisible(true);
+        ImageView selected = (ImageView) anchorPane.lookup("#"+getSelectedId(i));
+        selected.setVisible(false);
+        ImageView tuile = (ImageView) anchorPane.lookup("#"+getImageId(i));
+        tuile.opacityProperty().setValue(0.50);
+        tuile.setVisible(true);
     }
     
      
-    private String getNomId(int i)
+    public String getNomId(int i)
     {
         return "nom"+i;
     }
-    private String getDateId(int i)
+    public String getDateId(int i)
     {
         return "date"+i;
     }
-    private String getBinId(int i) {
+    public String getBinId(int i) {
             return "trash"+i;
     }
-    private String getRedCrossId(int i) {
+    public String getRedCrossId(int i) {
             return "cross"+i;
+    }
+    public String getSelectedId(int i) {
+            return "selected"+i;
+    }
+    public String getImageId(int i)
+    {
+        return "image"+i;
     }
     
     
@@ -252,6 +192,7 @@ public class ControleurSauvegarde extends ControleurBase
         {
               showTuileEmpty(indice);
         }
+        
       
        
     }

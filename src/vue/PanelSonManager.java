@@ -69,7 +69,7 @@ public class PanelSonManager extends Group {
                 
         sliderMusique = new Slider();
         sliderMusique.setLayoutX(35);
-        sliderMusique.setLayoutY(292);
+        sliderMusique.setLayoutY(307);
 
         imageSon = new Button();
         imageSon.setPickOnBounds(true);
@@ -83,7 +83,7 @@ public class PanelSonManager extends Group {
         
         sliderSon = new Slider();
         sliderSon.setLayoutX(35);
-        sliderSon.setLayoutY(327);
+        sliderSon.setLayoutY(357);
         
         this.getChildren().addAll(background,screen,imageMusique,sliderMusique,imageSon,sliderSon);
     }

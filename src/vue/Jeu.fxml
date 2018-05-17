@@ -12,38 +12,37 @@
 <?import javafx.scene.shape.Line?>
 <?import java.net.URL?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0"  minWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #304d93;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurJeu"-->
+<AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0"  minWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('Images/fond3.png');-fx-background-repeat: stretch;-fx-background-size: cover, auto;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurJeu"-->
       <children>
-    
-     <SimpleImageView  fitHeight="600" fitWidth="800" layoutX="0" layoutY="0" url="Images/jeu_background.png" />
 
       <!-- joueur bleu -->
 
-       <SimpleImageView fx:id="0_gui" fitHeight="72" fitWidth="214" layoutX="0" layoutY="0" url="Images/0_gui_afk.png" />
-      <Label  fx:id="0_nom" styleClass="nom_joueur" layoutX="90" layoutY="45" text="Nom joueur A" />
-      <Label fx:id="0_score" layoutX="160" layoutY="10" text="0" />
-      <Label fx:id="0_tuille" layoutX="160" layoutY="25" text="0" />
+       
+      <SimpleImageView fx:id="0_gui" fitWidth="126" preserveRatio="true" layoutX="5" layoutY="5" url="Images/0_gui_afk.png" />
+      <Label fx:id="0_nom" styleClass="gui_infos" layoutX="28" layoutY="58" text="Nom joueur bleu" />
+      <Label fx:id="0_score" styleClass="gui_infos" layoutX="67" layoutY="15" text="0" />
+      <Label fx:id="0_tuille" styleClass="gui_infos" layoutX="67" layoutY="30" text="0" />
 
       <!-- joueur jaune -->
       
-      <SimpleImageView  fx:id="1_gui" fitHeight="72" fitWidth="214" layoutX="586" layoutY="0" url="Images/1_gui_afk.png" />
-      <Label fx:id="1_nom" styleClass="nom_joueur"  layoutX="630" layoutY="45" text="Nom joueur B" />
-      <Label fx:id="1_score" layoutX="700" layoutY="10" text="0" />
-      <Label fx:id="1_tuille" layoutX="700" layoutY="25" text="0" />
+      <SimpleImageView  fx:id="1_gui" fitWidth="126" preserveRatio="true" layoutX="671" layoutY="5" url="Images/1_gui_afk.png" />
+      <Label fx:id="1_nom" styleClass="gui_infos" layoutX="706" layoutY="58" text="Nom joueur jaune" />
+      <Label fx:id="1_score" styleClass="gui_infos" layoutX="727" layoutY="15" text="0" />
+      <Label fx:id="1_tuille" styleClass="gui_infos" layoutX="727" layoutY="30" text="0" />
       
       <!-- joueur rouge -->
       
-      <SimpleImageView  fx:id="2_gui" fitHeight="72" fitWidth="214" layoutX="586" layoutY="530" url="Images/2_gui_afk.png" />
-      <Label fx:id="2_nom" styleClass="nom_joueur"  layoutX="630" layoutY="575" text="Nom joueur C" />
-      <Label fx:id="2_score" layoutX="700" layoutY="540" text="0" />
-      <Label fx:id="2_tuille" layoutX="700" layoutY="555" text="0" />
+      <SimpleImageView  fx:id="2_gui" fitWidth="126" preserveRatio="true" layoutX="671" layoutY="522" url="Images/2_gui_afk.png" />
+      <Label fx:id="2_nom" styleClass="gui_infos" layoutX="706" layoutY="575" text="Nom joueur rouge" />
+      <Label fx:id="2_score" styleClass="gui_infos" layoutX="727" layoutY="547" text="0" />
+      <Label fx:id="2_tuille" styleClass="gui_infos" layoutX="727" layoutY="532" text="0" />
       
       <!-- joueur vert -->
       
-      <SimpleImageView  fx:id="3_gui" fitHeight="72" fitWidth="214" layoutX="0" layoutY="530" url="Images/3_gui_afk.png" />
-      <Label fx:id="3_nom" styleClass="nom_joueur"  layoutX="90" layoutY="575" text="Nom joueur D" />
-      <Label fx:id="3_score" layoutX="160" layoutY="540" text="0" />
-      <Label fx:id="3_tuille" layoutX="160" layoutY="555" text="0" />
+      <SimpleImageView  fx:id="3_gui" fitWidth="126" preserveRatio="true" layoutX="5" layoutY="522" url="Images/3_gui_afk.png" />
+      <Label fx:id="3_nom" styleClass="gui_infos" layoutX="28" layoutY="575" text="Nom joueur vert" />
+      <Label fx:id="3_score" styleClass="gui_infos" layoutX="67" layoutY="547" text="0" />
+      <Label fx:id="3_tuille" styleClass="gui_infos" layoutX="67" layoutY="532" text="0" />
       
       
           
@@ -292,7 +291,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button text="Indice (ampoule)" layoutX="680.0" layoutY="150" onAction="#clicIndice" />
+        <Button text="Indice" layoutX="720.0" layoutY="150" onAction="#clicIndice" />
         <Group fx:id="groupEnPause" visible="false">
             <children>
                 <Line opacity="0.65" strokeWidth="25" startX="350" startY="200" endX="350" endY="400" />

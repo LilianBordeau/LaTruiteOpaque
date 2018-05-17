@@ -127,18 +127,18 @@ public class Navigation
      rect.setFill(Color.BLACK);
      rect2.setFill(Color.BLACK);
  
-     ScaleTransition tt = new ScaleTransition(Duration.seconds(0), rect);
+     ScaleTransition tt = new ScaleTransition(Duration.seconds(2), rect);
      tt.setByY(350f);
      
-     ScaleTransition ImageExitTransition = new ScaleTransition(Duration.seconds(0), imageExit);
-     TranslateTransition ImageExitTransition2 = new TranslateTransition(Duration.seconds(0), imageExit);
+     ScaleTransition ImageExitTransition = new ScaleTransition(Duration.seconds(2), imageExit);
+     TranslateTransition ImageExitTransition2 = new TranslateTransition(Duration.seconds(2), imageExit);
      ImageExitTransition.setByY(0.2f);
      ImageExitTransition.setByX(0.2f);
      
      ImageExitTransition2.setByX(30f);
      ImageExitTransition2.setByY(5f);
 
-     ScaleTransition tt2 = new ScaleTransition(Duration.seconds(0), rect2);
+     ScaleTransition tt2 = new ScaleTransition(Duration.seconds(2), rect2);
      tt2.setByY(-350f);
        tt.setOnFinished(e -> Platform.exit());
      tt.play();

@@ -292,6 +292,7 @@
                 </ImageView>
             </graphic>
         </Button>
+        <Button text="Indice (ampoule)" layoutX="680.0" layoutY="150" onAction="#clicIndice" />
         <Group fx:id="groupEnPause" visible="false">
             <children>
                 <Line opacity="0.65" strokeWidth="25" startX="350" startY="200" endX="350" endY="400" />

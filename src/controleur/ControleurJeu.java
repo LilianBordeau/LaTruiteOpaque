@@ -78,6 +78,8 @@ public class ControleurJeu  extends ControleurBase {
  	ImageView pingouinFantome;
     ImageView tuileFantome;    
     Line lineFantome;
+    Point positionAmpoule;
+    Line lineAmpoule;
     
     @FXML
     Group groupEnPause;
@@ -94,6 +96,11 @@ public class ControleurJeu  extends ControleurBase {
     {
         pingouinMvt =  new ImageView();
         lineFantome = new Line();
+        lineAmpoule = new Line();
+        lineAmpoule.setMouseTransparent(true);
+        lineAmpoule.setOpacity(0.5);
+        lineAmpoule.setStrokeWidth(5);
+        anchorPane.getChildren().add(lineAmpoule);
         lineFantome.setMouseTransparent(true);
         lineFantome.setOpacity(0.5);
         lineFantome.setStrokeWidth(5);
@@ -185,7 +192,7 @@ public class ControleurJeu  extends ControleurBase {
                 nouveauxPingouinsBloques = navigation.moteur.placerPingouin(coordonnees.ligne, coordonnees.colonne);
                 if(nouveauxPingouinsBloques != null)
                 {
-
+                    effacerAmpoule();
                     miseAJourPingouin(coordonnees.ligne, coordonnees.colonne);
                 }   
                 else
@@ -197,7 +204,7 @@ public class ControleurJeu  extends ControleurBase {
             {
 
                 if(navigation.moteur.contientJoueurCourant(coordonnees.ligne,coordonnees.colonne))
-                {
+                {                    
                     suprimerCasesAccessible();
                     pingouinSel = new Point(coordonnees.ligne,coordonnees.colonne);
                     ArrayList<Point> deplacements = navigation.moteur.deplacementsPossibles(coordonnees.ligne, coordonnees.colonne);
@@ -211,7 +218,8 @@ public class ControleurJeu  extends ControleurBase {
                     }
                 }
                 else if(pingouinSel != null)
-                {       
+                {      
+                    effacerAmpoule();
                     nouveauxPingouinsBloques = navigation.moteur.deplacerPingouin(pingouinSel.ligne, pingouinSel.colonne, coordonnees.ligne, coordonnees.colonne);
                     if(nouveauxPingouinsBloques != null)
                     {
@@ -363,6 +371,7 @@ public class ControleurJeu  extends ControleurBase {
             joueur.moteur.coupAnnules = null;
             joueur.moteur.coupJoues = null;
             int dureeMinTourJoueurAAttendre = 0;
+            effacerAmpoule();
             if(!navigation.moteur.pingouinsPlaces())
             {
                 Thread threadPlacement = new Thread() {
@@ -501,7 +510,61 @@ public class ControleurJeu  extends ControleurBase {
         
         navigation.changerVue(ControleurSauvegarderPartie.class);    
     }
-
+    
+    private void placerAmpoule(Point posAmpoule)
+    {
+        positionAmpoule = posAmpoule;
+        String idPingouin = indicesToId(posAmpoule.ligne, posAmpoule.colonne, DEBUTIDPINGOUIN);    
+        ImageView pingouinGraphique = (ImageView)anchorPane.getScene().lookup("#"+idPingouin);
+        pingouinGraphique.setImage(new Image("Images/ampoule.png"));
+        pingouinGraphique.setVisible(true);
+    }
+    
+    public void effacerAmpoule()
+    {
+        if(positionAmpoule != null)
+        {
+            miseAJourPingouin(positionAmpoule.ligne, positionAmpoule.colonne);
+            lineAmpoule.setVisible(false);
+        }
+    }
+    
+    @FXML
+    private void clicIndice(ActionEvent event)
+    {
+        Joueur joueurCourant = navigation.moteur.joueurs[navigation.moteur.joueurCourant];
+        if(!jeuInterrompu && joueurCourant instanceof JoueurHumain)
+        {
+            joueurCourant.moteur = navigation.moteur.clone();
+            if(!navigation.moteur.pingouinsPlaces())
+            {
+                Point placement = joueurCourant.choixPlacement();
+                placerAmpoule(placement);
+            }
+            else
+            {
+                Deplacement deplacement = joueurCourant.choixDeplacement();
+                placerAmpoule(new Point(deplacement.ligneDest, deplacement.colonneDest));
+                String idTuileSrc = indicesToId(deplacement.ligneSrc, deplacement.colonneSrc, DEBUTIDTUILE);    
+                ImageView tuileSrc = (ImageView)anchorPane.getScene().lookup("#"+idTuileSrc);
+                String idTuileDest = indicesToId(deplacement.ligneDest, deplacement.colonneDest, DEBUTIDTUILE);    
+                ImageView tuileDest = (ImageView)anchorPane.getScene().lookup("#"+idTuileDest);
+                double xDep = tuileSrc.getLayoutX() + tuileSrc.getFitWidth()/2;
+                double yDep = tuileSrc.getLayoutY() + tuileSrc.getFitHeight()/2;
+                double xArr = tuileDest.getLayoutX() + tuileDest.getFitWidth()/2;
+                double yArr = tuileDest.getLayoutY() + tuileDest.getFitHeight()/2;
+                lineAmpoule.setStartX(xDep);
+                lineAmpoule.setStartY(yDep);
+                lineAmpoule.setEndX(xArr);
+                lineAmpoule.setEndY(yArr);
+                lineAmpoule.setVisible(true);
+            }
+        }
+        else
+        {
+            System.out.println("Attendez le tour d'un joueur humain pour avoir un indice");  
+        }
+    }
     
     @FXML
     private void clicRecommencer(ActionEvent event)
@@ -514,6 +577,7 @@ public class ControleurJeu  extends ControleurBase {
             navigation.moteur = navigation.moteur.sauvegardeDebutPartie;
             navigation.moteur.sauvegarderDebutPartie();
             pingouinFantome = null;
+            effacerAmpoule();
             miseAJourPlateau();
             jeuInterrompu = false;
             reprendre(); 
@@ -530,7 +594,8 @@ public class ControleurJeu  extends ControleurBase {
     {    
         if(!navigation.moteur.coupJoues.isEmpty() && !navigation.moteur.estEnReseau)
         {
-            jeuInterrompu = true;            
+            jeuInterrompu = true;  
+            effacerAmpoule();
             if(navigation.moteur.queDesIA)
             {
                 pause();
@@ -564,6 +629,7 @@ public class ControleurJeu  extends ControleurBase {
         if(!navigation.moteur.coupAnnules.isEmpty()  && !navigation.moteur.estEnReseau)
         {            
             jeuInterrompu = true;
+            effacerAmpoule();
             if(navigation.moteur.queDesIA)
             {
                 pause();

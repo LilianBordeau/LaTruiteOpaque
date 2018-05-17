@@ -17,6 +17,7 @@ import modele.Constantes;
 import modele.Joueur;
 import modele.Moteur;
 import modele.Pingouin;
+import modele.Plateau;
 
 public class ControleurChargerPartie extends ControleurSauvegarde
 {
@@ -51,10 +52,7 @@ public class ControleurChargerPartie extends ControleurSauvegarde
         return prefixeId+ligne+"_"+colonne;
     }
     
-    public static int nbTuilesLigne(int i)
-    {
-        return (i%2==0)?7:8;
-    }
+    
     
     
     
@@ -63,7 +61,7 @@ public class ControleurChargerPartie extends ControleurSauvegarde
         Case[][] plateau = moteurs[nbPartie].plateau.plateau;
         for(int i = 0 ; i < plateau.length ; i++)
         {
-            for(int j =0 ; j < nbTuilesLigne(i) ; j++)
+            for(int j =0 ; j < Plateau.nbTuilesLigne(i) ; j++)
             {
                int nbPoissons  = plateau[i][j].nbPoissons;
                ImageView imagePlateau = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, "c"));
@@ -137,7 +135,7 @@ public class ControleurChargerPartie extends ControleurSauvegarde
     {
          for(int i = 0 ; i < 8 ; i++)
         {
-            for(int j =0 ; j < nbTuilesLigne(i) ; j++)
+            for(int j =0 ; j < Plateau.nbTuilesLigne(i) ; j++)
             {
               
                ImageView imagePlateau;
@@ -159,6 +157,8 @@ public class ControleurChargerPartie extends ControleurSauvegarde
         {
             System.out.println("commencerPartie");
             navigation.moteur = moteurs[tuileSelectionne];
+            ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
+            controleurJeu.lineFantome.setVisible(false);
             navigation.changerVue(ControleurJeu.class);
              
 

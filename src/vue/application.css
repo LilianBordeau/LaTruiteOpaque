@@ -45,3 +45,68 @@
 .nom_joueur {
     -fx-text-fill: white;
 }
+
+.managerPane:hover {
+  -fx-padding: 100 100 100 100 ;
+}
+
+#precedentBleu:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#precedentRouge:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#precedentJaune:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#precedentVert:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#suivantBleu:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#suivantRouge:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#suivantJaune:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#suivantVert:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#load:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-padding: 0 0 0 10;
+}
+
+#save:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-padding: 0 0 0 10;
+}
+
+#recommencer:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-padding: 0 0 0 10;
+}
+
+#retourMenu:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-padding: 0 170 0 10;
+}
+

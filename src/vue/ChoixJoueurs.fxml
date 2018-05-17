@@ -57,13 +57,13 @@
         
         
         
-        <Button fx:id="precedentBleu" layoutX="110.0" layoutY="175" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
+        <Button fx:id="precedentBleu" styleClass="btn" layoutX="110.0" layoutY="175" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
             <graphic>
                 <SimpleImageView layoutX="110.0" layoutY="175" fitHeight="30" fitWidth="30" url="Images/arriere.png"  pickOnBounds="true" preserveRatio="true"/>
             </graphic>
         </Button>
         
-        <Button fx:id="suivantBleu" layoutX="340.0" layoutY="175"  prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
+        <Button fx:id="suivantBleu" styleClass="btn" layoutX="340.0" layoutY="175"  prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
            <graphic>
                 <SimpleImageView fitHeight="30" fitWidth="30" url="Images/avant.png"  pickOnBounds="true" preserveRatio="true"/>
             </graphic>
@@ -98,12 +98,12 @@
         </StackPane>
         
         
-        <Button fx:id="precedentJaune"  layoutX="411.0" layoutY="175" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
+        <Button fx:id="precedentJaune"  styleClass="btn" layoutX="411.0" layoutY="175" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
             <graphic>
                    <SimpleImageView fitHeight="30" fitWidth="30" url="Images/arriere.png"  pickOnBounds="true" preserveRatio="true"/>
            </graphic>
         </Button>
-        <Button fx:id="suivantJaune" layoutX="640.0" layoutY="175" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
+        <Button fx:id="suivantJaune" styleClass="btn" layoutX="640.0" layoutY="175" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
         <graphic>
                 <SimpleImageView fitHeight="30" fitWidth="30" url="Images/avant.png"  pickOnBounds="true" preserveRatio="true"/>
             </graphic>
@@ -131,14 +131,14 @@
             </children>
         </StackPane>
         
-        <Button fx:id="precedentRouge" layoutX="110.0" layoutY="386" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
+        <Button fx:id="precedentRouge" styleClass="btn" layoutX="110.0" layoutY="386" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
             <graphic>
                    <SimpleImageView fitHeight="30" fitWidth="30" url="Images/arriere.png"  pickOnBounds="true" preserveRatio="true"/>
            </graphic>
         </Button>
         
         
-        <Button  fx:id="suivantRouge" layoutX="340.0" layoutY="386" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0"  onMouseClicked="#changerJoueur">
+        <Button  fx:id="suivantRouge" styleClass="btn" layoutX="340.0" layoutY="386" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0"  onMouseClicked="#changerJoueur">
         <graphic>
                 <SimpleImageView fitHeight="30" fitWidth="30" url="Images/avant.png"  pickOnBounds="true" preserveRatio="true"/>
             </graphic>
@@ -166,13 +166,13 @@
             </children>
         </StackPane>
         
-        <Button fx:id="precedentVert" layoutX="411.0" layoutY="386" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
+        <Button fx:id="precedentVert" styleClass="btn" layoutX="411.0" layoutY="386" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur">
             <graphic>
                 <SimpleImageView fitHeight="30" fitWidth="30" url="Images/arriere.png"  pickOnBounds="true" preserveRatio="true"/>
             </graphic>
         </Button>
         
-        <Button fx:id="suivantVert" layoutX="661.0" layoutY="386" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur" >
+        <Button fx:id="suivantVert" styleClass="btn" layoutX="661.0" layoutY="386" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" onMouseClicked="#changerJoueur" >
             <graphic>
                 <SimpleImageView fitHeight="30" fitWidth="30" url="Images/avant.png"  pickOnBounds="true" preserveRatio="true"/>
             </graphic>
@@ -182,7 +182,7 @@
         <!-- BOUTONS -->      
         <Label  fx:id="labelMessage" styleClass="btn" text="Nombre de joueurs invalide" layoutX="400" layoutY="550.0" visible="false" style="-fx-text-fill:red"  />
 
-        <Button fx:id="retour" styleClass="btn"  layoutX="15.0" layoutY="540" mnemonicParsing="false" prefWidth="150.0" onAction="#retourMenu" >
+        <Button fx:id="retour" styleClass="btn"  layoutX="15.0" layoutY="535.0" mnemonicParsing="false" prefWidth="150.0" onAction="#retourMenu" >
             <graphic>
                 <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
@@ -191,7 +191,7 @@
                 </ImageView>
             </graphic>
         </Button>    
-        <Button fx:id="btnCommencer" styleClass="btn" layoutX="560.0" layoutY="540.0" mnemonicParsing="false" prefWidth="150.0" onAction="#clicCommencer" >
+        <Button fx:id="btnCommencer" styleClass="btn" layoutX="560.0" layoutY="535.0" mnemonicParsing="false" prefWidth="150.0" onAction="#clicCommencer" >
             <graphic>
                 <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>

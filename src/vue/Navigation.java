@@ -14,10 +14,20 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Hashtable;
 import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import util.Couple;
 import modele.Joueur;
@@ -89,6 +99,55 @@ public class Navigation
         noeudRacine.getChildren().add(vueEtControleur.premier);
         vueEtControleur.second.onAppearing();
         vueEtControleur.second.onAppearingCommun();
+        
+        Image image2 = new Image("Images/mouse2.gif");
+        noeudRacine.getScene().setCursor(new ImageCursor(image2));
+        Stage primaryStage = (Stage) noeudRacine.getScene().getWindow();
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        @Override
+        public void handle(WindowEvent t) {
+            t.consume();
+        System.out.println("hey");
+        ImageView imageExit = new ImageView(new Image("Images/goodbye.gif"));
+        ImageView bulle = new ImageView(new Image("Images/goodbyeBulle.png"));
+        imageExit.setX(0);
+        imageExit.setY(100);
+        bulle.setX(300);
+        bulle.setY(100);
+        
+        Rectangle rect = new Rectangle (0, 0, 800, 1);
+        Rectangle rect2 = new Rectangle (0, 600, 800, 1);
+        
+        noeudRacine.getChildren().add(rect);
+        noeudRacine.getChildren().add(rect2);
+        noeudRacine.getChildren().add(bulle);
+        noeudRacine.getChildren().add(imageExit);
+        
+     
+     rect.setFill(Color.BLACK);
+     rect2.setFill(Color.BLACK);
+ 
+     ScaleTransition tt = new ScaleTransition(Duration.seconds(2), rect);
+     tt.setByY(350f);
+     
+     ScaleTransition ImageExitTransition = new ScaleTransition(Duration.seconds(2), imageExit);
+     TranslateTransition ImageExitTransition2 = new TranslateTransition(Duration.seconds(2), imageExit);
+     ImageExitTransition.setByY(0.2f);
+     ImageExitTransition.setByX(0.2f);
+     
+     ImageExitTransition2.setByX(30f);
+     ImageExitTransition2.setByY(5f);
+
+     ScaleTransition tt2 = new ScaleTransition(Duration.seconds(2), rect2);
+     tt2.setByY(-350f);
+       tt.setOnFinished(e -> Platform.exit());
+     tt.play();
+     tt2.play();
+     ImageExitTransition.play();
+     ImageExitTransition2.play();
+
+    }
+});
     }
     
     public void setFullScreen()

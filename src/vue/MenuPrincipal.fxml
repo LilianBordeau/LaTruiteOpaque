@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import java.net.*?>
+<?import vue.SimpleImageView?>
 <?import vue.PanelSonManager?>
 
 <AnchorPane fx:id="anchorPane"  maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" ><!--fx:controller="controleur.ControleurMenuPrincipal"-->
@@ -19,7 +20,8 @@
                 </image>    
         </ImageView>
      
-           
+        <SimpleImageView  fx:id="logo" fitHeight="46" fitWidth="141" layoutX="330" layoutY="150" url="Images/penguin_logo.png" />
+            
             <ImageView layoutX="200" layoutY="360">
                 <image>
                     <Image url="Images/batton.png" />

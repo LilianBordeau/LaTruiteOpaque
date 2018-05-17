@@ -18,6 +18,8 @@ import javafx.scene.layout.Pane;
  */
 public class PanelSonManager extends Group {
     
+    public ImageView background;
+    
     public ImageView screen;
     
     public ImageView imageMusique;
@@ -29,7 +31,14 @@ public class PanelSonManager extends Group {
     public PanelSonManager()
     {
        
-
+        background = new ImageView();
+        background.setPickOnBounds(true);
+        background.setLayoutX(0);
+        background.setLayoutY(200);
+        background.setFitWidth(40);
+        background.setFitHeight(209);
+        background.getStyleClass().add("managerPane");
+        
         screen = new ImageView();
         screen.setPickOnBounds(true);
         screen.setLayoutX(2);
@@ -59,7 +68,7 @@ public class PanelSonManager extends Group {
         sliderSon.setLayoutX(35);
         sliderSon.setLayoutY(327);
         
-        this.getChildren().addAll(screen,imageMusique,sliderMusique,imageSon,sliderSon);
+        this.getChildren().addAll(background,screen,imageMusique,sliderMusique,imageSon,sliderSon);
     }
     
    

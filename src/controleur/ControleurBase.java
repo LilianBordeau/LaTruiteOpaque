@@ -43,7 +43,7 @@ public abstract class ControleurBase implements Initializable
         
         
        
-        
+        panelSonManager.background.setImage(new Image("Images/soundboard.png"));
         panelSonManager.screen.setImage(new Image("Images/fullscreen.png"));
     }
     
@@ -85,6 +85,7 @@ public abstract class ControleurBase implements Initializable
         {
               panelSonManager.screen.setImage(new Image("Images/notfullscreen.png"));
         }else{
+              panelSonManager.background.setImage(new Image("Images/soundboard.png"));
               panelSonManager.screen.setImage(new Image("Images/fullscreen.png"));
         }
         panelSonManager.sliderMusique.setVisible(false);

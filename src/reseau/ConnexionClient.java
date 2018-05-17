@@ -8,19 +8,12 @@ public class ConnexionClient extends Connexion
 {
     public String ipServeur;
     
-    public ConnexionClient(String ipServeur, int port, int timeoutConnectMillis)
+    public ConnexionClient(String ipServeur, int port, int timeoutConnectMillis) throws IOException
     {
-        try
-        {
             Socket socket = new Socket();
             socket.connect(new InetSocketAddress(ipServeur,port),timeoutConnectMillis);
             socket.setSoTimeout(timeoutConnectMillis);
             setSocket(socket);   
-            socket.setSoTimeout(0);            
-        }
-        catch(IOException e)
-        {
-            throw new RuntimeException(e);
-        }
+            socket.setSoTimeout(0);
     }
 }

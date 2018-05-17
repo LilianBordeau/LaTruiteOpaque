@@ -5,16 +5,9 @@ import java.net.ServerSocket;
 
 public class ConnexionServeur extends Connexion
 {     
-    public ConnexionServeur(int port)
+    public ConnexionServeur(int port) throws IOException
     {
-        try
-        {
             ServerSocket serverSocket = new ServerSocket(port);
-            setSocket(serverSocket.accept());                    
-        }
-        catch(IOException e)
-        {
-            throw new RuntimeException(e);
-        }
+            setSocket(serverSocket.accept());
     }    
 }

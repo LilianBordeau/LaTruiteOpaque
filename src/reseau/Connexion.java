@@ -15,41 +15,25 @@ public abstract class Connexion
     private Socket socket;
     
     
-    public void setSocket(Socket socket)
+    public void setSocket(Socket socket) throws IOException
     {
-        try
-        {
-            this.socket = socket;
-            out = new ObjectOutputStream(socket.getOutputStream());
-            in = new ObjectInputStream(socket.getInputStream());                    
-        }
-        catch(IOException e)
-        {
-            throw new RuntimeException(e);
-        }
+        this.socket = socket;
+        out = new ObjectOutputStream(socket.getOutputStream());
+        in = new ObjectInputStream(socket.getInputStream());
     }
     
-    public synchronized Object readObject()
+    public synchronized Object readObject() throws IOException
     {
         try {
             return in.readObject();
-        }catch (SocketException|EOFException ex) {  
-            System.out.println("SocketException|EOFException");
-            return null;
-        }catch (IOException|ClassNotFoundException ex) {
+        }catch (ClassNotFoundException ex) {
             throw new RuntimeException(ex);
         }
     }
 
-    public synchronized void writeObject(Object object)
+    public synchronized void writeObject(Object object) throws IOException
     {
-        try {
-            out.writeObject(object);
-        }catch (SocketException|EOFException ex) {  
-            System.out.println("SocketException|EOFException");
-        }catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
+        out.writeObject(object);
     }
     
     public void close()

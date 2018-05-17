@@ -178,7 +178,7 @@ public abstract class ControleurBase implements Initializable
         dialog.initModality(Modality.APPLICATION_MODAL);
         VBox dialogVbox = new VBox(20);
         dialogVbox.getChildren().add(new Text(message));
-        Scene dialogScene = new Scene(dialogVbox, 300, 200);
+        Scene dialogScene = new Scene(dialogVbox, 350, 200);
         dialog.setScene(dialogScene);
         dialog.show();
     }
@@ -190,7 +190,7 @@ public abstract class ControleurBase implements Initializable
     
     protected void erreurAdresseDejaUtilisee()
     {
-        erreur("Un thread utilise la meme adresse IP que ce jeu");
+        erreur("Un thread utilise la même adresse IP que ce jeu");
     }
     
 }

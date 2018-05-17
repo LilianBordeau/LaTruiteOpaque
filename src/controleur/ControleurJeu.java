@@ -62,6 +62,7 @@ import modele.JoueurReseau;
 import modele.Moteur;
 import modele.Plateau;
 import modele.Point;
+import reseau.UnverifiedIOException;
 import thread.MyThread;
 import util.Couple;
 
@@ -386,28 +387,35 @@ public class ControleurJeu  extends ControleurBase {
                 Thread threadPlacement = new Thread() {
                     @Override
                     public void run() {
-                            Point lePlacement = joueur.getPlacementSuivant();                            
-                            MyThread.sleep(dureeMinTourJoueurAAttendre);
-                            Platform.runLater(new Runnable() {
-                                @Override
-                                public void run()
-                                {
-                                    if(!jeuInterrompu)
-                                    {                                      
-                                        ArrayList<Point> nouveauxPingouinsBloques = navigation.moteur.placerPingouin(lePlacement.ligne, lePlacement.colonne);
-                                        if(nouveauxPingouinsBloques != null)
-                                        {
-                                            miseAJourPingouin(lePlacement.ligne, lePlacement.colonne);
-                                            finDuTour(nouveauxPingouinsBloques); 
-                                        }
-                                        else
-                                        {
-                                            System.out.print("placement joueur a attendre abandonne");
-                                        }
+                            try
+                            {
+                                Point lePlacement = joueur.getPlacementSuivant();                            
+                                MyThread.sleep(dureeMinTourJoueurAAttendre);
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run()
+                                    {
+                                            if(!jeuInterrompu)
+                                            {                                      
+                                                ArrayList<Point> nouveauxPingouinsBloques = navigation.moteur.placerPingouin(lePlacement.ligne, lePlacement.colonne);
+                                                if(nouveauxPingouinsBloques != null)
+                                                {
+                                                    miseAJourPingouin(lePlacement.ligne, lePlacement.colonne);
+                                                    finDuTour(nouveauxPingouinsBloques); 
+                                                }
+                                                else
+                                                {
+                                                    System.out.print("placement joueur a attendre abandonne");
+                                                }
+                                            }
+                                            //estEnAttente = false;
                                     }
-                                    //estEnAttente = false;
-                                }
-                            });
+                                });
+                            }
+                            catch(UnverifiedIOException e)
+                            {
+                                Platform.runLater(ControleurJeu.this::erreurReseau);       
+                            }
                         }
                 };             
                 threadPlacement.start();
@@ -418,30 +426,37 @@ public class ControleurJeu  extends ControleurBase {
                 Thread threadDeplacement = new Thread() {
                     @Override
                     public void run(){
+                        try
+                        {
                             Deplacement depl = joueur.getDeplacementSuivant();
                             MyThread.sleep(dureeMinTourJoueurAAttendre);
                             Platform.runLater(new Runnable() {
                                 @Override
                                 public void run()
                                 {
-                                    if(!jeuInterrompu)
-                                    {                                        
-                                        ArrayList<Point> nouveauxPingouinsBloques = navigation.moteur.deplacerPingouin(depl.ligneSrc, depl.colonneSrc, depl.ligneDest, depl.colonneDest);
-                                        if(nouveauxPingouinsBloques != null)
-                                        {
-                                            miseAJourPingouin(depl.ligneSrc, depl.colonneSrc);
-                                            miseAJourTuile(depl.ligneSrc, depl.colonneSrc);
-                                         //   miseAJourPingouin(depl.ligneDest, depl.colonneDest);
-                                            finDuTour(nouveauxPingouinsBloques);  
-                                        }
-                                        else
-                                        {
-                                            System.out.print("placement joueur a attendre abandonne");
-                                        }
-                                        // estEnAttente = false;
-                                    } 
+                                        if(!jeuInterrompu)
+                                        {                                        
+                                            ArrayList<Point> nouveauxPingouinsBloques = navigation.moteur.deplacerPingouin(depl.ligneSrc, depl.colonneSrc, depl.ligneDest, depl.colonneDest);
+                                            if(nouveauxPingouinsBloques != null)
+                                            {
+                                                miseAJourPingouin(depl.ligneSrc, depl.colonneSrc);
+                                                miseAJourTuile(depl.ligneSrc, depl.colonneSrc);
+                                             //   miseAJourPingouin(depl.ligneDest, depl.colonneDest);
+                                                finDuTour(nouveauxPingouinsBloques);  
+                                            }
+                                            else
+                                            {
+                                                System.out.print("placement joueur a attendre abandonne");
+                                            }
+                                            // estEnAttente = false;
+                                        } 
                                 }
                             });
+                        }
+                        catch(UnverifiedIOException e)
+                        {
+                            Platform.runLater(ControleurJeu.this::erreurReseau);       
+                        }
                     }
                 };             
                 threadDeplacement.start();
@@ -460,42 +475,49 @@ public class ControleurJeu  extends ControleurBase {
             @Override
             public void run()
             {
-                for(Joueur joueur : navigation.moteur.joueurs)
+                try
                 {
-                    if(joueur.numero != navigation.moteur.joueurPrecedent && joueur instanceof JoueurReseau)
-                    {                        
-                        if(joueur instanceof JoueurClient)
-                        {
-                            if(navigation.moteur.joueurs[navigation.moteur.joueurPrecedent] instanceof JoueurHumain)
+                    for(Joueur joueur : navigation.moteur.joueurs)
+                    {
+                        if(joueur.numero != navigation.moteur.joueurPrecedent && joueur instanceof JoueurReseau)
+                        {                        
+                            if(joueur instanceof JoueurClient)
                             {
-                                joueur.connexion.writeObject(navigation.moteur.dernierCoupJoue);
+                                if(navigation.moteur.joueurs[navigation.moteur.joueurPrecedent] instanceof JoueurHumain)
+                                {
+                                    joueur.connexion.writeObject(navigation.moteur.dernierCoupJoue);
+                                }
+                                break;
                             }
-                            break;
-                        }
-                        else
-                        {
-                             joueur.connexion.writeObject(navigation.moteur.dernierCoupJoue);
-                        }
-                    }                    
-                }
-                Platform.runLater(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {                        
-                        estEnAttente = false;
-                        if(!jeuInterrompu)
-                        {                               
-                            if(coup instanceof Deplacement)
+                            else
                             {
-                                onTranslateDuPinguoin((Deplacement)coup, nouveauxPingouinsBloques);
-                            }else
-                            {
-                                onCouleDuPingouin(nouveauxPingouinsBloques);   
+                                 joueur.connexion.writeObject(navigation.moteur.dernierCoupJoue);
                             }
-                        }
+                        }                    
                     }
-                });
+                    Platform.runLater(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {                        
+                            estEnAttente = false;
+                            if(!jeuInterrompu)
+                            {                               
+                                if(coup instanceof Deplacement)
+                                {
+                                    onTranslateDuPinguoin((Deplacement)coup, nouveauxPingouinsBloques);
+                                }else
+                                {
+                                    onCouleDuPingouin(nouveauxPingouinsBloques);   
+                                }
+                            }
+                        }
+                    });
+                }
+                catch(IOException e)
+                {
+                    Platform.runLater(ControleurJeu.this::erreurReseau);
+                }
             }
         };    
         estEnAttente = true;

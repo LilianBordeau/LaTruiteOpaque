@@ -1,5 +1,7 @@
 package controleur;
 
+import java.io.IOException;
+import java.net.BindException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -261,11 +263,18 @@ public class ControleurChoixJoueurs extends ControleurBase
                                 joueur.connexion = new ConnexionServeur(port);
                                 joueur.nom = (String)joueur.connexion.readObject();
                                 nouveauJoueurConnecte();
+                            }                               
+                            catch(BindException e)
+                            {           
+                                Platform.runLater(ControleurChoixJoueurs.this::erreurAdresseDejaUtilisee);
+                                /*System.out.println("impossible de se connecter");
+                                throw(e);*/
                             }
-                            catch(RuntimeException e)
-                            {
-                                System.out.println("impossible de se connecter");
-                                throw(e);
+                            catch(IOException e)
+                            {           
+                                Platform.runLater(ControleurChoixJoueurs.this::erreurReseau);
+                                /*System.out.println("impossible de se connecter");
+                                throw(e);*/
                             }
                         }                       
                     };
@@ -307,10 +316,11 @@ public class ControleurChoixJoueurs extends ControleurBase
                                         joueur.connexion.writeObject(new DonneesDebutPartie(navigation.moteur.plateau, navigation.moteur.joueurs, joueur.numero));
                                         nouveauJoueurPret();
                                     }
-                                    catch(RuntimeException e)
+                                    catch(IOException e)
                                     {
-                                        System.out.println("impossible de se connecter");
-                                        throw(e);
+                                        Platform.runLater(ControleurChoixJoueurs.this::erreurReseau);
+                                        /*System.out.println("impossible de se connecter");
+                                        throw(e);*/
                                     }
                                 }                         
                             };

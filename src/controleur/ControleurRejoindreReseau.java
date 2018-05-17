@@ -17,6 +17,8 @@ import modele.Moteur;
 import reseau.Connexion;
 import reseau.ConnexionClient;
 import reseau.ConnexionServeur;
+import java.io.IOException;
+import java.net.BindException;
 
 public class ControleurRejoindreReseau extends ControleurBase
 {    
@@ -31,6 +33,8 @@ public class ControleurRejoindreReseau extends ControleurBase
     
     @FXML
     public TextField champNom;
+    
+    private int nbEchecsConnexion;
     
     @FXML
     @Override
@@ -83,9 +87,14 @@ public class ControleurRejoindreReseau extends ControleurBase
                                 break;
                             }
                         }
-                        catch(RuntimeException e)
+                        catch(IOException e)
                         {
                             System.out.println("impossible de se connecter");
+                            if(e instanceof BindException)
+                            {
+                                System.out.println("BIND EXCEPTION : cette adresse est deja utilisee par un autre thread");
+                            }
+                            echecConnexion();
                             //throw(e);
                         }
                     }
@@ -99,5 +108,14 @@ public class ControleurRejoindreReseau extends ControleurBase
     private void retourMenu(ActionEvent event)
     {
         navigation.changerVue(ControleurMenuPrincipal.class);
+    }
+    
+    private synchronized void echecConnexion()
+    {
+        nbEchecsConnexion++;
+        if(nbEchecsConnexion == 3)
+        {
+            Platform.runLater(ControleurRejoindreReseau.this::erreurReseau); 
+        }
     }
 }

@@ -39,6 +39,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -94,7 +95,7 @@ public class ControleurJeu  extends ControleurBase {
         pingouinMvt =  new ImageView();
         lineFantome = new Line();
         lineFantome.setMouseTransparent(true);
-        lineFantome.setOpacity(0.35);
+        lineFantome.setOpacity(0.5);
         lineFantome.setStrokeWidth(5);
         anchorPane.getChildren().add(pingouinMvt);
         anchorPane.getChildren().add(lineFantome);
@@ -851,12 +852,12 @@ public class ControleurJeu  extends ControleurBase {
         tuileFantome = (ImageView)anchorPane.getScene().lookup("#"+idCaseSource);
         Image image = new Image("Images/fantomes/tuilevierge.png") ;
         
-        tuileFantome.setImage(image);
+        //tuileFantome.setImage(image);
         
         String idCaseSourcePinguouin = indicesToId(dep.ligneSrc, dep.colonneSrc,DEBUTIDPINGOUIN);
         pingouinFantome = (ImageView)anchorPane.getScene().lookup("#"+idCaseSourcePinguouin);
         Image image2 = new  Image("Images/fantomes/" + navigation.moteur.joueurPrecedent + "_0_6.png") ;        
-        pingouinFantome.setImage(image2);
+        //pingouinFantome.setImage(image2);
 
         
         
@@ -870,6 +871,7 @@ public class ControleurJeu  extends ControleurBase {
         lineFantome.setStartY(yDep);
         lineFantome.setEndX(xArr);
         lineFantome.setEndY(yArr);
+        lineFantome.setStroke(Constantes.couleurJoueur(navigation.moteur.joueurs[navigation.moteur.joueurPrecedent]));
         lineFantome.setVisible(true);
         
         

@@ -1,5 +1,8 @@
 package modele;
 
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+
 public class Constantes
 {
     public static final String DOSSIERIMAGES = "Images";
@@ -74,5 +77,25 @@ public class Constantes
         
         path = path + sType + "_" + sStatus+".png";
         return path;
+    }
+
+    public static Paint couleurJoueur(Joueur joueur)
+    {
+        if(joueur.couleur == 0)
+        {
+            return Color.DEEPSKYBLUE;             
+        }
+        else if(joueur.couleur == 1)
+        {
+              return Color.YELLOW;        
+        }
+        else if(joueur.couleur == 2)
+        {            
+            return Color.RED;
+        }
+        else //  if(joueur.couleur == 3)
+        {
+            return Color.LIME;             
+        }
     }
 }

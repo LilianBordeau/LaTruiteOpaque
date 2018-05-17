@@ -12,12 +12,13 @@
 <?import javafx.scene.shape.Line?>
 <?import java.net.URL?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0"  minWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('Images/fond3.png');-fx-background-repeat: stretch;-fx-background-size: cover, auto;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurJeu"-->
+<AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0"  minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurJeu"-->
       <children>
 
       <!-- joueur bleu -->
-
-       
+  
+    <SimpleImageView  fitWidth="800" fitHeight="601"  layoutX="-1" layoutY="0" url="Images/fond3.png" />
+    
       <SimpleImageView fx:id="0_gui" fitWidth="126" preserveRatio="true" layoutX="5" layoutY="5" url="Images/0_gui_afk.png" />
       <Label fx:id="0_nom" styleClass="gui_infos" layoutX="28" layoutY="58" text="Nom joueur bleu" />
       <Label fx:id="0_score" styleClass="gui_infos" layoutX="67" layoutY="15" text="0" />

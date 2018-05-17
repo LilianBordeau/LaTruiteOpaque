@@ -50,3 +50,22 @@
     -fx-text-fill: #d7d7d7;
     -fx-font-size: 10px;
 }
+
+#precedentRouge:hover , #precedentBleu:hover, #precedentJaune:hover, #precedentVert:hover ,
+#suivantBleu:hover, #suivantRouge:hover, #suivantJaune:hover, #suivantVert:hover  {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#save:hover ,#recommencer:hover ,#retourMenu:hover ,#load:hover  {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-padding: 0 0 0 10;
+}
+
+#btnUndo:hover, #btnRedo:hover, #btnPause:hover  {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 0, 0, 2, 0) ;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-padding: 0 0 0 -2;
+}

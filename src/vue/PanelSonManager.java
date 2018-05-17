@@ -52,7 +52,6 @@ public class PanelSonManager extends Group {
         screen.setMaxHeight(30);
         setHoverListener(screen);
         
-        
        
 
     

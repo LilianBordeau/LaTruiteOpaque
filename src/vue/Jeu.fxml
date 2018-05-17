@@ -262,9 +262,9 @@
         
         <SimpleImageView fitHeight="209" fitWidth="40" layoutX="760.0" layoutY="214" url="Images/menuJeu.png" />
       
-        <Button fx:id="btnUndo" styleClass="btn"  layoutX="760.0" layoutY="250" onAction="#clicAnnuler" >
+        <Button fx:id="btnUndo" styleClass="btn"  layoutX="768" layoutY="250" onAction="#clicAnnuler" >
             <graphic>
-                <ImageView  fitWidth="20" fitHeight="20" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="false"  preserveRatio="true" visible="true" >
                     <image>
                         <Image url="Images/undo.png" />
                     </image>
@@ -272,9 +272,9 @@
             </graphic>
         </Button>
         
-        <Button fx:id="btnRedo" styleClass="btn"  layoutX="760.0" layoutY="300" onAction="#clicRefaire">
+        <Button fx:id="btnRedo" styleClass="btn"  layoutX="768" layoutY="300" onAction="#clicRefaire" >
             <graphic>
-                <ImageView  fitWidth="20" fitHeight="20" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="true" preserveRatio="true" visible="true" >
                     <image>
                         <Image url="Images/redo.png" />
                     </image>
@@ -282,9 +282,9 @@
             </graphic>
         </Button>
         
-        <Button fx:id="btnPause" styleClass="btn" layoutX="760.0" layoutY="350" onAction="#clicPause" >
+        <Button fx:id="btnPause" styleClass="btn" layoutX="768" layoutY="350" onAction="#clicPause" >
             <graphic>
-                <ImageView  fitWidth="20" fitHeight="20" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="true" preserveRatio="true" visible="true" >
                     <image>
                         <Image url="Images/pause.png" />
                     </image>

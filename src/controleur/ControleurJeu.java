@@ -25,8 +25,10 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -82,6 +84,9 @@ public class ControleurJeu  extends ControleurBase {
     Line lineAmpoule;
     
     @FXML
+    Button btnUndo,btnRedo,btnPause;
+    
+    @FXML
     Group groupEnPause;
 
     @FXML
@@ -108,7 +113,9 @@ public class ControleurJeu  extends ControleurBase {
         anchorPane.getChildren().add(lineFantome);
         casesAccessibles = new ArrayList<>();      
         
-        
+        btnUndo.setPadding(Insets.EMPTY);
+        btnRedo.setPadding(Insets.EMPTY);
+        btnPause.setPadding(Insets.EMPTY);
     }
     
     @Override

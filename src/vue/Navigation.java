@@ -147,7 +147,7 @@ public class Navigation
      ImageExitTransition2.play();
 
     }
-});
+}); 
     }
     
     public void setFullScreen()

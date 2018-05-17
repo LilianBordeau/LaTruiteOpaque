@@ -317,7 +317,6 @@
             </children>
         </Group>
         
-        <Button layoutX="10" layoutY="500" prefWidth="150" text="Fin de partie" onAction="#goFinPartie"/>
         <PanelSonManager fx:id="panelSonManager"/>
       </children>
     <stylesheets>

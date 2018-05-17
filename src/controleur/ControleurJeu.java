@@ -886,11 +886,7 @@ public class ControleurJeu  extends ControleurBase {
     public static final String Column3MapKey = "C";
     public static final String Column4MapKey = "D";
       
-    @FXML
-    private void goFinPartie(ActionEvent event)
-    {        
-       showFinPartie();
-    }
+
 
     private void showFinPartie() {
  ArrayList<Joueur>  classementJoueurs = navigation.moteur.getClassement();

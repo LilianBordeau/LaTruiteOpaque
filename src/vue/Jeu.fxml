@@ -34,14 +34,14 @@
       <!-- joueur rouge -->
       
       <SimpleImageView  fx:id="2_gui" fitHeight="72" fitWidth="214" layoutX="586" layoutY="530" url="Images/2_gui_afk.png" />
-      <Label fx:id="2_nom" styleClass="nom_joueur"  layoutX="90" layoutY="575" text="Nom joueur C" />
+      <Label fx:id="2_nom" styleClass="nom_joueur"  layoutX="630" layoutY="575" text="Nom joueur C" />
       <Label fx:id="2_score" layoutX="700" layoutY="540" text="0" />
       <Label fx:id="2_tuille" layoutX="700" layoutY="555" text="0" />
       
       <!-- joueur vert -->
       
       <SimpleImageView  fx:id="3_gui" fitHeight="72" fitWidth="214" layoutX="0" layoutY="530" url="Images/3_gui_afk.png" />
-      <Label fx:id="3_nom" styleClass="nom_joueur"  layoutX="630" layoutY="575" text="Nom joueur D" />
+      <Label fx:id="3_nom" styleClass="nom_joueur"  layoutX="90" layoutY="575" text="Nom joueur D" />
       <Label fx:id="3_score" layoutX="160" layoutY="540" text="0" />
       <Label fx:id="3_tuille" layoutX="160" layoutY="555" text="0" />
       

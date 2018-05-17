@@ -127,8 +127,9 @@ public class ControleurJeu  extends ControleurBase {
             for(int i = 0 ; i<navigation.moteur.joueurs.length ; i++ )
             {
                 couleursPrises.add(navigation.moteur.joueurs[i].couleur);
-                ImageView joueurInexistant = (ImageView) anchorPane.lookup("#"+navigation.moteur.joueurs[i].couleur+"_gui");
-                joueurInexistant.setImage(new Image("Images/"+navigation.moteur.joueurs[i].couleur+"_gui_afk.png"));
+                ImageView joueurExistant = (ImageView) anchorPane.lookup("#"+navigation.moteur.joueurs[i].couleur+"_gui");                
+                joueurExistant.setVisible(true);
+                joueurExistant.setImage(new Image("Images/"+navigation.moteur.joueurs[i].couleur+"_gui_afk.png"));
                 Label label3 = (Label) anchorPane.lookup("#"+i+"_nom");        
                 label3.setText(navigation.moteur.joueurs[i].nom);
             }

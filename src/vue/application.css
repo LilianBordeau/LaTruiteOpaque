@@ -4,7 +4,7 @@
 
 #nouvelle:hover {
     -fx-graphic: url('../hover_images/nouvelle_hover.png');
-    -fx-padding: 0 40 0 0;
+    -fx-padding: 0 0 0 0;
 }
 
 #creer:hover {
@@ -14,27 +14,27 @@
 
 #tutoriel:hover {
     -fx-graphic: url('../hover_images/tutoriel_hover.png');
-    -fx-padding: 0 40 0 0;
+    -fx-padding: 0 0 0 0;
 }
 
 #charger:hover {
     -fx-graphic: url('../hover_images/charger_hover.png');
-    -fx-padding: 0 0 40 0;
+    -fx-padding: 0 0 0 0;
 }
 
 #rejoindre:hover {
     -fx-graphic: url('../hover_images/rejoindre_hover.png');
-    -fx-padding: 0 0 40 0;
+    -fx-padding: 0 0 0 0;
 }
 
 #credits:hover {
     -fx-graphic: url('../hover_images/credits_hover.png');
-    -fx-padding: 0 40 0 0;
+    -fx-padding: 0 0 0 0;
 }
 
 #retour:hover {
     -fx-graphic: url('../hover_images/retour_hover.png');
-    -fx-padding: 0 40 0 0;
+    -fx-padding: 0 0 0 0;
 }
 
 #btnCommencer:hover {

@@ -1,4 +1,4 @@
-.btn {
+/*.btn {
     -fx-background-color: transparent;  
 }
 
@@ -107,6 +107,6 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
     -fx-scale-x: 1;
     -fx-scale-y: 1;
-    -fx-padding: 0 170 0 10;
-}
+    -fx-padding: 0 0 0 10;
+}*/
 

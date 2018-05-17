@@ -500,23 +500,7 @@ public class ControleurJeu  extends ControleurBase {
         
         navigation.changerVue(ControleurSauvegarderPartie.class);    
     }
-    @FXML
-    private void clicCharger(ActionEvent event)
-    {
-        jeuInterrompu = false;
-        System.out.println("clicCharger");
-        try
-        {
-            ObjectInputStream oos = new ObjectInputStream(new FileInputStream(Constantes.nomFichierSauvegarde));
-            navigation.moteur = (Moteur)oos.readObject();  
-            miseAJourPlateau();
-            tourSuivant();
-        }
-        catch(IOException|ClassNotFoundException e)
-        {
-            throw new RuntimeException(e);
-        }
-    }
+
     
     @FXML
     private void clicRecommencer(ActionEvent event)

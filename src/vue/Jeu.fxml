@@ -230,7 +230,7 @@
                 <ImageView fx:id="p7_6" fitWidth="71.22" layoutX="542.44" layoutY="444" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
                 <ImageView fx:id="p7_7" fitWidth="71.22" layoutX="613.66" layoutY="444" pickOnBounds="false" smooth="true" preserveRatio="true" onMouseClicked="#clicTuile"/>
     
-	<Button  styleClass="btn"  fx:id="save" layoutX="495.0" layoutY="550" onAction="#clicSauvegarder">
+	<Button  styleClass="btn"  fx:id="save" layoutX="515.0" layoutY="550" onAction="#clicSauvegarder">
             <graphic>
                 <ImageView  fitWidth="40" fitHeight="40" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
@@ -240,17 +240,8 @@
             </graphic>
         </Button>
         
-        <Button styleClass="btn" fx:id="load" layoutX="535.0" layoutY="550" onAction="#clicCharger">
-            <graphic>
-                <ImageView  fitWidth="40" fitHeight="40" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
-                    <image>
-                        <Image url="Images/load.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
         
-        <Button styleClass="btn"  fx:id="recommencer" layoutX="210.0" layoutY="539" onAction="#clicRecommencer">
+        <Button styleClass="btn"  fx:id="recommencer" layoutX="230.0" layoutY="539" onAction="#clicRecommencer">
         <graphic>
                 <ImageView  fitWidth="126" fitHeight="56" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
@@ -260,7 +251,7 @@
             </graphic>
         </Button>
         
-        <Button styleClass="btn" fx:id="retourMenu"  layoutX="345.0" layoutY="540" onAction="#retourMenu" >
+        <Button styleClass="btn" fx:id="retourMenu"  layoutX="358.0" layoutY="540" onAction="#retourMenu" >
             <graphic>
                 <ImageView  fitWidth="146" fitHeight="56" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
@@ -270,9 +261,9 @@
             </graphic>
         </Button>
         
-        <SimpleImageView fitHeight="209" fitWidth="40" layoutX="761.0" layoutY="214" url="Images/menuJeu.png" />
+        <SimpleImageView fitHeight="209" fitWidth="40" layoutX="760.0" layoutY="214" url="Images/menuJeu.png" />
       
-        <Button styleClass="btn"  layoutX="765.0" layoutY="250" onAction="#clicAnnuler" >
+        <Button styleClass="btn"  layoutX="760.0" layoutY="250" onAction="#clicAnnuler" >
             <graphic>
                 <ImageView  fitWidth="20" fitHeight="20" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
@@ -282,7 +273,7 @@
             </graphic>
         </Button>
         
-        <Button styleClass="btn"  layoutX="765.0" layoutY="300" onAction="#clicRefaire">
+        <Button styleClass="btn"  layoutX="760.0" layoutY="300" onAction="#clicRefaire">
             <graphic>
                 <ImageView  fitWidth="20" fitHeight="20" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
@@ -292,7 +283,7 @@
             </graphic>
         </Button>
         
-        <Button styleClass="btn" layoutX="765.0" layoutY="350" onAction="#clicPause" >
+        <Button styleClass="btn" layoutX="760.0" layoutY="350" onAction="#clicPause" >
             <graphic>
                 <ImageView  fitWidth="20" fitHeight="20" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>

@@ -49,6 +49,7 @@ public class Main extends Application {
         primaryStage.setWidth(LARGEURFENETREINIT);
         primaryStage.setHeight(HAUTEURFENETREINIT);
         primaryStage.centerOnScreen();        
+        primaryStage.setTitle("La Truite Opaque");
         navigation.changerVue(ControleurMenuPrincipal.class);
     }
         

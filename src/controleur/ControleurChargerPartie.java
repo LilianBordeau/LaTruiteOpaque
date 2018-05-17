@@ -29,7 +29,21 @@ public class ControleurChargerPartie extends ControleurSauvegarde
         super.onAppearing();
         clearPlateau();
         btnCommencer.setDisable(true);
-        setMessage("Veuillez choisir une sauvegarde !");
+        
+        int i = 0;
+        while(i < moteurs.length && moteurs[i] == null)
+        {
+            i++;     
+        }
+        
+        if(i== moteurs.length)
+        {
+            setMessage("Aucune sauvegarde n'est disponible !");            
+        }else
+        {
+            setMessage("Veuillez choisir une sauvegarde !");            
+        }
+
     }
     
     public String indicesToId(int ligne, int colonne, String prefixeId)

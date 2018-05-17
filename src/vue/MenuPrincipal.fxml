@@ -55,7 +55,7 @@
             </Button>
             
             
-            <Button fx:id="rejoindre" styleClass="btn" layoutX="399" layoutY="430" prefWidth="400"  onAction="#clicRejoindreReseau">                             
+            <Button fx:id="rejoindre" styleClass="btn" layoutX="430" layoutY="430" prefWidth="250"  onAction="#clicRejoindreReseau">                             
                   <graphic>
                      <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                             <image>

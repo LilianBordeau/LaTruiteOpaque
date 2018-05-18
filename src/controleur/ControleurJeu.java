@@ -744,6 +744,7 @@ public class ControleurJeu  extends ControleurBase {
             }
             if(navigation.moteur.estPartieTerminee())
             {
+                reprendre();
                 showFinPartie();
             }
             
@@ -1064,6 +1065,8 @@ public class ControleurJeu  extends ControleurBase {
         
         fondFinPartie.setVisible(true);
         titreFinPartie.setVisible(true);
+        titreFinPartie.setTextFill(Color.WHITE);
+        titreFinPartie.setFont(Font.font(null, FontWeight.BOLD, 10));
         for(int i=0; i<classementJoueurs.size();i++)
         {
             ImageView image1 = (ImageView) anchorPane.lookup("#"+"position"+(i+1));

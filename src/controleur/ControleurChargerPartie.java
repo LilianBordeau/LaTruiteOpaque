@@ -84,11 +84,14 @@ public class ControleurChargerPartie extends ControleurSauvegarde
             
             ArrayList<Pingouin> pingouins = joueurs[j].pingouins;
             for(Pingouin p : pingouins)
-            {
-                ImageView imagePingouin = (ImageView)anchorPane.lookup("#"+indicesToId(p.ligne,p.colonne, "p"));
-                String pathImagePingouin = Constantes.nomImagePingouin(joueurs[j]);
-                imagePingouin.setImage(new Image(pathImagePingouin));
-                imagePingouin.setVisible(true);
+            { 
+                if(!p.estBloque)
+                {
+                    ImageView imagePingouin = (ImageView)anchorPane.lookup("#"+indicesToId(p.ligne,p.colonne, "p"));
+                    String pathImagePingouin = Constantes.nomImagePingouin(joueurs[j]);
+                    imagePingouin.setImage(new Image(pathImagePingouin));
+                    imagePingouin.setVisible(true);
+                }
             }
         }     
     }

@@ -19,6 +19,11 @@ import reseau.ConnexionClient;
 import reseau.ConnexionServeur;
 import java.io.IOException;
 import java.net.BindException;
+import javafx.animation.RotateTransition;
+import javafx.animation.Transition;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 public class ControleurRejoindreReseau extends ControleurBase
 {    
@@ -36,16 +41,29 @@ public class ControleurRejoindreReseau extends ControleurBase
     
     private int nbEchecsConnexion;
     
+    public SimpleBooleanProperty enAttente;
+    
+    @FXML
+    public ImageView sablier;
+    
     @FXML
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {        
+        enAttente = new SimpleBooleanProperty(false);
+        sablier.visibleProperty().bind(enAttente);
+        RotateTransition transitionSablier = new RotateTransition(Duration.millis(1000), sablier);        
+        transitionSablier.setFromAngle(0);
+        transitionSablier.setByAngle(359);
+        transitionSablier.setCycleCount(Transition.INDEFINITE);
+        transitionSablier.play();
         labelTitre.setAlignment(Pos.CENTER);
     }
     
     @Override
     public void onAppearing()
     {
+        enAttente.set(false);
         navigation.afficherPopupErreur = true;
     }
     
@@ -75,7 +93,8 @@ public class ControleurRejoindreReseau extends ControleurBase
                                     public void run()
                                     {
                                         if(donneesDebutPartie != null)
-                                        {                            
+                                        {        
+                                            enAttente.set(false);
                                             Joueur[] joueurs = new Joueur[donneesDebutPartie.joueurs.length];
                                             for(int i = 0 ; i < joueurs.length ; i++)
                                             {
@@ -110,6 +129,7 @@ public class ControleurRejoindreReseau extends ControleurBase
                     
                 }                       
             };
+            enAttente.set(true);
             thread.start();  
     }
     
@@ -124,6 +144,7 @@ public class ControleurRejoindreReseau extends ControleurBase
         nbEchecsConnexion++;
         if(nbEchecsConnexion == 3)
         {
+            enAttente.set(false);
             Platform.runLater(ControleurRejoindreReseau.this::erreurReseau); 
         }
     }

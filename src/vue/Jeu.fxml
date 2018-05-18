@@ -310,7 +310,7 @@
         </Group>
         
         <PanelSonManager fx:id="panelSonManager"/>
-        <SimpleImageView  fx:id="sablier" opacity="0.75" fitWidth="70" fitHeight="70"  layoutX="705" layoutY="435" url="Images/sablier.png" />
+        <SimpleImageView  fx:id="sablier" fitWidth="70" fitHeight="70"  layoutX="705" layoutY="435" url="Images/sablier.png" />
       </children>
     <stylesheets>
     <URL value="@application.css" />

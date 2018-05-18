@@ -35,15 +35,15 @@
       
       <SimpleImageView  fx:id="2_gui" fitWidth="126" preserveRatio="true" layoutX="671" layoutY="522" url="Images/2_gui_afk.png" />
       <Label fx:id="2_nom" styleClass="gui_infos" layoutX="706" layoutY="575" text="Nom joueur rouge" />
-      <Label fx:id="2_score" styleClass="gui_infos" layoutX="727" layoutY="547" text="0" />
-      <Label fx:id="2_tuille" styleClass="gui_infos" layoutX="727" layoutY="532" text="0" />
+      <Label fx:id="2_score" styleClass="gui_infos" layoutX="727" layoutY="532" text="0" />
+      <Label fx:id="2_tuille" styleClass="gui_infos" layoutX="727" layoutY="547" text="0" />
       
       <!-- joueur vert -->
       
       <SimpleImageView  fx:id="3_gui" fitWidth="126" preserveRatio="true" layoutX="5" layoutY="522" url="Images/3_gui_afk.png" />
       <Label fx:id="3_nom" styleClass="gui_infos" layoutX="28" layoutY="575" text="Nom joueur vert" />
-      <Label fx:id="3_score" styleClass="gui_infos" layoutX="67" layoutY="547" text="0" />
-      <Label fx:id="3_tuille" styleClass="gui_infos" layoutX="67" layoutY="532" text="0" />
+      <Label fx:id="3_score" styleClass="gui_infos" layoutX="67" layoutY="532" text="0" />
+      <Label fx:id="3_tuille" styleClass="gui_infos" layoutX="67" layoutY="547" text="0" />
       
       
           
@@ -310,6 +310,7 @@
         </Group>
         
         <PanelSonManager fx:id="panelSonManager"/>
+        <SimpleImageView  fx:id="sablier" opacity="0.75" fitWidth="70" fitHeight="70"  layoutX="705" layoutY="435" url="Images/sablier.png" />
       </children>
     <stylesheets>
     <URL value="@application.css" />

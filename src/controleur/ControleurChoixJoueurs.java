@@ -288,7 +288,7 @@ public class ControleurChoixJoueurs extends ControleurBase
         {
             ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
             controleurJeu.lineFantome.setVisible(false);
-            controleurJeu.estEnAttente = false;
+            controleurJeu.estEnAttente.set(false);
             navigation.changerVue(ControleurJeu.class);
         }
     }
@@ -345,7 +345,7 @@ public class ControleurChoixJoueurs extends ControleurBase
                 {         
                     ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
                     controleurJeu.lineFantome.setVisible(false);                    
-                    controleurJeu.estEnAttente = false;
+                    controleurJeu.estEnAttente.set(false);
                     navigation.changerVue(ControleurJeu.class);
                 }
             });

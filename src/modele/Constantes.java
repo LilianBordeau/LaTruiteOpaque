@@ -2,9 +2,14 @@ package modele;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.stage.Screen;
 
 public class Constantes
 {
+    private static final double SCREENRATIOWIDTHPOPUP = 0.25;
+    private static final double SCREENRATIOHEIGHTPOPUP = SCREENRATIOWIDTHPOPUP;
+    public static final double POPUPWIDTH = Screen.getPrimary().getVisualBounds().getWidth()*SCREENRATIOWIDTHPOPUP;
+    public static final double POPUPHEIGHT = Screen.getPrimary().getVisualBounds().getHeight()*SCREENRATIOHEIGHTPOPUP;
     public static final String DOSSIERIMAGES = "Images";
     public static final String DOSSIERSONS = "rsc/Sons/";
     public static final String nomFichierSauvegarde = "sauvegarde.txt";

@@ -21,7 +21,7 @@ import vue.Navigation;
 
 public class Main extends Application {
     private static final double SCREENRATIOWIDTHINIT = 0.7;
-    private static final double SCREENRATIOHEIGHTINIT = SCREENRATIOWIDTHINIT;   
+    private static final double SCREENRATIOHEIGHTINIT = SCREENRATIOWIDTHINIT;      
     public static final int LARGEURFENETREINIT = (int)(Screen.getPrimary().getVisualBounds().getWidth()*SCREENRATIOWIDTHINIT);
     public static final int HAUTEURFENETREINIT = (int)(Screen.getPrimary().getVisualBounds().getHeight()*SCREENRATIOHEIGHTINIT);
     private static final int LARGEURFENETREFXML = 800;

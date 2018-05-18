@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import modele.Constantes;
 import reseau.Connexion;
@@ -181,7 +182,7 @@ public abstract class ControleurBase implements Initializable
             dialog.initModality(Modality.APPLICATION_MODAL);
             VBox dialogVbox = new VBox(20);
             dialogVbox.getChildren().add(new Text(message));
-            Scene dialogScene = new Scene(dialogVbox, 350, 200);
+            Scene dialogScene = new Scene(dialogVbox, Constantes.POPUPWIDTH, Constantes.POPUPHEIGHT);
             dialog.setScene(dialogScene);
             dialog.show();
         }        

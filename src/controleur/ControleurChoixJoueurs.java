@@ -5,7 +5,10 @@ import java.net.BindException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import javafx.animation.RotateTransition;
+import javafx.animation.Transition;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -13,8 +16,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import modele.DonneesDebutPartie;
 import modele.Joueur;
 import modele.JoueurHumain;
@@ -69,6 +74,10 @@ public class ControleurChoixJoueurs extends ControleurBase
    
     int nbJoueursReseauAAttendre;
     int nbJoueursReseau;
+    public SimpleBooleanProperty enAttente;
+    
+    @FXML
+    public ImageView sablier;
     
     public void setJoueur(int couleur, StackPane imagesCouleur,StackPane nomCouleur,int typeJoueur)
     {
@@ -107,6 +116,7 @@ public class ControleurChoixJoueurs extends ControleurBase
     @Override
     public void onAppearing()
     {  
+        enAttente.set(false);
         navigation.afficherPopupErreur = true;
         if(navigation.enReseau)
         {
@@ -142,8 +152,14 @@ public class ControleurChoixJoueurs extends ControleurBase
     public void initialize(URL url, ResourceBundle rb) 
     {     
         
-        
-        onAppearing();
+        enAttente = new SimpleBooleanProperty(false);
+        sablier.visibleProperty().bind(enAttente);
+        RotateTransition transitionSablier = new RotateTransition(Duration.millis(1000), sablier);        
+        transitionSablier.setFromAngle(0);
+        transitionSablier.setByAngle(359);
+        transitionSablier.setCycleCount(Transition.INDEFINITE);
+        transitionSablier.play();
+        //onAppearing();
        
     }
     
@@ -166,17 +182,18 @@ public class ControleurChoixJoueurs extends ControleurBase
     
     public void changerJoueur(Event event)
     {
-       //QUELLE BOUTON EST CLIQUÉ 
-       Button button = (Button) event.getTarget();
-     
-       Couple<Integer,Integer> deplacement = deplacements.get(button);
-       int couleur = deplacement.premier;
-       int rotation = deplacement.second;
+        if(!enAttente.get())
+        {
+            //QUELLE BOUTON EST CLIQUÉ 
+            Button button = (Button) event.getTarget();
 
-        changerAffichage(couleur,rotation);
-        estPartieConforme();
-     
-      
+            Couple<Integer,Integer> deplacement = deplacements.get(button);
+            int couleur = deplacement.premier;
+            int rotation = deplacement.second;
+
+             changerAffichage(couleur,rotation);
+             estPartieConforme();
+        }
     }
 
     private void changerAffichage(int couleur, int rotation) {
@@ -195,102 +212,106 @@ public class ControleurChoixJoueurs extends ControleurBase
     {
         
         
-        
-        Joueur[] joueurs = new Joueur[nombreDeJoueurs];
-        int i = 0;
-        nbJoueursReseauAAttendre = 0;
-        for(int j = 0; j < typesJoueur.length;j++)
+        if(!enAttente.get())
         {
-            
-            int typeJoueur  = typesJoueur[j];
-            if(typeJoueur != AUCUNJOUEUR)
+            Joueur[] joueurs = new Joueur[nombreDeJoueurs];
+            int i = 0;
+            nbJoueursReseauAAttendre = 0;
+            for(int j = 0; j < typesJoueur.length;j++)
             {
 
-                
-                if(typeJoueur == JOUEURREEL)
+                int typeJoueur  = typesJoueur[j];
+                if(typeJoueur != AUCUNJOUEUR)
                 {
-                    joueurs[i] = new JoueurHumain();
-                    TextField tf = (TextField) nomsJoueur[j].getChildren().get(0);
-                    joueurs[i].nom = tf.getText();
-                    joueurs[i].couleur = j;
 
-                }
-                else if(typeJoueur == IAFACILE)
-                {
-                   joueurs[i] = new JoueurIAAleatoire();
-                    joueurs[i].couleur = j;
-                }
-                else if(typeJoueur == IAMOYENNE)
-                {
-                    joueurs[i] = new JoueurIAMoyenne();
-                     joueurs[i].couleur = j;
-                }
-                else if(typeJoueur == IADIFFICILE)
-                {
-                    joueurs[i] = new JoueurIADifficile();
-                     joueurs[i].couleur = j;
-                }else if(typeJoueur == JOUEURRESEAU)
-                {
-                    nbJoueursReseauAAttendre++;
-                    joueurs[i] = new JoueurServeur();
-                    joueurs[i].couleur = j;
-                }
-                
-                i++;
-            }
-        }
-       
-        navigation.moteur = new Moteur(joueurs);
-        nbJoueursReseau = nbJoueursReseauAAttendre;
-        navigation.moteur.setJoueurs(joueurs);
-        if(nbJoueursReseauAAttendre >= 1)
-        {            
-            int k = 0;
-            for(int j = 0 ; j < navigation.moteur.joueurs.length ; j++)
-            {
-                Joueur joueur = navigation.moteur.joueurs[j];
-                if(joueur instanceof JoueurReseau)
-                {         
-                    final int port = Connexion.PORT+k;
-                    Thread thread = new Thread()
+
+                    if(typeJoueur == JOUEURREEL)
                     {
-                        
-                        @Override
-                        public void run()
-                        {
-                            try
-                            {
-                                joueur.connexion = navigation.gestionnaireConnexion.creerConnexionServeur(port);
-                                ((ConnexionServeur)joueur.connexion).accept();
-                                joueur.nom = (String)joueur.connexion.readObject();
-                                nouveauJoueurConnecte();
-                            }                               
-                            catch(BindException e)
-                            {           
-                                Platform.runLater(ControleurChoixJoueurs.this::erreurAdresseDejaUtilisee);
-                                /*System.out.println("impossible de se connecter");
-                                throw(e);*/
-                            }
-                            catch(IOException e)
-                            {           
-                                Platform.runLater(ControleurChoixJoueurs.this::erreurReseau);
-                                /*System.out.println("impossible de se connecter");
-                                throw(e);*/
-                            }
-                        }                       
-                    };
-                    thread.start();
-                    k++;
+                        joueurs[i] = new JoueurHumain();
+                        TextField tf = (TextField) nomsJoueur[j].getChildren().get(0);
+                        joueurs[i].nom = tf.getText();
+                        joueurs[i].couleur = j;
+
+                    }
+                    else if(typeJoueur == IAFACILE)
+                    {
+                       joueurs[i] = new JoueurIAAleatoire();
+                        joueurs[i].couleur = j;
+                    }
+                    else if(typeJoueur == IAMOYENNE)
+                    {
+                        joueurs[i] = new JoueurIAMoyenne();
+                         joueurs[i].couleur = j;
+                    }
+                    else if(typeJoueur == IADIFFICILE)
+                    {
+                        joueurs[i] = new JoueurIADifficile();
+                         joueurs[i].couleur = j;
+                    }else if(typeJoueur == JOUEURRESEAU)
+                    {
+                        nbJoueursReseauAAttendre++;
+                        joueurs[i] = new JoueurServeur();
+                        joueurs[i].couleur = j;
+                    }
+
+                    i++;
                 }
             }
-        }
-        else
-        {
-            ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
-            controleurJeu.lineFantome.setVisible(false);
-            controleurJeu.estEnAttente.set(false);
-            controleurJeu.reprendre();
-            navigation.changerVue(ControleurJeu.class);
+
+            navigation.moteur = new Moteur(joueurs);
+            nbJoueursReseau = nbJoueursReseauAAttendre;
+            navigation.moteur.setJoueurs(joueurs);
+            if(nbJoueursReseauAAttendre >= 1)
+            {            
+                int k = 0;
+                for(int j = 0 ; j < navigation.moteur.joueurs.length ; j++)
+                {
+                    Joueur joueur = navigation.moteur.joueurs[j];
+                    if(joueur instanceof JoueurReseau)
+                    {         
+                        final int port = Connexion.PORT+k;
+                        Thread thread = new Thread()
+                        {
+
+                            @Override
+                            public void run()
+                            {
+                                try
+                                {
+                                    joueur.connexion = navigation.gestionnaireConnexion.creerConnexionServeur(port);
+                                    ((ConnexionServeur)joueur.connexion).accept();
+                                    joueur.nom = (String)joueur.connexion.readObject();
+                                    nouveauJoueurConnecte();
+                                }                               
+                                catch(BindException e)
+                                {           
+                                    Platform.runLater(ControleurChoixJoueurs.this::erreurAdresseDejaUtilisee);
+                                    /*System.out.println("impossible de se connecter");
+                                    throw(e);*/
+                                }
+                                catch(IOException e)
+                                {           
+                                    Platform.runLater(ControleurChoixJoueurs.this::erreurReseau);
+                                    /*System.out.println("impossible de se connecter");
+                                    throw(e);*/
+                                }
+                            }                       
+                        };
+                        enAttente.set(true);
+                        thread.start();
+                        k++;
+                    }
+                }
+            }
+            else
+            {
+                ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
+                controleurJeu.lineFantome.setVisible(false);
+                controleurJeu.estEnAttente.set(false);
+                controleurJeu.reprendre();
+                enAttente.set(false);
+                navigation.changerVue(ControleurJeu.class);
+            }
         }
     }
     
@@ -348,6 +369,7 @@ public class ControleurChoixJoueurs extends ControleurBase
                     controleurJeu.lineFantome.setVisible(false);                    
                     controleurJeu.estEnAttente.set(false);
                     controleurJeu.reprendre();
+                    enAttente.set(false);
                     navigation.changerVue(ControleurJeu.class);
                 }
             });

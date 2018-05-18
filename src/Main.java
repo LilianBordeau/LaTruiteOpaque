@@ -62,7 +62,9 @@ public class Main extends Application {
         scene.setCursor(new ImageCursor(image2));
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
         @Override
-        public void handle(WindowEvent t) {
+        public void handle(WindowEvent t) {  
+            navigation.fermerToutesLesConnexions();
+            primaryStage.setOnCloseRequest(null);
             t.consume();
         ImageView imageExit = new ImageView(new Image("Images/goodbye.gif"));
         ImageView bulle = new ImageView(new Image("Images/goodbyeBulle.png"));
@@ -96,7 +98,7 @@ public class Main extends Application {
 
      ScaleTransition tt2 = new ScaleTransition(Duration.seconds(2), rect2);
      tt2.setByY(-350f);
-       tt.setOnFinished(e -> {navigation.fermerToutesLesConnexions();Platform.exit();});
+       tt.setOnFinished(e -> {Platform.exit();});
      tt.play();
      tt2.play();
      ImageExitTransition.play();

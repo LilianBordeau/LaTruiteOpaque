@@ -79,7 +79,7 @@ public class ControleurJeu  extends ControleurBase {
     public Point pingouinSel;
     public ArrayList<Point> casesAccessibles;
     public SimpleBooleanProperty estEnAttente;
-    private boolean jeuInterrompu;
+    private SimpleBooleanProperty jeuInterrompu;
 	public ImageView pingouinMvt;
  	ImageView pingouinFantome;
     ImageView tuileFantome;    
@@ -107,7 +107,8 @@ public class ControleurJeu  extends ControleurBase {
     public void initialize(URL location, ResourceBundle resources)
     {
         estEnAttente = new SimpleBooleanProperty(false);
-        sablier.visibleProperty().bind(estEnAttente);
+        jeuInterrompu = new SimpleBooleanProperty(false);
+        sablier.visibleProperty().bind(estEnAttente.and(jeuInterrompu.not()));
         RotateTransition transitionSablier = new RotateTransition(Duration.millis(1000), sablier);
         transitionSablier.setFromAngle(0);
         transitionSablier.setByAngle(359);
@@ -139,7 +140,7 @@ public class ControleurJeu  extends ControleurBase {
     @Override
     public void onAppearing()
     {
-        jeuInterrompu = false;
+        jeuInterrompu.set(false);
         Case[][] plateau = navigation.moteur.plateau.plateau;
         for(int i = 0 ; i < plateau.length ; i++)
         {
@@ -189,7 +190,7 @@ public class ControleurJeu  extends ControleurBase {
     @FXML
     private void retourMenu(ActionEvent event)
     {
-        jeuInterrompu = true;
+        jeuInterrompu.set(true);
         navigation.changerVue(ControleurMenuPrincipal.class);
     }
     
@@ -209,7 +210,7 @@ public class ControleurJeu  extends ControleurBase {
     @FXML
     private void clicTuile(MouseEvent event)
     {
-        if(!estEnAttente.get() && !jeuInterrompu)
+        if(!estEnAttente.get() && !jeuInterrompu.get())
         {            
             ImageView tuileGraphique = (ImageView)event.getSource();
             Point coordonnees = idToIndices(tuileGraphique.getId()); 
@@ -427,7 +428,7 @@ public class ControleurJeu  extends ControleurBase {
                                     @Override
                                     public void run()
                                     {
-                                            if(!jeuInterrompu)
+                                            if(!jeuInterrompu.get())
                                             {                                      
                                                 ArrayList<Point> nouveauxPingouinsBloques = navigation.moteur.placerPingouin(lePlacement.ligne, lePlacement.colonne);
                                                 if(nouveauxPingouinsBloques != null)
@@ -466,7 +467,7 @@ public class ControleurJeu  extends ControleurBase {
                                 @Override
                                 public void run()
                                 {
-                                        if(!jeuInterrompu)
+                                        if(!jeuInterrompu.get())
                                         {                                        
                                             ArrayList<Point> nouveauxPingouinsBloques = navigation.moteur.deplacerPingouin(depl.ligneSrc, depl.colonneSrc, depl.ligneDest, depl.colonneDest);
                                             if(nouveauxPingouinsBloques != null)
@@ -533,7 +534,7 @@ public class ControleurJeu  extends ControleurBase {
                         public void run()
                         {                        
                             estEnAttente.set(false);
-                            if(!jeuInterrompu)
+                            if(!jeuInterrompu.get())
                             {                               
                                 if(coup instanceof Deplacement)
                                 {
@@ -597,7 +598,7 @@ public class ControleurJeu  extends ControleurBase {
     private void clicIndice(ActionEvent event)
     {
         Joueur joueurCourant = navigation.moteur.joueurs[navigation.moteur.joueurCourant];
-        if(!jeuInterrompu && joueurCourant instanceof JoueurHumain)
+        if(!jeuInterrompu.get() && joueurCourant instanceof JoueurHumain)
         {
             joueurCourant.moteur = navigation.moteur.clone();
             if(!navigation.moteur.pingouinsPlaces())
@@ -640,7 +641,7 @@ public class ControleurJeu  extends ControleurBase {
     {
         if(!navigation.moteur.estEnReseau)
         {
-            jeuInterrompu = true;
+            jeuInterrompu.set(true);
             System.out.println(navigation.moteur.plateau.plateau == navigation.moteur.sauvegardeDebutPartie.plateau.plateau);
             System.out.println(navigation.moteur.plateau.plateau[0][0] == navigation.moteur.sauvegardeDebutPartie.plateau.plateau[0][0]);
             navigation.moteur = navigation.moteur.sauvegardeDebutPartie;
@@ -648,7 +649,7 @@ public class ControleurJeu  extends ControleurBase {
             pingouinFantome = null;
             effacerAmpoule();
             miseAJourPlateau();
-            jeuInterrompu = false;
+            jeuInterrompu.set(false);
             reprendre(); 
             tourSuivant();
         }
@@ -663,7 +664,7 @@ public class ControleurJeu  extends ControleurBase {
     {    
         if(!navigation.moteur.coupJoues.isEmpty() && !navigation.moteur.estEnReseau)
         {
-            jeuInterrompu = true;  
+            jeuInterrompu.set(true);  
             effacerAmpoule();
             if(navigation.moteur.queDesIA)
             {
@@ -697,7 +698,7 @@ public class ControleurJeu  extends ControleurBase {
         tourSuivant();*/
         if(!navigation.moteur.coupAnnules.isEmpty()  && !navigation.moteur.estEnReseau)
         {            
-            jeuInterrompu = true;
+            jeuInterrompu.set(true);
             effacerAmpoule();
             if(navigation.moteur.queDesIA)
             {
@@ -739,8 +740,8 @@ public class ControleurJeu  extends ControleurBase {
     }
     
     private void pause()
-    {        
-        jeuInterrompu = true;
+    {       
+        jeuInterrompu.set(true);
         groupEnPause.setVisible(true);
     }
     
@@ -750,9 +751,9 @@ public class ControleurJeu  extends ControleurBase {
         reprendre();          
     }
     
-    private void reprendre()
+    public void reprendre()
     {        
-        jeuInterrompu = false;
+        jeuInterrompu.set(false);
         groupEnPause.setVisible(false);
         tourSuivant();
     }

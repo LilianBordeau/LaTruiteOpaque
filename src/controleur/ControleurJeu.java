@@ -50,6 +50,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
@@ -92,7 +94,7 @@ public class ControleurJeu  extends ControleurBase {
     Line lineAmpoule;
     
     @FXML
-    Button btnUndo,btnRedo,btnPause;
+    Button btnUndo,btnRedo,btnPause,btnIndice;
     
     @FXML
     Group groupEnPause;
@@ -101,10 +103,15 @@ public class ControleurJeu  extends ControleurBase {
     public AnchorPane anchorPane;
     
     @FXML
-    public Label infosJeu;
+    public Label titreFinPartie;
      
     @FXML
-    public ImageView sablier;
+    public ImageView sablier,fondFinPartie;
+    
+     @FXML
+    public TableView tableClassement;
+     
+     
     
     @FXML
     @Override
@@ -135,6 +142,7 @@ public class ControleurJeu  extends ControleurBase {
         btnUndo.setPadding(Insets.EMPTY);
         btnRedo.setPadding(Insets.EMPTY);
         btnPause.setPadding(Insets.EMPTY);
+        btnIndice.setPadding(Insets.EMPTY);
     
         btnUndo.setOnMouseExited(e -> btnUndo.setPadding(Insets.EMPTY));  
         btnRedo.setOnMouseExited(e -> btnRedo.setPadding(Insets.EMPTY));   
@@ -144,6 +152,7 @@ public class ControleurJeu  extends ControleurBase {
     @Override
     public void onAppearing()
     {
+        
         jeuInterrompu.set(false);
         Case[][] plateau = navigation.moteur.plateau.plateau;
         for(int i = 0 ; i < plateau.length ; i++)
@@ -187,8 +196,10 @@ public class ControleurJeu  extends ControleurBase {
                     label3.setText("");
                 }
             }
+        hideFinPartie();
         miseAJourInfoJeu();
         tourSuivant();
+        
     }
     
     @FXML
@@ -301,7 +312,6 @@ public class ControleurJeu  extends ControleurBase {
             }
             texteInfoJeu += ")";
         }*/        
-            infosJeu.setText(texteInfoJeu);
             int joueurPrec = ((navigation.moteur.joueurPrecedent==-1)?0:navigation.moteur.joueurPrecedent);
             
             ColorAdjust afk_color = new ColorAdjust();
@@ -650,8 +660,10 @@ public class ControleurJeu  extends ControleurBase {
     @FXML
     private void clicRecommencer(ActionEvent event)
     {
+        
         if(!navigation.moteur.estEnReseau)
         {
+             hideFinPartie();
             jeuInterrompu.set(true);
             System.out.println(navigation.moteur.plateau.plateau == navigation.moteur.sauvegardeDebutPartie.plateau.plateau);
             System.out.println(navigation.moteur.plateau.plateau[0][0] == navigation.moteur.sauvegardeDebutPartie.plateau.plateau[0][0]);
@@ -675,6 +687,7 @@ public class ControleurJeu  extends ControleurBase {
     {    
         if(!navigation.moteur.coupJoues.isEmpty() && !navigation.moteur.estEnReseau)
         {
+            hideFinPartie();
             jeuInterrompu.set(true);  
             effacerAmpoule();
             if(navigation.moteur.queDesIA)
@@ -729,9 +742,15 @@ public class ControleurJeu  extends ControleurBase {
             {
                 reprendre();
             }
+            if(navigation.moteur.estPartieTerminee())
+            {
+                showFinPartie();
+            }
+            
         }
         else
         {
+            
             System.out.println("aucun coup a refaire ou refaire desactive (pour le jeu en reseau)");
         }  
     }
@@ -1027,36 +1046,112 @@ public class ControleurJeu  extends ControleurBase {
     }
          
          
+
+
+    private void showFinPartie()
+    {
      
-    public static final String Column1MapKey = "A";
-    public static final String Column2MapKey = "B";
-    public static final String Column3MapKey = "C";
-    public static final String Column4MapKey = "D";
-      
-
-
-private void showFinPartie() {
- ArrayList<Joueur>  classementJoueurs = navigation.moteur.getClassement();
-
+        double largeur = 300;
+        double colonne = 50;
+        double gap  = 20;
+        double debut = 250;
         
-        final Stage dialog = new Stage();
-        dialog.initModality(Modality.APPLICATION_MODAL);
-        VBox dialogVbox = new VBox(20);
-        dialogVbox.getChildren().add(new Text("Fin de partie"));
-         Text text;
-        for(int i= 0; i<classementJoueurs.size();i++ )
-        {
-            String ligne= "";
-            
-            ligne = Integer.toString(i+1) + " | " + classementJoueurs.get(i).nom + " | " +
-                    Integer.toString(classementJoueurs.get(i).scorePoisson) +" | "  +Integer.toString(classementJoueurs.get(i).scoreTuile );
-             text= new Text(ligne);
-             dialogVbox.getChildren().add(text);
-        }
- 
-        Scene dialogScene = new Scene(dialogVbox, 300, 200);
-        dialog.setScene(dialogScene);
-        dialog.show();
-    }
+        ArrayList<Joueur>  classementJoueurs = navigation.moteur.getClassement();
 
+        double xDebut = debut + (largeur -  (colonne * classementJoueurs.size()  + gap*(classementJoueurs.size()-1)))/2;
+        
+        Line line;
+        
+        fondFinPartie.setVisible(true);
+        titreFinPartie.setVisible(true);
+        for(int i=0; i<classementJoueurs.size();i++)
+        {
+            ImageView image1 = (ImageView) anchorPane.lookup("#"+"position"+(i+1));
+            image1.setLayoutX(xDebut);
+            image1.setVisible(true);
+            
+            image1 = (ImageView) anchorPane.lookup("#"+"classementPingouin"+(i+1));
+            image1.setLayoutX(xDebut);
+            image1.setImage(new Image(Constantes.nomImagePingouin(classementJoueurs.get(i))));
+            image1.setVisible(true);
+            
+            
+            Label nom = (Label) anchorPane.lookup("#"+"classementNom"+(i+1));
+            nom.setText(classementJoueurs.get(i).nom);
+            nom.setLayoutX(xDebut);    
+            nom.setTextFill(Color.WHITE);
+            nom.setFont(Font.font(null, FontWeight.BOLD, 8));
+            nom.setVisible(true);
+            
+            image1 = (ImageView) anchorPane.lookup("#"+"classementScore"+(i+1));
+            image1.setLayoutX(xDebut+25);
+            image1.setImage(new Image("Images/cadre.png"));
+            image1.setVisible(true);
+            
+            
+            nom = (Label) anchorPane.lookup("#"+"textPoisson"+(i+1));
+            nom.setText(Integer.toString(classementJoueurs.get(i).scorePoisson));
+            nom.setLayoutX(xDebut+10);    
+            nom.setTextFill(Color.WHITE);
+            nom.setFont(Font.font(null, FontWeight.BOLD, 10));
+            nom.setVisible(true);
+            
+            nom = (Label) anchorPane.lookup("#"+"textBanquise"+(i+1));
+            nom.setText(Integer.toString(classementJoueurs.get(i).scoreTuile));
+            nom.setLayoutX(xDebut+10);       
+            nom.setTextFill(Color.WHITE);
+            nom.setFont(Font.font(null, FontWeight.BOLD, 10));
+            nom.setVisible(true);
+            
+            
+            if(i != classementJoueurs.size()-1)
+            {
+                line = (Line) anchorPane.lookup("#"+"classementLine"+(i+1));
+                line.setLayoutX(xDebut+colonne+(gap/2));
+                line.setVisible(true);
+            }
+            xDebut += gap + colonne;
+           
+        }
+
+    }
+   
+    private void hideFinPartie()
+    {
+        fondFinPartie.setVisible(false);
+        titreFinPartie.setVisible(false);
+       
+        
+         Line line;
+        for(int i=1; i<5;i++)
+        {
+            ImageView image1 = (ImageView) anchorPane.lookup("#"+"position"+i);
+            image1.setVisible(false);
+            
+            image1 = (ImageView) anchorPane.lookup("#"+"classementPingouin"+i);
+            image1.setVisible(false);
+            
+            
+            Label nom = (Label) anchorPane.lookup("#"+"classementNom"+i);;
+            nom.setVisible(false);
+            
+            image1 = (ImageView) anchorPane.lookup("#"+"classementScore"+i);
+            image1.setVisible(false);
+            
+            
+            nom = (Label) anchorPane.lookup("#"+"textPoisson"+i);
+            nom.setVisible(false);
+            
+            nom = (Label) anchorPane.lookup("#"+"textBanquise"+i);    
+            nom.setVisible(false);
+            if( i<=3)
+            {
+                line = (Line) anchorPane.lookup("#"+"classementLine"+i);
+               
+                line.setVisible(false);
+            }
+        }
+    }
+    
+       
 }

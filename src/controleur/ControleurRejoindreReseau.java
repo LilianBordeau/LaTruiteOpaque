@@ -70,6 +70,10 @@ public class ControleurRejoindreReseau extends ControleurBase
     @FXML
     private void clicCommencer(ActionEvent event)
     {
+        if(!enAttente.get())
+        {            
+            enAttente.set(true);
+            nbEchecsConnexion = 0;
             Thread thread = new Thread()
             {
                 @Override
@@ -129,8 +133,8 @@ public class ControleurRejoindreReseau extends ControleurBase
                     
                 }                       
             };
-            enAttente.set(true);
             thread.start();  
+        }            
     }
     
     @FXML

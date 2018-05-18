@@ -16,7 +16,13 @@
             
             
             <Label fx:id="labelTitre" layoutX="275" layoutY="50"   prefWidth="250" text="Crédits" />
-            <Button layoutX="10" layoutY="550" prefWidth="150" text="Retour au menu" onAction="#retourMenu"/>
+            <Label layoutX="50" layoutY="100" text="Pingouin" />
+            <Label layoutX="50" layoutY="150" text="Developpé par Justin KOSSONOGOW, Maxence BLETON--GIORDANO, Quentin DESBRUS," />
+            <Label layoutX="50" layoutY="200" text="Amine TAGUI, Adel MOUSS et Lilian BORDEAU" />
+            <Label layoutX="50" layoutY="250" text="Basé sur un jeu de plateau de Alvydas Jakeliunas et Günter Cornett" />
+            <Label layoutX="50" layoutY="300" text="Édité par Phalanx Games en 2006" />
+            <Label layoutX="50" layoutY="350" text="Remerciements à notre tuteur, Thomas LAVOCAT" />
+            <Button layoutX="10" layoutY="550" prefWidth="150" text="Retour au menu" onAction="#retourMenu" />
             <PanelSonManager fx:id="panelSonManager"/>
         </children>
 </AnchorPane>

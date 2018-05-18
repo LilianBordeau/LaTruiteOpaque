@@ -12,7 +12,7 @@ public abstract class Connexion
     public static final int PORT = 1234;
     private ObjectOutputStream out; 
     private ObjectInputStream in;
-    private Socket socket;
+    protected Socket socket;
     
     
     public void setSocket(Socket socket) throws IOException
@@ -39,11 +39,14 @@ public abstract class Connexion
     public void close()
     {
         try {
-            in.close();
-            out.close();
-            socket.close();
+            /*in.close();
+            out.close();*/
+            if(socket != null)
+            {
+                socket.close();
+            }            
         } catch (IOException ex) {
-            System.out.println("Impossible de fermer la connexion");
+            System.out.println("Impossible de fermer la connexion (Socket)");
         }
     }
 }

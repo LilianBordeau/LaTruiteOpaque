@@ -5,9 +5,25 @@ import java.net.ServerSocket;
 
 public class ConnexionServeur extends Connexion
 {     
-    public ConnexionServeur(int port) throws IOException
+    ServerSocket serverSocket;
+    ConnexionServeur(int port) throws IOException
     {
-            ServerSocket serverSocket = new ServerSocket(port);
-            setSocket(serverSocket.accept());
-    }    
+            serverSocket = new ServerSocket(port);            
+    }
+    
+    public void accept() throws IOException
+    {
+        setSocket(serverSocket.accept());
+    }
+    
+    @Override
+    public void close()
+    {
+        super.close();
+        try {
+            serverSocket.close();
+        } catch (IOException ex) {
+            System.out.println("Impossible de fermer la connexion (ServerSocket)");
+        }
+    }
 }

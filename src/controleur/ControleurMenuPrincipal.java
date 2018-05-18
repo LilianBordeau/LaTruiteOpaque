@@ -47,6 +47,12 @@ public class ControleurMenuPrincipal  extends ControleurBase
         parallelTransition.play();
     }
     
+    @Override
+    public void onAppearing()
+    {
+        navigation.fermerToutesLesConnexions();
+    }
+    
     @FXML
     private void clicJouer(ActionEvent event)
     {

@@ -3,11 +3,19 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import vue.Navigation;
 
@@ -50,6 +58,52 @@ public class Main extends Application {
         primaryStage.setHeight(HAUTEURFENETREINIT);
         primaryStage.centerOnScreen();        
         primaryStage.setTitle("La Truite Opaque");
+        Image image2 = new Image("Images/mouse2.gif");
+        scene.setCursor(new ImageCursor(image2));
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        @Override
+        public void handle(WindowEvent t) {
+            t.consume();
+        ImageView imageExit = new ImageView(new Image("Images/goodbye.gif"));
+        ImageView bulle = new ImageView(new Image("Images/goodbyeBulle.png"));
+        imageExit.setX(0);
+        imageExit.setY(100);
+        bulle.setX(300);
+        bulle.setY(100);
+        
+        Rectangle rect = new Rectangle (0, 0, 800, 1);
+        Rectangle rect2 = new Rectangle (0, 600, 800, 1);
+        
+        noeudRacine.getChildren().add(rect);
+        noeudRacine.getChildren().add(rect2);
+        noeudRacine.getChildren().add(bulle);
+        noeudRacine.getChildren().add(imageExit);
+        
+     
+     rect.setFill(Color.BLACK);
+     rect2.setFill(Color.BLACK);
+ 
+     ScaleTransition tt = new ScaleTransition(Duration.seconds(2), rect);
+     tt.setByY(350f);
+     
+     ScaleTransition ImageExitTransition = new ScaleTransition(Duration.seconds(2), imageExit);
+     TranslateTransition ImageExitTransition2 = new TranslateTransition(Duration.seconds(2), imageExit);
+     ImageExitTransition.setByY(0.2f);
+     ImageExitTransition.setByX(0.2f);
+     
+     ImageExitTransition2.setByX(30f);
+     ImageExitTransition2.setByY(5f);
+
+     ScaleTransition tt2 = new ScaleTransition(Duration.seconds(2), rect2);
+     tt2.setByY(-350f);
+       tt.setOnFinished(e -> {navigation.fermerToutesLesConnexions();Platform.exit();});
+     tt.play();
+     tt2.play();
+     ImageExitTransition.play();
+     ImageExitTransition2.play();
+
+    }
+}); 
         navigation.changerVue(ControleurMenuPrincipal.class);
     }
         

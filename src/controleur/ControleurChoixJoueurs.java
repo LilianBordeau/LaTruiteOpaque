@@ -107,7 +107,7 @@ public class ControleurChoixJoueurs extends ControleurBase
     @Override
     public void onAppearing()
     {  
-        
+        navigation.afficherPopupErreur = true;
         if(navigation.enReseau)
         {
             TYPEJOUEUR = TYPEJOUEURENRESEAU;
@@ -260,7 +260,8 @@ public class ControleurChoixJoueurs extends ControleurBase
                         {
                             try
                             {
-                                joueur.connexion = new ConnexionServeur(port);
+                                joueur.connexion = navigation.gestionnaireConnexion.creerConnexionServeur(port);
+                                ((ConnexionServeur)joueur.connexion).accept();
                                 joueur.nom = (String)joueur.connexion.readObject();
                                 nouveauJoueurConnecte();
                             }                               
@@ -287,6 +288,7 @@ public class ControleurChoixJoueurs extends ControleurBase
         {
             ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
             controleurJeu.lineFantome.setVisible(false);
+            controleurJeu.estEnAttente = false;
             navigation.changerVue(ControleurJeu.class);
         }
     }
@@ -342,7 +344,8 @@ public class ControleurChoixJoueurs extends ControleurBase
                 public void run()
                 {         
                     ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
-                    controleurJeu.lineFantome.setVisible(false);
+                    controleurJeu.lineFantome.setVisible(false);                    
+                    controleurJeu.estEnAttente = false;
                     navigation.changerVue(ControleurJeu.class);
                 }
             });

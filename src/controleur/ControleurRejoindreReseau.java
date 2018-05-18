@@ -43,6 +43,12 @@ public class ControleurRejoindreReseau extends ControleurBase
         labelTitre.setAlignment(Pos.CENTER);
     }
     
+    @Override
+    public void onAppearing()
+    {
+        navigation.afficherPopupErreur = true;
+    }
+    
     @FXML
     private void clicCommencer(ActionEvent event)
     {
@@ -56,7 +62,8 @@ public class ControleurRejoindreReseau extends ControleurBase
                         final int port = Connexion.PORT+j;
                         try
                         {
-                            connexion = new ConnexionClient(champIp.getText(), port, 500);
+                            connexion = navigation.gestionnaireConnexion.creerConnexionClient();
+                            ((ConnexionClient)connexion).connect(champIp.getText(), port, 500);
                             System.out.println("connecte");
                             connexion.writeObject(champNom.getText());
                             donneesDebutPartie = (DonneesDebutPartie)connexion.readObject();
@@ -80,6 +87,7 @@ public class ControleurRejoindreReseau extends ControleurBase
                                             navigation.moteur.plateau = donneesDebutPartie.plateau;
                                             ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
                                             controleurJeu.lineFantome.setVisible(false);
+                                            controleurJeu.estEnAttente = false;
                                             navigation.changerVue(ControleurJeu.class);
                                         }
                                     }
@@ -92,7 +100,7 @@ public class ControleurRejoindreReseau extends ControleurBase
                             System.out.println("impossible de se connecter");
                             if(e instanceof BindException)
                             {
-                                System.out.println("BIND EXCEPTION : cette adresse est deja utilisee par un autre thread");
+                                System.out.println("BIND EXCEPTION : le port "+port+" est deja utilise");
                             }
                             echecConnexion();
                             //throw(e);

@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.Constantes;
+import reseau.Connexion;
 import vue.Navigation;
 import vue.PanelSonManager;
 
@@ -171,16 +172,19 @@ public abstract class ControleurBase implements Initializable
         btn.setGraphic(image);
     }
     
-     protected void erreur(String message)
+    protected void erreur(String message)
     {
-        navigation.changerVue(ControleurMenuPrincipal.class);
-        final Stage dialog = new Stage();
-        dialog.initModality(Modality.APPLICATION_MODAL);
-        VBox dialogVbox = new VBox(20);
-        dialogVbox.getChildren().add(new Text(message));
-        Scene dialogScene = new Scene(dialogVbox, 350, 200);
-        dialog.setScene(dialogScene);
-        dialog.show();
+        if(navigation.afficherPopupErreur)
+        {
+            navigation.changerVue(ControleurMenuPrincipal.class);
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            VBox dialogVbox = new VBox(20);
+            dialogVbox.getChildren().add(new Text(message));
+            Scene dialogScene = new Scene(dialogVbox, 350, 200);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        }        
     }
     
     protected void erreurReseau()
@@ -190,7 +194,7 @@ public abstract class ControleurBase implements Initializable
     
     protected void erreurAdresseDejaUtilisee()
     {
-        erreur("Un thread utilise la même adresse IP que ce jeu");
+        erreur("Les ports "+Connexion.PORT+", "+(Connexion.PORT+1)+" et/ou "+(Connexion.PORT+2)+" sont déjà utilisés");
     }
     
 }

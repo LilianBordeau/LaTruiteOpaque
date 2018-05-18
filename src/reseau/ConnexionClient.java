@@ -8,12 +8,16 @@ public class ConnexionClient extends Connexion
 {
     public String ipServeur;
     
-    public ConnexionClient(String ipServeur, int port, int timeoutConnectMillis) throws IOException
+    ConnexionClient()
     {
-            Socket socket = new Socket();
-            socket.connect(new InetSocketAddress(ipServeur,port),timeoutConnectMillis);
-            socket.setSoTimeout(timeoutConnectMillis);
-            setSocket(socket);   
-            socket.setSoTimeout(0);
+            socket = new Socket();
+    }
+    
+    public void connect(String ipServeur, int port, int timeoutConnectMillis) throws IOException
+    {
+        socket.connect(new InetSocketAddress(ipServeur,port),timeoutConnectMillis);
+        socket.setSoTimeout(timeoutConnectMillis);
+        setSocket(socket);   
+        socket.setSoTimeout(0);
     }
 }

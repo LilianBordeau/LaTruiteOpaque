@@ -75,7 +75,7 @@ public class ControleurJeu  extends ControleurBase {
     public ImageView[][] tuiles;
     public Point pingouinSel;
     public ArrayList<Point> casesAccessibles;
-    private boolean estEnAttente;
+    public boolean estEnAttente;
     private boolean jeuInterrompu;
 	public ImageView pingouinMvt;
  	ImageView pingouinFantome;
@@ -527,19 +527,15 @@ public class ControleurJeu  extends ControleurBase {
     @FXML
     private void clicSauvegarder(ActionEvent event)
     {
-        System.out.println("clicSauvegarder");
-        try
-        {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(Constantes.nomFichierSauvegarde));
-            oos.writeObject(navigation.moteur);            
+        if(!navigation.moteur.estEnReseau)
+        {            
+            System.out.println("clicSauvegarder");
+            navigation.changerVue(ControleurSauvegarderPartie.class); 
         }
-        catch(IOException e)
+        else
         {
-            throw new RuntimeException(e);
-        }
-        
-        
-        navigation.changerVue(ControleurSauvegarderPartie.class);    
+            System.out.println("impossible de sauvegarder pendant un partie en réseau");
+        }   
     }
     
     private void placerAmpoule(Point posAmpoule)

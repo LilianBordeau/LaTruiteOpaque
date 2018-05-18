@@ -34,6 +34,7 @@ import modele.Joueur;
 import modele.JoueurHumain;
 import modele.Moteur;
 import modele.SonManager;
+import reseau.GestionnaireConnexion;
 
 public class Navigation
 {
@@ -43,15 +44,18 @@ public class Navigation
     public Moteur moteur;
     public SonManager sonManager;
     public Boolean enReseau;
-
+    public GestionnaireConnexion gestionnaireConnexion;
+    public boolean afficherPopupErreur;
     
     public Navigation(Group noeudRacine)
     {
+        afficherPopupErreur = true;
         enReseau = false;
         sonManager =  new SonManager();
         sonManager.jouerMusique();
         this.noeudRacine = noeudRacine;
         vuesEtControleurs = new Hashtable<>();
+        gestionnaireConnexion = new GestionnaireConnexion();
         initialiserVue(ControleurChoixJoueurs.class);
         initialiserVue(ControleurJeu.class);
         initialiserVue(ControleurFinDePartie.class);
@@ -98,56 +102,7 @@ public class Navigation
         noeudRacine.getChildren().clear();
         noeudRacine.getChildren().add(vueEtControleur.premier);
         vueEtControleur.second.onAppearing();
-        vueEtControleur.second.onAppearingCommun();
-        
-        Image image2 = new Image("Images/mouse2.gif");
-        noeudRacine.getScene().setCursor(new ImageCursor(image2));
-        Stage primaryStage = (Stage) noeudRacine.getScene().getWindow();
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-        @Override
-        public void handle(WindowEvent t) {
-            t.consume();
-        System.out.println("hey");
-        ImageView imageExit = new ImageView(new Image("Images/goodbye.gif"));
-        ImageView bulle = new ImageView(new Image("Images/goodbyeBulle.png"));
-        imageExit.setX(0);
-        imageExit.setY(100);
-        bulle.setX(300);
-        bulle.setY(100);
-        
-        Rectangle rect = new Rectangle (0, 0, 800, 1);
-        Rectangle rect2 = new Rectangle (0, 600, 800, 1);
-        
-        noeudRacine.getChildren().add(rect);
-        noeudRacine.getChildren().add(rect2);
-        noeudRacine.getChildren().add(bulle);
-        noeudRacine.getChildren().add(imageExit);
-        
-     
-     rect.setFill(Color.BLACK);
-     rect2.setFill(Color.BLACK);
- 
-     ScaleTransition tt = new ScaleTransition(Duration.seconds(2), rect);
-     tt.setByY(350f);
-     
-     ScaleTransition ImageExitTransition = new ScaleTransition(Duration.seconds(2), imageExit);
-     TranslateTransition ImageExitTransition2 = new TranslateTransition(Duration.seconds(2), imageExit);
-     ImageExitTransition.setByY(0.2f);
-     ImageExitTransition.setByX(0.2f);
-     
-     ImageExitTransition2.setByX(30f);
-     ImageExitTransition2.setByY(5f);
-
-     ScaleTransition tt2 = new ScaleTransition(Duration.seconds(2), rect2);
-     tt2.setByY(-350f);
-       tt.setOnFinished(e -> Platform.exit());
-     tt.play();
-     tt2.play();
-     ImageExitTransition.play();
-     ImageExitTransition2.play();
-
-    }
-}); 
+        vueEtControleur.second.onAppearingCommun();       
     }
     
     public void setFullScreen()
@@ -167,6 +122,12 @@ public class Navigation
    {
        return vuesEtControleurs.get(classeControleur.getSimpleName()).second;
        
+   }
+   
+   public void fermerToutesLesConnexions()
+   {
+       afficherPopupErreur = false;
+       gestionnaireConnexion.fermerToutesLesConnexions();
    }
    
 }

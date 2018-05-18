@@ -11,6 +11,7 @@
 <?import vue.PanelSonManager?>
 <?import vue.SimpleImageView?>
 <?import javafx.scene.shape.Line?>
+<?import java.net.URL?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurChoixJoueurs"-->
     <children>
@@ -25,7 +26,7 @@
     <Text fx:id="date0" layoutX="60" layoutY="95" text="Date : " mouseTransparent="true"/>
     <Text fx:id="nom0" layoutX="60" layoutY="125" text="Nom : " mouseTransparent="true"/>
     <SimpleImageView fx:id="selected0" url="Images/accessible3.png" layoutX="50" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" smooth="true" visible="false" />
-    <SimpleImageView fx:id="trash0" url="Images/trash.png" layoutX="138" layoutY="150" fitHeight="25" fitWidth="25" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#trashIt"/>
+    <SimpleImageView fx:id="trash0" url="Images/trash.png" layoutX="138" layoutY="150" fitHeight="25" fitWidth="25" preserveRatio="true" visible="true" smooth="true" pickOnBounds="false" onMouseClicked="#showDialogTrash"/>
 
 
 
@@ -33,7 +34,7 @@
     <Text  fx:id="date1" layoutX="310" layoutY="95" text="Date : " mouseTransparent="true"/>   
     <Text fx:id="nom1" layoutX="310" layoutY="125" text="Nom : " mouseTransparent="true"/>
     <SimpleImageView fx:id="selected1" url="Images/accessible3.png" layoutX="300" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" smooth="true" visible="false" />
-    <SimpleImageView fx:id="trash1" url="Images/trash.png" layoutX="388" layoutY="150" fitHeight="25" fitWidth="25" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#trashIt"/>
+    <SimpleImageView fx:id="trash1" url="Images/trash.png" layoutX="388" layoutY="150" fitHeight="25" fitWidth="25" preserveRatio="true" visible="true" smooth="true" pickOnBounds="false" onMouseClicked="#showDialogTrash"/>
 
 
 
@@ -41,7 +42,7 @@
     <Text fx:id="date2" layoutX="560" layoutY="95" text="Date : " mouseTransparent="true"/>     
     <Text fx:id="nom2" layoutX="560" layoutY="125" text="Nom : " mouseTransparent="true"/>
     <SimpleImageView fx:id="selected2" url="Images/accessible3.png" layoutX="550" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" smooth="true" visible="false" />
-    <SimpleImageView fx:id="trash2" url="Images/trash.png" layoutX="638" layoutY="150" fitHeight="25" fitWidth="25" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#trashIt" />
+    <SimpleImageView fx:id="trash2" url="Images/trash.png" layoutX="638" layoutY="150" fitHeight="25" fitWidth="25" preserveRatio="true" visible="true" smooth="true" pickOnBounds="false" onMouseClicked="#showDialogTrash" />
 
     
 
@@ -165,10 +166,34 @@
     <ImageView fx:id="p7_5" fitWidth="60" layoutX="469.52" layoutY="422.92" pickOnBounds="false" smooth="true" preserveRatio="true" />
     <ImageView fx:id="p7_6" fitWidth="60" layoutX="529.52" layoutY="422.92" pickOnBounds="false" smooth="true" preserveRatio="true" />
     <ImageView fx:id="p7_7" fitWidth="60" layoutX="589.52" layoutY="422.92" pickOnBounds="false" smooth="true" preserveRatio="true" />
-    <Button layoutX="10.0" layoutY="550.0" mnemonicParsing="false" prefWidth="150.0" text="Retour au menu" onAction="#retourMenu" />
-    <Button fx:id="btnCommencer" layoutX="640.0" layoutY="550.0" mnemonicParsing="false" prefWidth="150.0" text="Commencer"  onAction="#commencer"/>
+    
+    
+    
+    <Button fx:id="retour" styleClass="btn"  layoutX="10.0" layoutY="535.0" mnemonicParsing="false" prefWidth="150.0" onAction="#retourMenu" >
+        <graphic>
+            <ImageView   pickOnBounds="true" preserveRatio="true" visible="true">
+                <image>
+                    <Image url="Images/retour.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>    
+        
+    <Button fx:id="btnCommencer" styleClass="btn" layoutX="560.0" layoutY="535.0" mnemonicParsing="false" prefWidth="150.0" onAction="#commencer" >
+            <graphic>
+                <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                    <image>
+                        <Image url="Images/commencer.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>    
+    
     <Text fx:id="message" layoutX="275" layoutY="575" />
 
     <PanelSonManager fx:id="panelSonManager"/>
     </children>
+    <stylesheets>
+        <URL value="@application.css" />
+    </stylesheets>
 </AnchorPane>

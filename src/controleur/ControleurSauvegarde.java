@@ -13,12 +13,20 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import modele.Case;
 import modele.Constantes;
 import modele.Joueur;
@@ -44,6 +52,7 @@ public class ControleurSauvegarde extends ControleurBase
     public Text message;
     
     int tuileSelectionne;
+    int tuileSupprimee;
     
     @FXML
     public void initialize(URL location, ResourceBundle resources)
@@ -55,6 +64,7 @@ public class ControleurSauvegarde extends ControleurBase
     @Override
     public void onAppearing()
     {
+        tuileSupprimee = -1;
         tuileSelectionne = -1;
         scanSaveFolder();
        
@@ -171,33 +181,80 @@ public class ControleurSauvegarde extends ControleurBase
     }
     
     
-    
-   
-    public void trashIt(MouseEvent event)
-    {
+   public void showDialogTrash(MouseEvent event)
+   {
         ImageView bin = (ImageView) event.getTarget();
-        int indice;
+        
         if(bin == trash0)
         {
-            indice = 0;
+            tuileSupprimee = 0;
         }else if(bin == trash1)
         {
-            indice = 1;
+            tuileSupprimee = 1;
         }else
         {
-            indice = 2;
+            tuileSupprimee = 2;
         }
-     
-        if(deleteSave(indice))
+       
+       
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        
+        VBox dialogVbox = new VBox(20);
+        HBox hBoxButtons = new HBox();
+        Text message = new Text("Etes vous sur de vouloir supprimer la sauvegarde : ");
+        Text date = (Text) anchorPane.lookup("#"+getDateId(tuileSupprimee));
+        Text nom = (Text) anchorPane.lookup("#"+getNomId(tuileSupprimee));
+        Text dateDialog = new Text(date.getText());
+        Text nomDialog = new Text(nom.getText());
+        
+        
+        Button valider = new Button("Valider");
+        Button annuler = new Button("Annuler");
+        hBoxButtons.getChildren().addAll(annuler,valider);
+        hBoxButtons.setSpacing(100);
+        hBoxButtons.setAlignment(Pos.CENTER);
+        
+        dialogVbox.getChildren().addAll(message,nomDialog,dateDialog);
+        dialogVbox.getChildren().add(hBoxButtons);
+        dialogVbox.setAlignment(Pos.CENTER);
+        Scene dialogScene = new Scene(dialogVbox, 350, 150);
+       
+        dialog.setScene(dialogScene);
+        dialog.show();
+        
+
+        annuler.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            
+            @Override
+            public void handle(MouseEvent event) {
+                dialog.close();
+                tuileSupprimee = -1;
+            }
+        });
+        
+        valider.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                 trashIt(tuileSupprimee);
+                 dialog.close();
+            }
+        });
+        
+   }
+    
+    
+   
+    public void trashIt(int numSauvegarde)
+    {   
+        if(deleteSave(numSauvegarde))
         {
-              showTuileEmpty(indice);
+              showTuileEmpty(numSauvegarde);
         }
         
-      
-       
     }
     
-    private boolean deleteSave(int indice) 
+    public boolean deleteSave(int indice) 
     {
         moteurs[indice] = null;
         boolean res = files[indice].delete();

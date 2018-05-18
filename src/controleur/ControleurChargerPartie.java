@@ -113,6 +113,7 @@ public class ControleurChargerPartie extends ControleurSauvegarde
             imageSelected.setVisible(true);
             
             btnCommencer.setDisable(false);
+            clearPlateau();
             showSave(tuileSelectionne);
             
             System.out.println("TUILE "+ tuileSelectionne+" selectionnee");
@@ -173,5 +174,20 @@ public class ControleurChargerPartie extends ControleurSauvegarde
         navigation.changerVue(ControleurMenuPrincipal.class);
     }
   
-    
+    @Override
+    public void trashIt(int numSauvegarde)
+    {
+        
+        super.trashIt(numSauvegarde);
+        
+        if(tuileSupprimee == tuileSelectionne)
+        {
+            clearPlateau();
+            btnCommencer.setDisable(true);
+            setMessage("Veuillez choisir une sauvegarde !");
+            tuileSelectionne = -1;
+            
+        }
+        
+    }
 }

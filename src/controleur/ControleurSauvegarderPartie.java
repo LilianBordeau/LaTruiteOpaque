@@ -43,10 +43,11 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
     {
         tuileSelectionne = -1;
         super.onAppearing();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm");
         Date date = new Date();
         dateString = dateFormat.format(date).toString().replace("/","-");
         nouvelleDateText.setText("Date : " + dateFormat.format(date));
+        nouveauNomInput.clear();
         setMessage("Veuillez choisir un emplacement de sauvegarde !");
         disableSaisie();
 

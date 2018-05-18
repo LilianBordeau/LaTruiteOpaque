@@ -966,7 +966,7 @@ public class ControleurJeu  extends ControleurBase {
       
 
 
-    private void showFinPartie() {
+private void showFinPartie() {
  ArrayList<Joueur>  classementJoueurs = navigation.moteur.getClassement();
 
         
@@ -990,4 +990,4 @@ public class ControleurJeu  extends ControleurBase {
         dialog.show();
     }
 
-    }
+}

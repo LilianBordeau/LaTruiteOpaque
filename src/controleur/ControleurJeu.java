@@ -13,10 +13,14 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Stack;
 import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
+import javafx.animation.Timeline;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -153,10 +157,10 @@ public class ControleurJeu  extends ControleurBase {
         
             for(int i = 0 ; i < 4 ; i++)
             {
-                ColorAdjust desaturate = new ColorAdjust();
-                desaturate.setSaturation(-0.75);
+                ColorAdjust afk_color = new ColorAdjust();
+                afk_color.setBrightness(-0.5);
                 ImageView tbAll = (ImageView) anchorPane.lookup("#"+i+"_gui");
-                tbAll.setEffect(desaturate);
+                tbAll.setEffect(afk_color);
             }
             ArrayList<Integer> couleursPrises = new ArrayList<>();
             for(int i = 0 ; i<navigation.moteur.joueurs.length ; i++ )
@@ -164,7 +168,7 @@ public class ControleurJeu  extends ControleurBase {
                 couleursPrises.add(navigation.moteur.joueurs[i].couleur);
                 ImageView joueurExistant = (ImageView) anchorPane.lookup("#"+navigation.moteur.joueurs[i].couleur+"_gui");                
                 joueurExistant.setVisible(true);
-                joueurExistant.setImage(new Image("Images/"+navigation.moteur.joueurs[i].couleur+"_gui_afk.png"));
+                joueurExistant.setImage(new Image("Images/gui/"+navigation.moteur.joueurs[i].couleur+"_gui_afk.png"));
                 Label label3 = (Label) anchorPane.lookup("#"+i+"_nom");        
                 label3.setText(navigation.moteur.joueurs[i].nom);
             }
@@ -271,7 +275,7 @@ public class ControleurJeu  extends ControleurBase {
         }        
     }
 
-    private void miseAJourInfoJeu()
+   private void miseAJourInfoJeu()
     {
         String texteInfoJeu = null;
         if(navigation.moteur.estPartieTerminee())
@@ -299,29 +303,36 @@ public class ControleurJeu  extends ControleurBase {
         }*/        
             infosJeu.setText(texteInfoJeu);
             int joueurPrec = ((navigation.moteur.joueurPrecedent==-1)?0:navigation.moteur.joueurPrecedent);
-            ColorAdjust desaturate = new ColorAdjust();
-            ColorAdjust colored = new ColorAdjust();
-            desaturate.setSaturation(-0.75);
-            colored.setSaturation(0);
-            ImageView tb2 = (ImageView) anchorPane.lookup("#"+navigation.moteur.joueurs[joueurPrec].couleur+"_gui");
-            //tb2.setStyle("-fx-scale-x:0.9;");
-            tb2.setEffect(desaturate);
-            tb2.setImage(new Image("Images/"+navigation.moteur.joueurs[joueurPrec].couleur+"_gui_afk.png"));
-            if(joueurPrec%2==0)
-            {
-                tb2.setStyle("-fx-padding: 0 100 0 0;");
-            }
-            else
-            {
-                tb2.setStyle("-fx-padding: 0 0 100 0;");
-            }
-            //System.out.println(texteInfoJeu);
-            ImageView tb = (ImageView) anchorPane.lookup("#"+navigation.moteur.joueurs[navigation.moteur.joueurCourant].couleur+"_gui");
-            //tb.setStyle("-fx-scale-x:2.5;");
-             //tb.setStyle("-fx-scale-y:1.2;");
             
-             tb.setEffect(colored);
-             tb.setImage(new Image("Images/"+navigation.moteur.joueurs[navigation.moteur.joueurCourant].couleur+"_gui_active.png"));
+            ColorAdjust afk_color = new ColorAdjust();
+            ColorAdjust active_color = new ColorAdjust();
+            afk_color.setBrightness(0);
+            active_color.setBrightness(-0.5);
+            
+            ImageView tb2 = (ImageView) anchorPane.lookup("#"+navigation.moteur.joueurs[joueurPrec].couleur+"_gui");
+            tb2.setImage(new Image("Images/gui/"+navigation.moteur.joueurs[joueurPrec].couleur+"_gui_afk.png"));
+            tb2.setEffect(afk_color);
+            
+            ImageView tb = (ImageView) anchorPane.lookup("#"+navigation.moteur.joueurs[navigation.moteur.joueurCourant].couleur+"_gui");
+            tb.setImage(new Image("Images/gui/"+navigation.moteur.joueurs[navigation.moteur.joueurCourant].couleur+"_gui_active.png"));
+            tb.setEffect(active_color);
+            
+            Timeline fadeOutTimeline = new Timeline();
+            fadeOutTimeline.setCycleCount(1);
+            fadeOutTimeline.setAutoReverse(false);
+            final KeyValue kv = new KeyValue(afk_color.brightnessProperty(), -0.5, Interpolator.LINEAR);
+            final KeyFrame kf = new KeyFrame(Duration.millis(300), kv);
+            fadeOutTimeline.getKeyFrames().add(kf);
+            fadeOutTimeline.play();
+            
+            Timeline fadeInTimeline = new Timeline();
+            fadeInTimeline.setCycleCount(1);
+            fadeInTimeline.setAutoReverse(false);
+            final KeyValue kv2 = new KeyValue(active_color.brightnessProperty(), 0, Interpolator.LINEAR);
+            final KeyFrame kf2 = new KeyFrame(Duration.millis(300), kv2);
+            fadeInTimeline.getKeyFrames().add(kf2);
+            fadeInTimeline.play();
+                    
             joueurPrec = navigation.moteur.joueurCourant;
             
             for(int i=0;i< navigation.moteur.joueurs.length ;i++)
@@ -335,7 +346,7 @@ public class ControleurJeu  extends ControleurBase {
             }
         
     }
-
+   
     private void miseAJourTuile(int i, int j)
     {
         ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDTUILE));

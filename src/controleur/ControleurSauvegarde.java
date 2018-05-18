@@ -218,7 +218,7 @@ public class ControleurSauvegarde extends ControleurBase
         dialogVbox.getChildren().addAll(message,nomDialog,dateDialog);
         dialogVbox.getChildren().add(hBoxButtons);
         dialogVbox.setAlignment(Pos.CENTER);
-        Scene dialogScene = new Scene(dialogVbox, 350, 150);
+        Scene dialogScene = new Scene(dialogVbox, Constantes.POPUPWIDTH, Constantes.POPUPHEIGHT);
        
         dialog.setScene(dialogScene);
         dialog.show();

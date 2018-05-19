@@ -306,9 +306,9 @@ public class ControleurChoixJoueurs extends ControleurBase
             else
             {
                 ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
-                controleurJeu.initPartie();
                 enAttente.set(false);
-                navigation.changerVue(ControleurJeu.class);
+                navigation.changerVue(ControleurJeu.class);                
+                controleurJeu.initPartie();
             }
         }
     }
@@ -364,9 +364,9 @@ public class ControleurChoixJoueurs extends ControleurBase
                 public void run()
                 {         
                     ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
-                    controleurJeu.initPartie();
                     enAttente.set(false);
-                    navigation.changerVue(ControleurJeu.class);
+                    navigation.changerVue(ControleurJeu.class);                    
+                    controleurJeu.initPartie();
                 }
             });
         }

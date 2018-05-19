@@ -109,8 +109,8 @@ public class ControleurRejoindreReseau extends ControleurBase
                                             navigation.moteur = new Moteur(joueurs);
                                             navigation.moteur.plateau = donneesDebutPartie.plateau;
                                             ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
+                                            navigation.changerVue(ControleurJeu.class);                                            
                                             controleurJeu.initPartie();
-                                            navigation.changerVue(ControleurJeu.class);
                                         }
                                     }
                                 });

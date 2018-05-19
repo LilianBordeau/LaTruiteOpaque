@@ -162,9 +162,8 @@ public class ControleurChargerPartie extends ControleurSauvegarde
             System.out.println("commencerPartie");
             navigation.moteur = moteurs[tuileSelectionne];
             ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
+            navigation.changerVue(ControleurJeu.class);            
             controleurJeu.initPartie();
-            navigation.changerVue(ControleurJeu.class);
-             
 
         }else{
             System.out.println("Pas de selection valide ");

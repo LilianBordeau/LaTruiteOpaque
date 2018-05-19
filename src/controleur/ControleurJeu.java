@@ -737,7 +737,7 @@ public class ControleurJeu  extends ControleurBase {
                 miseAJourAnnulerRefaire(navigation.moteur.dernierCoupJoue, coupRefaire);
                 /*jeuInterrompu = false;
                 tourSuivant();*/
-            } while(!navigation.moteur.queDesIA && !(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain));
+            } while(!navigation.moteur.queDesIA && !navigation.moteur.coupAnnules.isEmpty() && !(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain));
             if(!navigation.moteur.queDesIA)
             {
                 reprendre();

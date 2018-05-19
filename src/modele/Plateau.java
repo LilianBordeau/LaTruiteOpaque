@@ -6,12 +6,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import static modele.GenererFichierNiveau.ecrireNiveau;
 
 public class Plateau implements Serializable,Cloneable
 {
     public Case[][] plateau;
     public static final int NBLIGNES = 8;
     public static final int NBCASES1POISSONMIN = 9;
+    public static final int NBTUILES3POISSONS = 10;
+    public static final int NBTUILES2POISSONS = 20;
     
     public Plateau()
     {
@@ -24,31 +27,31 @@ public class Plateau implements Serializable,Cloneable
         if(fichierNiveau == null)
         {
             Random random = new Random();
-            int nbCases1Poisson = 0;
-            /* le plateau est regenere tant qu'il n'y a pas au moins 9 case avec un poisson (la probabilite d'en avoir au moins 9 est
-            sum (60 choose k)*((1/3)^k)*((2/3)^(60-k)) k=9 to 60 = 4708335263475879410443936361/4710128697246244834921603689 ~ 0.99962, on genere donc
-            souvent un plateau satisfaisant cette condition des le premier tirage) */
-            while(nbCases1Poisson < NBCASES1POISSONMIN)
-            {   
-                nbCases1Poisson = 0;
-                for(int i = 0 ; i < plateau.length ; i++)
+            for(int i = 0 ; i < plateau.length ; i++)
+            {
+                for(int j = 0 ; j < nbTuilesLigne(i) ; j++)
                 {
-                    for(int j = 0 ; j < nbTuilesLigne(i) ; j++)
-                    {
-                        plateau[i][j] = new Case(random.nextInt(3)+1,i,j);
-                        if(plateau[i][j].nbPoissons == 1)
-                        {
-                            nbCases1Poisson++;
-                        }
-                    }
+                    plateau[i][j] = new Case(1,i,j);
                 }
             }
+            for(int i = 1 ; i <= NBTUILES3POISSONS+NBTUILES2POISSONS ; i++)
+            {
+                int nbPoissons = (i<=NBTUILES2POISSONS)?2:3;
+                int ligne = -1;
+                int colonne = -1;
+                do
+                {
+                    ligne = random.nextInt(plateau.length);
+                    colonne = random.nextInt(nbTuilesLigne(ligne));
+                } while(plateau[ligne][colonne].nbPoissons != 1);
+                plateau[ligne][colonne].nbPoissons = nbPoissons;
+            }           
         }
         else
         {
             lireNiveau(fichierNiveau);
         }
-        GenererFichierNiveau.ecrireNiveau(plateau, "dernierNiveau.txt");
+        ecrireNiveau(plateau, "dernierNiveau.txt");
     }    
     
     public static int nbTuilesLigne(int i)
@@ -84,6 +87,19 @@ public class Plateau implements Serializable,Cloneable
         }catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+    }
+    
+    public static void ecrireNiveau(Case[][] plateau, String nomFichier)
+    {
+        int[][] plateauInt = new int[8][8];
+        for(int i = 0 ; i <= 7 ; i++)
+	{
+	    for(int j = 0 ; j <= (((i%2)==0)?6:7) ; j++)
+            {
+               	plateauInt[i][j] = plateau[i][j].nbPoissons;
+	    }
+        }
+        GenererFichierNiveau.ecrireNiveau(plateauInt, nomFichier);
     }
     
     @Override

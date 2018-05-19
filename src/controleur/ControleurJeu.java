@@ -208,6 +208,7 @@ public class ControleurJeu  extends ControleurBase {
         estEnAttente.set(false);        
         pingouinSel = null;
         suprimerCasesAccessible();
+        effacerAmpoule();
         reprendre();
     }
     

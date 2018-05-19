@@ -89,7 +89,7 @@ public class ControleurJeu  extends ControleurBase {
 	public ImageView pingouinMvt;
  	ImageView pingouinFantome;
     ImageView tuileFantome;    
-    Line lineFantome;
+    private Line lineFantome;
     Point positionAmpoule;
     Line lineAmpoule;
     
@@ -200,6 +200,15 @@ public class ControleurJeu  extends ControleurBase {
         miseAJourInfoJeu();
         tourSuivant();
         
+    }
+    
+    public void initPartie()
+    {
+        lineFantome.setVisible(false);
+        estEnAttente.set(false);        
+        pingouinSel = null;
+        suprimerCasesAccessible();
+        reprendre();
     }
     
     @FXML
@@ -414,7 +423,7 @@ public class ControleurJeu  extends ControleurBase {
         caseAccessible.setImage(image);
     }
 
-    private void suprimerCasesAccessible() {
+    public void suprimerCasesAccessible() {
                 Iterator it = casesAccessibles.iterator();
                 while(it.hasNext())
                 {   

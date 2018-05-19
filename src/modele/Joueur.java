@@ -269,7 +269,7 @@ public abstract class Joueur implements Serializable,Cloneable
                                 gainComposante += score(caseCourante.nbPoissons,1);
                                 pileSommets.push(successeur);
                             }
-                            else if(caseCourante.estOccupee() && !caseCourante.contientPingouin(joueur.numero))
+                            else if(caseCourante.estOccupee() && !caseCourante.pingouin.estBloque && !caseCourante.contientPingouin(joueur.numero))
                             {
                                 autresJoueursComposante.put(caseCourante.numJoueurPingouin(), true);
                                 /*continuer = false;

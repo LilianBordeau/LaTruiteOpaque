@@ -44,8 +44,12 @@ public class JoueurIADifficile extends JoueurAAttendre implements Serializable,C
         if(pingouinsNonIsol.isEmpty())
         {
             System.out.println("recherche de chemin hamiltonien");
-            /* solution approchee : change l'heuristique en la somme de la valeur des cases sur au moins une des composantes connexe contenant 
-            au moins 1 des pingouins du joueur */
+            if (nbCaseLibres <= 13)
+            {
+                profondeur = 9;
+            }
+            /* solution approchee : change l'heuristique en la somme de la valeur des cases sur  une des composantes connexe contenant 
+            au moins 1 des pingouins du joueur */            
             Deplacement cheminMax = negamax(ReelEtendu.moinsLInfini(), ReelEtendu.plusLInfini(), profondeur-2, false, true);
             MyThread.sleep(DUREEMINTOURMILLIS);
             return cheminMax;

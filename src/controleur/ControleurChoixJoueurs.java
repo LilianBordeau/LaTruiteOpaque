@@ -57,7 +57,9 @@ public class ControleurChoixJoueurs extends ControleurBase
     @FXML
     private Button btnCommencer;
     @FXML
-    private Label labelMessage;
+    private Label labelMessageNbJoueurs;
+    @FXML
+    private Label labelMessageReseau;
     
     @FXML
     private Button precedentRouge,suivantRouge,precedentVert,suivantVert,precedentBleu,suivantBleu,precedentJaune,suivantJaune;
@@ -380,20 +382,30 @@ public class ControleurChoixJoueurs extends ControleurBase
 
     private void estPartieConforme() {
         int nbJoueurs = 0;
+        boolean queDesJoueursReseau = true;
         for(int i=0; i < typesJoueur.length;i++ )
         {
             if(typesJoueur[i] != AUCUNJOUEUR )
             {
                 nbJoueurs++;
+                if(typesJoueur[i] != JOUEURRESEAU)
+                {
+                    queDesJoueursReseau = false;
+                }
             }
         }
         nombreDeJoueurs = nbJoueurs ;
-        if(nbJoueurs < 2 ) //nombre de joueur minimum non ok 
+        if(nbJoueurs < 2 || queDesJoueursReseau) // pas assez de joueurs ou que des joueurs en reseau
         {
             btnCommencer.setDisable(true);
-            labelMessage.setVisible(true);
+            labelMessageNbJoueurs.setVisible(true);
+            if(queDesJoueursReseau)
+            {                
+                labelMessageReseau.setVisible(true);
+            }
         }else{
-            labelMessage.setVisible(false);
+            labelMessageNbJoueurs.setVisible(false);
+            labelMessageReseau.setVisible(false);
             btnCommencer.setDisable(false);
         }
     }

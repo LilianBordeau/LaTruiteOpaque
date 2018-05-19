@@ -181,9 +181,9 @@
         </Button>
         
         
-        <!-- BOUTONS -->      
-        <Label  fx:id="labelMessage" styleClass="btn" text="Nombre de joueurs invalide" layoutX="320" layoutY="560" visible="false" style="-fx-text-fill:red"  />
-
+        <!-- BOUTONS -->    
+        <Label fx:id="labelMessageNbJoueurs" styleClass="btn" text="Veuillez choisir de 2 à 4 joueurs" layoutX="291" layoutY="545"  style="-fx-text-fill:red"  />
+        <Label fx:id="labelMessageReseau" styleClass="btn" text="dont au moins 1 n'est pas en réseau" layoutX="280" layoutY="565"  style="-fx-text-fill:red"  />
         <Button fx:id="retour" styleClass="btn"  layoutX="15.0" layoutY="535.0" mnemonicParsing="false" prefWidth="150.0" onAction="#retourMenu" >
             <graphic>
                 <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">

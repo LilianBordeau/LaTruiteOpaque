@@ -30,7 +30,8 @@ public class SonManager {
         sons = new Media[Constantes.SONS.length];
         for(int i =0; i <Constantes.SONS.length ;i++ )
         {
-            sons[i] = new Media(new File(Constantes.cheminSon(i)).toURI().toString());
+            //sons[i] = new Media(new File(Constantes.cheminSon(i)).toURI().toString());
+            sons[i] = new Media(getClass().getClassLoader().getResource(Constantes.cheminSon(i)).toString());
         }    
        
     }

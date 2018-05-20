@@ -11,7 +11,7 @@ public class Constantes
     public static final double POPUPWIDTH = Screen.getPrimary().getVisualBounds().getWidth()*SCREENRATIOWIDTHPOPUP;
     public static final double POPUPHEIGHT = Screen.getPrimary().getVisualBounds().getHeight()*SCREENRATIOHEIGHTPOPUP;
     public static final String DOSSIERIMAGES = "Images";
-    public static final String DOSSIERSONS = "rsc/Sons/";
+    public static final String DOSSIERSONS = "Sons/";//"rsc/Sons/";
     public static final String nomFichierSauvegarde = "sauvegarde.txt";
     public static String nomImageCase(Case uneCase)
     {

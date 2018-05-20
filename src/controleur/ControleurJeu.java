@@ -198,7 +198,7 @@ public class ControleurJeu  extends ControleurBase {
             }
         hideFinPartie();
         miseAJourInfoJeu();
-        tourSuivant();
+        reprendre();
         
     }
     
@@ -209,7 +209,6 @@ public class ControleurJeu  extends ControleurBase {
         pingouinSel = null;
         suprimerCasesAccessible();
         effacerAmpoule();
-        reprendre();
     }
     
     @FXML
@@ -594,6 +593,7 @@ public class ControleurJeu  extends ControleurBase {
         if(!navigation.moteur.estEnReseau)
         {            
             System.out.println("clicSauvegarder");
+            pause();
             navigation.changerVue(ControleurSauvegarderPartie.class); 
         }
         else

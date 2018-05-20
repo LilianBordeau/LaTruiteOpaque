@@ -45,16 +45,22 @@ public class Navigation
     public Boolean enReseau;
     public GestionnaireConnexion gestionnaireConnexion;
     public boolean afficherPopupErreur;
+    public static boolean estEnModeDebug = false;
     
     public Navigation(Group noeudRacine)
-    {
+    {        
+        gestionnaireConnexion = new GestionnaireConnexion();
+        Thread.setDefaultUncaughtExceptionHandler((Thread t, Throwable e) -> {
+            e.printStackTrace();
+            fermerToutesLesConnexions();
+            Platform.exit();
+        });
         afficherPopupErreur = true;
         enReseau = false;
         sonManager =  new SonManager();
         sonManager.jouerMusique();
         this.noeudRacine = noeudRacine;
         vuesEtControleurs = new Hashtable<>();
-        gestionnaireConnexion = new GestionnaireConnexion();
         initialiserVue(ControleurChoixJoueurs.class);
         initialiserVue(ControleurJeu.class);
         initialiserVue(ControleurChargerPartie.class);

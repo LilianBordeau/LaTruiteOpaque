@@ -1,12 +1,17 @@
 package thread;
 
+import vue.Navigation;
+
 public class MyThread
 {
     public static void sleep(long millis)
     {
         try
-        {                          
-            Thread.sleep(millis);             
+        {      
+            if(!Navigation.estEnModeDebug)
+            {
+                Thread.sleep(millis); 
+            }            
         }
         catch (InterruptedException e)
         {

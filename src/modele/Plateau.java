@@ -3,10 +3,8 @@ package modele;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-import static modele.GenererFichierNiveau.ecrireNiveau;
 
 public class Plateau implements Serializable,Cloneable
 {
@@ -26,26 +24,15 @@ public class Plateau implements Serializable,Cloneable
         //String fichierNiveau = "rsc/niveauIADifficilePerd.txt";        
         if(fichierNiveau == null)
         {
+            int[][] plateauInt = GenerateurNiveau.genererNiveau();
             Random random = new Random();
             for(int i = 0 ; i < plateau.length ; i++)
             {
                 for(int j = 0 ; j < nbTuilesLigne(i) ; j++)
                 {
-                    plateau[i][j] = new Case(1,i,j);
+                    plateau[i][j] = new Case(plateauInt[i][j],i,j);
                 }
             }
-            for(int i = 1 ; i <= NBTUILES3POISSONS+NBTUILES2POISSONS ; i++)
-            {
-                int nbPoissons = (i<=NBTUILES2POISSONS)?2:3;
-                int ligne = -1;
-                int colonne = -1;
-                do
-                {
-                    ligne = random.nextInt(plateau.length);
-                    colonne = random.nextInt(nbTuilesLigne(ligne));
-                } while(plateau[ligne][colonne].nbPoissons != 1);
-                plateau[ligne][colonne].nbPoissons = nbPoissons;
-            }           
         }
         else
         {
@@ -99,7 +86,7 @@ public class Plateau implements Serializable,Cloneable
                	plateauInt[i][j] = plateau[i][j].nbPoissons;
 	    }
         }
-        GenererFichierNiveau.ecrireNiveau(plateauInt, nomFichier);
+        GenerateurNiveau.ecrireNiveau(plateauInt, nomFichier);
     }
     
     @Override

@@ -4,7 +4,7 @@ import java.io.PrintStream;
 import java.io.FileNotFoundException;
 import java.util.Random;
 
-public class GenererFichierNiveau
+public class GenerateurNiveau
 {        
         public static final int NBTUILES3POISSONS = 10;
         public static final int NBTUILES2POISSONS = 20;
@@ -38,7 +38,7 @@ public class GenererFichierNiveau
 		out.close();
         }
         
-	public static void generer()
+	public static int[][] genererNiveau()
 	{                       
                 int[][] plateau = new int[8][8];
 		Random random = new Random();
@@ -61,11 +61,16 @@ public class GenererFichierNiveau
                     } while(plateau[ligne][colonne] != 1);
                     plateau[ligne][colonne] = nbPoissons;
                 } 
-                ecrireNiveau(plateau, "niveau.txt");		
+                return plateau;	
+	}
+        
+        public static void genererEtEcrireNiveau()
+	{                       
+                ecrireNiveau(genererNiveau(), "niveau.txt");		
 	}
         
         /* cette methode est copiee de la classe plateau car ce fichier ne doit pas dependre du reste du projet car il peut etre utilise seul pour generer un fichier
-           contenant la description du niveau */
+           contenant la description d'un niveau */
         public static int nbTuilesLigne(int i)
         {
             return (i%2==0)?7:8;

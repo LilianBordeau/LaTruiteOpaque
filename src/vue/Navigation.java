@@ -4,7 +4,6 @@ import controleur.ControleurBase;
 import controleur.ControleurChargerPartie;
 import controleur.ControleurChoixJoueurs;
 import controleur.ControleurCredits;
-import controleur.ControleurFinDePartie;
 import controleur.ControleurJeu;
 import controleur.ControleurMenuPrincipal;
 import controleur.ControleurRejoindreReseau;
@@ -58,7 +57,6 @@ public class Navigation
         gestionnaireConnexion = new GestionnaireConnexion();
         initialiserVue(ControleurChoixJoueurs.class);
         initialiserVue(ControleurJeu.class);
-        initialiserVue(ControleurFinDePartie.class);
         initialiserVue(ControleurChargerPartie.class);
         initialiserVue(ControleurSauvegarderPartie.class);
         initialiserVue(ControleurMenuPrincipal.class);

@@ -32,7 +32,7 @@ import util.Couple;
 import modele.Joueur;
 import modele.JoueurHumain;
 import modele.Moteur;
-import modele.SonManager;
+import controleur.SonManager;
 import reseau.GestionnaireConnexion;
 
 public class Navigation

@@ -43,7 +43,7 @@ public class ControleurChoixJoueurs extends ControleurBase
     String[] TYPEJOUEURHORSRESEAU = {"JOUEUR", "IA FACILE", "IA MOYENNE", "IA DIFFICILE", "AUCUN"};
     String[] TYPEJOUEURENRESEAU = {"JOUEUR", "IA FACILE", "IA MOYENNE", "IA DIFFICILE", "AUCUN","JOUEUR EN RESEAU"};
     String[] TYPEJOUEUR;
-    String[] COULEUR = {"BLEU","JAUNE","ROUGE","VERT"};
+    String[] COULEUR = {"VIOLET","JAUNE","ROUGE","VERT"};
     int JOUEURREEL = 0;    
     int IAFACILE = 1;
     int IAMOYENNE = 2;
@@ -92,16 +92,18 @@ public class ControleurChoixJoueurs extends ControleurBase
         
         setImage(imagesCouleur,typeJoueur);
         
-        if(typeJoueur == JOUEURREEL){
-            textfield = (TextField) nomCouleur.getChildren().get(0); 
+        if(typeJoueur == JOUEURREEL)
+        {
+            textfield = (TextField) nomCouleur.getChildren().get(0);
             textfield.setVisible(true);
             textfield.setAlignment(Pos.CENTER);
-            textfield.setText("Joueur " + " " + COULEUR[couleur]);  
+            textfield.setText("Joueur " + COULEUR[couleur]);
 
-            text = (Text) nomCouleur.getChildren().get(1); 
+            text = (Text) nomCouleur.getChildren().get(1);
             text.setVisible(false);
         }
-        else{
+        else
+        {
             String message =  TYPEJOUEUR[ typesJoueur[couleur] ];
             nomCouleur.getChildren().get(0).setVisible(false);
             if(typesJoueur[couleur] == IAFACILE || typesJoueur[couleur] == IAMOYENNE || typesJoueur[couleur] == IADIFFICILE )

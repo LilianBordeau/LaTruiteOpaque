@@ -30,7 +30,23 @@ public class Constantes
     
     public static String nomImagePingouin(Joueur joueur)
     {
-        return DOSSIERIMAGES+"/pingouins/"+joueur.couleur+"_"+joueur.numero+".png";
+        if(joueur.getClass().getName() == "modele.JoueurHumain")
+        {
+          return DOSSIERIMAGES+"/pingouins/"+joueur.couleur+"_0.png";   
+        }
+        else if(joueur.getClass().getName() == "modele.JoueurIAAleatoire")
+        {
+          return DOSSIERIMAGES+"/pingouins/"+joueur.couleur+"_1.png";
+        }
+        else if(joueur.getClass().getName() == "modele.JoueurIAMoyenne")
+        {
+          return DOSSIERIMAGES+"/pingouins/"+joueur.couleur+"_2.png";
+        }
+        else if(joueur.getClass().getName() == "modele.JoueurIADifficile")
+        {
+          return DOSSIERIMAGES+"/pingouins/"+joueur.couleur+"_3.png";
+        }
+        return null;
     }       
 
     

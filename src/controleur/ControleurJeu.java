@@ -120,7 +120,7 @@ public class ControleurJeu  extends ControleurBase {
         estEnAttente = new SimpleBooleanProperty(false);
         jeuInterrompu = new SimpleBooleanProperty(false);
         sablier.visibleProperty().bind(estEnAttente.and(jeuInterrompu.not()));
-        RotateTransition transitionSablier = new RotateTransition(Duration.millis(1000), sablier);
+        RotateTransition transitionSablier = new RotateTransition(Duration.millis(2500), sablier);
         transitionSablier.setFromAngle(0);
         transitionSablier.setByAngle(359);
         transitionSablier.setCycleCount(Transition.INDEFINITE);

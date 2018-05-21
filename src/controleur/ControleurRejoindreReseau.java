@@ -52,7 +52,7 @@ public class ControleurRejoindreReseau extends ControleurBase
     {        
         enAttente = new SimpleBooleanProperty(false);
         sablier.visibleProperty().bind(enAttente);
-        RotateTransition transitionSablier = new RotateTransition(Duration.millis(1000), sablier);        
+        RotateTransition transitionSablier = new RotateTransition(Duration.millis(2000), sablier);        
         transitionSablier.setFromAngle(0);
         transitionSablier.setByAngle(359);
         transitionSablier.setCycleCount(Transition.INDEFINITE);

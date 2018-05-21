@@ -30,23 +30,26 @@ public class Constantes
     
     public static String nomImagePingouin(Joueur joueur)
     {
-        if(joueur.getClass().getName() == "modele.JoueurHumain")
+        if(joueur instanceof JoueurHumain || joueur instanceof JoueurReseau)
         {
           return DOSSIERIMAGES+"/pingouins/"+joueur.couleur+"_0.png";   
         }
-        else if(joueur.getClass().getName() == "modele.JoueurIAAleatoire")
+        if(joueur instanceof JoueurIAAleatoire)
         {
           return DOSSIERIMAGES+"/pingouins/"+joueur.couleur+"_1.png";
         }
-        else if(joueur.getClass().getName() == "modele.JoueurIAMoyenne")
+        else if(joueur instanceof JoueurIAMoyenne)
         {
           return DOSSIERIMAGES+"/pingouins/"+joueur.couleur+"_2.png";
         }
-        else if(joueur.getClass().getName() == "modele.JoueurIADifficile")
+        else if(joueur instanceof JoueurIADifficile)
         {
           return DOSSIERIMAGES+"/pingouins/"+joueur.couleur+"_3.png";
         }
-        return null;
+        else
+        {
+            throw new RuntimeException("image manquante");
+        }
     }       
 
     
@@ -104,7 +107,7 @@ public class Constantes
     {
         if(joueur.couleur == 0)
         {
-            return Color.DEEPSKYBLUE;             
+            return Color.MAGENTA;             
         }
         else if(joueur.couleur == 1)
         {

@@ -122,7 +122,8 @@ public class ControleurJeu  extends ControleurBase {
     
         btnUndo.setOnMouseExited(e -> btnUndo.setPadding(Insets.EMPTY));  
         btnRedo.setOnMouseExited(e -> btnRedo.setPadding(Insets.EMPTY));   
-        btnPause.setOnMouseExited(e -> btnPause.setPadding(Insets.EMPTY));   
+        btnPause.setOnMouseExited(e -> btnPause.setPadding(Insets.EMPTY));  
+        btnIndice.setOnMouseExited(e -> btnIndice.setPadding(Insets.EMPTY));  
     }
     
     @Override

@@ -10,6 +10,8 @@
 <?import java.net.*?>
 <?import vue.SimpleImageView?>
 <?import vue.PanelSonManager?>
+<?import vue.MyButton?>
+
 
 <AnchorPane fx:id="anchorPane"  maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" ><!--fx:controller="controleur.ControleurMenuPrincipal"-->
    
@@ -33,7 +35,7 @@
                     <Image url="Images/batton.png" />
                 </image>    
             </ImageView>        
-            <Button  fx:id="nouvelle" styleClass="btn"  layoutX="32" layoutY="310" prefWidth="316" prefHeight="111"  onAction="#clicJouer">       
+            <MyButton  fx:id="nouvelle" styleClass="btn"  layoutX="32" layoutY="310" prefWidth="316" prefHeight="111"  onAction="#clicJouer">       
                   <graphic>
                      <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                             <image>
@@ -41,9 +43,9 @@
                             </image>
                         </ImageView>
                     </graphic>
-            </Button>
+            </MyButton>
             
-            <Button fx:id="creer"  styleClass="btn" layoutX="32" layoutY="430" prefWidth="250" onAction="#clicCreerReseau">           
+            <MyButton fx:id="creer"  styleClass="btn" layoutX="32" layoutY="430" prefWidth="250" onAction="#clicCreerReseau">           
                                          
                   <graphic>
                      <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
@@ -52,10 +54,10 @@
                             </image>
                         </ImageView>
                     </graphic>
-            </Button>
+            </MyButton>
             
             
-            <Button fx:id="rejoindre" styleClass="btn" layoutX="430" layoutY="430" prefWidth="250"  onAction="#clicRejoindreReseau">                             
+            <MyButton fx:id="rejoindre" styleClass="btn" layoutX="430" layoutY="430" prefWidth="250"  onAction="#clicRejoindreReseau">                             
                   <graphic>
                      <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                             <image>
@@ -63,9 +65,9 @@
                             </image>
                         </ImageView>
                     </graphic>
-            </Button>
+            </MyButton>
             
-            <Button fx:id="charger" styleClass="btn" layoutX="430" layoutY="310" prefWidth="250" onAction="#clicChargerPartie">                     
+            <MyButton fx:id="charger" styleClass="btn" layoutX="430" layoutY="310" prefWidth="250" onAction="#clicChargerPartie">                     
                   <graphic>
                      <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                             <image>
@@ -73,9 +75,9 @@
                             </image>
                         </ImageView>
                     </graphic>
-            </Button>
+            </MyButton>
             
-            <Button fx:id="tutoriel" styleClass="btn" layoutX="75" layoutY="520" prefWidth="240" onAction="#clicTutoriel">         
+            <MyButton fx:id="tutoriel" styleClass="btn" layoutX="75" layoutY="520" prefWidth="240" onAction="#clicTutoriel">         
                   <graphic>
                      <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                             <image>
@@ -83,9 +85,9 @@
                             </image>
                         </ImageView>
                     </graphic>
-            </Button>
+            </MyButton>
             
-            <Button fx:id="credits" styleClass="btn" layoutX="460" layoutY="520" prefWidth="250" onAction="#clicCredits">                          
+            <MyButton fx:id="credits" styleClass="btn" layoutX="460" layoutY="520" prefWidth="250" onAction="#clicCredits">                          
                   <graphic>
                      <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                             <image>
@@ -93,7 +95,7 @@
                             </image>
                         </ImageView>
                     </graphic>
-            </Button>
+            </MyButton>
         <PanelSonManager fx:id="panelSonManager"/>
 
     </children>

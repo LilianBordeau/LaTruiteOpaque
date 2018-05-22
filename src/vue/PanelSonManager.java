@@ -23,12 +23,12 @@ public class PanelSonManager extends Group {
     
     public ImageView background;
     
-    public Button screen;
+    public MyButton screen;
     
-    public Button imageMusique;
+    public MyButton imageMusique;
     public Slider sliderMusique = new Slider();
     
-    public Button imageSon;
+    public MyButton imageSon;
     public Slider sliderSon;
     
     public PanelSonManager()
@@ -42,7 +42,7 @@ public class PanelSonManager extends Group {
         background.setFitHeight(209);
         background.getStyleClass().add("managerPane");
         
-        screen = new Button();
+        screen = new MyButton();
         screen.setPickOnBounds(true);
         screen.setLayoutX(2);
         screen.setLayoutY(250);
@@ -55,7 +55,7 @@ public class PanelSonManager extends Group {
        
 
     
-        imageMusique = new Button();
+        imageMusique = new MyButton();
         imageMusique.setPickOnBounds(true);
         imageMusique.setLayoutX(2);
         imageMusique.setLayoutY(300);
@@ -70,7 +70,7 @@ public class PanelSonManager extends Group {
         sliderMusique.setLayoutX(35);
         sliderMusique.setLayoutY(307);
 
-        imageSon = new Button();
+        imageSon = new MyButton();
         imageSon.setPickOnBounds(true);
         imageSon.setLayoutX(2);
         imageSon.setLayoutY(350);
@@ -89,12 +89,12 @@ public class PanelSonManager extends Group {
     
    
     
-    private void setHoverListener(Button button)
+    private void setHoverListener(MyButton button)
     {
-      button.setOnMouseEntered(e -> button.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.80), 0, 0, -2, 0) ;-fx-scale-x: 1;" +
+      button.afterOnMouseEntered = (() -> button.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.80), 0, 0, -2, 0) ;-fx-scale-x: 1;" +
 "    -fx-scale-y: 1;" +
 "    -fx-padding: 0 0 0 2;"));
-        button.setOnMouseExited(e -> button.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.0), 0, 0, 0, 0) "));   
+        button.afterOnMouseExited = (() -> button.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.0), 0, 0, 0, 0) "));   
     }
     
 }

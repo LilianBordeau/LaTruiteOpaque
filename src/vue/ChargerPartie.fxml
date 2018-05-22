@@ -12,7 +12,7 @@
 <?import vue.SimpleImageView?>
 <?import javafx.scene.shape.Line?>
 <?import java.net.URL?>
-
+<?import vue.MyButton?>
 <AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurChoixJoueurs"-->
     <children>
         
@@ -169,7 +169,7 @@
     
     
     
-    <Button fx:id="retour" styleClass="btn"  layoutX="10.0" layoutY="535.0" mnemonicParsing="false" prefWidth="150.0" onAction="#retourMenu" >
+    <MyButton fx:id="retour" styleClass="btn"  layoutX="10.0" layoutY="535.0" mnemonicParsing="false" prefWidth="150.0" onAction="#retourMenu" >
         <graphic>
             <ImageView   pickOnBounds="true" preserveRatio="true" visible="true">
                 <image>
@@ -177,9 +177,9 @@
                 </image>
             </ImageView>
         </graphic>
-    </Button>    
+    </MyButton>    
         
-    <Button fx:id="btnCommencer" styleClass="btn" layoutX="560.0" layoutY="535.0" mnemonicParsing="false" prefWidth="150.0" onAction="#commencer" >
+    <MyButton fx:id="btnCommencer" styleClass="btn" layoutX="560.0" layoutY="535.0" mnemonicParsing="false" prefWidth="150.0" onAction="#commencer" >
             <graphic>
                 <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
@@ -187,7 +187,7 @@
                     </image>
                 </ImageView>
             </graphic>
-        </Button>    
+        </MyButton>    
     
     <Text fx:id="message" layoutX="275" layoutY="575" />
 

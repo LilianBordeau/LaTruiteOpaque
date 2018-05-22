@@ -12,6 +12,7 @@
 <?import vue.SimpleImageView?>
 <?import javafx.scene.shape.Line?>
 <?import vue.MyTextField?>
+<?import vue.MyButton?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurChoixJoueurs"-->
     <children>
@@ -51,8 +52,8 @@
     <Text fx:id="nouveauNomText" layoutX="250" layoutY="400" text="Nom : " />
     <MyTextField  fx:id="nouveauNomInput" layoutX="300" layoutY="380" />
     <Text fx:id="message" layoutX="275" layoutY="575" />
-    <Button layoutX="10.0" layoutY="550.0" mnemonicParsing="false" prefWidth="150.0" text="Retour au jeu" onAction="#retourJeu" />
-    <Button fx:id="btnSauvegarder" layoutX="640.0" layoutY="550.0" mnemonicParsing="false" prefWidth="150.0" text="Sauvegarder" onAction="#sauvegarder" />
+    <MyButton layoutX="10.0" layoutY="550.0" mnemonicParsing="false" prefWidth="150.0" text="Retour au jeu" onAction="#retourJeu" />
+    <MyButton fx:id="btnSauvegarder" layoutX="640.0" layoutY="550.0" mnemonicParsing="false" prefWidth="150.0" text="Sauvegarder" onAction="#sauvegarder" />
     <PanelSonManager fx:id="panelSonManager"/>
     </children>
 </AnchorPane>

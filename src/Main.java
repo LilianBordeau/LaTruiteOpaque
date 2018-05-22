@@ -198,6 +198,7 @@ public class Main extends Application {
         primaryStage.setTitle("La Truite Opaque");
         Image image2 = new Image("Images/mouse2.gif");
         scene.setCursor(new ImageCursor(image2));
+        
       
     }
         

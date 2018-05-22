@@ -837,30 +837,35 @@ public class ControleurJeu  extends ControleurBase {
         ParallelTransition parallelTransition = new ParallelTransition();
         for(Point point : nouveauxPingouinsBloques)
         {            
+          
             Case tuile = navigation.moteur.plateau.plateau[point.ligne][point.colonne];
-            String nomImage = Constantes.nomImagePingouin(navigation.moteur.joueurs[tuile.numJoueurPingouin()]);
-            System.out.println(nomImage);
-            ImageView pingouinGraphique2 = null;
-            pingouinGraphique2 = (ImageView)anchorPane.lookup("#"+indicesToId(point.ligne,point.colonne,DEBUTIDPINGOUIN));
-            System.out.println(pingouinGraphique2);
-            ImageView pingouinFondu = new ImageView(new Image(nomImage));
-            anchorPane.getChildren().add(pingouinFondu);
-            pingouinFondu.setLayoutX(pingouinGraphique2.getLayoutX());
-            pingouinFondu.setLayoutY(pingouinGraphique2.getLayoutY());
-            pingouinFondu.setFitHeight(pingouinGraphique2.getFitHeight());
-            pingouinFondu.setFitWidth(pingouinGraphique2.getFitWidth());
-            pingouinFondu.setPreserveRatio(true);
-            pingouinFondu.setVisible(true);
-            ScaleTransition scaleTransitionMax = new ScaleTransition(Duration.seconds(0.5), pingouinFondu);
-            scaleTransitionMax.setFromX(1);
-            scaleTransitionMax.setToX(1.5);
-            ScaleTransition scaleTransitionMin = new ScaleTransition(Duration.seconds(0.5), pingouinFondu);
-            scaleTransitionMin.setFromX(1.5);
-            scaleTransitionMin.setToX(0);
-            scaleTransitionMin.setFromY(1);
-            scaleTransitionMin.setToY(0);
-            SequentialTransition sequentialTransition = new SequentialTransition(scaleTransitionMax, scaleTransitionMin);
-            parallelTransition.getChildren().add(sequentialTransition);
+            if(tuile.pingouin != null &&  !tuile.pingouin.estBloque)
+            {
+                String nomImage = Constantes.nomImagePingouin(navigation.moteur.joueurs[tuile.numJoueurPingouin()]);
+                System.out.println(nomImage);
+                ImageView pingouinGraphique2 = null;
+                pingouinGraphique2 = (ImageView)anchorPane.lookup("#"+indicesToId(point.ligne,point.colonne,DEBUTIDPINGOUIN));
+                System.out.println(pingouinGraphique2);
+                ImageView pingouinFondu = new ImageView(new Image(nomImage));
+                anchorPane.getChildren().add(pingouinFondu);
+                pingouinFondu.setLayoutX(pingouinGraphique2.getLayoutX());
+                pingouinFondu.setLayoutY(pingouinGraphique2.getLayoutY());
+                pingouinFondu.setFitHeight(pingouinGraphique2.getFitHeight());
+                pingouinFondu.setFitWidth(pingouinGraphique2.getFitWidth());
+                pingouinFondu.setPreserveRatio(true);
+                pingouinFondu.setVisible(true);
+                ScaleTransition scaleTransitionMax = new ScaleTransition(Duration.seconds(0.5), pingouinFondu);
+                scaleTransitionMax.setFromX(1);
+                scaleTransitionMax.setToX(1.5);
+                ScaleTransition scaleTransitionMin = new ScaleTransition(Duration.seconds(0.5), pingouinFondu);
+                scaleTransitionMin.setFromX(1.5);
+                scaleTransitionMin.setToX(0);
+                scaleTransitionMin.setFromY(1);
+                scaleTransitionMin.setToY(0);
+                SequentialTransition sequentialTransition = new SequentialTransition(scaleTransitionMax, scaleTransitionMin);
+                parallelTransition.getChildren().add(sequentialTransition);
+            }
+           
         }
         parallelTransition.setOnFinished(new EventHandler<ActionEvent>() {
 
@@ -1013,9 +1018,29 @@ public class ControleurJeu  extends ControleurBase {
         titreFinPartie.setVisible(true);
         titreFinPartie.setTextFill(Color.WHITE);
         titreFinPartie.setFont(Font.font(null, FontWeight.BOLD, 10));
+        boolean gagnant = true;
         for(int i=0; i<classementJoueurs.size();i++)
         {
+            
+            if(gagnant && i != 0)
+            {
+                if(classementJoueurs.get(i).scorePoisson != classementJoueurs.get(i-1).scorePoisson  ||  classementJoueurs.get(i).scoreTuile != classementJoueurs.get(i-1).scoreTuile)
+                {
+                    gagnant = false;
+                }
+            }
+            
+            
             ImageView image1 = (ImageView) anchorPane.lookup("#"+"position"+(i+1));
+            Image imageClassement;
+            if(gagnant)
+            {
+                imageClassement = new Image("Images/rang1.png");
+            }else
+            {
+                imageClassement = new Image("Images/loser.png");
+            }
+            image1.setImage(imageClassement);
             image1.setLayoutX(xDebut);
             image1.setVisible(true);
             

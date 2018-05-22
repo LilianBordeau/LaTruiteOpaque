@@ -25,7 +25,7 @@
                 </image>    
         </ImageView>
          
-        <ImageView layoutX="350" layoutY="320" fitHeight="171" fitWidth="400">
+        <ImageView layoutX="320" layoutY="310" fitHeight="250" fitWidth="450">
                 <image>
                     <Image url="Images/bulle.png" />
                 </image>    
@@ -219,8 +219,8 @@
        
         
         
-            <Label  fx:id="labelTitre" styleClass="tuto" layoutX="330" layoutY="340" prefHeight="90" prefWidth="450"/>
-            <Button fx:id="suivant" layoutX="500" layoutY="420" prefWidth="75" text="suivant" onAction="#clicSuivant">  </Button>
+            <Label  fx:id="labelTitre" styleClass="tuto" layoutX="320" layoutY="360" prefHeight="90" prefWidth="450"/>
+            <Button fx:id="suivant" layoutX="500" layoutY="450" prefWidth="75" text="suivant" onAction="#clicSuivant">  </Button>
             <Button fx:id="retour" styleClass="btn"  layoutX="15.0" layoutY="535.0" mnemonicParsing="false" prefWidth="150.0" onAction="#retourMenu" >
             <graphic>
                 <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">

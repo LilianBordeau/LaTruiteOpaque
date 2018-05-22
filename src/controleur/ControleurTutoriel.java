@@ -283,28 +283,30 @@ public class ControleurTutoriel extends ControleurBase
     }
     public void Rule_of_game(){
         Tab = new String[8];
-        Tab[0] = "Objectif du jeu est que Chaque joueur essaie d’attraper \n" 
-                 +"un maximum de poissons avec ses pingouins,\n"
+        Tab[0] = "Objectif du jeu est que Chaque joueur essaie\n" 
+                 +"d’attraper un maximum de poissons avec ses pingouins,\n"
                  +"avant d’être définitivement isolé sur la banquise.";
         
         Tab[1]= "chaque joueur place tour à tour un de ses pingouins\n"
-                + " sur un bloc de glace qui contenant un et un seul poisson\n"
+                + "sur un bloc de glace qui contenant un et un seul poisson\n"
                 + "Il ne peut y avoir qu’un seul pingouin par bloc de glace.\n" ;
                 
-        Tab[2]=" Pour mieur comprendre cela\n"+" Cliquez sur une case avec UN POISSON pour placer vos pingouins\n";
+        Tab[2]=" Pour mieur comprendre cela\n"+
+               "Cliquez sur une case avec UN POISSON pour placer vos\n"
+                + "pingouins\n";
 
         Tab[3] = "Le deplacement doit respecer les contraintes suivantes : ";
         
       
-        Tab[4] ="*Le pingouin doit se déplacer en ligne droite dans une des 6\n" 
-                +"*directions qui entoure son bloc de glace.\n ";
+        Tab[4] ="*Le pingouin doit se déplacer en ligne droite dans\n" 
+                +"une des 6 directions qui entoure son bloc de glace.\n ";
              
                 
         Tab[5] = "*Le pingouin peut avancer d’autant de cases\n"+"              que le joueur le souhaite.\n"
                 +"*enfin un pingouin ne peut pas franchir d’obtacle.";
         
-        Tab[6] = "Tour à tour,chaque joueur doit Déplacer ces pingouin"
-                + "\nPour déplacer un pingouin, séléctionne le en cliquant dessus\n"
+        Tab[6] = "Tour à tour,chaque joueur doit Déplacer ces pingouin,\n"
+                + "séléctionne le en cliquant dessus\n"
                 + "puis clique sur la case où vous voulez le déplacer\n";
    
         

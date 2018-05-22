@@ -859,7 +859,7 @@ public class ControleurJeu  extends ControleurBase {
         {            
           
             Case tuile = navigation.moteur.plateau.plateau[point.ligne][point.colonne];
-            if(tuile.pingouin != null &&  !tuile.pingouin.estBloque)
+            if(tuile.numJoueurPingouin() != -1)
             {
                 String nomImage = Constantes.nomImagePingouin(navigation.moteur.joueurs[tuile.numJoueurPingouin()]);
                 System.out.println(nomImage);

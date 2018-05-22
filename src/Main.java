@@ -1,6 +1,11 @@
+import controleur.ControleurChoixJoueurs;
 import controleur.ControleurMenuPrincipal;
+import java.io.IOException;
+import java.net.BindException;
 import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -9,14 +14,21 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+import modele.DonneesDebutPartie;
+import modele.Joueur;
+import modele.JoueurReseau;
+import reseau.ConnexionServeur;
 import vue.Navigation;
 
 public class Main extends Application {
@@ -26,15 +38,22 @@ public class Main extends Application {
     public static final int HAUTEURFENETREINIT = (int)(Screen.getPrimary().getVisualBounds().getHeight()*SCREENRATIOHEIGHTINIT);
     private static final int LARGEURFENETREFXML = 800;
     private static final int HAUTEURFENETREFXML = 600;
-    
+    private Navigation navigation;
     @Override
     public void start(Stage primaryStage) {
-        Group noeudRacine = new Group();        
-        Navigation navigation = new Navigation(noeudRacine);
+        
+        
+        AnchorPane anchorPane = new AnchorPane();  
+        Group noeudRacine = new Group(anchorPane);       
         Scene scene = new Scene(noeudRacine);
         primaryStage.setScene(scene);
-        primaryStage.show();
-        scene.widthProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) -> {
+        
+     
+        anchorPane.setPrefWidth(LARGEURFENETREFXML);
+        anchorPane.setPrefHeight(HAUTEURFENETREFXML);
+       
+
+         scene.widthProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) -> {
             double newWidthDouble = newSceneWidth.doubleValue();
             TranslateTransition translate = new TranslateTransition(Duration.millis(1), noeudRacine);
             translate.setToX((newWidthDouble-LARGEURFENETREFXML)/2);
@@ -52,61 +71,134 @@ public class Main extends Application {
             ParallelTransition transition = new ParallelTransition(noeudRacine, scale, translate);
             transition.play();
         });
-        //primaryStage.setWidth(LARGEURFENETREFXML); // remplacer par LARGEURFENETREINIT avant le rendu
-        //primaryStage.setHeight(HAUTEURFENETREFXML); // remplacer par HAUTEURFENETREINIT avant le rendu 
+  
+        
+        
+        ImageView sablier = new ImageView(new Image("Images/sablier.png"));
+        sablier.setFitHeight(150);
+        sablier.setFitWidth(150);
+        sablier.setLayoutX(325);
+        sablier.setLayoutY(215);
+        
+        ImageView panneau = new ImageView(new Image("Images/panneauChargement.png"));
+        panneau.setLayoutX(250);
+        panneau.setLayoutY(400);
+        panneau.setFitHeight(75);
+        panneau.setFitWidth(300);
+        
+        Label message = new Label("Pêchage de truites en cours ...");
+        message.setFont(new Font(null,15));
+        message.setTextFill(Color.WHITE);
+        message.setLayoutX(290);
+        message.setLayoutY(440);
+        
+        
+        RotateTransition transitionSablier = new RotateTransition(Duration.millis(2500), sablier);
+        transitionSablier.setFromAngle(0);
+        transitionSablier.setByAngle(359);
+        transitionSablier.setCycleCount(Transition.INDEFINITE);
+        
+       
+        ImageView fond = new ImageView(new Image("Images/fond.png"));
+        fond.setFitHeight(HAUTEURFENETREFXML);
+        fond.setFitWidth(LARGEURFENETREFXML);
+        
+        anchorPane.getChildren().add(fond);
+        anchorPane.getChildren().add(sablier);
+        anchorPane.getChildren().add(panneau);
+        anchorPane.getChildren().add(message);
+        transitionSablier.play();
+        
+        
+              
+       
+           
         primaryStage.setWidth(LARGEURFENETREINIT);
         primaryStage.setHeight(HAUTEURFENETREINIT);
-        primaryStage.centerOnScreen();        
+        primaryStage.centerOnScreen();
+        
+        primaryStage.show();
+        
+     
+        Thread thread = new Thread()
+        {
+            @Override
+            public void run()
+            {
+                
+             
+                navigation = new Navigation(noeudRacine);
+  
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run()
+                    {
+                         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                            @Override
+                            public void handle(WindowEvent t) 
+                            {  
+                                navigation.fermerToutesLesConnexions();
+                                primaryStage.setOnCloseRequest(null);
+                                t.consume();
+                                ImageView imageExit = new ImageView(new Image("Images/goodbye.gif"));
+                                ImageView bulle = new ImageView(new Image("Images/goodbyeBulle.png"));
+                                imageExit.setX(0);
+                                imageExit.setY(100);
+                                bulle.setX(300);
+                                bulle.setY(100);
+
+                                Rectangle rect = new Rectangle (0, 0, 800, 1);
+                                Rectangle rect2 = new Rectangle (0, 600, 800, 1);
+
+                                noeudRacine.getChildren().add(rect);
+                                noeudRacine.getChildren().add(rect2);
+                                noeudRacine.getChildren().add(bulle);
+                                noeudRacine.getChildren().add(imageExit);
+
+
+                                rect.setFill(Color.BLACK);
+                                rect2.setFill(Color.BLACK);
+
+                                ScaleTransition tt = new ScaleTransition(Duration.seconds(2), rect);
+                                tt.setByY(350f);
+
+                                ScaleTransition ImageExitTransition = new ScaleTransition(Duration.seconds(2), imageExit);
+                                TranslateTransition ImageExitTransition2 = new TranslateTransition(Duration.seconds(2), imageExit);
+                                ImageExitTransition.setByY(0.2f);
+                                ImageExitTransition.setByX(0.2f);
+
+                                ImageExitTransition2.setByX(30f);
+                                ImageExitTransition2.setByY(5f);
+
+                                ScaleTransition tt2 = new ScaleTransition(Duration.seconds(2), rect2);
+                                tt2.setByY(-350f);
+                                  tt.setOnFinished(e -> {Platform.exit();});
+                                tt.play();
+                                tt2.play();
+                                ImageExitTransition.play();
+                                ImageExitTransition2.play();
+
+                               }
+                        }); 
+                        navigation.changerVue(ControleurMenuPrincipal.class);
+                        
+                    }
+                });
+            }                       
+        };
+        thread.start();
+        
+        
+        
+       
+       
+        //primaryStage.setWidth(LARGEURFENETREFXML); // remplacer par LARGEURFENETREINIT avant le rendu
+        //primaryStage.setHeight(HAUTEURFENETREFXML); // remplacer par HAUTEURFENETREINIT avant le rendu 
+    
         primaryStage.setTitle("La Truite Opaque");
         Image image2 = new Image("Images/mouse2.gif");
         scene.setCursor(new ImageCursor(image2));
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-        @Override
-        public void handle(WindowEvent t) {  
-            navigation.fermerToutesLesConnexions();
-            primaryStage.setOnCloseRequest(null);
-            t.consume();
-        ImageView imageExit = new ImageView(new Image("Images/goodbye.gif"));
-        ImageView bulle = new ImageView(new Image("Images/goodbyeBulle.png"));
-        imageExit.setX(0);
-        imageExit.setY(100);
-        bulle.setX(300);
-        bulle.setY(100);
-        
-        Rectangle rect = new Rectangle (0, 0, 800, 1);
-        Rectangle rect2 = new Rectangle (0, 600, 800, 1);
-        
-        noeudRacine.getChildren().add(rect);
-        noeudRacine.getChildren().add(rect2);
-        noeudRacine.getChildren().add(bulle);
-        noeudRacine.getChildren().add(imageExit);
-        
-     
-     rect.setFill(Color.BLACK);
-     rect2.setFill(Color.BLACK);
- 
-     ScaleTransition tt = new ScaleTransition(Duration.seconds(2), rect);
-     tt.setByY(350f);
-     
-     ScaleTransition ImageExitTransition = new ScaleTransition(Duration.seconds(2), imageExit);
-     TranslateTransition ImageExitTransition2 = new TranslateTransition(Duration.seconds(2), imageExit);
-     ImageExitTransition.setByY(0.2f);
-     ImageExitTransition.setByX(0.2f);
-     
-     ImageExitTransition2.setByX(30f);
-     ImageExitTransition2.setByY(5f);
-
-     ScaleTransition tt2 = new ScaleTransition(Duration.seconds(2), rect2);
-     tt2.setByY(-350f);
-       tt.setOnFinished(e -> {Platform.exit();});
-     tt.play();
-     tt2.play();
-     ImageExitTransition.play();
-     ImageExitTransition2.play();
-
-    }
-}); 
-        navigation.changerVue(ControleurMenuPrincipal.class);
+      
     }
         
     public static void main(String[] args)

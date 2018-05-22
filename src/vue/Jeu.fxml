@@ -270,7 +270,7 @@
             </graphic>
         </Button>
         
-        <SimpleImageView fitHeight="209" fitWidth="40" layoutX="760.0" layoutY="214" url="Images/menuJeu.png" />
+        <SimpleImageView fitHeight="260" fitWidth="40" layoutX="760.0" layoutY="205" url="Images/menuJeu.png" />
       
         <Button fx:id="btnUndo" styleClass="btn"  layoutX="768" layoutY="250" onAction="#clicAnnuler" >
             <graphic>

@@ -238,13 +238,8 @@ public class ControleurJeu  extends ControleurBase {
                     ArrayList<Point> deplacements = navigation.moteur.deplacementsPossibles(coordonnees.ligne, coordonnees.colonne);
                     for(Point depl : deplacements)
                     {
-                        String idTuile = indicesToId(depl.ligne, depl.colonne, DEBUTIDTUILE);     
-                        Scene scene = anchorPane.getScene();
-                        if(scene == null)
-                        {
-                            return;
-                        }
-                        ImageView tuileDepl = (ImageView)scene.lookup("#"+idTuile);
+                        String idTuile = indicesToId(depl.ligne, depl.colonne, DEBUTIDTUILE);
+                        ImageView tuileDepl = (ImageView)anchorPane.lookup("#"+idTuile);
                         //tuileDepl.setImage(null);
                         afficherCaseAccessible(depl);
 
@@ -358,12 +353,7 @@ public class ControleurJeu  extends ControleurBase {
     private void miseAJourPingouin(int i, int j)
     {
         String idPingouin = indicesToId(i, j, DEBUTIDPINGOUIN);
-        Scene scene = anchorPane.getScene();
-        if(scene == null)
-        {
-            return;
-        }
-        ImageView pingouinGraphique = (ImageView)scene.lookup("#"+idPingouin);
+        ImageView pingouinGraphique = (ImageView)anchorPane.lookup("#"+idPingouin);
         Case tuile = navigation.moteur.plateau.plateau[i][j];
         Image image = null;
         if(tuile.estOccupee() && !tuile.pingouin.estBloque)
@@ -385,12 +375,7 @@ public class ControleurJeu  extends ControleurBase {
     private void miseAJourCaseAccessible(Point uneCase, boolean supprimer)
     {
         String idAccessible = indicesToId(uneCase.ligne,uneCase.colonne,DEBUTIDCASEACCESSIBLE);
-        Scene scene = anchorPane.getScene();
-        if(scene == null)
-        {
-            return;
-        }
-        ImageView caseAccessible = (ImageView)scene.lookup("#"+idAccessible);
+        ImageView caseAccessible = (ImageView)anchorPane.lookup("#"+idAccessible);
         Image image = null;
         if(!supprimer)
         {
@@ -583,11 +568,7 @@ public class ControleurJeu  extends ControleurBase {
         positionAmpoule = posAmpoule;
         String idPingouin = indicesToId(posAmpoule.ligne, posAmpoule.colonne, DEBUTIDPINGOUIN);   
         Scene scene = anchorPane.getScene();
-        if(scene == null)
-        {
-            return;
-        }
-        ImageView pingouinGraphique = (ImageView)scene.lookup("#"+idPingouin);
+        ImageView pingouinGraphique = (ImageView)anchorPane.lookup("#"+idPingouin);
         pingouinGraphique.setImage(new Image("Images/ampoule.png"));
         pingouinGraphique.setVisible(true);
     }
@@ -617,15 +598,10 @@ public class ControleurJeu  extends ControleurBase {
             {
                 Deplacement deplacement = joueurCourant.choixDeplacement();
                 placerAmpoule(new Point(deplacement.ligneDest, deplacement.colonneDest));
-                String idTuileSrc = indicesToId(deplacement.ligneSrc, deplacement.colonneSrc, DEBUTIDTUILE);  
-                Scene scene = anchorPane.getScene();
-                if(scene == null)
-                {
-                    return;
-                }
-                ImageView tuileSrc = (ImageView)scene.lookup("#"+idTuileSrc);
+                String idTuileSrc = indicesToId(deplacement.ligneSrc, deplacement.colonneSrc, DEBUTIDTUILE);
+                ImageView tuileSrc = (ImageView)anchorPane.lookup("#"+idTuileSrc);
                 String idTuileDest = indicesToId(deplacement.ligneDest, deplacement.colonneDest, DEBUTIDTUILE);    
-                ImageView tuileDest = (ImageView)scene.lookup("#"+idTuileDest);
+                ImageView tuileDest = (ImageView)anchorPane.lookup("#"+idTuileDest);
                 double xDep = tuileSrc.getLayoutX() + tuileSrc.getFitWidth()/2;
                 double yDep = tuileSrc.getLayoutY() + tuileSrc.getFitHeight()/2;
                 double xArr = tuileDest.getLayoutX() + tuileDest.getFitWidth()/2;
@@ -863,12 +839,7 @@ public class ControleurJeu  extends ControleurBase {
             String nomImage = Constantes.nomImagePingouin(navigation.moteur.joueurs[tuile.numJoueurPingouin()]);
             System.out.println(nomImage);
             ImageView pingouinGraphique2 = null;
-            Scene scene = anchorPane.getScene();
-            if(scene == null)
-            {
-                return;
-            }
-            pingouinGraphique2 = (ImageView)scene.lookup("#"+indicesToId(point.ligne,point.colonne,DEBUTIDPINGOUIN));
+            pingouinGraphique2 = (ImageView)anchorPane.lookup("#"+indicesToId(point.ligne,point.colonne,DEBUTIDPINGOUIN));
             System.out.println(pingouinGraphique2);
             ImageView pingouinFondu = new ImageView(new Image(nomImage));
             anchorPane.getChildren().add(pingouinFondu);
@@ -921,16 +892,11 @@ public class ControleurJeu  extends ControleurBase {
         }
          montrerDernierCoup(dep);
         String idPingouin = indicesToId(dep.ligneSrc, dep.colonneSrc,DEBUTIDPINGOUIN);
-        Scene scene = anchorPane.getScene();
-        if(scene == null)
-        {
-            return;
-        }
-        ImageView pingouinGraphique = (ImageView)scene.lookup("#"+idPingouin);
+        ImageView pingouinGraphique = (ImageView)anchorPane.lookup("#"+idPingouin);
         
         
         String idCaseDest = indicesToId(dep.ligneDest, dep.colonneDest,DEBUTIDPINGOUIN);
-        ImageView caseDest = (ImageView)scene.lookup("#"+idCaseDest);
+        ImageView caseDest = (ImageView)anchorPane.lookup("#"+idCaseDest);
         
         
         Case tuile = navigation.moteur.plateau.plateau[dep.ligneDest][dep.colonneDest];
@@ -993,22 +959,17 @@ public class ControleurJeu  extends ControleurBase {
     {
         
         String idCasePinguoin = indicesToId(dep.ligneDest, dep.colonneDest,DEBUTIDTUILE);
-        Scene scene = anchorPane.getScene();
-        if(scene == null)
-        {
-            return;
-        }
-        ImageView pingouinCourant = (ImageView)scene.lookup("#"+idCasePinguoin);
+        ImageView pingouinCourant = (ImageView)anchorPane.lookup("#"+idCasePinguoin);
         
         
         String idCaseSource = indicesToId(dep.ligneSrc, dep.colonneSrc,DEBUTIDTUILE);
-        tuileFantome = (ImageView)scene.lookup("#"+idCaseSource);
+        tuileFantome = (ImageView)anchorPane.lookup("#"+idCaseSource);
         Image image = new Image("Images/fantomes/tuilevierge.png") ;
         
         //tuileFantome.setImage(image);
         
         String idCaseSourcePinguouin = indicesToId(dep.ligneSrc, dep.colonneSrc,DEBUTIDPINGOUIN);
-        pingouinFantome = (ImageView)scene.lookup("#"+idCaseSourcePinguouin);
+        pingouinFantome = (ImageView)anchorPane.lookup("#"+idCaseSourcePinguouin);
         Image image2 = new  Image("Images/fantomes/" + navigation.moteur.joueurPrecedent + "_0_6.png") ;        
         //pingouinFantome.setImage(image2);
 

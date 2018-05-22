@@ -654,6 +654,7 @@ public class ControleurJeu  extends ControleurBase {
             navigation.moteur = navigation.moteur.sauvegardeDebutPartie;
             navigation.moteur.sauvegarderDebutPartie();
             pingouinFantome = null;
+            pingouinSel = null;
             effacerAmpoule();
             miseAJourPlateau();
             jeuInterrompu.set(false);
@@ -673,6 +674,7 @@ public class ControleurJeu  extends ControleurBase {
         {
             hideFinPartie();
             jeuInterrompu.set(true);  
+            pingouinSel = null;
             effacerAmpoule();
             if(navigation.moteur.queDesIA)
             {
@@ -707,6 +709,7 @@ public class ControleurJeu  extends ControleurBase {
         if(!navigation.moteur.coupAnnules.isEmpty()  && !navigation.moteur.estEnReseau)
         {            
             jeuInterrompu.set(true);
+            pingouinSel = null;
             effacerAmpoule();
             if(navigation.moteur.queDesIA)
             {

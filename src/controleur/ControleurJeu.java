@@ -1,18 +1,10 @@
 package controleur;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Stack;
-import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -25,10 +17,6 @@ import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -37,28 +25,17 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.MapValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
-import javafx.util.Callback;
 import javafx.util.Duration;
-import javafx.util.StringConverter;
 import modele.Case;
 import modele.Constantes;
 import modele.Coup;
@@ -68,12 +45,10 @@ import modele.JoueurAAttendre;
 import modele.JoueurClient;
 import modele.JoueurHumain;
 import modele.JoueurReseau;
-import modele.Moteur;
 import modele.Plateau;
 import modele.Point;
 import reseau.UnverifiedIOException;
 import thread.MyThread;
-import util.Couple;
 
 public class ControleurJeu  extends ControleurBase {
     private static final String DEBUTIDTUILE = "c";
@@ -178,8 +153,9 @@ public class ControleurJeu  extends ControleurBase {
                 ImageView joueurExistant = (ImageView) anchorPane.lookup("#"+navigation.moteur.joueurs[i].couleur+"_gui");                
                 joueurExistant.setVisible(true);
                 joueurExistant.setImage(new Image("Images/gui/"+navigation.moteur.joueurs[i].couleur+"_gui_afk.png"));
-                Label label3 = (Label) anchorPane.lookup("#"+i+"_nom");        
+                Label label3 = (Label) anchorPane.lookup("#"+navigation.moteur.joueurs[i].couleur+"_nom");        
                 label3.setText(navigation.moteur.joueurs[i].nom);
+                System.out.println(navigation.moteur.joueurs[i].nom);
             }
             for(int i = 0 ; i<4 ; i++ )
             {

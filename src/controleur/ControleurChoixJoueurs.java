@@ -234,30 +234,29 @@ public class ControleurChoixJoueurs extends ControleurBase
                         joueurs[i] = new JoueurHumain();
                         TextField tf = (TextField) nomsJoueur[j].getChildren().get(0);
                         joueurs[i].nom = tf.getText();
-                        joueurs[i].couleur = j;
 
                     }
-                    else if(typeJoueur == IAFACILE)
-                    {
-                       joueurs[i] = new JoueurIAAleatoire();
-                        joueurs[i].couleur = j;
-                    }
-                    else if(typeJoueur == IAMOYENNE)
-                    {
-                        joueurs[i] = new JoueurIAMoyenne();
-                         joueurs[i].couleur = j;
-                    }
-                    else if(typeJoueur == IADIFFICILE)
-                    {
-                        joueurs[i] = new JoueurIADifficile();
-                         joueurs[i].couleur = j;
-                    }else if(typeJoueur == JOUEURRESEAU)
+                    else if(typeJoueur == JOUEURRESEAU)
                     {
                         nbJoueursReseauAAttendre++;
                         joueurs[i] = new JoueurServeur();
-                        joueurs[i].couleur = j;
+                    }else{
+                        Text label = (Text) nomsJoueur[j].getChildren().get(1);
+                        if(typeJoueur == IAFACILE)
+                        {
+                            joueurs[i] = new JoueurIAAleatoire();
+                        }else if(typeJoueur == IAMOYENNE)
+                        {
+                            joueurs[i] = new JoueurIAMoyenne();
+                        }
+                        else if(typeJoueur == IADIFFICILE)
+                        {
+                            joueurs[i] = new JoueurIADifficile();
+                        } 
+                        joueurs[i].nom = label.getText();
                     }
-
+                   
+                    joueurs[i].couleur = j;
                     i++;
                 }
             }

@@ -20,28 +20,28 @@
       <SimpleImageView fx:id="0_gui" fitWidth="120" preserveRatio="true" layoutX="0" layoutY="10" url="Images/gui/0_gui_afk.png" />
       <Label fx:id="0_score" styleClass="gui_infos" layoutX="35" layoutY="19" text="0" />
       <Label fx:id="0_tuille" styleClass="gui_infos" layoutX="35" layoutY="44" text="0" />
-      <Label fx:id="0_nom" styleClass="gui_infos" layoutX="5" layoutY="83" text="Joueur 1" />
+      <Label fx:id="0_nom" styleClass="gui_infos" layoutX="5" layoutY="83"/>
 
       <!-- Joueur 2 (haut droite) -->
       
       <SimpleImageView  fx:id="1_gui" fitWidth="120" preserveRatio="true" layoutX="680" layoutY="10" url="Images/gui/1_gui_afk.png" />
       <Label fx:id="1_score" styleClass="gui_infos" layoutX="755" layoutY="19" text="0" />
       <Label fx:id="1_tuille" styleClass="gui_infos" layoutX="755" layoutY="44" text="0" />
-      <Label fx:id="1_nom" styleClass="gui_infos" layoutX="705" layoutY="83" text="Joueur 2" />
+      <Label fx:id="1_nom" styleClass="gui_infos" layoutX="705" layoutY="83"  />
       
       <!-- Joueur 3 (bas droite) -->
       
       <SimpleImageView  fx:id="2_gui" fitWidth="120" preserveRatio="true" layoutX="680" layoutY="495" url="Images/gui/2_gui_afk.png" />
       <Label fx:id="2_score" styleClass="gui_infos" layoutX="755" layoutY="504" text="0" />
       <Label fx:id="2_tuille" styleClass="gui_infos" layoutX="755" layoutY="529" text="0" />
-      <Label fx:id="2_nom" styleClass="gui_infos" layoutX="705" layoutY="568" text="Joueur 3" />
+      <Label fx:id="2_nom" styleClass="gui_infos" layoutX="705" layoutY="568"  />
       
       <!-- Joueur 4 (bas gauche) -->
       
       <SimpleImageView  fx:id="3_gui" fitWidth="120" preserveRatio="true" layoutX="0" layoutY="495" url="Images/gui/3_gui_afk.png" />
       <Label fx:id="3_score" styleClass="gui_infos" layoutX="35" layoutY="504" text="0" />
       <Label fx:id="3_tuille" styleClass="gui_infos" layoutX="35" layoutY="529" text="0" />
-      <Label fx:id="3_nom" styleClass="gui_infos" layoutX="5" layoutY="568" text="Joueur 4" />
+      <Label fx:id="3_nom" styleClass="gui_infos" layoutX="5" layoutY="568" />
       
       
           

@@ -25,7 +25,7 @@ public class IATest
         duelIA(JoueurIADifficile.class, JoueurIADifficile.class);
         duelIA(JoueurIADifficile.class, JoueurIADifficile.class, JoueurIADifficile.class);
         duelIA(JoueurIADifficile.class, JoueurIADifficile.class, JoueurIADifficile.class, JoueurIADifficile.class);
-        Navigation.estEnModeDebug = true;
+        Navigation.estEnModeDebug = false;
     }
     
     private void duelIA(Class<? extends JoueurAAttendre>... classesIA)

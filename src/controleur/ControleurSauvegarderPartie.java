@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import vue.MyTextField;
 
 
 /**
@@ -30,7 +31,7 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
    
     
     @FXML
-    public TextField nouveauNomInput;   
+    public MyTextField   nouveauNomInput;   
     @FXML
     public Text nouvelleDateText;  
     @FXML
@@ -48,6 +49,7 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
         dateString = dateFormat.format(date).toString().replace("/","-");
         nouvelleDateText.setText("Date : " + dateFormat.format(date));
         nouveauNomInput.clear();
+        nouveauNomInput.charactereInvalides = "[/\\<>|\"*_:]";
         setMessage("Veuillez choisir un emplacement de sauvegarde !");
         disableSaisie();
 

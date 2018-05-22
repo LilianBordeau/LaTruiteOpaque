@@ -8,7 +8,7 @@ public class ConnexionServeur extends Connexion
     ServerSocket serverSocket;
     ConnexionServeur(int port) throws IOException
     {
-            serverSocket = new ServerSocket(port);            
+            serverSocket = new ServerSocket(port);
     }
     
     public void accept() throws IOException

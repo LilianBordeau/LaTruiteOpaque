@@ -63,7 +63,7 @@
     -fx-padding: 0 0 0 10;
 }
 
-#btnUndo:hover, #btnRedo:hover, #btnPause:hover  {
+#btnUndo:hover, #btnRedo:hover, #btnPause:hover, #btnIndice:hover   {
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 0, 0, 2, 0) ;
     -fx-scale-x: 1;
     -fx-scale-y: 1;

@@ -72,6 +72,9 @@ public class ControleurJeu  extends ControleurBase {
     @FXML
     Button btnUndo,btnRedo,btnPause,btnIndice;
     
+    @FXML 
+    Button recommencer,save;
+    
     @FXML
     Group groupEnPause;
 
@@ -128,8 +131,11 @@ public class ControleurJeu  extends ControleurBase {
     
     @Override
     public void onAppearing()
-    {
-        
+    {        
+        miseAJourAnnulerRefaireIndiceActive();
+        btnPause.setDisable(navigation.moteur.estEnReseau);
+        recommencer.setDisable(navigation.moteur.estEnReseau);
+        save.setDisable(navigation.moteur.estEnReseau);
         jeuInterrompu.set(false);
         Case[][] plateau = navigation.moteur.plateau.plateau;
         for(int i = 0 ; i < plateau.length ; i++)
@@ -207,6 +213,13 @@ public class ControleurJeu  extends ControleurBase {
         pingouinSel = null;
         suprimerCasesAccessible();
         effacerAmpoule();
+    }
+    
+    private void miseAJourAnnulerRefaireIndiceActive()
+    {
+        btnUndo.setDisable(navigation.moteur.coupJoues.isEmpty() || navigation.moteur.estEnReseau);
+        btnRedo.setDisable(navigation.moteur.coupAnnules.isEmpty() || navigation.moteur.estEnReseau);
+        btnIndice.setDisable(!(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain));
     }
     
     @FXML
@@ -545,7 +558,8 @@ public class ControleurJeu  extends ControleurBase {
                     {
                         @Override
                         public void run()
-                        {                        
+                        {          
+                            miseAJourAnnulerRefaireIndiceActive();
                             estEnAttente.set(false);
                             if(!jeuInterrompu.get())
                             {                               
@@ -688,6 +702,7 @@ public class ControleurJeu  extends ControleurBase {
                 navigation.moteur = navigation.moteur.coupJoues.pop();            
                 miseAJourAnnulerRefaire(dernierCoupJoue, null);
             } while(!navigation.moteur.queDesIA && !navigation.moteur.coupJoues.isEmpty() && !(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain));
+            miseAJourAnnulerRefaireIndiceActive();
             if(!navigation.moteur.queDesIA)
             {
                 reprendre();
@@ -725,6 +740,7 @@ public class ControleurJeu  extends ControleurBase {
                 /*jeuInterrompu = false;
                 tourSuivant();*/
             } while(!navigation.moteur.queDesIA && !navigation.moteur.coupAnnules.isEmpty() && !(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain));
+            miseAJourAnnulerRefaireIndiceActive();
             if(!navigation.moteur.queDesIA)
             {
                 reprendre();

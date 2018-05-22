@@ -145,8 +145,28 @@ public class ControleurJeu  extends ControleurBase {
             {
                 ColorAdjust afk_color = new ColorAdjust();
                 afk_color.setBrightness(-0.5);
-                ImageView tbAll = (ImageView) anchorPane.lookup("#"+i+"_gui");
-                tbAll.setEffect(afk_color);
+                AnchorPane gui_all = (AnchorPane) anchorPane.lookup("#"+i+"_gui_all");
+                ImageView gui_background = (ImageView) anchorPane.lookup("#"+i+"_gui");
+                gui_background.setEffect(afk_color);
+                
+                if(i == 0 || i == 3)
+                {
+                    TranslateTransition translateGUI = new TranslateTransition(Duration.seconds(1), gui_all);
+                    translateGUI.setCycleCount(1);
+                    translateGUI.setAutoReverse(false);
+                    translateGUI.setFromX(- gui_background.getFitWidth());
+                    translateGUI.setToX(0);
+                    translateGUI.play();
+                }
+                else if(i == 1 || i == 2)
+                {
+                    TranslateTransition translateGUI = new TranslateTransition(Duration.seconds(1), gui_all);
+                    translateGUI.setCycleCount(1);
+                    translateGUI.setAutoReverse(false);
+                    translateGUI.setFromX(gui_background.getX() + gui_background.getFitWidth());
+                    translateGUI.setToX(gui_background.getX());
+                    translateGUI.play();
+                }
             }
             ArrayList<Integer> couleursPrises = new ArrayList<>();
             for(int i = 0 ; i<navigation.moteur.joueurs.length ; i++ )

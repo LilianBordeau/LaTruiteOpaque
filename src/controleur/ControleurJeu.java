@@ -35,6 +35,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import modele.Case;
 import modele.Constantes;
@@ -987,9 +988,6 @@ public class ControleurJeu  extends ControleurBase {
         lineFantome.setEndY(yArr);
         lineFantome.setStroke(Constantes.couleurJoueur(navigation.moteur.joueurs[navigation.moteur.joueurPrecedent]));
         lineFantome.setVisible(true);
-        
-        
-        
         
     }
          

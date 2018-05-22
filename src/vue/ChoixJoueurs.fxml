@@ -9,12 +9,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import vue.SimpleImageView?>
+<?import vue.MyTextField?>
 <?import javafx.scene.shape.Line?>
 <?import java.net.URL?>
 <?import vue.PanelSonManager?>
 <?import vue.SimpleImageView?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurChoixJoueurs"-->
+<AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurChoixJoueurs"-->
         <children>
             
            
@@ -52,7 +53,7 @@
         </StackPane>
         <StackPane fx:id="nomBleu" layoutX="170" layoutY="243" prefHeight="25.0" prefWidth="150.0" >
               <children>
-                <TextField visible="true"   />
+                <MyTextField fx:id="champNomJoueur0" visible="true"   />
                 <Text  text="Joueur 1" visible="false"/>      
             </children>
         </StackPane>
@@ -94,7 +95,7 @@
         
         <StackPane fx:id="nomJaune" layoutX="471" layoutY="243" prefHeight="25.0" prefWidth="150.0"  >
             <children>
-                <TextField layoutX="115.0" layoutY="68" visible="true"   />
+                <MyTextField fx:id="champNomJoueur1" layoutX="115.0" layoutY="68" visible="true"   />
                 <Text  text="Joueur 2" visible="false"/>      
             </children>
         </StackPane>
@@ -128,7 +129,7 @@
         
         <StackPane fx:id="nomRouge" layoutX="170" layoutY="504" prefHeight="25.0" prefWidth="150.0">
             <children>
-                <TextField visible="false"   />
+                <MyTextField fx:id="champNomJoueur2" visible="false"   />
                 <Text  text="Aucun" visible="true"/>      
             </children>
         </StackPane>
@@ -163,7 +164,7 @@
         
         <StackPane  fx:id="nomVert" layoutX="471" layoutY="504" prefHeight="25.0" prefWidth="150.0"  >
         <children>
-                <TextField  visible="false"   />
+                <MyTextField fx:id="champNomJoueur3"  visible="false"   />
                  <Text  text="Aucun" visible="true"/>     
             </children>
         </StackPane>

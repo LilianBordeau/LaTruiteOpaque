@@ -3,6 +3,8 @@ package controleur;
 import java.io.IOException;
 import java.net.BindException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.animation.RotateTransition;
@@ -17,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -32,27 +35,31 @@ import modele.Moteur;
 import reseau.Connexion;
 import reseau.ConnexionServeur;
 import util.Couple;
+import vue.MyTextField;
 
 public class ControleurChoixJoueurs extends ControleurBase
 {    
     
-    int BLEU = 0;
-    int JAUNE = 1;
-    int ROUGE = 2;
-    int VERT = 3;
-    String[] TYPEJOUEURHORSRESEAU = {"JOUEUR", "IA FACILE", "IA MOYENNE", "IA DIFFICILE", "AUCUN"};
-    String[] TYPEJOUEURENRESEAU = {"JOUEUR", "IA FACILE", "IA MOYENNE", "IA DIFFICILE", "AUCUN","JOUEUR EN RESEAU"};
-    String[] TYPEJOUEUR;
-    String[] COULEUR = {"VIOLET","JAUNE","ROUGE","VERT"};
-    int JOUEURREEL = 0;    
-    int IAFACILE = 1;
-    int IAMOYENNE = 2;
-    int IADIFFICILE = 3;
-    int AUCUNJOUEUR = 4;
-    int JOUEURRESEAU = 5;
+    final int BLEU = 0;
+    final int JAUNE = 1;
+    final int ROUGE = 2;
+    final int VERT = 3;
+    final String[] TYPEJOUEURHORSRESEAU = {"JOUEUR", "IA FACILE", "IA MOYENNE", "IA DIFFICILE", "AUCUN"};
+    //final String[] TYPEJOUEURENRESEAU = {"JOUEUR", "IA FACILE", "IA MOYENNE", "IA DIFFICILE", "AUCUN","JOUEUR EN RESEAU"};
+    String[] typeJoueur;
+    final String[] COULEUR = {"VIOLET","JAUNE","ROUGE","VERT"};
+    final int JOUEURREEL = 0;    
+    final int IAFACILE = 1;
+    final int IAMOYENNE = 2;
+    final int IADIFFICILE = 3;
+    final int AUCUNJOUEUR = 4;
+   final  int JOUEURRESEAU = 5;
     
     
     int nombreDeJoueurs = 2;
+    
+    @FXML
+    private AnchorPane anchorPane;
     
     @FXML
     private Button btnCommencer;
@@ -94,17 +101,16 @@ public class ControleurChoixJoueurs extends ControleurBase
         
         if(typeJoueur == JOUEURREEL)
         {
-            textfield = (TextField) nomCouleur.getChildren().get(0);
+            textfield = (MyTextField) nomCouleur.getChildren().get(0);
             textfield.setVisible(true);
             textfield.setAlignment(Pos.CENTER);
             textfield.setText("Joueur " + COULEUR[couleur]);
-
             text = (Text) nomCouleur.getChildren().get(1);
             text.setVisible(false);
         }
         else
         {
-            String message =  TYPEJOUEUR[ typesJoueur[couleur] ];
+            String message =  this.typeJoueur[ typesJoueur[couleur] ];
             nomCouleur.getChildren().get(0).setVisible(false);
             if(typesJoueur[couleur] == IAFACILE || typesJoueur[couleur] == IAMOYENNE || typesJoueur[couleur] == IADIFFICILE )
             { 
@@ -121,27 +127,32 @@ public class ControleurChoixJoueurs extends ControleurBase
     public void onAppearing()
     {  
         enAttente.set(false);
-        navigation.afficherPopupErreur = true;
+        navigation.afficherPopupErreur = true;        
         if(navigation.enReseau)
         {
-            TYPEJOUEUR = TYPEJOUEURENRESEAU;
+            typeJoueur = new String[TYPEJOUEURHORSRESEAU.length+1];
+            for(int i = 0 ; i < TYPEJOUEURHORSRESEAU.length ; i++)
+            {
+                typeJoueur[i] = TYPEJOUEURHORSRESEAU[i];
+            }
+            typeJoueur[typesJoueur.length-1] = "JOUEUR EN RESEAU";
             setJoueur(JAUNE,imagesJaune,nomJaune,JOUEURRESEAU);
         }
         else
         {
-            TYPEJOUEUR = TYPEJOUEURHORSRESEAU;
+            typeJoueur = TYPEJOUEURHORSRESEAU;
             setJoueur(JAUNE,imagesJaune,nomJaune,JOUEURREEL);
         }
         nombreDeJoueurs = 2;
         deplacements =  new HashMap<>();
-        deplacements.put(precedentBleu,     new Couple(0,-1));
-        deplacements.put(suivantBleu,       new Couple(0,1));
-        deplacements.put(precedentJaune,    new Couple(1,-1));
-        deplacements.put(suivantJaune,      new Couple(1,1));
-        deplacements.put(precedentRouge,    new Couple(2,-1));
-        deplacements.put(suivantRouge,      new Couple(2,1));
-        deplacements.put(precedentVert,     new Couple(3,-1));
-        deplacements.put(suivantVert,       new Couple(3,1));
+        deplacements.put(precedentBleu,     new Couple<>(0,-1));
+        deplacements.put(suivantBleu,       new Couple<>(0,1));
+        deplacements.put(precedentJaune,    new Couple<>(1,-1));
+        deplacements.put(suivantJaune,      new Couple<>(1,1));
+        deplacements.put(precedentRouge,    new Couple<>(2,-1));
+        deplacements.put(suivantRouge,      new Couple<>(2,1));
+        deplacements.put(precedentVert,     new Couple<>(3,-1));
+        deplacements.put(suivantVert,       new Couple<>(3,1));
 
         
         
@@ -163,8 +174,18 @@ public class ControleurChoixJoueurs extends ControleurBase
         transitionSablier.setByAngle(359);
         transitionSablier.setCycleCount(Transition.INDEFINITE);
         transitionSablier.play();
+        int maxlength = 1+longueurChaineMaxDuTableau(TYPEJOUEURHORSRESEAU)+longueurChaineMaxDuTableau(COULEUR);
+        for(int i = 0 ; i < 4 ; i++)
+        {
+            ((MyTextField)anchorPane.lookup("#champNomJoueur"+i)).maxlength = maxlength;
+        }
         //onAppearing();
        
+    }
+    
+    private int longueurChaineMaxDuTableau(String[] chaines)
+    {
+        return Arrays.asList(chaines).stream().map(x -> x.length()).max(Comparator.<Integer>naturalOrder()).get();
     }
     
     
@@ -203,9 +224,9 @@ public class ControleurChoixJoueurs extends ControleurBase
     private void changerAffichage(int couleur, int rotation) {
         
         
-        int nouveauType =  (typesJoueur[couleur] + rotation) % TYPEJOUEUR.length;
+        int nouveauType =  (typesJoueur[couleur] + rotation) % typeJoueur.length;
         
-        if(nouveauType < 0){ nouveauType = TYPEJOUEUR.length-1;}
+        if(nouveauType < 0){ nouveauType = typeJoueur.length-1;}
         
         setJoueur(couleur,imagesJoueur[couleur],nomsJoueur[couleur],nouveauType);
         

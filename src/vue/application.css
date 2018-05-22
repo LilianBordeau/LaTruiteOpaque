@@ -74,3 +74,12 @@
     -fx-scale-y: 1;
     -fx-padding: 0 0 0 -2;
 }
+
+.tuto {
+    /*-fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-border-color: red;*/
+    -fx-alignment: TOP_LEFT;
+    -fx-wrap-text: true;
+    -fx-text-alignment: justify;
+}

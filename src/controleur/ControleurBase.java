@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
@@ -54,6 +55,11 @@ public abstract class ControleurBase implements Initializable
     
     public final void onAppearingCommun()
     {
+        Scene scene = panelSonManager.getScene();
+        if(scene != null)
+        {
+            scene.setCursor(Cursor.DEFAULT);
+        }
         panelSonManager.sliderMusique.setValue((int)navigation.sonManager.volumeMusique);
         panelSonManager.sliderSon.setValue((int)navigation.sonManager.volumeSon);
         

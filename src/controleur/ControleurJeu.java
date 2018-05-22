@@ -17,10 +17,13 @@ import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -50,6 +53,7 @@ import modele.Plateau;
 import modele.Point;
 import reseau.UnverifiedIOException;
 import thread.MyThread;
+import vue.MyButton;
 
 public class ControleurJeu  extends ControleurBase {
     private static final String DEBUTIDTUILE = "c";
@@ -62,6 +66,7 @@ public class ControleurJeu  extends ControleurBase {
     public ArrayList<Point> casesAccessibles;
     public SimpleBooleanProperty estEnAttente;
     private SimpleBooleanProperty jeuInterrompu;
+    private SimpleBooleanProperty afficherCurseurAttente;
 	public ImageView pingouinMvt;
  	ImageView pingouinFantome;
     ImageView tuileFantome;    
@@ -70,10 +75,10 @@ public class ControleurJeu  extends ControleurBase {
     Line lineAmpoule;
     
     @FXML
-    Button btnUndo,btnRedo,btnPause,btnIndice;
+    MyButton btnUndo,btnRedo,btnPause,btnIndice;
     
     @FXML 
-    Button recommencer,save;
+    MyButton recommencer,save;
     
     @FXML
     Group groupEnPause;
@@ -98,7 +103,21 @@ public class ControleurJeu  extends ControleurBase {
     {
         estEnAttente = new SimpleBooleanProperty(false);
         jeuInterrompu = new SimpleBooleanProperty(false);
+        afficherCurseurAttente = new SimpleBooleanProperty(false);
         sablier.visibleProperty().bind(estEnAttente.and(jeuInterrompu.not()));
+        afficherCurseurAttente.bind(sablier.visibleProperty().and(save.hoverProperty().not()).and(btnUndo.hoverProperty().not()).and(btnRedo.hoverProperty().not()).and(btnPause.hoverProperty().not()).and(btnIndice.hoverProperty().not()).and(recommencer.hoverProperty().not()));
+        afficherCurseurAttente.addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)
+            {
+                Scene scene = anchorPane.getScene();
+                if(scene != null)
+                {
+                    scene.setCursor(newValue ? Cursor.WAIT : Cursor.DEFAULT);
+                }
+            }
+        });        
         RotateTransition transitionSablier = new RotateTransition(Duration.millis(2500), sablier);
         transitionSablier.setFromAngle(0);
         transitionSablier.setByAngle(359);
@@ -219,7 +238,13 @@ public class ControleurJeu  extends ControleurBase {
     {
         btnUndo.setDisable(navigation.moteur.coupJoues.isEmpty() || navigation.moteur.estEnReseau);
         btnRedo.setDisable(navigation.moteur.coupAnnules.isEmpty() || navigation.moteur.estEnReseau);
-        btnIndice.setDisable(!(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain));
+        boolean estJoueurCourantHumain = navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain;
+        btnIndice.setDisable(!estJoueurCourantHumain);
+        Scene scene = anchorPane.getScene();
+        if(scene != null && !estJoueurCourantHumain)
+        {
+            scene.setCursor(Cursor.DEFAULT);
+        }
     }
     
     @FXML
@@ -299,6 +324,30 @@ public class ControleurJeu  extends ControleurBase {
                 finDuTour(nouveauxPingouinsBloques);
             }
         }        
+    }
+    
+    @FXML
+    private void survolTuile(MouseEvent event)
+    {
+        Scene scene = anchorPane.getScene();
+        ImageView tuileGraphique = (ImageView)event.getSource();
+        Point coordonnees = idToIndices(tuileGraphique.getId()); 
+        if(scene != null && navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain
+           && (navigation.moteur.placementPossible(coordonnees.ligne, coordonnees.colonne) || casesAccessibles.contains(coordonnees)
+                || (navigation.moteur.pingouinsPlaces() && navigation.moteur.contientJoueurCourant(coordonnees.ligne, coordonnees.colonne))))
+        {
+            scene.setCursor(Cursor.HAND);
+        }
+    }
+    
+    @FXML
+    private void sortieTuile(MouseEvent event)
+    {
+        Scene scene = anchorPane.getScene();
+        if(scene != null && !sablier.visibleProperty().get())
+        {
+            scene.setCursor(Cursor.DEFAULT);
+        }
     }
 
    private void miseAJourInfoJeu()

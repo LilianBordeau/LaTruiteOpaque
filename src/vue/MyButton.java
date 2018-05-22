@@ -5,6 +5,7 @@
  */
 package vue;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -19,9 +20,8 @@ import javafx.scene.input.MouseEvent;
 public class MyButton extends Button {
     public Runnable afterOnMouseEntered;
     public Runnable afterOnMouseExited;
-    
     public MyButton()
-    {
+    {        
         super();
         afterOnMouseEntered = this::afterOnMouseEnteredMethod;
         afterOnMouseExited = this::afterOnMouseExitedMethod;

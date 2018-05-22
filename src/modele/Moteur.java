@@ -65,29 +65,26 @@ public class Moteur implements Serializable,Cloneable
 
     // renvoie null si le placement n'est pas possible ou la liste des nouveaux pingouins bloques sinon
     public ArrayList<Point> placerPingouin(int i, int j)
-    {
-        Case caseCourante = plateau.plateau[i][j];
-        if(!pingouinsPlaces())
-        {
-            if(caseCourante.peutPlacerPingouin())
-            {        
+    {        
+        if(placementPossible(i,j))
+        {   
                 Moteur moteurAvantCoup = this.clone();
                 Pingouin pingouin = new Pingouin(i,j,joueurCourant);
                 joueurs[joueurCourant].ajouterPingouin(pingouin);
-                caseCourante.ajouterPingouin(pingouin);
+                plateau.plateau[i][j].ajouterPingouin(pingouin);
                 nbPingouinsPlaces++;
                 dernierCoupJoue = new Point(i,j);
                 return finTour(i, j, moteurAvantCoup);
-            }
-            else
-            {
-                return null;
-            }
         }
         else
         {
             return null;
         }
+    }
+    
+    public boolean placementPossible(int i, int j)
+    {
+        return !pingouinsPlaces() && plateau.plateau[i][j].peutPlacerPingouin();
     }
     
     public ArrayList<Point> deplacementsPossibles(int ligne, int colonne)
@@ -151,7 +148,7 @@ public class Moteur implements Serializable,Cloneable
     {
         ArrayList<Point> deplacements = new ArrayList<>();
         ArrayList<Integer> indicesDirections = new ArrayList<>();
-        if(plateau.plateau[ligne][colonne].contientPingouin(joueurCourant))
+        if(contientJoueurCourant(ligne, colonne) && !plateau.plateau[ligne][colonne].pingouin.estBloque)
         {    
             ajouterDeplacementsHorizontaux(deplacements, indicesDirections, ligne, colonne-1, -1, -1);
             ajouterDeplacementsHorizontaux(deplacements, indicesDirections, ligne, colonne+1, Plateau.nbTuilesLigne(ligne), 1);
@@ -212,7 +209,7 @@ public class Moteur implements Serializable,Cloneable
     // renvoie null si le deplacement n'est pas possible ou la liste des nouveaux pingouins bloques sinon
     public ArrayList<Point> deplacerPingouin(int ligneSource, int colonneSource, int ligneDest, int colonneDest)
     {
-        if(contientJoueurCourant(ligneSource, colonneSource) && deplacementsPossibles(ligneSource, colonneSource).contains(new Point(ligneDest,colonneDest)))
+        if(estDeplacementPossible(ligneSource, colonneSource, ligneDest, colonneDest))
         {
             Moteur moteurAvantCoup = this.clone();
             Case ancienneCase = plateau.plateau[ligneSource][colonneSource].enleverPingouin();
@@ -226,6 +223,11 @@ public class Moteur implements Serializable,Cloneable
         {
             return null;
         }
+    }
+    
+    public boolean estDeplacementPossible(int ligneSource, int colonneSource, int ligneDest, int colonneDest)
+    {
+        return pingouinsPlaces() && contientJoueurCourant(ligneSource, colonneSource) && deplacementsPossibles(ligneSource, colonneSource).contains(new Point(ligneDest,colonneDest));
     }
     
     public boolean peutDeplacerPingouin(Pingouin pingouin)

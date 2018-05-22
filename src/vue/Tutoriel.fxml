@@ -224,9 +224,9 @@
         
             <Label  fx:id="labelTitre" styleClass="tuto" layoutX="380" layoutY="340" prefHeight="190" prefWidth="360"/>
             
-            <Button fx:id="suivant" layoutX="650" layoutY="540" prefWidth="75" text="Suivant" onAction="#clicSuivant">  </Button>
+            <MyButton fx:id="suivant" layoutX="650" layoutY="540" prefWidth="75" text="Suivant" onAction="#clicSuivant">  </MyButton>
             
-            <Button fx:id="retour" styleClass="btn"  layoutX="15.0" layoutY="535.0" mnemonicParsing="false" prefWidth="150.0" onAction="#retourMenu" >
+            <MyButton fx:id="retour" styleClass="btn"  layoutX="15.0" layoutY="535.0" mnemonicParsing="false" prefWidth="150.0" onAction="#retourMenu" >
                 
             <graphic>
                 <ImageView   pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">

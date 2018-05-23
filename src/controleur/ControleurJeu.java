@@ -378,16 +378,22 @@ public class ControleurJeu  extends ControleurBase {
             }
             texteInfoJeu += ")";
         }*/        
-            int joueurPrec = ((navigation.moteur.joueurPrecedent==-1)?0:navigation.moteur.joueurPrecedent);
+            //int joueurPrec = ((navigation.moteur.joueurPrecedent==-1)?0:navigation.moteur.joueurPrecedent);
             
             ColorAdjust afk_color = new ColorAdjust();
             ColorAdjust active_color = new ColorAdjust();
             afk_color.setBrightness(0);
             active_color.setBrightness(-0.5);
             
-            ImageView tb2 = (ImageView) anchorPane.lookup("#"+navigation.moteur.joueurs[joueurPrec].couleur+"_gui");
+            for(int i = 0 ; i < 4 ; i++)
+            {
+                ImageView tb2 = (ImageView) anchorPane.lookup("#"+i+"_gui");
+                tb2.setImage(new Image("Images/gui/"+i+"_gui_afk.png"));
+                tb2.setEffect(afk_color);
+            }
+            /*ImageView tb2 = (ImageView) anchorPane.lookup("#"+navigation.moteur.joueurs[joueurPrec].couleur+"_gui");
             tb2.setImage(new Image("Images/gui/"+navigation.moteur.joueurs[joueurPrec].couleur+"_gui_afk.png"));
-            tb2.setEffect(afk_color);
+            tb2.setEffect(afk_color);*/
             
             ImageView tb = (ImageView) anchorPane.lookup("#"+navigation.moteur.joueurs[navigation.moteur.joueurCourant].couleur+"_gui");
             tb.setImage(new Image("Images/gui/"+navigation.moteur.joueurs[navigation.moteur.joueurCourant].couleur+"_gui_active.png"));
@@ -409,7 +415,7 @@ public class ControleurJeu  extends ControleurBase {
             fadeInTimeline.getKeyFrames().add(kf2);
             fadeInTimeline.play();
                     
-            joueurPrec = navigation.moteur.joueurCourant;
+            //joueurPrec = navigation.moteur.joueurCourant;
             
             for(int i=0;i< navigation.moteur.joueurs.length ;i++)
             {

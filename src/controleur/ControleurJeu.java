@@ -49,6 +49,7 @@ import modele.JoueurAAttendre;
 import modele.JoueurClient;
 import modele.JoueurHumain;
 import modele.JoueurReseau;
+import modele.Pingouin;
 import modele.Plateau;
 import modele.Point;
 import reseau.UnverifiedIOException;
@@ -64,11 +65,12 @@ public class ControleurJeu  extends ControleurBase {
     public ImageView[][] tuiles;
     public Point pingouinSel;
     public ArrayList<Point> casesAccessibles;
+    public ArrayList<Point> casesJoueurCourant;
     public SimpleBooleanProperty estEnAttente;
     private SimpleBooleanProperty jeuInterrompu;
     private SimpleBooleanProperty boutonActifSurvole;
-	public ImageView pingouinMvt;
- 	ImageView pingouinFantome;
+    public ImageView pingouinMvt;
+    ImageView pingouinFantome;
     ImageView tuileFantome;    
     private Line lineFantome;
     Point positionAmpoule;
@@ -127,7 +129,7 @@ public class ControleurJeu  extends ControleurBase {
         anchorPane.getChildren().add(pingouinMvt);
         anchorPane.getChildren().add(lineFantome);
         casesAccessibles = new ArrayList<>();      
-        
+        casesJoueurCourant = new ArrayList<>();   
         btnUndo.setPadding(Insets.EMPTY);
         btnRedo.setPadding(Insets.EMPTY);
         btnPause.setPadding(Insets.EMPTY);
@@ -223,9 +225,7 @@ public class ControleurJeu  extends ControleurBase {
                 }
             }
         hideFinPartie();
-        miseAJourInfoJeu();
         reprendre();
-        
     }
     
     public void initPartie()
@@ -235,6 +235,8 @@ public class ControleurJeu  extends ControleurBase {
         pingouinSel = null;
         suprimerCasesAccessible();
         effacerAmpoule();
+        miseAJourInfoJeu();
+
     }
     
     private void miseAJourAnnulerRefaireIndiceActive()
@@ -426,10 +428,48 @@ public class ControleurJeu  extends ControleurBase {
                 
                 label.setText(Integer.toString(navigation.moteur.joueurs[i].scorePoisson));
                 label2.setText(Integer.toString(navigation.moteur.joueurs[i].scoreTuile));
-               
             }
-        
+            suprimerCasesAccessible();
+            suprimerCasesJoueurCourant();
+            if(!navigation.moteur.pingouinsPlaces())
+            {  
+               
+                Case[][] plateau = navigation.moteur.plateau.plateau;
+                for(int i = 0 ; i < plateau.length ; i++)
+                {
+                    for(int j = 0 ; j < Plateau.nbTuilesLigne(i) ; j++)
+                    {
+                        Case c  = navigation.moteur.plateau.plateau[i][j];
+                        if(c.peutPlacerPingouin())
+                        {
+                            ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDCASEACCESSIBLE));
+                            Image image = new Image(Constantes.nomImageCaseAccessible(navigation.moteur.joueurs[navigation.moteur.joueurCourant]));
+                            tuileGraphique.setImage(image);
+                            tuileGraphique.setVisible(true); 
+                            casesAccessibles.add(new Point(i,j));
+                        }
+
+                    }
+                }   
+            }
+            
+            if(navigation.moteur.pingouinsPlaces())
+            {          
+               
+                int joueurCourant = navigation.moteur.joueurCourant;
+                ArrayList<Pingouin> pingouinsJoueurCourant = navigation.moteur.joueurs[joueurCourant].pingouins;
+                for(Pingouin p : pingouinsJoueurCourant)
+                {
+                    ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(p.ligne,p.colonne, DEBUTIDCASEACCESSIBLE));
+                    Image image = new Image(Constantes.nomImageCaseAccessible(navigation.moteur.joueurs[navigation.moteur.joueurCourant]));
+                    tuileGraphique.setImage(image);
+                    tuileGraphique.setVisible(true); 
+                    casesJoueurCourant.add(new Point(p.ligne,p.colonne));
+                    
+                }
+            }
     }
+            
    
     private void miseAJourTuile(int i, int j)
     {
@@ -487,6 +527,19 @@ public class ControleurJeu  extends ControleurBase {
                    it.remove();
                 }    
     }
+        public void suprimerCasesJoueurCourant() {
+               Iterator it = casesJoueurCourant.iterator();
+                while(it.hasNext())
+                {   
+                    Point p = (Point) it.next();
+                    ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(p.ligne,p.colonne, DEBUTIDCASEACCESSIBLE));
+                    tuileGraphique.setImage(null);
+                    tuileGraphique.setVisible(false);  
+                    it.remove();
+                }  
+    }
+    
+     
 
     private void tourSuivant()
     {

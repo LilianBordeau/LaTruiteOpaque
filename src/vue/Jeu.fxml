@@ -20,36 +20,36 @@
     
       <AnchorPane fx:id="0_gui_all" layoutX="0" layoutY="10">
         <SimpleImageView fx:id="0_gui" fitWidth="120" preserveRatio="true" url="Images/gui/0_gui_afk.png" />
-        <Label fx:id="0_score" styleClass="gui_score" layoutX="35" layoutY="9" text="0" />
-        <Label fx:id="0_tuille" styleClass="gui_score" layoutX="35" layoutY="34" text="0" />
-        <Label fx:id="0_nom" styleClass="gui_infos" layoutX="5" layoutY="77"/>
+        <Label fx:id="0_score" styleClass="gui_score" layoutX="27" layoutY="9" text="0" prefWidth="25"/>
+        <Label fx:id="0_tuille" styleClass="gui_score" layoutX="27" layoutY="34" text="0" prefWidth="25"/>
+        <Label fx:id="0_nom" styleClass="gui_infos" layoutX="3" layoutY="75" prefHeight="18" prefWidth="92"/>
       </AnchorPane>
 
       <!-- Joueur 2 (haut droite) -->
       
       <AnchorPane fx:id="1_gui_all" layoutX="679" layoutY="10">
         <SimpleImageView  fx:id="1_gui" fitWidth="120" preserveRatio="true" url="Images/gui/1_gui_afk.png" />
-        <Label fx:id="1_score" styleClass="gui_score" layoutX="75" layoutY="9" text="0" />
-        <Label fx:id="1_tuille" styleClass="gui_score" layoutX="75" layoutY="34" text="0" />
-        <Label fx:id="1_nom" styleClass="gui_infos" layoutX="27" layoutY="77"  />
+        <Label fx:id="1_score" styleClass="gui_score" layoutX="68" layoutY="9" text="0" prefWidth="25"/>
+        <Label fx:id="1_tuille" styleClass="gui_score" layoutX="68" layoutY="34" text="0" prefWidth="25"/>
+        <Label fx:id="1_nom" styleClass="gui_infos" layoutX="25" layoutY="75" prefHeight="18" prefWidth="92"/>
       </AnchorPane>
       
       <!-- Joueur 3 (bas droite) -->
       
       <AnchorPane fx:id="2_gui_all" layoutX="679" layoutY="495">
         <SimpleImageView  fx:id="2_gui" fitWidth="120" preserveRatio="true" url="Images/gui/2_gui_afk.png" />
-        <Label fx:id="2_score" styleClass="gui_score" layoutX="75" layoutY="9" text="0" />
-        <Label fx:id="2_tuille" styleClass="gui_score" layoutX="75" layoutY="34" text="0" />
-        <Label fx:id="2_nom" styleClass="gui_infos" layoutX="27" layoutY="77"/>
+        <Label fx:id="2_score" styleClass="gui_score" layoutX="68" layoutY="9" text="0" prefWidth="25"/>
+        <Label fx:id="2_tuille" styleClass="gui_score" layoutX="68" layoutY="34" text="0" prefWidth="25"/>
+        <Label fx:id="2_nom" styleClass="gui_infos" layoutX="25" layoutY="75" prefHeight="18" prefWidth="92"/>
       </AnchorPane>
       
       <!-- Joueur 4 (bas gauche) -->
       
       <AnchorPane fx:id="3_gui_all" layoutX="0" layoutY="495">
         <SimpleImageView  fx:id="3_gui" fitWidth="120" preserveRatio="true" url="Images/gui/3_gui_afk.png" />
-        <Label fx:id="3_score" styleClass="gui_score" layoutX="35" layoutY="9" text="0" />
-        <Label fx:id="3_tuille" styleClass="gui_score" layoutX="35" layoutY="34" text="0" />
-        <Label fx:id="3_nom" styleClass="gui_infos" layoutX="5" layoutY="77" />
+        <Label fx:id="3_score" styleClass="gui_score" layoutX="27" layoutY="9" text="0" prefWidth="25"/>
+        <Label fx:id="3_tuille" styleClass="gui_score" layoutX="27" layoutY="34" text="0" prefWidth="25"/>
+        <Label fx:id="3_nom" styleClass="gui_infos" layoutX="3" layoutY="75" prefHeight="18" prefWidth="92"/>
       </AnchorPane>
       
       <SimpleImageView fitHeight="60" fitWidth="250" layoutX="275" layoutY="0" url="Images/panneauPlacementDeplacement.png" />

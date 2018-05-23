@@ -1,8 +1,3 @@
-.root{
-    -fx-font-size: 14pt;
-    -fx-font-family: "Guns n' Flash Comix";
-}
-
 .btn {
     -fx-background-color: transparent;  
 }
@@ -52,11 +47,13 @@
 }
 
 .gui_infos {
+    -fx-alignment: CENTER;
     -fx-text-fill: #d7d7d7;
-    -fx-font-size: 9px;
+    -fx-font-size: 10px;
 }
 
 .gui_score {
+    -fx-alignment: CENTER;
     -fx-text-fill: #d7d7d7;
     -fx-font-size: 14px;
 }

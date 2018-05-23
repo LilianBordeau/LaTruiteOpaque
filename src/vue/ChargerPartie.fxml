@@ -16,15 +16,35 @@
 <AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurChoixJoueurs"-->
     <children>
         
-         <ImageView layoutX="0" layoutY="0" fitHeight="600" fitWidth="800">
-                <image>
-                    <Image url="Images/cj_background.png" />
-                </image>    
+        <ImageView layoutX="0" layoutY="0" fitHeight="600" fitWidth="800">
+               <image>
+                   <Image url="Images/cj_background.png" />
+               </image>    
         </ImageView>
+    
+    <Text fx:id="valeurPageActuelle" layoutX="390" layoutY="45"  text="/" />       
+    <Text layoutX="400" layoutY="45"  text="/" />      
+    <Text fx:id="valeurNbPage" layoutX="410" layoutY="45"  text="/" />   
+    
+    <MyButton fx:id="precedent" styleClass="btn" layoutX="5" layoutY="95"  onAction="#precedent" >
+        <graphic>
+            <SimpleImageView fitHeight="30" fitWidth="30" url="Images/arriere.png"  pickOnBounds="true" preserveRatio="true"/>
+        </graphic>
+    </MyButton>
+
+    <MyButton fx:id="suivant" styleClass="btn" layoutX="755" layoutY="95" onAction="#suivant">
+       <graphic>
+            <SimpleImageView fitHeight="30" fitWidth="30" url="Images/avant.png"  pickOnBounds="true" preserveRatio="true"/>
+        </graphic>
+    </MyButton>
+        
+        
+        
         
     <SimpleImageView  fx:id="image0" url="Images/tuilevierge.png" layoutX="50" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#selectEmplacement"/>
     <Text fx:id="date0" layoutX="60" layoutY="95" text="Date : " mouseTransparent="true"/>
     <Text fx:id="nom0" layoutX="60" layoutY="125" text="Nom : " mouseTransparent="true"/>
+    <Text fx:id="vide0" layoutX="90" layoutY="120" text="Sauvegarde  vide" mouseTransparent="true"/>
     <SimpleImageView fx:id="selected0" url="Images/accessible3.png" layoutX="50" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" smooth="true" visible="false" />
     <SimpleImageView fx:id="trash0" url="Images/trash.png" layoutX="138" layoutY="150" fitHeight="25" fitWidth="25" preserveRatio="true" visible="true" smooth="true" pickOnBounds="false" onMouseClicked="#showDialogTrash"/>
 
@@ -33,6 +53,7 @@
     <SimpleImageView fx:id="image1" url="Images/tuilevierge.png" layoutX="300" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#selectEmplacement"/>
     <Text  fx:id="date1" layoutX="310" layoutY="95" text="Date : " mouseTransparent="true"/>   
     <Text fx:id="nom1" layoutX="310" layoutY="125" text="Nom : " mouseTransparent="true"/>
+    <Text fx:id="vide1" layoutX="340" layoutY="120" text="Sauvegarde  vide" mouseTransparent="true"/>
     <SimpleImageView fx:id="selected1" url="Images/accessible3.png" layoutX="300" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" smooth="true" visible="false" />
     <SimpleImageView fx:id="trash1" url="Images/trash.png" layoutX="388" layoutY="150" fitHeight="25" fitWidth="25" preserveRatio="true" visible="true" smooth="true" pickOnBounds="false" onMouseClicked="#showDialogTrash"/>
 
@@ -41,6 +62,7 @@
     <SimpleImageView fx:id="image2" url="Images/tuilevierge.png" layoutX="550" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#selectEmplacement"/>
     <Text fx:id="date2" layoutX="560" layoutY="95" text="Date : " mouseTransparent="true"/>     
     <Text fx:id="nom2" layoutX="560" layoutY="125" text="Nom : " mouseTransparent="true"/>
+    <Text fx:id="vide2" layoutX="590" layoutY="120" text="Sauvegarde  vide" mouseTransparent="true"/>
     <SimpleImageView fx:id="selected2" url="Images/accessible3.png" layoutX="550" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" smooth="true" visible="false" />
     <SimpleImageView fx:id="trash2" url="Images/trash.png" layoutX="638" layoutY="150" fitHeight="25" fitWidth="25" preserveRatio="true" visible="true" smooth="true" pickOnBounds="false" onMouseClicked="#showDialogTrash" />
 

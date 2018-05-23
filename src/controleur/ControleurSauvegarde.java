@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -32,6 +33,7 @@ import modele.Constantes;
 import modele.Joueur;
 import modele.Moteur;
 import modele.Pingouin;
+import util.Couple;
 
 /**
  *
@@ -41,32 +43,38 @@ public class ControleurSauvegarde extends ControleurBase
 {
 
     int NBSAUVEGARDES = 3;
-    Moteur[] moteurs;
-    File[] files;
+    ArrayList<Couple> parties;
+     ArrayList<File> files;
     @FXML
     public AnchorPane anchorPane;
     @FXML
     public ImageView trash0,trash1,trash2;
     
     @FXML
-    public Text message;
+    public Text message,valeurNbPage,valeurPageActuelle;
     
     int tuileSelectionne;
     int tuileSupprimee;
     
+    int indicePage;
+    int nbPages;
+    
     @FXML
     public void initialize(URL location, ResourceBundle resources)
     {
-        moteurs = new Moteur[NBSAUVEGARDES];
-        files = new File[NBSAUVEGARDES];
+        
+  
     }
     
     @Override
     public void onAppearing()
     {
+        parties = new ArrayList<>();
+        files = new ArrayList<>();
         tuileSupprimee = -1;
         tuileSelectionne = -1;
         scanSaveFolder();
+        
        
     }
     
@@ -80,28 +88,14 @@ public class ControleurSauvegarde extends ControleurBase
           boolean res = (folder.mkdirs()); 
         }
         File[] filestmp = folder.listFiles();
-        
         for(File file : filestmp)
         {
             String[] params = file.getName().split("_");
             int indice = Integer.parseInt(params[0]); 
-            files[indice] = file;
-            showTuile(indice,params);
-            
-           moteurs[indice] = getMoteurFromFile(file);
-
-           
-        }
-        
- 
-        for(int i = 0 ; i< NBSAUVEGARDES;i++)
-        {
-            if(files[i] == null)
-            {
-                showTuileEmpty(i);
-            }
-        }
-      
+            Couple partie = new Couple(params,getMoteurFromFile(file));
+            parties.add(partie);
+            files.add(file);
+        }        
     }
     
     
@@ -121,11 +115,13 @@ public class ControleurSauvegarde extends ControleurBase
     }
     
     
-    private void showTuile(int i,String[] params)
+    public void showTuile(int i,String[] params)
     { 
             Text nom = (Text)anchorPane.lookup("#"+getNomId(i));
             nom.setText("Nom : " + params[1]);
             nom.setVisible(true);
+            Text invalide = (Text)anchorPane.lookup("#"+getVideId(i));
+            invalide.setVisible(false);
             Text date = (Text)anchorPane.lookup("#"+getDateId(i));
             String dateText = params[2].replace("-", "/");
             dateText = dateText.replaceFirst("[.][^.]+$", "");
@@ -144,6 +140,8 @@ public class ControleurSauvegarde extends ControleurBase
    
     public void showTuileEmpty(int i)
     {
+        Text invalide = (Text)anchorPane.lookup("#"+getVideId(i));
+        invalide.setVisible(true);
         Text nom = (Text)anchorPane.lookup("#"+getNomId(i));
         nom.setVisible(false);
         Text date = (Text)anchorPane.lookup("#"+getDateId(i));
@@ -178,6 +176,10 @@ public class ControleurSauvegarde extends ControleurBase
     public String getImageId(int i)
     {
         return "image"+i;
+    }
+    public String getVideId(int i)
+    {
+        return "vide"+i;
     }
     
     
@@ -256,13 +258,22 @@ public class ControleurSauvegarde extends ControleurBase
     
     public boolean deleteSave(int indice) 
     {
-        moteurs[indice] = null;
-        boolean res = files[indice].delete();
-        if(res)
+        if(indice +  (indicePage*3)< parties.size()  )
         {
-            files[indice] = null;
+            boolean res = files.get(indice).delete();
+            if(res)
+            {
+                files.set(indice,null);
+                parties.set(indice,null);
+            }
+            return res;
         }
-        return res;
+        else
+        {
+            return false;
+        }
+     
+        
     }
     
     
@@ -274,5 +285,12 @@ public class ControleurSauvegarde extends ControleurBase
     public void clearMessage()
     {
         message.setText("");
+    }
+    
+    
+    
+   
+    
+    private void showCurrentTuiles() {
     }
 }

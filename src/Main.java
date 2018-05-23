@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
@@ -116,7 +117,7 @@ public class Main extends Application {
         primaryStage.setWidth(LARGEURFENETREINIT);
         primaryStage.setHeight(HAUTEURFENETREINIT);
         primaryStage.centerOnScreen();
-        
+        scene.setCursor(Cursor.WAIT);
         primaryStage.show();
         
      

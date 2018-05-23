@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -50,6 +51,7 @@ public class PanelSonManager extends Group {
         screen.setBackground(Background.EMPTY);
         screen.setMaxWidth(30);
         screen.setMaxHeight(30);
+        screen.setTooltip(new Tooltip("Plein écran"));
         setHoverListener(screen);
         
        
@@ -63,6 +65,7 @@ public class PanelSonManager extends Group {
         imageMusique.setBackground(Background.EMPTY);
         imageMusique.setMaxWidth(30);
         imageMusique.setMaxWidth(30);
+        imageMusique.setTooltip(new Tooltip("Musique"));
         setHoverListener(imageMusique);
 
                 
@@ -78,6 +81,7 @@ public class PanelSonManager extends Group {
         imageSon.setBackground(Background.EMPTY);
         imageSon.setMaxWidth(30);
         imageSon.setMaxWidth(30);
+        imageSon.setTooltip(new Tooltip("Son"));
          setHoverListener(imageSon);
         
         sliderSon = new Slider();

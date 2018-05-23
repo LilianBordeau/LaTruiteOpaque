@@ -242,6 +242,7 @@
        <!-- <SimpleImageView  fx:id="rang4" fitWidth="300" fitHeight="200"  opacity="0.9" layoutX="200" layoutY="200" visible="false" url="Images/rang4.png" /> -->
         
         <Button  styleClass="btn"  fx:id="save" layoutX="515.0" layoutY="550" onAction="#clicSauvegarder">
+            <tooltip><Tooltip text="Sauvegarder" /></tooltip>
             <graphic>
                 <ImageView  fitWidth="40" fitHeight="40" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
@@ -253,6 +254,7 @@
         
         
         <Button styleClass="btn"  fx:id="recommencer" layoutX="230.0" layoutY="539" onAction="#clicRecommencer">
+            <tooltip><Tooltip text="Recommencer" /></tooltip>
         <graphic>
                 <ImageView  fitWidth="126" fitHeight="56" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
@@ -263,6 +265,7 @@
         </Button>
         
         <Button styleClass="btn" fx:id="retourMenu"  layoutX="358.0" layoutY="540" onAction="#retourMenu" >
+            <tooltip><Tooltip text="Menu" /></tooltip>
             <graphic>
                 <ImageView  fitWidth="146" fitHeight="56" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
@@ -275,6 +278,7 @@
         <SimpleImageView fitHeight="260" fitWidth="40" layoutX="760.0" layoutY="205" url="Images/menuJeu.png" />
       
         <Button fx:id="btnUndo" styleClass="btn"  layoutX="768" layoutY="250" onAction="#clicAnnuler" >
+            <tooltip><Tooltip text="Annuler" /></tooltip>
             <graphic>
                 <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="false"  preserveRatio="true" visible="true" >
                     <image>
@@ -285,6 +289,7 @@
         </Button>
         
         <Button fx:id="btnRedo" styleClass="btn"  layoutX="768" layoutY="300" onAction="#clicRefaire" >
+            <tooltip><Tooltip text="Refaire" /></tooltip>
             <graphic>
                 <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="true" preserveRatio="true" visible="true" >
                     <image>
@@ -295,6 +300,7 @@
         </Button>
         
         <Button fx:id="btnPause" styleClass="btn" layoutX="768" layoutY="350" onAction="#clicPause" >
+            <tooltip><Tooltip text="Pause" /></tooltip>
             <graphic>
                 <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="true" preserveRatio="true" visible="true" >
                     <image>
@@ -304,6 +310,7 @@
             </graphic>
         </Button>
         <Button fx:id="btnIndice" styleClass="btn"  layoutX="768" layoutY="400" onAction="#clicIndice" >
+            <tooltip><Tooltip text="Indice" /></tooltip>
             <graphic>
                 <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="true" preserveRatio="true" visible="true" >
                     <image>

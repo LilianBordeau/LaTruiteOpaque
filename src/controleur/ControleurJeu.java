@@ -87,7 +87,7 @@ public class ControleurJeu  extends ControleurBase {
     public AnchorPane anchorPane;
     
     @FXML
-    public Label titreFinPartie;
+    public Label titreFinPartie, titrePlacementOuDeplacement;
      
     @FXML
     public ImageView sablier,fondFinPartie;
@@ -104,6 +104,7 @@ public class ControleurJeu  extends ControleurBase {
         estEnAttente = new SimpleBooleanProperty(false);
         jeuInterrompu = new SimpleBooleanProperty(false);
         sablier.visibleProperty().bind(estEnAttente.and(jeuInterrompu.not()));
+        //titrePlacementOuDeplacement.visibleProperty().bind(sablier.visibleProperty().not());
         boutonActifSurvole = new SimpleBooleanProperty(false);
         boutonActifSurvole.bind(save.hoverProperty().or(btnUndo.hoverProperty()).or(btnRedo.hoverProperty()).or(btnPause.hoverProperty()).or(btnIndice.hoverProperty()).or(recommencer.hoverProperty()).or(reprendre.hoverProperty()).or(retourMenu.hoverProperty()).or(panelSonManager.imageMusique.hoverProperty()).or(panelSonManager.imageSon.hoverProperty()).or(panelSonManager.screen.hoverProperty()));
         sablier.visibleProperty().addListener(this::changerCurseur);  
@@ -149,7 +150,7 @@ public class ControleurJeu  extends ControleurBase {
     
     @Override
     public void onAppearing()
-    {        
+    {
         panelSonManager.imageMusique.changerCurseur = false;
         panelSonManager.imageSon.changerCurseur = false;
         panelSonManager.screen.changerCurseur = false;
@@ -354,6 +355,7 @@ public class ControleurJeu  extends ControleurBase {
 
    private void miseAJourInfoJeu()
     {
+        titreEtatJeuPlacementDeplacement();
         String texteInfoJeu = null;
         if(navigation.moteur.estPartieTerminee())
         {
@@ -1098,7 +1100,6 @@ public class ControleurJeu  extends ControleurBase {
 
     private void showFinPartie()
     {
-     
         double largeur = 300;
         double colonne = 50;
         double gap  = 20;
@@ -1220,6 +1221,26 @@ public class ControleurJeu  extends ControleurBase {
                
                 line.setVisible(false);
             }
+        }
+    }
+    
+    private void titreEtatJeuPlacementDeplacement()
+    {
+        if(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain)
+        {
+            if(!navigation.moteur.pingouinsPlaces())
+            {
+                titrePlacementOuDeplacement.setText("Placez vos pingouins !");
+                titrePlacementOuDeplacement.setLayoutX(330);
+            } else
+            {
+                titrePlacementOuDeplacement.setText("Déplacez vos pingouins !");
+                titrePlacementOuDeplacement.setLayoutX(320);
+            }
+            titrePlacementOuDeplacement.setTextFill(Color.WHITE);
+            titrePlacementOuDeplacement.setFont(new Font(null,13));
+        } else {
+            titrePlacementOuDeplacement.setText("");
         }
     }
     

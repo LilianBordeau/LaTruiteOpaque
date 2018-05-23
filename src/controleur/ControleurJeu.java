@@ -104,7 +104,7 @@ public class ControleurJeu  extends ControleurBase {
         estEnAttente = new SimpleBooleanProperty(false);
         jeuInterrompu = new SimpleBooleanProperty(false);
         sablier.visibleProperty().bind(estEnAttente.and(jeuInterrompu.not()));
-        //titrePlacementOuDeplacement.visibleProperty().bind(sablier.visibleProperty().not());
+        titrePlacementOuDeplacement.visibleProperty().bind(sablier.visibleProperty().not());
         boutonActifSurvole = new SimpleBooleanProperty(false);
         boutonActifSurvole.bind(save.hoverProperty().or(btnUndo.hoverProperty()).or(btnRedo.hoverProperty()).or(btnPause.hoverProperty()).or(btnIndice.hoverProperty()).or(recommencer.hoverProperty()).or(reprendre.hoverProperty()).or(retourMenu.hoverProperty()).or(panelSonManager.imageMusique.hoverProperty()).or(panelSonManager.imageSon.hoverProperty()).or(panelSonManager.screen.hoverProperty()));
         sablier.visibleProperty().addListener(this::changerCurseur);  

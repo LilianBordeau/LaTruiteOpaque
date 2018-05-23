@@ -382,8 +382,8 @@ public class ControleurJeu  extends ControleurBase {
             
             ColorAdjust afk_color = new ColorAdjust();
             ColorAdjust active_color = new ColorAdjust();
-            afk_color.setBrightness(0);
-            active_color.setBrightness(-0.5);
+            afk_color.setBrightness(-0.5);
+            active_color.setBrightness(0);
             
             for(int i = 0 ; i < 4 ; i++)
             {

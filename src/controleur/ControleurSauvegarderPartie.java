@@ -163,7 +163,8 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
     }
     
     
-    private void showCurrentTuiles() {
+    @Override
+     public void showCurrentTuiles() {
         System.out.println(indicePage+ "test" + nbPages);
         int nbEmplacement = 0;
         int debut = (indicePage*3);
@@ -187,36 +188,4 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
     }
     
     
-     @FXML
-    private void suivant(Event event)
-    {
-        if(indicePage == nbPages)
-        {
-            indicePage =  0;    
-        }else
-        {
-            indicePage++;
-        }
-        tuileSelectionne = -1;
-        valeurPageActuelle.setText(Integer.toString(indicePage+1));
-        showCurrentTuiles();
-
-    }
-    
-    @FXML
-    private void precedent(Event event)
-    {
-        if(indicePage ==0)
-        {
-            indicePage = nbPages;    
-            
-        }else
-        {
-            indicePage --;
-        }
-         tuileSelectionne = -1;
-          valeurPageActuelle.setText(Integer.toString(indicePage+1));
-        showCurrentTuiles();
-    }
-
 }

@@ -39,7 +39,7 @@ import util.Couple;
  *
  * @author maxence
  */
-public class ControleurSauvegarde extends ControleurBase 
+public abstract class ControleurSauvegarde extends ControleurBase 
 {
 
     int NBSAUVEGARDES = 3;
@@ -288,9 +288,40 @@ public class ControleurSauvegarde extends ControleurBase
     }
     
     
-    
    
+  abstract public void showCurrentTuiles() ;
     
-    private void showCurrentTuiles() {
+    @FXML
+    private void suivant(Event event)
+    {
+        if(indicePage == nbPages)
+        {
+            indicePage =  0;    
+        }else
+        {
+            indicePage++;
+        }
+        tuileSelectionne = -1;
+        valeurPageActuelle.setText(Integer.toString(indicePage+1));
+        showCurrentTuiles();
+
     }
+    
+    @FXML
+    private void precedent(Event event)
+    {
+        System.out.print("teffds");
+        if(indicePage ==0)
+        {
+            indicePage = nbPages;    
+            
+        }else
+        {
+            indicePage --;
+        }
+        tuileSelectionne = -1;
+        valeurPageActuelle.setText(Integer.toString(indicePage+1));
+        showCurrentTuiles();
+    }
+    
 }

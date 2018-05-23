@@ -2,6 +2,8 @@ import controleur.ControleurChoixJoueurs;
 import controleur.ControleurMenuPrincipal;
 import java.io.IOException;
 import java.net.BindException;
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
@@ -142,40 +144,48 @@ public class Main extends Application {
                                 primaryStage.setOnCloseRequest(null);
                                 t.consume();
                                 ImageView imageExit = new ImageView(new Image("Images/goodbye.gif"));
-                                ImageView bulle = new ImageView(new Image("Images/goodbyeBulle.png"));
-                                imageExit.setX(0);
-                                imageExit.setY(100);
-                                bulle.setX(300);
-                                bulle.setY(100);
+                                //ImageView bulle = new ImageView(new Image("Images/goodbyeBulle.png"));
+                                imageExit.setX(130);
+                                imageExit.setY(180);
+                                //bulle.setX(300);
+                                //bulle.setY(100);
 
-                                Rectangle rect = new Rectangle (0, 0, 800, 1);
-                                Rectangle rect2 = new Rectangle (0, 600, 800, 1);
+                                Rectangle rect = new Rectangle (0, 0, 800, 600);
+                                //Rectangle rect2 = new Rectangle (0, 600, 800, 1);
 
                                 noeudRacine.getChildren().add(rect);
-                                noeudRacine.getChildren().add(rect2);
-                                noeudRacine.getChildren().add(bulle);
+                                //noeudRacine.getChildren().add(rect2);
+                                //noeudRacine.getChildren().add(bulle);
                                 noeudRacine.getChildren().add(imageExit);
 
 
                                 rect.setFill(Color.BLACK);
-                                rect2.setFill(Color.BLACK);
+                                //rect2.setFill(Color.BLACK);
 
-                                ScaleTransition tt = new ScaleTransition(Duration.seconds(2), rect);
-                                tt.setByY(350f);
+                                //ScaleTransition tt = new ScaleTransition(Duration.seconds(2), rect);
+                                //tt.setByY(350f);
 
-                                ScaleTransition ImageExitTransition = new ScaleTransition(Duration.seconds(2), imageExit);
-                                TranslateTransition ImageExitTransition2 = new TranslateTransition(Duration.seconds(2), imageExit);
+                                FadeTransition tt = new FadeTransition(Duration.seconds(0.5), rect);
+                                tt.setInterpolator(Interpolator.LINEAR);
+                                tt.setCycleCount(1);
+                                tt.setAutoReverse(false);
+                                tt.setFromValue(0);
+                                tt.setToValue(1);
+                                
+                                ScaleTransition ImageExitTransition = new ScaleTransition(Duration.seconds(1.5), imageExit);
+                                TranslateTransition ImageExitTransition2 = new TranslateTransition(Duration.seconds(1.5), imageExit);
                                 ImageExitTransition.setByY(0.2f);
                                 ImageExitTransition.setByX(0.2f);
-
                                 ImageExitTransition2.setByX(30f);
                                 ImageExitTransition2.setByY(5f);
 
-                                ScaleTransition tt2 = new ScaleTransition(Duration.seconds(2), rect2);
-                                tt2.setByY(-350f);
-                                  tt.setOnFinished(e -> {Platform.exit();});
+                                //ScaleTransition tt2 = new ScaleTransition(Duration.seconds(2), rect2);
+                                //tt2.setByY(-350f);
+                                //tt.setOnFinished(e -> {Platform.exit();});
+                                //tt.play();
+                                //tt2.play();
+                                ImageExitTransition2.setOnFinished(e -> {Platform.exit();});
                                 tt.play();
-                                tt2.play();
                                 ImageExitTransition.play();
                                 ImageExitTransition2.play();
 

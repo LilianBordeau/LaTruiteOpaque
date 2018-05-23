@@ -52,6 +52,8 @@
         <Label fx:id="3_nom" styleClass="gui_infos" layoutX="5" layoutY="77" />
       </AnchorPane>
       
+      <SimpleImageView  fx:id="sablier" fitWidth="40" fitHeight="40"  layoutX="380" layoutY="10"  url="Images/sablier.png" />
+      
           
   
         <ImageView fx:id="c0_0" fitHeight="76.8" fitWidth="71.22" layoutX="150.73" layoutY="60" pickOnBounds="false" onMouseClicked="#clicTuile" onMouseEntered="#survolTuile" onMouseExited="#sortieTuile"  />
@@ -372,7 +374,6 @@
 
         
         <PanelSonManager fx:id="panelSonManager"/>
-        <SimpleImageView  fx:id="sablier" fitWidth="60" fitHeight="60"  layoutX="695" layoutY="415"  url="Images/sablier.png" />
       </children>
     <stylesheets>
     <URL value="@application.css" />

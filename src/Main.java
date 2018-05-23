@@ -145,7 +145,7 @@ public class Main extends Application {
                                 t.consume();
                                 ImageView imageExit = new ImageView(new Image("Images/goodbye.gif"));
                                 //ImageView bulle = new ImageView(new Image("Images/goodbyeBulle.png"));
-                                imageExit.setX(130);
+                                imageExit.setX(165);
                                 imageExit.setY(180);
                                 //bulle.setX(300);
                                 //bulle.setY(100);

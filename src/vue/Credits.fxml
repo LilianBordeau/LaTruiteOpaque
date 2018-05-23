@@ -8,7 +8,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import vue.PanelSonManager?>
+<?import vue.SimpleImageView?>
 <?import vue.MyButton?>
+<?import java.net.URL?>
 
 <AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurCredits"-->
         <children>
@@ -25,5 +27,27 @@
             <Label layoutX="50" layoutY="350" text="Remerciements à notre tuteur, Thomas LAVOCAT" />
             <MyButton layoutX="10" layoutY="550" prefWidth="150" text="Retour au menu" onAction="#retourMenu" />
             <PanelSonManager fx:id="panelSonManager"/>
+            
+            
+            
+            <MyButton styleClass="btn" layoutX="600" layoutY="500" prefHeight="30.0" prefWidth="30.0" >
+                <graphic>
+                    <SimpleImageView fitHeight="50" fitWidth="50" url="Images/coin.png"  pickOnBounds="true" preserveRatio="true"/>
+                </graphic>
+            </MyButton>
+            <MyButton  styleClass="btn" layoutX="660" layoutY="500" prefHeight="30.0" prefWidth="30.0" >
+                <graphic>
+                    <SimpleImageView fitHeight="50" fitWidth="50" url="Images/paypal.png"  pickOnBounds="true" preserveRatio="true"/>
+                </graphic>
+            </MyButton>
+            <MyButton styleClass="btn" layoutX="720" layoutY="500" prefHeight="30.0" prefWidth="30.0" >
+                <graphic>
+                    <SimpleImageView fitHeight="50" fitWidth="50" url="Images/creditCard.png"  pickOnBounds="true" preserveRatio="true"/>
+                </graphic>
+            </MyButton>
         </children>
+        
+         <stylesheets>
+            <URL value="@application.css" />
+        </stylesheets> 
 </AnchorPane>

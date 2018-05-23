@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -30,21 +31,34 @@ public class ControleurChargerPartie extends ControleurSauvegarde
         super.onAppearing();
         clearPlateau();
         btnCommencer.setDisable(true);
+        tuileSupprimee = -1;
+        tuileSelectionne = -1;
+  
         
-        int i = 0;
-        while(i < moteurs.length && moteurs[i] == null)
-        {
-            i++;     
-        }
-        
-        if(i== moteurs.length)
+        if(parties.isEmpty())
         {
             setMessage("Aucune sauvegarde n'est disponible !");            
         }else
         {
             setMessage("Veuillez choisir une sauvegarde !");            
         }
+        if( parties.isEmpty())
+        {
+            nbPages = 0;
+        }else{
+            nbPages  = parties.size()/3 ;
+            if(parties.size()%3==0)
+            {
+               nbPages--; 
+            }
 
+        }
+                
+        indicePage = nbPages;
+
+        valeurPageActuelle.setText(Integer.toString(indicePage +1));
+        valeurNbPage.setText(Integer.toString(nbPages + 1));
+        showCurrentTuiles();
     }
     
     public String indicesToId(int ligne, int colonne, String prefixeId)
@@ -55,10 +69,10 @@ public class ControleurChargerPartie extends ControleurSauvegarde
     
     
     
-    
     public void showSave(int nbPartie)
     {   
-        Case[][] plateau = moteurs[nbPartie].plateau.plateau;
+        Moteur m  = (Moteur) parties.get(nbPartie).second;
+        Case[][] plateau = m.plateau.plateau;
         for(int i = 0 ; i < plateau.length ; i++)
         {
             for(int j =0 ; j < Plateau.nbTuilesLigne(i) ; j++)
@@ -78,7 +92,7 @@ public class ControleurChargerPartie extends ControleurSauvegarde
                }
             }  
         }
-        Joueur[] joueurs =  moteurs[nbPartie].joueurs;
+        Joueur[] joueurs = m.joueurs;
         for(int j = 0 ; j < joueurs.length ; j++)
         {
             
@@ -101,17 +115,18 @@ public class ControleurChargerPartie extends ControleurSauvegarde
     private void selectEmplacement(MouseEvent event)
     {
         ImageView b =  (ImageView) event.getTarget();
-        int indice =  Character.getNumericValue(b.getId().charAt(b.getId().length()-1));
-        
+        int numTuile =  Character.getNumericValue(b.getId().charAt(b.getId().length()-1));
+        int indice = numTuile+(indicePage*3);
         if(tuileSelectionne != -1)
         {
             ImageView imageSelectedPrec = (ImageView) anchorPane.lookup("#"+getSelectedId(tuileSelectionne));
             imageSelectedPrec.setVisible(false);
         }
                   
-        if(moteurs[indice] != null)
+        
+        if( indice < parties.size() && parties.get(indice) != null  )
         {  
-            tuileSelectionne = indice;
+            tuileSelectionne = numTuile;
             ImageView imageSelected = (ImageView) anchorPane.lookup("#"+getSelectedId(tuileSelectionne));
             imageSelected.setVisible(true);
             
@@ -160,7 +175,8 @@ public class ControleurChargerPartie extends ControleurSauvegarde
         if(tuileSelectionne != -1)
         {
             System.out.println("commencerPartie");
-            navigation.moteur = moteurs[tuileSelectionne];
+            Moteur moteur = (Moteur) parties.get(tuileSelectionne).second;
+            navigation.moteur = moteur;
             ControleurJeu controleurJeu = (ControleurJeu)navigation.getController(ControleurJeu.class);
             navigation.changerVue(ControleurJeu.class);            
             controleurJeu.initPartie();
@@ -191,5 +207,29 @@ public class ControleurChargerPartie extends ControleurSauvegarde
             
         }
         
+    }
+    
+    
+    @Override
+    public void showCurrentTuiles() {
+        System.out.println(indicePage+ "test" + nbPages);
+        int nbEmplacement = 0;
+        int debut = (indicePage*3);
+      
+        for(int i = debut;i < debut+3;i++)
+        {
+            if(i >= parties.size() || parties.get(i) == null)
+            { 
+                showTuileEmpty(nbEmplacement);
+            }
+            else 
+            {
+                String[] params = (String[]) parties.get(i).premier;
+                showTuile(nbEmplacement,params);
+            }
+            nbEmplacement++;
+        }
+      
+
     }
 }

@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -46,13 +47,22 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
         super.onAppearing();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm");
         Date date = new Date();
-        dateString = dateFormat.format(date).toString().replace("/","-");
+        dateString = dateFormat.format(date).toString().replaceAll("[/:]","-");
         nouvelleDateText.setText("Date : " + dateFormat.format(date));
         nouveauNomInput.clear();
         nouveauNomInput.charactereInvalides = "[/\\<>|\"*_:]";
         setMessage("Veuillez choisir un emplacement de sauvegarde !");
         disableSaisie();
+       
+   
+        nbPages  = parties.size()/3  ;
 
+        indicePage = nbPages;
+    
+        
+        valeurPageActuelle.setText(Integer.toString(indicePage +1));
+        valeurNbPage.setText(Integer.toString(nbPages + 1));
+        showCurrentTuiles();
     }
     
     
@@ -60,8 +70,8 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
     private void selectEmplacement(MouseEvent event)
     {
         ImageView b =  (ImageView) event.getTarget();
-        int indice =  Character.getNumericValue(b.getId().charAt(b.getId().length()-1));
-        
+        int numTuile =  Character.getNumericValue(b.getId().charAt(b.getId().length()-1));
+        int indice = numTuile+(indicePage*3);
         if(tuileSelectionne != -1)
          {
              ImageView imageSelectedPrec = (ImageView) anchorPane.lookup("#"+getSelectedId(tuileSelectionne));
@@ -69,10 +79,9 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
              showTuileEmpty(tuileSelectionne);
          }
         
-        
-        if(moteurs[indice] == null)
+        if( indice +1> parties.size() || parties.get(indice) == null  )
         {
-            tuileSelectionne = indice;          
+            tuileSelectionne = numTuile;          
             ImageView imageSelected = (ImageView) anchorPane.lookup("#"+getSelectedId(tuileSelectionne));
             imageSelected.setVisible(true);
             enableSaisie();
@@ -88,6 +97,7 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
     
        
     }
+    
     
     @FXML
     private void retourJeu(ActionEvent event)
@@ -111,13 +121,17 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
             String nomSauvegarde = tuileSelectionne + "_"+nouveauNomInput.getText().trim()+"_"+dateString+".txt";
                     
             try {
-                
-                boolean res = new File("Sauvegardes/"+nomSauvegarde).createNewFile();
+                File fichier = new File("Sauvegardes/"+nomSauvegarde);
+                boolean res = fichier.createNewFile();
                 if(res)
                 {
-                    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Sauvegardes/"+nomSauvegarde));
-                    oos.writeObject(navigation.moteur);    
+                    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichier));
+                    oos.writeObject(navigation.moteur);
                     oos.close();
+                }
+                else
+                {
+                    throw new RuntimeException("impossible de creer le fichier de sauvegarde");
                 }
             } catch (IOException ex) {
                throw new RuntimeException(ex);
@@ -147,4 +161,31 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
         btnSauvegarder.setDisable(false);
         nouveauNomInput.setDisable(false);
     }
+    
+    
+    @Override
+     public void showCurrentTuiles() {
+        System.out.println(indicePage+ "test" + nbPages);
+        int nbEmplacement = 0;
+        int debut = (indicePage*3);
+      
+        for(int i = debut;i < debut+3;i++)
+        {
+            if(i >= parties.size() || parties.get(i) == null)
+            { 
+                showTuileEmpty(nbEmplacement);
+            }
+            else 
+            {
+
+                String[] params = (String[]) parties.get(i).premier;
+                showTuile(nbEmplacement,params);
+            }
+            nbEmplacement++;
+        }
+      
+
+    }
+    
+    
 }

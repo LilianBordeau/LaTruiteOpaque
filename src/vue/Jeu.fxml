@@ -13,7 +13,7 @@
 <?import java.net.URL?>
 <?import javafx.scene.text.*?>
 <?import vue.MyButton?>
-<AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0"  minWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('Images/fond.png');-fx-background-repeat: stretch;-fx-background-size: cover, auto;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurJeu"-->
+<AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0"  minWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('Images/fond.png');-fx-background-size: stretch;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurJeu"-->
       <children>
 
       <!-- Joueur 1 (haut gauche) -->

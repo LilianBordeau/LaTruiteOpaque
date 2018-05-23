@@ -52,7 +52,7 @@
         <Label fx:id="3_nom" styleClass="gui_infos" layoutX="5" layoutY="77" />
       </AnchorPane>
       
-      <SimpleImageView fitHeight="60" fitWidth="200" layoutX="300" layoutY="0" url="Images/panneauPlacementDeplacement.png" />
+      <SimpleImageView fitHeight="60" fitWidth="250" layoutX="275" layoutY="0" url="Images/panneauPlacementDeplacement.png" />
       <Label fx:id="titrePlacementOuDeplacement" layoutY="20"/>
       <SimpleImageView  fx:id="sablier" fitWidth="40" fitHeight="40"  layoutX="380" layoutY="7"  url="Images/sablier.png" />
       

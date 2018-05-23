@@ -24,6 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -83,17 +84,17 @@ public class Main extends Application {
         sablier.setLayoutX(325);
         sablier.setLayoutY(215);
         
-        ImageView panneau = new ImageView(new Image("Images/panneauChargement.png"));
+        ImageView panneau = new ImageView(new Image("Images/panneauPlacementDeplacement.png"));
         panneau.setLayoutX(250);
         panneau.setLayoutY(400);
         panneau.setFitHeight(75);
         panneau.setFitWidth(300);
         
         Label message = new Label("Pêchage de truites en cours ...");
-        message.setFont(new Font(null,15));
+        message.setFont(Font.font(null,FontWeight.BOLD,15));
         message.setTextFill(Color.WHITE);
-        message.setLayoutX(290);
-        message.setLayoutY(440);
+        message.setLayoutX(295);
+        message.setLayoutY(425);
         
         
         RotateTransition transitionSablier = new RotateTransition(Duration.millis(2500), sablier);

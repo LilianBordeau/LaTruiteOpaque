@@ -460,11 +460,14 @@ public class ControleurJeu  extends ControleurBase {
                 ArrayList<Pingouin> pingouinsJoueurCourant = navigation.moteur.joueurs[joueurCourant].pingouins;
                 for(Pingouin p : pingouinsJoueurCourant)
                 {
-                    ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(p.ligne,p.colonne, DEBUTIDCASEACCESSIBLE));
-                    Image image = new Image(Constantes.nomImageCaseAccessible(navigation.moteur.joueurs[navigation.moteur.joueurCourant]));
-                    tuileGraphique.setImage(image);
-                    tuileGraphique.setVisible(true); 
-                    casesJoueurCourant.add(new Point(p.ligne,p.colonne));
+                    if(!p.estBloque)
+                    {                        
+                        ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(p.ligne,p.colonne, DEBUTIDCASEACCESSIBLE));
+                        Image image = new Image(Constantes.nomImageCaseAccessible(navigation.moteur.joueurs[navigation.moteur.joueurCourant]));
+                        tuileGraphique.setImage(image);
+                        tuileGraphique.setVisible(true); 
+                        casesJoueurCourant.add(new Point(p.ligne,p.colonne));
+                    }
                     
                 }
             }
@@ -516,6 +519,7 @@ public class ControleurJeu  extends ControleurBase {
             image = new Image(Constantes.nomImageCaseAccessible(navigation.moteur.joueurs[navigation.moteur.joueurCourant]));
         }
         caseAccessible.setImage(image);
+        caseAccessible.setVisible(true);
     }
 
     public void suprimerCasesAccessible() {
@@ -533,7 +537,7 @@ public class ControleurJeu  extends ControleurBase {
                 {   
                     Point p = (Point) it.next();
                     ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(p.ligne,p.colonne, DEBUTIDCASEACCESSIBLE));
-                    tuileGraphique.setImage(null);
+                    //tuileGraphique.setImage(null);
                     tuileGraphique.setVisible(false);  
                     it.remove();
                 }  
@@ -1035,6 +1039,7 @@ public class ControleurJeu  extends ControleurBase {
 	private void onTranslateDuPinguoin(Deplacement dep, ArrayList<Point> nouveauxPingouinsBloques) {
         estEnAttente.set(true);
        
+        suprimerCasesJoueurCourant();
         if(pingouinFantome != null)
         {
             pingouinFantome.setImage(null);  
@@ -1284,14 +1289,14 @@ public class ControleurJeu  extends ControleurBase {
             if(!navigation.moteur.pingouinsPlaces())
             {
                 titrePlacementOuDeplacement.setText("Placez vos pingouins !");
-                titrePlacementOuDeplacement.setLayoutX(330);
+                titrePlacementOuDeplacement.setLayoutX(320);
             } else
             {
                 titrePlacementOuDeplacement.setText("Déplacez vos pingouins !");
-                titrePlacementOuDeplacement.setLayoutX(320);
+                titrePlacementOuDeplacement.setLayoutX(312);
             }
             titrePlacementOuDeplacement.setTextFill(Color.WHITE);
-            titrePlacementOuDeplacement.setFont(new Font(null,13));
+            titrePlacementOuDeplacement.setFont(Font.font(null,FontWeight.BOLD,15));
         } else {
             titrePlacementOuDeplacement.setText("");
         }

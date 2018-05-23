@@ -19,8 +19,8 @@
             <TextField fx:id="champIp" text="10.186.8.152" layoutX="200" layoutY="200" prefWidth="400" />
             <Label layoutX="200" layoutY="250"   prefWidth="250" text="Nom" />
             <TextField fx:id="champNom" text="Moi" layoutX="200" layoutY="300" prefWidth="400" />
-            <MyButton layoutX="640" layoutY="550" prefWidth="150" text="Commencer" onAction="#clicCommencer"/>
-            <MyButton layoutX="10" layoutY="550" prefWidth="150" text="Retour au menu" onAction="#retourMenu"/>
+            <MyButton  fx:id="commencer" layoutX="640" layoutY="550" prefWidth="150" text="Commencer" onAction="#clicCommencer"/>
+            <Button fx:id="retour" layoutX="10" layoutY="550" prefWidth="150" text="Retour au menu" onAction="#retourMenu"/>
             <PanelSonManager fx:id="panelSonManager"/>
             <SimpleImageView  fx:id="sablier" fitWidth="100" fitHeight="100"  layoutX="350" layoutY="250" url="Images/sablier.png" />
         </children>

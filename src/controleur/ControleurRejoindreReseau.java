@@ -22,6 +22,11 @@ import java.net.BindException;
 import javafx.animation.RotateTransition;
 import javafx.animation.Transition;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
@@ -42,9 +47,13 @@ public class ControleurRejoindreReseau extends ControleurBase
     private int nbEchecsConnexion;
     
     public SimpleBooleanProperty enAttente;
+    public SimpleBooleanProperty boutonActifSurvole;
     
     @FXML
     public ImageView sablier;
+    
+    @FXML
+    Button commencer, retour;
     
     @FXML
     @Override
@@ -63,10 +72,32 @@ public class ControleurRejoindreReseau extends ControleurBase
     @Override
     public void onAppearing()
     {
+        panelSonManager.imageMusique.changerCurseur = false;
+        panelSonManager.imageSon.changerCurseur = false;
+        panelSonManager.screen.changerCurseur = false;
+        boutonActifSurvole = new SimpleBooleanProperty(false);
+        boutonActifSurvole.bind(retour.hoverProperty().or(panelSonManager.screen.hoverProperty()).or(panelSonManager.imageMusique.hoverProperty()).or(panelSonManager.imageSon.hoverProperty()));
+        enAttente.addListener(new ChangeListener<Boolean>(){
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)
+            {
+                commencer.setDisable(newValue);
+                changerCurseur(observable, oldValue, newValue);
+            }            
+        });
+        boutonActifSurvole.addListener(this::changerCurseur);
         enAttente.set(false);
         navigation.afficherPopupErreur = true;
     }
     
+    public void changerCurseur(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)
+    {
+                Scene scene = labelTitre.getScene();
+                if(scene != null)
+                {
+                    scene.setCursor(boutonActifSurvole.get() ? Cursor.HAND : (sablier.visibleProperty().get() ? Cursor.WAIT : Cursor.DEFAULT));
+                }
+    }
     @FXML
     private void clicCommencer(ActionEvent event)
     {

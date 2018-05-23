@@ -104,9 +104,9 @@ public class Navigation
         fadeTransition.setToValue(1);
         fadeTransition.play();
         noeudRacine.getChildren().clear();
-        noeudRacine.getChildren().add(vueEtControleur.premier);
-        vueEtControleur.second.onAppearing();
-        vueEtControleur.second.onAppearingCommun();       
+        noeudRacine.getChildren().add(vueEtControleur.premier);        
+        vueEtControleur.second.onAppearingCommun();  
+        vueEtControleur.second.onAppearing();     
     }
     
     public void setFullScreen()

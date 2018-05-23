@@ -20,16 +20,21 @@ import javafx.scene.input.MouseEvent;
 public class MyButton extends Button {
     public Runnable afterOnMouseEntered;
     public Runnable afterOnMouseExited;
+    public boolean changerCurseur;
     public MyButton()
     {        
         super();
+        changerCurseur = true;
         afterOnMouseEntered = this::afterOnMouseEnteredMethod;
         afterOnMouseExited = this::afterOnMouseExitedMethod;
         this.setOnMouseEntered(new EventHandler<Event>(){
             @Override
             public void handle(Event event) {
-                Scene scene = MyButton.this.getScene();
-                scene.setCursor(Cursor.HAND);
+                if(changerCurseur)
+                {
+                    Scene scene = MyButton.this.getScene();
+                    scene.setCursor(Cursor.HAND);
+                }                
                 afterOnMouseEntered.run();
             
             }
@@ -38,8 +43,11 @@ public class MyButton extends Button {
         this.setOnMouseExited(new EventHandler<Event>(){
             @Override
             public void handle(Event event) {
-                Scene scene = MyButton.this.getScene();
-                scene.setCursor(Cursor.DEFAULT);
+                if(changerCurseur)
+                {
+                    Scene scene = MyButton.this.getScene();
+                    scene.setCursor(Cursor.DEFAULT);
+                }                
                 afterOnMouseExited.run();
             }
         });

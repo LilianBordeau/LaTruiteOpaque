@@ -239,7 +239,7 @@
         
        <!-- <SimpleImageView  fx:id="rang4" fitWidth="300" fitHeight="200"  opacity="0.9" layoutX="200" layoutY="200" visible="false" url="Images/rang4.png" /> -->
         
-        <MyButton  styleClass="btn"  fx:id="save" layoutX="515.0" layoutY="550" onAction="#clicSauvegarder">
+        <Button  styleClass="btn"  fx:id="save" layoutX="515.0" layoutY="550" onAction="#clicSauvegarder">
             <graphic>
                 <ImageView  fitWidth="40" fitHeight="40" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
@@ -247,10 +247,10 @@
                     </image>
                 </ImageView>
             </graphic>
-        </MyButton>
+        </Button>
         
         
-        <MyButton styleClass="btn"  fx:id="recommencer" layoutX="230.0" layoutY="539" onAction="#clicRecommencer">
+        <Button styleClass="btn"  fx:id="recommencer" layoutX="230.0" layoutY="539" onAction="#clicRecommencer">
         <graphic>
                 <ImageView  fitWidth="126" fitHeight="56" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
@@ -258,9 +258,9 @@
                     </image>
                 </ImageView>
             </graphic>
-        </MyButton>
+        </Button>
         
-        <MyButton styleClass="btn" fx:id="retourMenu"  layoutX="358.0" layoutY="540" onAction="#retourMenu" >
+        <Button styleClass="btn" fx:id="retourMenu"  layoutX="358.0" layoutY="540" onAction="#retourMenu" >
             <graphic>
                 <ImageView  fitWidth="146" fitHeight="56" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
@@ -268,11 +268,11 @@
                     </image>
                 </ImageView>
             </graphic>
-        </MyButton>
+        </Button>
         
         <SimpleImageView fitHeight="260" fitWidth="40" layoutX="760.0" layoutY="205" url="Images/menuJeu.png" />
       
-        <MyButton fx:id="btnUndo" styleClass="btn"  layoutX="768" layoutY="250" onAction="#clicAnnuler" >
+        <Button fx:id="btnUndo" styleClass="btn"  layoutX="768" layoutY="250" onAction="#clicAnnuler" >
             <graphic>
                 <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="false"  preserveRatio="true" visible="true" >
                     <image>
@@ -280,9 +280,9 @@
                     </image>
                 </ImageView>
             </graphic>
-        </MyButton>
+        </Button>
         
-        <MyButton fx:id="btnRedo" styleClass="btn"  layoutX="768" layoutY="300" onAction="#clicRefaire" >
+        <Button fx:id="btnRedo" styleClass="btn"  layoutX="768" layoutY="300" onAction="#clicRefaire" >
             <graphic>
                 <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="true" preserveRatio="true" visible="true" >
                     <image>
@@ -290,9 +290,9 @@
                     </image>
                 </ImageView>
             </graphic>
-        </MyButton>
+        </Button>
         
-        <MyButton fx:id="btnPause" styleClass="btn" layoutX="768" layoutY="350" onAction="#clicPause" >
+        <Button fx:id="btnPause" styleClass="btn" layoutX="768" layoutY="350" onAction="#clicPause" >
             <graphic>
                 <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="true" preserveRatio="true" visible="true" >
                     <image>
@@ -300,8 +300,8 @@
                     </image>
                 </ImageView>
             </graphic>
-        </MyButton>
-        <MyButton fx:id="btnIndice" styleClass="btn"  layoutX="768" layoutY="400" onAction="#clicIndice" >
+        </Button>
+        <Button fx:id="btnIndice" styleClass="btn"  layoutX="768" layoutY="400" onAction="#clicIndice" >
             <graphic>
                 <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="true" preserveRatio="true" visible="true" >
                     <image>
@@ -309,12 +309,12 @@
                     </image>
                 </ImageView>
             </graphic>
-         </MyButton>
+         </Button>
         <Group fx:id="groupEnPause" visible="false">
             <children>
                 <Line opacity="0.65" strokeWidth="25" startX="350" startY="200" endX="350" endY="400" />
                 <Line opacity="0.65" strokeWidth="25" startX="425" startY="200" endX="425" endY="400" />
-                <MyButton text="Reprendre" layoutX="323.0" layoutY="420.0" onAction="#clicReprendre" >
+                <MyButton fx:id="reprendre" text="Reprendre" layoutX="323.0" layoutY="420.0" onAction="#clicReprendre" >
                     <graphic>
                         <ImageView  fitWidth="146" fitHeight="56" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                           <image>

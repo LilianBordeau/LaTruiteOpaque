@@ -11,10 +11,14 @@ import javafx.animation.RotateTransition;
 import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -63,6 +67,10 @@ public class ControleurChoixJoueurs extends ControleurBase
     
     @FXML
     private Button btnCommencer;
+    
+    @FXML
+    private Button retour;
+    
     @FXML
     private Label labelMessageNbJoueurs;
     @FXML
@@ -84,6 +92,7 @@ public class ControleurChoixJoueurs extends ControleurBase
     int nbJoueursReseauAAttendre;
     int nbJoueursReseau;
     public SimpleBooleanProperty enAttente;
+    public SimpleBooleanProperty boutonActifSurvole;
     
     @FXML
     public ImageView sablier;
@@ -126,6 +135,28 @@ public class ControleurChoixJoueurs extends ControleurBase
     @Override
     public void onAppearing()
     {  
+        panelSonManager.imageMusique.changerCurseur = false;
+        panelSonManager.imageSon.changerCurseur = false;
+        panelSonManager.screen.changerCurseur = false;
+        boutonActifSurvole = new SimpleBooleanProperty(false);
+        boutonActifSurvole.bind(retour.hoverProperty().or(panelSonManager.screen.hoverProperty()).or(panelSonManager.imageMusique.hoverProperty()).or(panelSonManager.imageSon.hoverProperty()));
+        enAttente.addListener(new ChangeListener<Boolean>(){
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)
+            {
+                precedentRouge.setDisable(newValue);
+                suivantRouge.setDisable(newValue);
+                precedentVert.setDisable(newValue);
+                suivantVert.setDisable(newValue);
+                precedentBleu.setDisable(newValue);
+                suivantBleu.setDisable(newValue);
+                precedentJaune.setDisable(newValue);
+                suivantJaune.setDisable(newValue);
+                btnCommencer.setDisable(newValue);
+                changerCurseur(observable, oldValue, newValue);
+            }            
+        });
+        boutonActifSurvole.addListener(this::changerCurseur);
         enAttente.set(false);
         navigation.afficherPopupErreur = true;        
         if(navigation.enReseau)
@@ -162,6 +193,14 @@ public class ControleurChoixJoueurs extends ControleurBase
         estPartieConforme();
     }
     
+    public void changerCurseur(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)
+    {
+                Scene scene = anchorPane.getScene();
+                if(scene != null)
+                {
+                    scene.setCursor(boutonActifSurvole.get() ? Cursor.HAND : (sablier.visibleProperty().get() ? Cursor.WAIT : Cursor.DEFAULT));
+                }
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) 

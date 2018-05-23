@@ -66,7 +66,7 @@ public class ControleurJeu  extends ControleurBase {
     public ArrayList<Point> casesAccessibles;
     public SimpleBooleanProperty estEnAttente;
     private SimpleBooleanProperty jeuInterrompu;
-    private SimpleBooleanProperty afficherCurseurAttente;
+    private SimpleBooleanProperty boutonActifSurvole;
 	public ImageView pingouinMvt;
  	ImageView pingouinFantome;
     ImageView tuileFantome;    
@@ -75,10 +75,10 @@ public class ControleurJeu  extends ControleurBase {
     Line lineAmpoule;
     
     @FXML
-    MyButton btnUndo,btnRedo,btnPause,btnIndice;
+    Button btnUndo,btnRedo,btnPause,btnIndice;
     
     @FXML 
-    MyButton recommencer,save;
+    Button recommencer,save, reprendre, retourMenu;
     
     @FXML
     Group groupEnPause;
@@ -103,21 +103,11 @@ public class ControleurJeu  extends ControleurBase {
     {
         estEnAttente = new SimpleBooleanProperty(false);
         jeuInterrompu = new SimpleBooleanProperty(false);
-        afficherCurseurAttente = new SimpleBooleanProperty(false);
         sablier.visibleProperty().bind(estEnAttente.and(jeuInterrompu.not()));
-        afficherCurseurAttente.bind(sablier.visibleProperty().and(save.hoverProperty().not()).and(btnUndo.hoverProperty().not()).and(btnRedo.hoverProperty().not()).and(btnPause.hoverProperty().not()).and(btnIndice.hoverProperty().not()).and(recommencer.hoverProperty().not()));
-        afficherCurseurAttente.addListener(new ChangeListener<Boolean>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)
-            {
-                Scene scene = anchorPane.getScene();
-                if(scene != null)
-                {
-                    scene.setCursor(newValue ? Cursor.WAIT : Cursor.DEFAULT);
-                }
-            }
-        });        
+        boutonActifSurvole = new SimpleBooleanProperty(false);
+        boutonActifSurvole.bind(save.hoverProperty().or(btnUndo.hoverProperty()).or(btnRedo.hoverProperty()).or(btnPause.hoverProperty()).or(btnIndice.hoverProperty()).or(recommencer.hoverProperty()).or(reprendre.hoverProperty()).or(retourMenu.hoverProperty()).or(panelSonManager.imageMusique.hoverProperty()).or(panelSonManager.imageSon.hoverProperty()).or(panelSonManager.screen.hoverProperty()));
+        sablier.visibleProperty().addListener(this::changerCurseur);  
+        boutonActifSurvole.addListener(this::changerCurseur); 
         RotateTransition transitionSablier = new RotateTransition(Duration.millis(2500), sablier);
         transitionSablier.setFromAngle(0);
         transitionSablier.setByAngle(359);
@@ -148,9 +138,21 @@ public class ControleurJeu  extends ControleurBase {
         btnIndice.setOnMouseExited(e -> btnIndice.setPadding(Insets.EMPTY));  
     }
     
+    public void changerCurseur(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)
+    {
+                Scene scene = anchorPane.getScene();
+                if(scene != null)
+                {
+                    scene.setCursor(boutonActifSurvole.get() ? Cursor.HAND : (sablier.visibleProperty().get() ? Cursor.WAIT : Cursor.DEFAULT));
+                }
+    }
+    
     @Override
     public void onAppearing()
     {        
+        panelSonManager.imageMusique.changerCurseur = false;
+        panelSonManager.imageSon.changerCurseur = false;
+        panelSonManager.screen.changerCurseur = false;
         miseAJourAnnulerRefaireIndiceActive();
         btnPause.setDisable(navigation.moteur.estEnReseau);
         recommencer.setDisable(navigation.moteur.estEnReseau);

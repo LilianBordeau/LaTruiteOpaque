@@ -112,8 +112,9 @@ public abstract class ControleurBase implements Initializable
         panelSonManager.background.setImage(new Image("Images/soundboard.png"));
         panelSonManager.sliderMusique.setVisible(false);
         panelSonManager.sliderSon.setVisible(false);
-
-     
+        panelSonManager.imageMusique.changerCurseur = true;
+        panelSonManager.imageSon.changerCurseur = true;
+        panelSonManager.screen.changerCurseur = true;
     }
     
      public void onAppearing()

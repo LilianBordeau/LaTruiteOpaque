@@ -46,17 +46,20 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         
+        System.setProperty("prism.lcdtext", "false"); // Lisse les polices
+        System.setProperty("prism.text", "t2k");
+        Font.loadFont(Main.class.getResource("Guns n' Flash Comix.ttf").toExternalForm(), 14);
         
-        AnchorPane anchorPane = new AnchorPane();  
-        Group noeudRacine = new Group(anchorPane);       
+        AnchorPane anchorPane = new AnchorPane();
+        Group noeudRacine = new Group(anchorPane);
         Scene scene = new Scene(noeudRacine);
         primaryStage.setScene(scene);
         
      
         anchorPane.setPrefWidth(LARGEURFENETREFXML);
         anchorPane.setPrefHeight(HAUTEURFENETREFXML);
-       
-
+        
+           
          scene.widthProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) -> {
             double newWidthDouble = newSceneWidth.doubleValue();
             TranslateTransition translate = new TranslateTransition(Duration.millis(1), noeudRacine);

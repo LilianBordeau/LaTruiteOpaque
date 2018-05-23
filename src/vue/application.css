@@ -1,3 +1,8 @@
+.root{
+    -fx-font-size: 14pt;
+    -fx-font-family: "Guns n' Flash Comix";
+}
+
 .btn {
     -fx-background-color: transparent;  
 }
@@ -91,7 +96,8 @@
     -fx-alignment: CENTER_LEFT;
     -fx-wrap-text: true;
     -fx-text-alignment: justify;
-    -fx-font-size: 13px;
+    -fx-font-size: 12px;
+    -fx-font-family: "Guns n' Flash Comix";
 }
 
 .texte_equipe {

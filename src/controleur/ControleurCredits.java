@@ -63,6 +63,12 @@ public class ControleurCredits extends ControleurBase
     boolean fullscreen;
     boolean credits_equipe = true;
   
+    
+    int keyA;
+    int keyB;
+    int key5;
+    int key$;
+    boolean sexyMove;
 
     
     @FXML
@@ -76,6 +82,9 @@ public class ControleurCredits extends ControleurBase
     @Override
     public void onAppearing()
     {   
+        
+        
+        sexyMove = true;
         membre1.setOpacity(0);
         membre2.setOpacity(0);
         membre3.setOpacity(0);
@@ -100,6 +109,73 @@ public class ControleurCredits extends ControleurBase
                 + "Cette page raconte leur histoire...");
 
     
+        
+        anchorPane.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                Timestamp tm =  new Timestamp(System.currentTimeMillis());
+                
+                if(event.getCode() == KeyCode.A)
+                {
+                    keyA  = tm.getNanos();
+                    sexyMove = true;
+                }
+                
+                if(event.getCode() == KeyCode.B)
+                {   
+                    keyB  = tm.getNanos();
+                    int diff = keyB - keyA;
+                    System.out.println("!ok"+diff);
+
+                    if(sexyMove &&  diff < 250000000 && diff > 0)
+                    {
+                        System.out.println("ok");
+                      sexyMove = true;  
+                    }else
+                    {
+                      sexyMove = false;  
+                    }
+                    
+                }
+                  
+                if(event.getCode() == KeyCode.SOFTKEY_5 || event.getCode() == KeyCode.NUMPAD5 )
+                {
+                    key5  = tm.getNanos();
+                    int diff = key5 - keyB;
+                    System.out.println("!ok2 " + diff);
+
+                    if(sexyMove &&  diff < 1000000000 && diff > 500000000)
+                    {
+                        System.out.print("ok2");
+                      sexyMove = true;  
+                      afficherImage();
+                    }else
+                    {
+                      sexyMove = false;  
+                    }
+                }
+                /*    
+                if(event.getCode() == KeyCode.DOLLAR)
+                {
+                    key$  = tm.getNanos();
+                }
+                */
+
+            }
+        });
+        
+    }
+    
+    
+    private void  afficherImage() {
+
+        Image img = new Image("Images/neige.gif");
+        ImageView imageView = new ImageView(img);
+        imageView.setLayoutX(0);
+        imageView.setLayoutY(0);
+        imageView.setFitHeight(600);
+        imageView.setFitWidth(800);
+        anchorPane.getChildren().add(imageView);
     }
     @FXML
     private void retourMenu(ActionEvent event)

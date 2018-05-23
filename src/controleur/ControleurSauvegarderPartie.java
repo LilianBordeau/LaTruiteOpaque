@@ -47,7 +47,7 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
         super.onAppearing();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm");
         Date date = new Date();
-        dateString = dateFormat.format(date).toString().replace("/","-");
+        dateString = dateFormat.format(date).toString().replaceAll("[/:]","-");
         nouvelleDateText.setText("Date : " + dateFormat.format(date));
         nouveauNomInput.clear();
         nouveauNomInput.charactereInvalides = "[/\\<>|\"*_:]";
@@ -121,13 +121,17 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
             String nomSauvegarde = tuileSelectionne + "_"+nouveauNomInput.getText().trim()+"_"+dateString+".txt";
                     
             try {
-                
-                boolean res = new File("Sauvegardes/"+nomSauvegarde).createNewFile();
+                File fichier = new File("Sauvegardes/"+nomSauvegarde);
+                boolean res = fichier.createNewFile();
                 if(res)
                 {
-                    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Sauvegardes/"+nomSauvegarde));
-                    oos.writeObject(navigation.moteur);    
+                    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichier));
+                    oos.writeObject(navigation.moteur);
                     oos.close();
+                }
+                else
+                {
+                    throw new RuntimeException("impossible de creer le fichier de sauvegarde");
                 }
             } catch (IOException ex) {
                throw new RuntimeException(ex);

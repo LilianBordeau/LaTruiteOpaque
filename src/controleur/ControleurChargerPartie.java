@@ -42,13 +42,18 @@ public class ControleurChargerPartie extends ControleurSauvegarde
         {
             setMessage("Veuillez choisir une sauvegarde !");            
         }
-        
-        nbPages  = parties.size()/3 ;
-        if(parties.size()%3==0)
+        if( parties.isEmpty())
         {
-           nbPages--; 
+            nbPages = 0;
+        }else{
+            nbPages  = parties.size()/3 ;
+            if(parties.size()%3==0)
+            {
+               nbPages--; 
+            }
+
         }
-        
+                
         indicePage = nbPages;
 
         valeurPageActuelle.setText(Integer.toString(indicePage +1));

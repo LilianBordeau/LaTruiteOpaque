@@ -1,6 +1,7 @@
 package controleur;
 
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -15,11 +16,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import modele.Constantes;
 import vue.PanelSonManager;
+
+import java.time.Instant;
+import javafx.scene.input.KeyCode;
 
 public class ControleurCredits extends ControleurBase
 {    
@@ -58,8 +63,7 @@ public class ControleurCredits extends ControleurBase
     boolean fullscreen;
     boolean credits_equipe = true;
   
-    
-    
+
     
     @FXML
     @Override
@@ -97,7 +101,6 @@ public class ControleurCredits extends ControleurBase
 
     
     }
-    
     @FXML
     private void retourMenu(ActionEvent event)
     {

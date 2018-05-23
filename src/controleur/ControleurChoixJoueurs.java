@@ -460,7 +460,7 @@ public class ControleurChoixJoueurs extends ControleurBase
         {
             btnCommencer.setDisable(true);
             labelMessageNbJoueurs.setVisible(true);
-            if(queDesJoueursReseau)
+            if(queDesJoueursReseau && nbJoueurs != 0)
             {                
                 labelMessageReseau.setVisible(true);
             }

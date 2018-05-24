@@ -245,7 +245,7 @@
        <SimpleImageView fitHeight="209" fitWidth="40" layoutX="760.0" layoutY="205" url="Images/menuJeu.png" />
         
         
-        <Button  styleClass="btn"  fx:id="save" layoutX="762" layoutY="350" onAction="#clicSauvegarder">
+        <Button  styleClass="btn"  fx:id="save" layoutX="768" layoutY="350" onAction="#clicSauvegarder">
             <tooltip><Tooltip text="Sauvegarder" /></tooltip>
             <graphic>
                 <ImageView  fitWidth="25" fitHeight="25" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
@@ -257,7 +257,7 @@
         </Button>
         
         
-        <Button styleClass="btn"  fx:id="recommencer" layoutX="762" layoutY="300" onAction="#clicRecommencer">
+        <Button styleClass="btn"  fx:id="recommencer" layoutX="768" layoutY="300" onAction="#clicRecommencer">
             <tooltip><Tooltip text="Recommencer" /></tooltip>
         <graphic>
                 <ImageView  fitWidth="25" fitHeight="25" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
@@ -268,7 +268,7 @@
             </graphic>
         </Button>
         
-        <Button styleClass="btn" fx:id="retourMenu"  layoutX="762" layoutY="250" onAction="#retourMenu" >
+        <Button styleClass="btn" fx:id="retourMenu"  layoutX="768" layoutY="250" onAction="#retourMenu" >
             <tooltip><Tooltip text="Menu" /></tooltip>
             <graphic>
                 <ImageView  fitWidth="25" fitHeight="25" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">

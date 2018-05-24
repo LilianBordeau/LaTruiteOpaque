@@ -77,7 +77,7 @@ public class ControleurJeu  extends ControleurBase {
     Line lineAmpoule;
     
     @FXML
-    Button btnUndo,btnRedo,btnPause,btnIndice,revanche;
+    Button btnUndo,btnRedo,btnPause,btnIndice,revanche/*, save, recommencer, */;
     
     
     @FXML 
@@ -130,13 +130,19 @@ public class ControleurJeu  extends ControleurBase {
         anchorPane.getChildren().add(pingouinMvt);
         anchorPane.getChildren().add(lineFantome);
         casesAccessibles = new ArrayList<>();      
-        casesJoueurCourant = new ArrayList<>();   
+        casesJoueurCourant = new ArrayList<>(); 
+        save.setPadding(Insets.EMPTY);
+        recommencer.setPadding(Insets.EMPTY);
+        retourMenu.setPadding(Insets.EMPTY);
         btnUndo.setPadding(Insets.EMPTY);
         btnRedo.setPadding(Insets.EMPTY);
         btnPause.setPadding(Insets.EMPTY);
         btnIndice.setPadding(Insets.EMPTY);
         revanche.setPadding(Insets.EMPTY);
         
+        save.setOnMouseExited(e -> save.setPadding(Insets.EMPTY));  
+        recommencer.setOnMouseExited(e -> recommencer.setPadding(Insets.EMPTY));  
+        retourMenu.setOnMouseExited(e -> retourMenu.setPadding(Insets.EMPTY));  
         ((MyButton)revanche).afterOnMouseExited = (() -> revanche.setPadding(Insets.EMPTY));
         btnUndo.setOnMouseExited(e -> btnUndo.setPadding(Insets.EMPTY));  
         btnRedo.setOnMouseExited(e -> btnRedo.setPadding(Insets.EMPTY));   

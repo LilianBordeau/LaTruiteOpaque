@@ -22,9 +22,9 @@
                     </image>    
             </ImageView>     
             
-            <ImageView layoutX="250" layoutY="450" fitHeight="100" fitWidth="100">
+            <ImageView layoutX="250" layoutY="400" fitHeight="200" fitWidth="110">
                     <image>
-                        <Image url="Images/p.png" />
+                        <Image url="Images/p.gif" />
                     </image>
             </ImageView>
 

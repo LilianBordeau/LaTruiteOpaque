@@ -137,7 +137,7 @@ public class ControleurJeu  extends ControleurBase {
         btnIndice.setPadding(Insets.EMPTY);
         revanche.setPadding(Insets.EMPTY);
         
-        revanche.setOnMouseExited(e -> revanche.setPadding(Insets.EMPTY));
+        ((MyButton)revanche).afterOnMouseExited = (() -> revanche.setPadding(Insets.EMPTY));
         btnUndo.setOnMouseExited(e -> btnUndo.setPadding(Insets.EMPTY));  
         btnRedo.setOnMouseExited(e -> btnRedo.setPadding(Insets.EMPTY));   
         btnPause.setOnMouseExited(e -> btnPause.setPadding(Insets.EMPTY));  

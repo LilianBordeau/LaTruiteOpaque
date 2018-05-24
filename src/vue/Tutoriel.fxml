@@ -21,8 +21,14 @@
                         <Image url="Images/fond.png" />
                     </image>    
             </ImageView>     
-            
-            <ImageView layoutX="250" layoutY="400" fitHeight="200" fitWidth="110">
+            <AnchorPane fx:id="0_gui_all" layoutX="0" layoutY="10">
+                <SimpleImageView fx:id="0_gui" fitWidth="120" preserveRatio="true" url="Images/gui/0_gui_afk.png" />
+                <Label fx:id="0_score" styleClass="gui_score" layoutX="35" layoutY="9" text="0" />
+                <Label fx:id="0_tuille" styleClass="gui_score" layoutX="35" layoutY="34" text="0" />
+                <Label  styleClass="gui_infos" layoutX="5" layoutY="77" text="Tutoriel"/>
+            </AnchorPane>
+
+            <ImageView layoutX="250" layoutY="400" fitHeight="200" fitWidth="100">
                     <image>
                         <Image url="Images/p.gif" />
                     </image>

@@ -25,6 +25,7 @@ import vue.PanelSonManager;
 
 import java.time.Instant;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 
 public class ControleurCredits extends ControleurBase
 {    
@@ -58,10 +59,23 @@ public class ControleurCredits extends ControleurBase
     private Label membre6;
     
     @FXML
+    private Label membre1_metier;
+    @FXML
+    private Label membre2_metier;
+    @FXML
+    private Label membre3_metier;
+    @FXML
+    private Label membre4_metier;
+    @FXML
+    private Label membre5_metier;
+    @FXML
+    private Label membre6_metier;
+    
+    @FXML
     private Button boutonCredits;
     
     boolean fullscreen;
-    boolean credits_equipe = true;
+    boolean credits_equipe;
   
     
     int keyA;
@@ -83,21 +97,45 @@ public class ControleurCredits extends ControleurBase
     public void onAppearing()
     {   
         
-        
+        credits_equipe = true;
         sexyMove = true;
+        
         membre1.setOpacity(0);
         membre2.setOpacity(0);
         membre3.setOpacity(0);
         membre4.setOpacity(0);
         membre5.setOpacity(0);
-        membre6.setOpacity(0);
+        membre6.setOpacity(0);        
+        membre1_metier.setOpacity(0);
+        membre2_metier.setOpacity(0);
+        membre3_metier.setOpacity(0);
+        membre4_metier.setOpacity(0);
+        membre5_metier.setOpacity(0);
+        membre6_metier.setOpacity(0);
         
-        membre1.setText("Adel Mouss\nPeintre architecte");
-        membre2.setText("Quentin Desbrus\nChef des effets spéciaux");
-        membre3.setText("Amine Tagui\nArtisan du bois");
-        membre4.setText("Maxence Bleton-Giordano\nInterfaceur codeur");
-        membre5.setText("Lilian Bordeau\nSculpteur de pingouins");
-        membre6.setText("Justin Kossonogow\nGénie du réseau");
+        remerciements.setOpacity(1);
+        labelCredits.setOpacity(1);
+        boutonCredits.setText("La communauté");
+        
+        membre1.setText("Adel Mouss");
+        membre1.setTextFill(Color.valueOf("d80000"));
+        membre2.setText("Quentin Desbrus");
+        membre2.setTextFill(Color.valueOf("9e20c6"));
+        membre3.setText("Amine Tagui");
+        membre3.setTextFill(Color.valueOf("381ec6"));
+        membre4.setText("Maxence Bleton-Giordano");
+        membre4.setTextFill(Color.valueOf("ffe100"));
+        membre5.setText("Lilian Bordeau");
+        membre5.setTextFill(Color.valueOf("36a525"));
+        membre6.setText("Justin Kossonogow");
+        membre6.setTextFill(Color.valueOf("1bbcd0"));
+        
+        membre1_metier.setText("Peintre architecte");
+        membre2_metier.setText("Chef des effets spéciaux");
+        membre3_metier.setText("Artisan du bois");
+        membre4_metier.setText("Interfaceur codeur");
+        membre5_metier.setText("Sculpteur de pingouins");
+        membre6_metier.setText("Génie du réseau");
         
         equipe.setOpacity(0);
         labelCredits.setText("Il y a très très longtemps, sur une banquise très très lointaine...\n"
@@ -198,12 +236,23 @@ public class ControleurCredits extends ControleurBase
          for(int i = 1; i <= 6; i++)
          {
          Label membre = (Label) anchorPane.lookup("#membre"+i);
+         Label membre_metier = (Label) anchorPane.lookup("#membre"+i+"_metier");
+         
          FadeTransition fadeMembre = new FadeTransition(Duration.seconds(0.5), membre);
          fadeMembre.setInterpolator(Interpolator.EASE_BOTH);
          fadeMembre.setCycleCount(1);
          fadeMembre.setAutoReverse(false);
          fadeMembre.setFromValue(0);
          fadeMembre.setToValue(1);
+         
+         FadeTransition fadeMembreMetier = new FadeTransition(Duration.seconds(0.5), membre_metier);
+         fadeMembreMetier.setInterpolator(Interpolator.EASE_BOTH);
+         fadeMembreMetier.setCycleCount(1);
+         fadeMembreMetier.setAutoReverse(false);
+         fadeMembreMetier.setFromValue(0);
+         fadeMembreMetier.setToValue(1);
+         
+         fadeMembreMetier.play();
          fadeMembre.play();
          }
          
@@ -243,12 +292,23 @@ public class ControleurCredits extends ControleurBase
          for(int i = 1; i <= 6; i++)
          {
          Label membre = (Label) anchorPane.lookup("#membre"+i);
+         Label membre_metier = (Label) anchorPane.lookup("#membre"+i+"_metier");
+         
          FadeTransition fadeMembre = new FadeTransition(Duration.seconds(0.5), membre);
          fadeMembre.setInterpolator(Interpolator.EASE_BOTH);
          fadeMembre.setCycleCount(1);
          fadeMembre.setAutoReverse(false);
          fadeMembre.setFromValue(1);
          fadeMembre.setToValue(0);
+         
+         FadeTransition fadeMembreMetier = new FadeTransition(Duration.seconds(0.5), membre_metier);
+         fadeMembreMetier.setInterpolator(Interpolator.EASE_BOTH);
+         fadeMembreMetier.setCycleCount(1);
+         fadeMembreMetier.setAutoReverse(false);
+         fadeMembreMetier.setFromValue(1);
+         fadeMembreMetier.setToValue(0);
+         
+         fadeMembreMetier.play();
          fadeMembre.play();
          }
          

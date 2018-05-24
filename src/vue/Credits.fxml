@@ -29,12 +29,19 @@
             
             <Label  fx:id="labelCredits" styleClass="texte_credits" layoutX="50" layoutY="45" prefHeight="145" prefWidth="700"/>
             
-            <Label fx:id="membre1" styleClass="texte_equipe" layoutX="25" layoutY="35" prefHeight="65" prefWidth="200"  />
-            <Label fx:id="membre2" styleClass="texte_equipe" layoutX="75" layoutY="135" prefHeight="65" prefWidth="200" />
-            <Label fx:id="membre3" styleClass="texte_equipe" layoutX="275" layoutY="35" prefHeight="65" prefWidth="200" />
-            <Label fx:id="membre4" styleClass="texte_equipe" layoutX="325" layoutY="135" prefHeight="65" prefWidth="200"/>
-            <Label fx:id="membre5" styleClass="texte_equipe" layoutX="525" layoutY="35" prefHeight="65" prefWidth="200" />
-            <Label fx:id="membre6" styleClass="texte_equipe" layoutX="575" layoutY="135" prefHeight="65" prefWidth="200"/>
+            <Label fx:id="membre1" styleClass="texte_equipe" layoutX="25" layoutY="37" prefHeight="30" prefWidth="200"  />
+            <Label fx:id="membre2" styleClass="texte_equipe" layoutX="75" layoutY="137" prefHeight="30" prefWidth="200" />
+            <Label fx:id="membre3" styleClass="texte_equipe" layoutX="275" layoutY="37" prefHeight="30" prefWidth="200" />
+            <Label fx:id="membre4" styleClass="texte_equipe" layoutX="325" layoutY="137" prefHeight="30" prefWidth="200"/>
+            <Label fx:id="membre5" styleClass="texte_equipe" layoutX="525" layoutY="37" prefHeight="30" prefWidth="200" />
+            <Label fx:id="membre6" styleClass="texte_equipe" layoutX="575" layoutY="137" prefHeight="30" prefWidth="200"/>
+            
+            <Label fx:id="membre1_metier" styleClass="texte_equipe" layoutX="25" layoutY="66" prefHeight="30" prefWidth="200"  />
+            <Label fx:id="membre2_metier" styleClass="texte_equipe" layoutX="75" layoutY="166" prefHeight="30" prefWidth="200" />
+            <Label fx:id="membre3_metier" styleClass="texte_equipe" layoutX="275" layoutY="66" prefHeight="30" prefWidth="200" />
+            <Label fx:id="membre4_metier" styleClass="texte_equipe" layoutX="325" layoutY="166" prefHeight="30" prefWidth="200"/>
+            <Label fx:id="membre5_metier" styleClass="texte_equipe" layoutX="525" layoutY="66" prefHeight="30" prefWidth="200" />
+            <Label fx:id="membre6_metier" styleClass="texte_equipe" layoutX="575" layoutY="166" prefHeight="30" prefWidth="200"/>
             
             <MyButton layoutX="10" layoutY="550" prefWidth="150" text="Retour au menu" onAction="#retourMenu" />
             <MyButton fx:id="boutonCredits" layoutX="640" layoutY="550" prefWidth="150" text="La communauté" onAction="#suivantMenu" />

@@ -104,4 +104,6 @@
     -fx-alignment: CENTER;
     -fx-wrap-text: true;
     -fx-text-alignment: center;
+    -fx-font-size: 12px;
+    -fx-font-family: "Guns n' Flash Comix";
 }

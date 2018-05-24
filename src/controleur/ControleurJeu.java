@@ -802,11 +802,12 @@ public class ControleurJeu  extends ControleurBase {
             jeuInterrompu.set(true);
             System.out.println(navigation.moteur.plateau.plateau == navigation.moteur.sauvegardeDebutPartie.plateau.plateau);
             System.out.println(navigation.moteur.plateau.plateau[0][0] == navigation.moteur.sauvegardeDebutPartie.plateau.plateau[0][0]);
-            navigation.moteur = navigation.moteur.sauvegardeDebutPartie;
+            navigation.moteur = navigation.moteur.sauvegardeDebutPartie;            
             navigation.moteur.sauvegarderDebutPartie();
             pingouinFantome = null;
             pingouinSel = null;
             effacerAmpoule();
+            miseAJourAnnulerRefaireIndiceActive();
             miseAJourPlateau();
             jeuInterrompu.set(false);
             reprendre(); 
@@ -1389,6 +1390,7 @@ public class ControleurJeu  extends ControleurBase {
             pingouinFantome = null;
             pingouinSel = null;
             effacerAmpoule();
+            miseAJourAnnulerRefaireIndiceActive();
             miseAJourPlateau();
             jeuInterrompu.set(false);
             reprendre(); 

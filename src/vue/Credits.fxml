@@ -12,18 +12,18 @@
 <?import vue.MyButton?>
 <?import java.net.URL?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('Images/lacene.png');-fx-background-size: stretch;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurCredits"-->
+<AnchorPane fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('Images/cene1.png');-fx-background-size: stretch;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="controleur.ControleurCredits"-->
         <children>
             
             <ImageView fx:id="remerciements" layoutX="0" layoutY="0" fitHeight="600" fitWidth="800">
                 <image>
-                    <Image url="Images/lacene2.png"/>
+                    <Image url="Images/cene2.png"/>
                 </image>    
             </ImageView>
             
             <ImageView fx:id="equipe" layoutX="0" layoutY="0" fitHeight="600" fitWidth="800">
                 <image>
-                    <Image url="Images/lacene3.png"/>
+                    <Image url="Images/cene3.png"/>
                 </image>    
             </ImageView>
             

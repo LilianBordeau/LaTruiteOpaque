@@ -372,7 +372,6 @@ public class ControleurJeu  extends ControleurBase {
             {
                     System.out.println("J"+joueur.numero+"("+joueur.getClass().getSimpleName()+") : "+joueur.scorePoisson+"p et "+joueur.scoreTuile+"t, ");
             }
-            
             showFinPartie();
         }
         /*else
@@ -782,7 +781,7 @@ public class ControleurJeu  extends ControleurBase {
         
         if(!navigation.moteur.estEnReseau)
         {
-             hideFinPartie();
+            hideFinPartie();
             jeuInterrompu.set(true);
             System.out.println(navigation.moteur.plateau.plateau == navigation.moteur.sauvegardeDebutPartie.plateau.plateau);
             System.out.println(navigation.moteur.plateau.plateau[0][0] == navigation.moteur.sauvegardeDebutPartie.plateau.plateau[0][0]);
@@ -1170,14 +1169,33 @@ public class ControleurJeu  extends ControleurBase {
         
         ArrayList<Joueur>  classementJoueurs = navigation.moteur.getClassement();
 
+        boolean estRevanche = false;
+        int j  = 0;
+        while(j< classementJoueurs.size() &&  classementJoueurs.get(j).nbManchesGagne==0)
+        {  
+            j++;
+        }
+
+        estRevanche = (j != classementJoueurs.size());
+        
+        System.out.print("revanche"+ estRevanche);
         double xDebut = debut + (largeur -  (colonne * classementJoueurs.size()  + gap*(classementJoueurs.size()-1)))/2;
         
         Line line;
-        
         fondFinPartie.setVisible(true);
         titreFinPartie.setVisible(true);
         titreFinPartie.setTextFill(Color.WHITE);
         titreFinPartie.setFont(Font.font(null, FontWeight.BOLD, 10));
+        MyButton revanche = (MyButton)anchorPane.lookup("#revanche");
+        revanche.setVisible(true);
+        
+        ArrayList<Joueur> joueurGagnant  = navigation.moteur.joueursGagnants();
+        for(Joueur joueur : joueurGagnant)
+        {           
+             joueur.nbManchesGagne ++ ;
+        }
+        
+        
         boolean gagnant = true;
         for(int i=0; i<classementJoueurs.size();i++)
         {
@@ -1238,6 +1256,20 @@ public class ControleurJeu  extends ControleurBase {
             nom.setVisible(true);
             
             
+            if(estRevanche)
+            {
+                image1 = (ImageView) anchorPane.lookup("#"+"imageRevanche"+(i+1));
+                image1.setLayoutX(xDebut+28);
+                image1.setVisible(true);
+                
+                nom = (Label) anchorPane.lookup("#"+"nombreRevanche"+(i+1));
+                nom.setLayoutX(xDebut+4); 
+                nom.setText(Integer.toString(classementJoueurs.get(i).nbManchesGagne));
+                nom.setTextFill(Color.WHITE);
+                nom.setFont(Font.font(null, FontWeight.BOLD, 10));
+                nom.setVisible(true);
+            }
+            
             if(i != classementJoueurs.size()-1)
             {
                 line = (Line) anchorPane.lookup("#"+"classementLine"+(i+1));
@@ -1245,7 +1277,7 @@ public class ControleurJeu  extends ControleurBase {
                 line.setVisible(true);
             }
             xDebut += gap + colonne;
-           
+
         }
 
     }
@@ -1254,9 +1286,12 @@ public class ControleurJeu  extends ControleurBase {
     {
         fondFinPartie.setVisible(false);
         titreFinPartie.setVisible(false);
-       
+        MyButton revanche = (MyButton)anchorPane.lookup("#revanche");
+        revanche.setVisible(false);
         
-         Line line;
+        
+        
+        Line line;
         for(int i=1; i<5;i++)
         {
             ImageView image1 = (ImageView) anchorPane.lookup("#"+"position"+i);
@@ -1278,6 +1313,14 @@ public class ControleurJeu  extends ControleurBase {
             
             nom = (Label) anchorPane.lookup("#"+"textBanquise"+i);    
             nom.setVisible(false);
+            
+            image1 = (ImageView) anchorPane.lookup("#"+"imageRevanche"+(i));
+            image1.setVisible(false);
+                
+            nom = (Label) anchorPane.lookup("#"+"nombreRevanche"+(i));
+            nom.setVisible(false);
+            
+            
             if( i<=3)
             {
                 line = (Line) anchorPane.lookup("#"+"classementLine"+i);
@@ -1305,6 +1348,39 @@ public class ControleurJeu  extends ControleurBase {
         } else {
             titrePlacementOuDeplacement.setText("");
         }
+    }
+    
+    @FXML
+    private void clicRevanche(ActionEvent event)
+    {
+        Joueur[] joueurs = navigation.moteur.joueurs;
+        if(!navigation.moteur.estEnReseau)
+        {
+            hideFinPartie();
+            jeuInterrompu.set(true);
+            System.out.println(navigation.moteur.plateau.plateau == navigation.moteur.sauvegardeDebutPartie.plateau.plateau);
+            System.out.println(navigation.moteur.plateau.plateau[0][0] == navigation.moteur.sauvegardeDebutPartie.plateau.plateau[0][0]);
+            navigation.moteur = navigation.moteur.sauvegardeDebutPartie;
+            navigation.moteur.sauvegarderDebutPartie();
+            navigation.moteur.plateau = new Plateau();
+            pingouinFantome = null;
+            pingouinSel = null;
+            effacerAmpoule();
+            miseAJourPlateau();
+            jeuInterrompu.set(false);
+            reprendre(); 
+            tourSuivant();
+        }
+        else
+        {
+            System.out.println("impossible de recommencer une partie lorsque l'on joue en réseau");
+        }
+       
+        for(Joueur j : joueurs)
+        {           
+            navigation.moteur.joueurs[j.numero].nbManchesGagne = j.nbManchesGagne;
+        }
+        
     }
     
        

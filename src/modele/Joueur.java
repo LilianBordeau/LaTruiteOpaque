@@ -18,6 +18,7 @@ public abstract class Joueur implements Serializable,Cloneable
     public int scorePoisson;
     public int scoreTuile;
     public int nbPingouinsAPlacer;
+    public int nbManchesGagne;
     public ArrayList<Pingouin> pingouins;
     public transient Connexion connexion;
     
@@ -25,6 +26,7 @@ public abstract class Joueur implements Serializable,Cloneable
     {
         scorePoisson = 0;
         scoreTuile = 0;
+        nbManchesGagne = 0;
         pingouins = new ArrayList<>();
     }
 

@@ -350,6 +350,8 @@
         <ImageView  fx:id="classementScore1" fitWidth="25" fitHeight="47"  opacity="0.9" layoutX="255" layoutY="328" visible="false"  />
         <Label  fx:id="textPoisson1" opacity="0.9"  layoutY="328" visible="false"   />
         <Label  fx:id="textBanquise1" opacity="0.9"  layoutY="360" visible="false"   />
+        <SimpleImageView  fx:id="imageRevanche1"  fitWidth="20" fitHeight="20"   opacity="0.9" layoutX="420" layoutY="380" visible="false"  url="Images/coupe.png" />
+        <Label  fx:id="nombreRevanche1" opacity="0.9"  layoutY="380" visible="false"   />
         
         
         <SimpleImageView  fx:id="position2" fitWidth="50" fitHeight="50"  opacity="0.9" layoutY="200" visible="false" url="Images/rang2.png" />
@@ -358,7 +360,8 @@
         <ImageView  fx:id="classementScore2" fitWidth="25" fitHeight="47"  opacity="0.9" layoutX="255" layoutY="328" visible="false"  />
         <Label  fx:id="textPoisson2" opacity="0.9"  layoutY="328" visible="false"   />
         <Label  fx:id="textBanquise2" opacity="0.9"  layoutY="360" visible="false"   />
-
+        <SimpleImageView  fx:id="imageRevanche2" fitWidth="20" fitHeight="20"   opacity="0.9" layoutX="420" layoutY="380" visible="false"  url="Images/coupe.png" />
+        <Label  fx:id="nombreRevanche2" opacity="0.9"  layoutY="380" visible="false"   />
         
         
 	<SimpleImageView  fx:id="position3" fitWidth="50" fitHeight="50"  opacity="0.9" layoutX="365" layoutY="200" visible="false"  url="Images/rang3.png" />
@@ -367,7 +370,8 @@
         <ImageView  fx:id="classementScore3" fitWidth="25" fitHeight="47"  opacity="0.9" layoutX="255" layoutY="328" visible="false"  />
         <Label  fx:id="textPoisson3" opacity="0.9"  layoutY="328" visible="false"   />
         <Label  fx:id="textBanquise3" opacity="0.9"  layoutY="360" visible="false"   />
-        
+        <SimpleImageView  fx:id="imageRevanche3"  fitWidth="20" fitHeight="20"   opacity="0.9" layoutX="420" layoutY="380" visible="false"  url="Images/coupe.png" />
+        <Label  fx:id="nombreRevanche3" opacity="0.9"  layoutY="380" visible="false"   />
         
         
         <SimpleImageView  fx:id="position4" fitWidth="50" fitHeight="50"  opacity="0.9" layoutX="420" layoutY="200" visible="false"  url="Images/loser.png" />
@@ -376,6 +380,21 @@
         <ImageView  fx:id="classementScore4" fitWidth="25" fitHeight="47"  opacity="0.9" layoutX="255" layoutY="328" visible="false"  />
         <Label  fx:id="textPoisson4" opacity="0.9"  layoutY="328" visible="false"   />
         <Label  fx:id="textBanquise4" opacity="0.9"  layoutY="360" visible="false"   />
+        <Label  fx:id="nombreRevanche4" opacity="0.9"  layoutY="380" visible="false"   />
+        <SimpleImageView  fx:id="imageRevanche4" fitWidth="20" fitHeight="20"  opacity="0.9" layoutX="420" layoutY="380" visible="false"  url="Images/coupe.png" />
+
+        
+        
+        <MyButton fx:id="revanche"  layoutX="350" layoutY="430" onAction="#clicRevanche" >
+            <graphic>
+                <ImageView  fitWidth="50" fitHeight="50" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                  <image>
+                     <Image url="Images/revanche.png" />
+                   </image>
+                 </ImageView>
+            </graphic>
+        </MyButton>
+        
         
         <Line fx:id="classementLine1" layoutY="200" startX="0" endY="200" visible="false" />
         <Line fx:id="classementLine3" layoutY="200"  startX="0" endY="200" visible="false"/>

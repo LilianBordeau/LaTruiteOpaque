@@ -69,7 +69,7 @@
     -fx-scale-y: 0.9;
 }
 
-#btnUndo:hover, #btnRedo:hover, #btnPause:hover, #btnIndice:hover   {
+#btnUndo:hover, #btnRedo:hover, #btnPause:hover, #btnIndice:hover, #revanche:hover    {
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 0, 0, 2, 0) ;
     -fx-scale-x: 1;
     -fx-scale-y: 1;

@@ -77,7 +77,8 @@ public class ControleurJeu  extends ControleurBase {
     Line lineAmpoule;
     
     @FXML
-    Button btnUndo,btnRedo,btnPause,btnIndice;
+    Button btnUndo,btnRedo,btnPause,btnIndice,revanche;
+    
     
     @FXML 
     Button recommencer,save, reprendre, retourMenu;
@@ -134,7 +135,9 @@ public class ControleurJeu  extends ControleurBase {
         btnRedo.setPadding(Insets.EMPTY);
         btnPause.setPadding(Insets.EMPTY);
         btnIndice.setPadding(Insets.EMPTY);
-    
+        revanche.setPadding(Insets.EMPTY);
+        
+        revanche.setOnMouseExited(e -> revanche.setPadding(Insets.EMPTY));
         btnUndo.setOnMouseExited(e -> btnUndo.setPadding(Insets.EMPTY));  
         btnRedo.setOnMouseExited(e -> btnRedo.setPadding(Insets.EMPTY));   
         btnPause.setOnMouseExited(e -> btnPause.setPadding(Insets.EMPTY));  
@@ -226,18 +229,22 @@ public class ControleurJeu  extends ControleurBase {
                     label3.setText("");
                 }
             }
-        hideFinPartie();
+            
+        
+        
         reprendre();
     }
     
     public void initPartie()
     {
+        hideFinPartie();
         lineFantome.setVisible(false);
         estEnAttente.set(false);        
         pingouinSel = null;
         suprimerCasesAccessible();
         effacerAmpoule();
         miseAJourInfoJeu();
+       
 
     }
     
@@ -372,7 +379,17 @@ public class ControleurJeu  extends ControleurBase {
             {
                     System.out.println("J"+joueur.numero+"("+joueur.getClass().getSimpleName()+") : "+joueur.scorePoisson+"p et "+joueur.scoreTuile+"t, ");
             }
-            showFinPartie();
+                ImageView finPartie = (ImageView)anchorPane.lookup("#fondFinPartie");
+                if(!finPartie.isVisible())
+                {
+                     ArrayList<Joueur> joueurGagnant  = navigation.moteur.joueursGagnants();
+                    for(Joueur joueur : joueurGagnant)
+                    {           
+                         joueur.nbManchesGagne ++ ;
+                    }
+                }
+               
+                showFinPartie();
         }
         /*else
         {
@@ -814,6 +831,14 @@ public class ControleurJeu  extends ControleurBase {
             {
                 pause();
             }
+            if(navigation.moteur.estPartieTerminee())
+            {
+                ArrayList<Joueur> joueurs  = navigation.moteur.joueursGagnants();
+                for(Joueur joueur : joueurs)
+                {
+                    joueur.nbManchesGagne--;
+                }
+            }
             do
             {                
                 Coup dernierCoupJoue = navigation.moteur.dernierCoupJoue;   
@@ -1169,14 +1194,14 @@ public class ControleurJeu  extends ControleurBase {
         
         ArrayList<Joueur>  classementJoueurs = navigation.moteur.getClassement();
 
-        boolean estRevanche = false;
-        int j  = 0;
-        while(j< classementJoueurs.size() &&  classementJoueurs.get(j).nbManchesGagne==0)
-        {  
-            j++;
+        
+        int sommePartie = 0;
+        for(Joueur joueur  :classementJoueurs)
+        {
+            sommePartie += joueur.nbManchesGagne;
         }
 
-        estRevanche = (j != classementJoueurs.size());
+        boolean estRevanche  = (sommePartie != 1);
         
         System.out.print("revanche"+ estRevanche);
         double xDebut = debut + (largeur -  (colonne * classementJoueurs.size()  + gap*(classementJoueurs.size()-1)))/2;
@@ -1189,11 +1214,7 @@ public class ControleurJeu  extends ControleurBase {
         MyButton revanche = (MyButton)anchorPane.lookup("#revanche");
         revanche.setVisible(true);
         
-        ArrayList<Joueur> joueurGagnant  = navigation.moteur.joueursGagnants();
-        for(Joueur joueur : joueurGagnant)
-        {           
-             joueur.nbManchesGagne ++ ;
-        }
+       
         
         
         boolean gagnant = true;
@@ -1237,20 +1258,19 @@ public class ControleurJeu  extends ControleurBase {
             
             image1 = (ImageView) anchorPane.lookup("#"+"classementScore"+(i+1));
             image1.setLayoutX(xDebut+25);
-            image1.setImage(new Image("Images/cadre.png"));
             image1.setVisible(true);
             
             
             nom = (Label) anchorPane.lookup("#"+"textPoisson"+(i+1));
             nom.setText(Integer.toString(classementJoueurs.get(i).scorePoisson));
-            nom.setLayoutX(xDebut+10);    
+            nom.setLayoutX(xDebut+4);    
             nom.setTextFill(Color.WHITE);
             nom.setFont(Font.font(null, FontWeight.BOLD, 10));
             nom.setVisible(true);
             
             nom = (Label) anchorPane.lookup("#"+"textBanquise"+(i+1));
             nom.setText(Integer.toString(classementJoueurs.get(i).scoreTuile));
-            nom.setLayoutX(xDebut+10);       
+            nom.setLayoutX(xDebut+4);       
             nom.setTextFill(Color.WHITE);
             nom.setFont(Font.font(null, FontWeight.BOLD, 10));
             nom.setVisible(true);

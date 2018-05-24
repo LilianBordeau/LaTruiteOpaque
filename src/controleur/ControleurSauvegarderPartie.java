@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -20,6 +21,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import modele.Joueur;
+import modele.Moteur;
 import vue.MyTextField;
 
 
@@ -126,7 +129,19 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
                 if(res)
                 {
                     ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichier));
-                    oos.writeObject(navigation.moteur);
+                    Moteur moteur = navigation.moteur.clone();
+                    
+                    
+                    if(moteur.estPartieTerminee())
+                    {
+                        ArrayList<Joueur> joueurs  = moteur.joueursGagnants();
+                        for(Joueur joueur : joueurs)
+                        {
+                            joueur.nbManchesGagne--;
+                        }
+                    }
+                    
+                    oos.writeObject(moteur);
                     oos.close();
                 }
                 else

@@ -205,8 +205,10 @@ public class ControleurJeu  extends ControleurBase {
                 ImageView joueurExistant = (ImageView) anchorPane.lookup("#"+navigation.moteur.joueurs[i].couleur+"_gui");                
                 joueurExistant.setVisible(true);
                 joueurExistant.setImage(new Image("Images/gui/"+navigation.moteur.joueurs[i].couleur+"_gui_afk.png"));
-                Label label3 = (Label) anchorPane.lookup("#"+navigation.moteur.joueurs[i].couleur+"_nom");        
-                label3.setText(navigation.moteur.joueurs[i].nom);
+                Label label3 = (Label) anchorPane.lookup("#"+navigation.moteur.joueurs[i].couleur+"_nom");                     
+                label3.setFont(Font.font(null,8));
+                label3.setTextFill(Color.WHITE);
+                label3.setText(navigation.moteur.joueurs[i].nom); 
                 System.out.println(navigation.moteur.joueurs[i].nom);
             }
             for(int i = 0 ; i<4 ; i++ )
@@ -431,46 +433,49 @@ public class ControleurJeu  extends ControleurBase {
             }
             suprimerCasesAccessible();
             suprimerCasesJoueurCourant();
-            if(!navigation.moteur.pingouinsPlaces())
-            {  
-               
-                Case[][] plateau = navigation.moteur.plateau.plateau;
-                for(int i = 0 ; i < plateau.length ; i++)
-                {
-                    for(int j = 0 ; j < Plateau.nbTuilesLigne(i) ; j++)
+            if(navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain)
+            {
+                if(!navigation.moteur.pingouinsPlaces())
+                {  
+
+                    Case[][] plateau = navigation.moteur.plateau.plateau;
+                    for(int i = 0 ; i < plateau.length ; i++)
                     {
-                        Case c  = navigation.moteur.plateau.plateau[i][j];
-                        if(c.peutPlacerPingouin())
+                        for(int j = 0 ; j < Plateau.nbTuilesLigne(i) ; j++)
                         {
-                            ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDCASEACCESSIBLE));
+                            Case c  = navigation.moteur.plateau.plateau[i][j];
+                            if(c.peutPlacerPingouin())
+                            {
+                                ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDCASEACCESSIBLE));
+                                Image image = new Image(Constantes.nomImageCaseAccessible(navigation.moteur.joueurs[navigation.moteur.joueurCourant]));
+                                tuileGraphique.setImage(image);
+                                tuileGraphique.setVisible(true); 
+                                casesAccessibles.add(new Point(i,j));
+                            }
+
+                        }
+                    }   
+                }
+                else
+                {          
+
+                    int joueurCourant = navigation.moteur.joueurCourant;
+                    ArrayList<Pingouin> pingouinsJoueurCourant = navigation.moteur.joueurs[joueurCourant].pingouins;
+                    for(Pingouin p : pingouinsJoueurCourant)
+                    {
+                        if(!p.estBloque)
+                        {                        
+                            ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(p.ligne,p.colonne, DEBUTIDCASEACCESSIBLE));
                             Image image = new Image(Constantes.nomImageCaseAccessible(navigation.moteur.joueurs[navigation.moteur.joueurCourant]));
                             tuileGraphique.setImage(image);
                             tuileGraphique.setVisible(true); 
-                            casesAccessibles.add(new Point(i,j));
+                            casesJoueurCourant.add(new Point(p.ligne,p.colonne));
                         }
 
                     }
-                }   
-            }
-            
-            if(navigation.moteur.pingouinsPlaces())
-            {          
-               
-                int joueurCourant = navigation.moteur.joueurCourant;
-                ArrayList<Pingouin> pingouinsJoueurCourant = navigation.moteur.joueurs[joueurCourant].pingouins;
-                for(Pingouin p : pingouinsJoueurCourant)
-                {
-                    if(!p.estBloque)
-                    {                        
-                        ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(p.ligne,p.colonne, DEBUTIDCASEACCESSIBLE));
-                        Image image = new Image(Constantes.nomImageCaseAccessible(navigation.moteur.joueurs[navigation.moteur.joueurCourant]));
-                        tuileGraphique.setImage(image);
-                        tuileGraphique.setVisible(true); 
-                        casesJoueurCourant.add(new Point(p.ligne,p.colonne));
-                    }
-                    
                 }
             }
+            
     }
             
    
@@ -1209,7 +1214,7 @@ public class ControleurJeu  extends ControleurBase {
             nom.setText(classementJoueurs.get(i).nom);
             nom.setLayoutX(xDebut);    
             nom.setTextFill(Color.WHITE);
-            nom.setFont(Font.font(null, FontWeight.BOLD, 8));
+            nom.setFont(Font.font(null, FontWeight.BOLD, 6));
             nom.setVisible(true);
             
             image1 = (ImageView) anchorPane.lookup("#"+"classementScore"+(i+1));

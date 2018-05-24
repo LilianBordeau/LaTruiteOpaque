@@ -817,7 +817,6 @@ public class ControleurJeu  extends ControleurBase {
             miseAJourPlateau();
             jeuInterrompu.set(false);
             reprendre(); 
-            tourSuivant();
         }
         else
         {
@@ -1398,13 +1397,12 @@ public class ControleurJeu  extends ControleurBase {
             effacerAmpoule();
             miseAJourAnnulerRefaireIndiceActive();
             miseAJourPlateau();
-            jeuInterrompu.set(false);
-            reprendre(); 
-            tourSuivant();
+            jeuInterrompu.set(false);            
             for(Joueur j : joueurs)
             {           
                 navigation.moteur.joueurs[j.numero].nbManchesGagne = j.nbManchesGagne;
             }
+            reprendre(); 
         }
         else
         {

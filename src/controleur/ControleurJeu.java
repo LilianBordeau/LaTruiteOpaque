@@ -1211,8 +1211,11 @@ public class ControleurJeu  extends ControleurBase {
         titreFinPartie.setVisible(true);
         titreFinPartie.setTextFill(Color.WHITE);
         titreFinPartie.setFont(Font.font(null, FontWeight.BOLD, 10));
-        MyButton revanche = (MyButton)anchorPane.lookup("#revanche");
-        revanche.setVisible(true);
+        if(!navigation.moteur.estEnReseau)
+        {            
+            MyButton revanche = (MyButton)anchorPane.lookup("#revanche");
+            revanche.setVisible(true);
+        }
         
        
         
@@ -1390,16 +1393,17 @@ public class ControleurJeu  extends ControleurBase {
             jeuInterrompu.set(false);
             reprendre(); 
             tourSuivant();
+            for(Joueur j : joueurs)
+            {           
+                navigation.moteur.joueurs[j.numero].nbManchesGagne = j.nbManchesGagne;
+            }
         }
         else
         {
             System.out.println("impossible de recommencer une partie lorsque l'on joue en réseau");
         }
        
-        for(Joueur j : joueurs)
-        {           
-            navigation.moteur.joueurs[j.numero].nbManchesGagne = j.nbManchesGagne;
-        }
+        
         
     }
     

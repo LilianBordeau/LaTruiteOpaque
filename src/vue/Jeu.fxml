@@ -384,7 +384,7 @@
         <Label  fx:id="textPoisson4" opacity="0.9"  layoutY="328" visible="false"   />
         <Label  fx:id="textBanquise4" opacity="0.9"  layoutY="360" visible="false"   />
         <Label  fx:id="nombreRevanche4" opacity="0.9"  layoutY="382" visible="false"    />
-        <SimpleImageView  fx:id="imageRevanche4" fitWidth="20" fitHeight="20"  opacity="0.9" layoutX="420" layoutY="380" visible="false"  url="Images/coupe.png" />
+        <SimpleImageView  fx:id="imageRevanche4" fitWidth="20" fitHeight="20"  opacity="0.9" layoutX="420" layoutY="380" visible="false" url="Images/coupe.png" />
 
         
         

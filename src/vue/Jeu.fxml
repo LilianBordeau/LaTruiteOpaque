@@ -22,7 +22,7 @@
         <SimpleImageView fx:id="0_gui" fitWidth="120" preserveRatio="true" url="Images/gui/0_gui_afk.png" />
         <Label fx:id="0_score" styleClass="gui_score" layoutX="27" layoutY="9" text="0" prefWidth="25"/>
         <Label fx:id="0_tuille" styleClass="gui_score" layoutX="27" layoutY="34" text="0" prefWidth="25"/>
-        <Label fx:id="0_nom" layoutX="3" layoutY="75" prefHeight="18" prefWidth="92"/>
+        <Label fx:id="0_nom" styleClass="gui_infos" layoutX="3" layoutY="75" prefHeight="18" prefWidth="92"/>
       </AnchorPane>
 
       <!-- Joueur 2 (haut droite) -->
@@ -31,7 +31,7 @@
         <SimpleImageView  fx:id="1_gui" fitWidth="120" preserveRatio="true" url="Images/gui/1_gui_afk.png" />
         <Label fx:id="1_score" styleClass="gui_score" layoutX="68" layoutY="9" text="0" prefWidth="25"/>
         <Label fx:id="1_tuille" styleClass="gui_score" layoutX="68" layoutY="34" text="0" prefWidth="25"/>
-        <Label fx:id="1_nom" layoutX="25" layoutY="75" prefHeight="18" prefWidth="92"/>
+        <Label fx:id="1_nom" styleClass="gui_infos" layoutX="25" layoutY="75" prefHeight="18" prefWidth="92"/>
       </AnchorPane>
       
       <!-- Joueur 3 (bas droite) -->
@@ -40,7 +40,7 @@
         <SimpleImageView  fx:id="2_gui" fitWidth="120" preserveRatio="true" url="Images/gui/2_gui_afk.png" />
         <Label fx:id="2_score" styleClass="gui_score" layoutX="68" layoutY="9" text="0" prefWidth="25"/>
         <Label fx:id="2_tuille" styleClass="gui_score" layoutX="68" layoutY="34" text="0" prefWidth="25"/>
-        <Label fx:id="2_nom" layoutX="25" layoutY="75" prefHeight="18" prefWidth="92"/>
+        <Label fx:id="2_nom" styleClass="gui_infos" layoutX="25" layoutY="75" prefHeight="18" prefWidth="92"/>
       </AnchorPane>
       
       <!-- Joueur 4 (bas gauche) -->
@@ -49,7 +49,7 @@
         <SimpleImageView  fx:id="3_gui" fitWidth="120" preserveRatio="true" url="Images/gui/3_gui_afk.png" />
         <Label fx:id="3_score" styleClass="gui_score" layoutX="27" layoutY="9" text="0" prefWidth="25"/>
         <Label fx:id="3_tuille" styleClass="gui_score" layoutX="27" layoutY="34" text="0" prefWidth="25"/>
-        <Label fx:id="3_nom" layoutX="3" layoutY="75" prefHeight="18" prefWidth="92"/>
+        <Label fx:id="3_nom" styleClass="gui_infos" layoutX="3" layoutY="75" prefHeight="18" prefWidth="92"/>
       </AnchorPane>
       
       <SimpleImageView fitHeight="60" fitWidth="250" layoutX="275" layoutY="0" url="Images/panneauPlacementDeplacement.png" />
@@ -242,11 +242,13 @@
         
         
        <!-- <SimpleImageView  fx:id="rang4" fitWidth="300" fitHeight="200"  opacity="0.9" layoutX="200" layoutY="200" visible="false" url="Images/rang4.png" /> -->
+       <SimpleImageView fitHeight="209" fitWidth="40" layoutX="760.0" layoutY="205" url="Images/menuJeu.png" />
         
-        <Button  styleClass="btn"  fx:id="save" layoutX="515.0" layoutY="550" onAction="#clicSauvegarder">
+        
+        <Button  styleClass="btn"  fx:id="save" layoutX="762" layoutY="350" onAction="#clicSauvegarder">
             <tooltip><Tooltip text="Sauvegarder" /></tooltip>
             <graphic>
-                <ImageView  fitWidth="40" fitHeight="40" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                <ImageView  fitWidth="25" fitHeight="25" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
                         <Image url="Images/save.png" />
                     </image>
@@ -255,10 +257,10 @@
         </Button>
         
         
-        <Button styleClass="btn"  fx:id="recommencer" layoutX="230.0" layoutY="539" onAction="#clicRecommencer">
+        <Button styleClass="btn"  fx:id="recommencer" layoutX="762" layoutY="300" onAction="#clicRecommencer">
             <tooltip><Tooltip text="Recommencer" /></tooltip>
         <graphic>
-                <ImageView  fitWidth="126" fitHeight="56" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                <ImageView  fitWidth="25" fitHeight="25" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
                         <Image url="Images/recommencer.png" />
                     </image>
@@ -266,10 +268,10 @@
             </graphic>
         </Button>
         
-        <Button styleClass="btn" fx:id="retourMenu"  layoutX="358.0" layoutY="540" onAction="#retourMenu" >
+        <Button styleClass="btn" fx:id="retourMenu"  layoutX="762" layoutY="250" onAction="#retourMenu" >
             <tooltip><Tooltip text="Menu" /></tooltip>
             <graphic>
-                <ImageView  fitWidth="146" fitHeight="56" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+                <ImageView  fitWidth="25" fitHeight="25" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
                     <image>
                         <Image url="Images/retouraumenu.png" />
                     </image>
@@ -277,9 +279,10 @@
             </graphic>
         </Button>
         
-        <SimpleImageView fitHeight="260" fitWidth="40" layoutX="760.0" layoutY="205" url="Images/menuJeu.png" />
+        
+      <SimpleImageView fitHeight="60" fitWidth="230" layoutX="286.0" layoutY="540" url="Images/barre_outils.png" />
       
-        <Button fx:id="btnUndo" styleClass="btn"  layoutX="768" layoutY="250" onAction="#clicAnnuler" >
+        <Button fx:id="btnUndo" styleClass="btn"  layoutX="315" layoutY="560" onAction="#clicAnnuler" >
             <tooltip><Tooltip text="Annuler" /></tooltip>
             <graphic>
                 <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="false"  preserveRatio="true" visible="true" >
@@ -290,7 +293,7 @@
             </graphic>
         </Button>
         
-        <Button fx:id="btnRedo" styleClass="btn"  layoutX="768" layoutY="300" onAction="#clicRefaire" >
+        <Button fx:id="btnRedo" styleClass="btn"  layoutX="365" layoutY="560" onAction="#clicRefaire" >
             <tooltip><Tooltip text="Refaire" /></tooltip>
             <graphic>
                 <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="true" preserveRatio="true" visible="true" >
@@ -301,7 +304,7 @@
             </graphic>
         </Button>
         
-        <Button fx:id="btnPause" styleClass="btn" layoutX="768" layoutY="350" onAction="#clicPause" >
+        <Button fx:id="btnPause" styleClass="btn" layoutX="415" layoutY="560" onAction="#clicPause" >
             <tooltip><Tooltip text="Pause" /></tooltip>
             <graphic>
                 <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="true" preserveRatio="true" visible="true" >
@@ -311,7 +314,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="btnIndice" styleClass="btn"  layoutX="768" layoutY="400" onAction="#clicIndice" >
+        <Button fx:id="btnIndice" styleClass="btn"  layoutX="465" layoutY="560" onAction="#clicIndice" >
             <tooltip><Tooltip text="Indice" /></tooltip>
             <graphic>
                 <ImageView  fitWidth="30" fitHeight="30" pickOnBounds="true" preserveRatio="true" visible="true" >

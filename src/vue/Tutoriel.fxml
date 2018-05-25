@@ -232,6 +232,9 @@
             
             <MyButton fx:id="suivant" layoutX="650" layoutY="540" prefWidth="75" text="Suivant" onAction="#clicSuivant">  </MyButton>
             
+            <MyButton fx:id="choixPartie" layoutX="650" layoutY="540" prefWidth="75" text="Jouer" onAction="#clicChoixPartie" visible="false"/>  
+            
+            
             <MyButton fx:id="retour" styleClass="btn"  layoutX="15.0" layoutY="535.0" mnemonicParsing="false" prefWidth="150.0" onAction="#retourMenu" >
                 
             <graphic>

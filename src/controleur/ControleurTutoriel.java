@@ -1,6 +1,5 @@
 package controleur;
 
-import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -12,43 +11,27 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
 import modele.Point;
-import controleur.ControleurJeu;
-import java.io.IOException;
 import java.util.Iterator;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
-import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 import modele.Joueur;
 import modele.JoueurHumain;
 import modele.Moteur;
 import modele.Plateau;
-import static modele.Plateau.*;
 import  modele.Case;
-import static modele.Case.*;
 import modele.Constantes;
 import modele.Coup;
 import modele.Deplacement;
-import modele.JoueurClient;
-import modele.JoueurReseau;
 import modele.Pingouin;
-import thread.MyThread;
 
 
 
@@ -57,23 +40,22 @@ public class ControleurTutoriel extends ControleurBase
 {     //private boolean estEnAttente;
     Moteur moteur;
     public Point pingouinSel;
-    public SimpleBooleanProperty estEnAttente;
-    private SimpleBooleanProperty jeuInterrompu;
     public ArrayList<Point> casesAccessibles;
-   
-    private int mots = 0;
-    private String[] Tab;
-    private ImageView tuileGraphique;
+    private int etape = 0;
+    private String[] tab;
     private static final String DEBUTIDTUILE = "c";
     private static final String DEBUTIDPINGOUIN = "p";
     private static final String DEBUTIDCASEACCESSIBLE = "a";
     private static final String SEPARATEURID = "_";
     private boolean canDeplace;
     private boolean canPlace;
+    ImageView tuileFantome;   
     public ImageView pingouinMvt;
+    
     private Line lineFantome;
-    ImageView tuileFantome;
     ImageView pingouinFantome;
+    
+    int lPenguin,cPenguin;
    
  @FXML
     public AnchorPane anchorPane;
@@ -82,7 +64,7 @@ public class ControleurTutoriel extends ControleurBase
     public Label labelTitre;
     
     @FXML
-    public Button suivant;
+    public Button suivant,choixPartie;
     @FXML
     public ImageView imgv;
     public ImageView img;
@@ -94,20 +76,24 @@ public class ControleurTutoriel extends ControleurBase
         Rule_of_game();
         casesAccessibles = new ArrayList<>();  
         labelTitre.setAlignment(Pos.CENTER);
-        labelTitre.setText(Tab[mots]);
+        labelTitre.setText(tab[etape]);
         pingouinMvt =  new ImageView();
-         lineFantome = new Line();
-         lineFantome.setMouseTransparent(true);
+        lineFantome = new Line();
+        lineFantome.setMouseTransparent(true);
         lineFantome.setOpacity(0.5);
         lineFantome.setStrokeWidth(5);
+        lineFantome.setMouseTransparent(true);
+        lineFantome.setVisible(false);
+        anchorPane.getChildren().add(pingouinMvt);
         anchorPane.getChildren().add(lineFantome);
-	estEnAttente = new SimpleBooleanProperty(false);
-        jeuInterrompu = new SimpleBooleanProperty(false);
     }
     
     @Override
     public void onAppearing(){
+    suivant.setVisible(true);
     suivant.setDisable(false);
+    
+    
     for(Node element : anchorPane.getChildren())
     {
         element.setVisible(true);
@@ -116,143 +102,125 @@ public class ControleurTutoriel extends ControleurBase
         Label label1 = (Label) anchorPane.lookup("#0_tuille");
         label1.setText("0");
         lineFantome.setVisible(false);
-       suprimerCasesAccessible();
-       mots=0;
-       labelTitre.setText(Tab[mots]);
+        suprimerCasesAccessible();
+        etape=0;
+        labelTitre.setText(tab[etape]);
        
-            Joueur[] joueurs = new Joueur[]{new JoueurHumain(), new JoueurHumain()};
-            moteur = new Moteur(joueurs);
-            for(int i = 0 ; i < moteur.plateau.plateau.length ; i++)
+        Joueur[] joueurs = new Joueur[]{new JoueurHumain(), new JoueurHumain()};
+        moteur = new Moteur(joueurs);
+        for(int i = 0 ; i < moteur.plateau.plateau.length ; i++)
+        {
+            for(int j = 0 ; j < moteur.plateau.nbTuilesLigne(i) ; j++)
             {
-                for(int j = 0 ; j < moteur.plateau.nbTuilesLigne(i) ; j++)
-		{
-                    if(i >= 4 || j >= 4)
+                if(i >= 4 || j >= 4)
+                {
+                    moteur.plateau.plateau[i][j].nbPoissons = 1; 
+                }
+
+            }
+        }
+                    moteur.placerPingouin(4,4);   
+                    moteur.placerPingouin(4,5);  
+                    moteur.placerPingouin(4,6);  
+                    moteur.placerPingouin(5,4);  	
+                    moteur.placerPingouin(5,5);   
+                    moteur.placerPingouin(5,6);  
+                    moteur.placerPingouin(6,4);
+        for(Joueur joueur : moteur.joueurs)
+        {
+            for(Pingouin pingouin : joueur.pingouins)
+            {
+                pingouin.estBloque = true;
+            }
+        }
+        for(int i = 0 ; i < moteur.plateau.plateau.length ; i++)
+        {
+            for(int j = 0 ; j < Plateau.nbTuilesLigne(i) ; j++)
+            {
+                if(i >= 4 || j >= 4)
+                {
+                    moteur.plateau.plateau[i][j].nbPoissons = 0; 
+                }					
+            }
+        }
+        moteur.plateau.plateau[0][0].nbPoissons = 1; 
+        for(Pingouin pingouin : moteur.joueurs[0].pingouins)
+        {
+            pingouin.estBloque = true;
+        }
+        moteur.sauvegarderCoupJoues = false;
+        for(int i=0;i<4;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                if(anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDTUILE)) != null)
+                {
+                    ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDTUILE));
+                    ImageView pASupp = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDPINGOUIN));
+                    pASupp.setImage(null);
+                    Case tuile = moteur.plateau.plateau[i][j];
+                    Image image = null;
+                    if(!tuile.estCoulee())
                     {
-                        moteur.plateau.plateau[i][j].nbPoissons = 1; 
+                        image = new Image(Constantes.nomImageCase(tuile));
                     }
-					
-		}
-            }
-            		moteur.placerPingouin(4,4);   
-			moteur.placerPingouin(4,5);  
-			moteur.placerPingouin(4,6);  
-			moteur.placerPingouin(5,4);  	
-			moteur.placerPingouin(5,5);   
-			moteur.placerPingouin(5,6);  
-			moteur.placerPingouin(6,4);
-            for(Joueur joueur : moteur.joueurs)
-            {
-                for(Pingouin pingouin : joueur.pingouins)
-                {
-                    pingouin.estBloque = true;
-                }
-            }
-            for(int i = 0 ; i < moteur.plateau.plateau.length ; i++)
-            {
-                for(int j = 0 ; j < Plateau.nbTuilesLigne(i) ; j++)
-		{
-		    if(i >= 4 || j >= 4)
-                    {
-                        moteur.plateau.plateau[i][j].nbPoissons = 0; 
-                    }					
-		}
-            }
-		for(Pingouin pingouin : moteur.joueurs[0].pingouins)
-		{
-                    pingouin.estBloque = true;
-		}
-		moteur.sauvegarderCoupJoues = false;
-           for(int i=0;i<4;i++)
-           {
-               for(int j=0;j<4;j++)
-               {
-                   if(anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDTUILE)) != null)
-                   {
-                       ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDTUILE));
-                       ImageView pASupp = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDPINGOUIN));
-                       pASupp.setImage(null);
-                         Case tuile = moteur.plateau.plateau[i][j];
-                         Image image = null;
-                         if(!tuile.estCoulee())
-                         {
-                             image = new Image(Constantes.nomImageCase(tuile));
-                         }
-                         tuileGraphique.setImage(image);
-                          tuileGraphique.setVisible(true);
-                   }
-                   
-               }
-           }
-          
-        
-            ArrayList<Integer> couleursPrises = new ArrayList<>();
-            for(int i = 0 ; i<1 ; i++ )
-            {
-                couleursPrises.add(moteur.joueurs[i].couleur);
-                ImageView joueurExistant = (ImageView) anchorPane.lookup("#"+moteur.joueurs[i].couleur+"_gui");                
-                joueurExistant.setVisible(true);
-                joueurExistant.setImage(new Image("Images/gui/"+moteur.joueurs[i].couleur+"_gui_afk.png"));
-                System.out.println(moteur.joueurs[i].nom);
-            }
-            for(int i = 0 ; i<1 ; i++ )
-            {
-                if(!couleursPrises.contains(i))
-                {
-                    
-                    ImageView joueurInexistant = (ImageView) anchorPane.lookup("#"+i+"_gui");
-                    joueurInexistant.setVisible(false);
-                    Label label = (Label) anchorPane.lookup("#"+i+"_score");
-                    Label label2 = (Label) anchorPane.lookup("#"+i+"_tuille");                
-                    label.setText("");
-                    label2.setText("");
+                    tuileGraphique.setImage(image);
+                    tuileGraphique.setVisible(true);
                   
+                      
+                    
                 }
-               
+
             }
-       Joueur joueurCourant = moteur.joueurs[moteur.joueurCourant];
-        miseAJourInfoJeu();
-         
+        }
+
+
+        ArrayList<Integer> couleursPrises = new ArrayList<>();
+        for(int i = 0 ; i<1 ; i++ )
+        {
+            couleursPrises.add(moteur.joueurs[i].couleur);
+            ImageView joueurExistant = (ImageView) anchorPane.lookup("#"+moteur.joueurs[i].couleur+"_gui");                
+            joueurExistant.setVisible(true);
+            joueurExistant.setImage(new Image("Images/gui/"+moteur.joueurs[i].couleur+"_gui_afk.png"));
+            System.out.println(moteur.joueurs[i].nom);
+        }
+        for(int i = 0 ; i<1 ; i++ )
+        {
+            if(!couleursPrises.contains(i))
+            {
+
+                ImageView joueurInexistant = (ImageView) anchorPane.lookup("#"+i+"_gui");
+                joueurInexistant.setVisible(false);
+                Label label = (Label) anchorPane.lookup("#"+i+"_score");
+                Label label2 = (Label) anchorPane.lookup("#"+i+"_tuille");                
+                label.setText("");
+                label2.setText("");
+
+            }
+
+        }
+        choixPartie.setVisible(false);   
     }  
     
-    
-    @FXML
-    private void retourMenu(ActionEvent event)
-    {
-        navigation.changerVue(ControleurMenuPrincipal.class);
-       
-        
-        
-    }
-    @FXML
-    private void suivant(ActionEvent event)
-    {
-      
-      clicSuivant(event);
-       
-    }
-     @FXML
-    private void clicSuivant(ActionEvent event){
-        nextPhrase();
-        labelTitre.setText(Tab[mots]);  
-
-    }
-    int lPenguin,cPenguin;
      @FXML
      private void clicTuile(MouseEvent event)
     {        
-        if(mots>=2){             
+        if(etape == 1 || etape >= 3  ){             
             ImageView tuileGraphique = (ImageView)event.getSource();
             Point coordonnees = idToIndices(tuileGraphique.getId()); 
             System.out.print(moteur.deplacementsPossibles(coordonnees.ligne, coordonnees.colonne));
             ArrayList<Point> nouveauxPingouinsBloques = null;
+          
             if(!moteur.pingouinsPlaces())
             {     
+                
                 canPlace=true;
                 nouveauxPingouinsBloques = moteur.placerPingouin(coordonnees.ligne, coordonnees.colonne);
-                suivant.setDisable(!canPlace);
+               
                 if(nouveauxPingouinsBloques != null)
                 {
-                    //effacerAmpoule();
+                    suprimerCasesAccessible();
+                    suivant.setDisable(!canPlace);
                     miseAJourPingouin(coordonnees.ligne, coordonnees.colonne);
                 }   
                 else
@@ -262,51 +230,54 @@ public class ControleurTutoriel extends ControleurBase
             }        
             else
             {
-
-                if(moteur.contientJoueurCourant(coordonnees.ligne,coordonnees.colonne))
-                {                    
-                    suprimerCasesAccessible();
-                    pingouinSel = new Point(coordonnees.ligne,coordonnees.colonne);
-                    ArrayList<Point> deplacements = moteur.deplacementsPossibles(coordonnees.ligne, coordonnees.colonne);
-                    for(Point depl : deplacements)
-                    {
-                        String idTuile = indicesToId(depl.ligne, depl.colonne, DEBUTIDTUILE);     
-                        Scene scene = anchorPane.getScene();
-                        if(scene == null)
-                        {
-                            return;
-                        }
-                        ImageView tuileDepl = (ImageView)scene.lookup("#"+idTuile);
-                        //tuileDepl.setImage(null);
-                        if(mots>=6)
-                        afficherCaseAccessible(depl);
-
-                    }
-                }
-                else if(pingouinSel != null && mots>=6)
-                {      
-                    //effacerAmpoule();
-                    nouveauxPingouinsBloques = moteur.deplacerPingouin(pingouinSel.ligne, pingouinSel.colonne, coordonnees.ligne, coordonnees.colonne);
-                    canDeplace = true;
-                    suivant.setDisable(!canDeplace);
-                    System.out.println("SCORE JC ::::  " + moteur.joueurs[moteur.joueurCourant].scorePoisson );
-                    Label labelScore = (Label) anchorPane.lookup("#0_score");
-                    labelScore.setText(Integer.toString(moteur.joueurs[moteur.joueurCourant].scorePoisson));
-                    Label labeltuille = (Label) anchorPane.lookup("#0_tuille");
-                    labeltuille.setText(Integer.toString(moteur.joueurs[moteur.joueurCourant].scoreTuile));
-                    if(mots == 7)
-                    {
-                        suivant.setDisable(true);
-                    }
-                    if(nouveauxPingouinsBloques != null)
-                    {
+                if(etape >= 3 && canDeplace)
+                {
+                    if(moteur.contientJoueurCourant(coordonnees.ligne,coordonnees.colonne))
+                    {                    
                         suprimerCasesAccessible();
-                        miseAJourPingouin(pingouinSel.ligne, pingouinSel.colonne);
-                        miseAJourTuile(pingouinSel.ligne, pingouinSel.colonne); 
-                        miseAJourPingouin(coordonnees.ligne, coordonnees.colonne);
-                        pingouinSel = null;
+                        pingouinSel = new Point(coordonnees.ligne,coordonnees.colonne);
+                        ArrayList<Point> deplacements = moteur.deplacementsPossibles(coordonnees.ligne, coordonnees.colonne);
+                        for(Point depl : deplacements)
+                        {
+                            String idTuile = indicesToId(depl.ligne, depl.colonne, DEBUTIDTUILE);     
+                            Scene scene = anchorPane.getScene();
+                            if(scene == null)
+                            {
+                                return;
+                            }
+                            ImageView tuileDepl = (ImageView)scene.lookup("#"+idTuile);
+                            //tuileDepl.setImage(null);
+
+                            afficherCaseAccessible(depl);
+
+                        }
+                    }
+                    else if(pingouinSel != null)
+                    {      
+                        
+                        nouveauxPingouinsBloques = moteur.deplacerPingouin(pingouinSel.ligne, pingouinSel.colonne, coordonnees.ligne, coordonnees.colonne);
+                        Label labelScore = (Label) anchorPane.lookup("#0_score");
+                        labelScore.setText(Integer.toString(moteur.joueurs[moteur.joueurCourant].scorePoisson));
+                        Label labeltuille = (Label) anchorPane.lookup("#0_tuille");
+                        labeltuille.setText(Integer.toString(moteur.joueurs[moteur.joueurCourant].scoreTuile));
+                       
+                        if(nouveauxPingouinsBloques != null)
+                        {
+                            suprimerCasesAccessible();
+                            miseAJourPingouin(pingouinSel.ligne, pingouinSel.colonne);
+                            miseAJourTuile(pingouinSel.ligne, pingouinSel.colonne); 
+                            pingouinSel = null;
+                        }
+                        
+                        if(etape == 3 || moteur.estPartieTerminee() )
+                        {
+                            suivant.setDisable(false);
+                            canDeplace = false;
+                        }
+                        
                     }
                 }
+                
             }
             if(nouveauxPingouinsBloques != null)
             {
@@ -321,54 +292,50 @@ public class ControleurTutoriel extends ControleurBase
 
     
     public void nextPhrase(){
-        if(mots<7)
+        if(etape<6)
         {
-            mots++;
-            if(mots == 2 || mots == 6 || mots == 7)
+            etape++;
+            if( etape == 1)
             {
+                showTuilePlaceble();
                 suivant.setDisable(true);
             }
-            
-          
+            else if(etape == 3 || etape == 4 )
+            {
+                suivant.setDisable(true);
+                canDeplace = true;
+            }
+
+            if(etape == 5)
+            {
+                suivant.setVisible(false);
+                choixPartie.setVisible(true);
+            }
         }
-        
-        
-        System.out.println("phrase: " + mots);
+
+        System.out.println("phrase: " + etape);
     }
 
-    public int getphrase() {
-        return mots;
-    }
-    
-    public boolean istutoFinie(){
-        if(mots == 5){
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
- 
-    public String getMots() {
-        return Tab[mots];
-    }
+
     public void Rule_of_game(){
-        Tab = new String[8];
-        Tab[0] = "Bonjour, jeune padawan. Je suis Obikwak Kenobi et je vais te former à l'art d'amasser du poisson.\n"
+        tab = new String[8];
+        tab[0] = "Bonjour, jeune padawan. Je suis Obikwak Kenobi et je vais te former à l'art d'amasser du poisson.\n"
                 + "L'objectif du jeu est simple : chaque joueur doit attraper un maximum de poissons avec ses pingouins. "
                  +"Mais attention ! Si un pingouin est isolé sur une banquise il ne peut plus jouer et devient par conséquent inutile.";
         
-        Tab[1] = "Chaque joueur place tour à tour un de ses pingouins sur un bloc de glace contenant un et un seul poisson."
+        tab[1] = "Chaque joueur place tour à tour un de ses pingouins sur un bloc de glace contenant un et un seul poisson."
                 + " Il ne peut y avoir qu’un seul pingouin par bloc de glace. Pour mieux comprendre cela, clique sur une case avec un poisson pour placer un pingouin.";
 
-        Tab[2] = "Le deplacement doit respecter les contraintes suivantes :\n"
+        tab[2] = "Le deplacement doit respecter les contraintes suivantes :\n"
                 + "* Un pingouin doit se déplacer en ligne droite dans une des 6 directions qui entoure son bloc de glace.\n"
                 + "* Un pingouin peut avancer d’autant de cases que le joueur le souhaite.\n"
                 + "* Enfin un pingouin ne peut pas franchir d’obtacle.\n";
         
-        Tab[3] = "Tour à tour, chaque joueur doit déplacer ces pingouin, sélectionne le en cliquant dessus puis clique sur la case où tu veux le déplacer.";
+        tab[3] = "Tour à tour, chaque joueur doit déplacer ces pingouin, sélectionne le en cliquant dessus puis clique sur la case où tu veux le déplacer.";
    
-        Tab[4] ="Tu es fin prêt, tu peux commencer à jouer. Et surtout n'oublie pas : une truite vaut mieux que deux tu l'auras." ;
+        tab[4] ="Essayes de ramasser un maximum de poissons ! " ;
+
+        tab[5] ="Tu es fin prêt, tu peux commencer à jouer. Et surtout n'oublie pas : une truite vaut mieux que deux tu l'auras." ;
     }
 
     private Point idToIndices(String id)
@@ -383,13 +350,22 @@ public class ControleurTutoriel extends ControleurBase
     {
         return prefixeId+ligne+SEPARATEURID+colonne;
     }
-     private void miseAJourPingouin(int i, int j)
+    private void miseAJourPingouin(int i, int j)
     {
-        ImageView pinguin = (ImageView) anchorPane.lookup("#p"+i+"_"+j);
-                    pinguin.setImage(new Image("Images/pingouins/0_0.png"));
-                    pinguin.setVisible(true);
+        
+        String idPingouin = indicesToId(i, j, DEBUTIDPINGOUIN);
+        ImageView pingouinGraphique = (ImageView)anchorPane.lookup("#"+idPingouin);
+        Case tuile = moteur.plateau.plateau[i][j];
+        Image image = null;
+        if(tuile.estOccupee() && !tuile.pingouin.estBloque)
+        {
+            String nomImage = Constantes.nomImagePingouin(moteur.joueurs[tuile.numJoueurPingouin()]);
+            image = new Image(nomImage);
+        }
+        pingouinGraphique.setImage(image);
+        pingouinGraphique.setVisible(true);
     }
-     private void miseAJourTuile(int i, int j)
+    private void miseAJourTuile(int i, int j)
     {
         ImageView tuileGraphique = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDTUILE));
         Case tuile = moteur.plateau.plateau[i][j];
@@ -411,7 +387,6 @@ public class ControleurTutoriel extends ControleurBase
                    miseAJourCaseAccessible(depl, true);
                    it.remove();
                 }
-        
     }
      private void miseAJourCaseAccessible(Point uneCase, boolean supprimer)
     {
@@ -442,166 +417,56 @@ public class ControleurTutoriel extends ControleurBase
      private void finDuTour(ArrayList<Point> nouveauxPingouinsBloques)
     {
         Coup coup = moteur.dernierCoupJoue;   
-        System.out.println(coup);
-        Thread thread = new Thread()
+        System.out.println(coup);                     
+        if(coup instanceof Deplacement)
         {
-            @Override
-            public void run()
-            {
-                try
-                {
-                    for(Joueur joueur : moteur.joueurs)
-                    {
-                        if(joueur.numero != moteur.joueurPrecedent && joueur instanceof JoueurReseau)
-                        {                        
-                            if(joueur instanceof JoueurClient)
-                            {
-                                if(moteur.joueurs[moteur.joueurPrecedent] instanceof JoueurHumain)
-                                {
-                                    joueur.connexion.writeObject(moteur.dernierCoupJoue);
-                                }
-                                break;
-                            }
-                            else
-                            {
-                                 joueur.connexion.writeObject(moteur.dernierCoupJoue);
-                            }
-                        }                    
-                    }
-                    Platform.runLater(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {                        
-                            estEnAttente.set(false);
-                            if(!jeuInterrompu.get())
-                            {                               
-                                if(coup instanceof Deplacement)
-                                {
-                                   onTranslateDuPinguoin((Deplacement)coup, nouveauxPingouinsBloques);
-                                   miseAJourInfoJeu();
-                                    System.out.println("onTranslateDuPinguoin");
-                                }else
-                                {
-                                    onCouleDuPingouin(nouveauxPingouinsBloques);   
-                                    System.out.println("onCouleDuPingouin");
-                                }
-                            }
-                        }
-                    });
-                }
-                catch(IOException e)
-                {
-                    Platform.runLater(ControleurTutoriel.this::erreurReseau);
-                }
-            }
-        };    
-        estEnAttente.set(true);
-        thread.start();
+           onTranslateDuPinguoin((Deplacement)coup, nouveauxPingouinsBloques);
+            System.out.println("onTranslateDuPinguoin");
+        }else
+        {
+            onCouleDuPingouin(nouveauxPingouinsBloques);   
+            System.out.println("onCouleDuPingouin");
+        }
+   
     }
      
-       private void miseAjourPoints(ArrayList<Point> points)
-    {
-        for(Point point : points)
+        private void miseAjourPoints(ArrayList<Point> points)
         {
-            miseAJourPingouin(point.ligne, point.colonne);
-            miseAJourTuile(point.ligne, point.colonne);
+            for(Point point : points)
+            {
+                miseAJourPingouin(point.ligne, point.colonne);
+                miseAJourTuile(point.ligne, point.colonne);
+            }
         }
-    }
     
-    private void miseAJourInfoJeu()
-    {
-        String texteInfoJeu = null;
-        if(moteur.estPartieTerminee())
-        {
-            texteInfoJeu = "Partie terminée ! Gagnant(s) : ";
-            for(Joueur joueur : moteur.joueursGagnants())
-            {
-                texteInfoJeu += "J"+joueur.numero+" ("+joueur.scorePoisson+"p et "+joueur.scoreTuile+"t), ";
-            }            
-            for(Joueur joueur : moteur.joueurs)
-            {
-                    System.out.println("J"+joueur.numero+"("+joueur.getClass().getSimpleName()+") : "+joueur.scorePoisson+"p et "+joueur.scoreTuile+"t, ");
-            }
-            
-            //showFinPartie();
-        }
-            Label labelScore = (Label) anchorPane.lookup("#0_score");
-            labelScore.setText(Integer.toString(moteur.joueurs[1].scorePoisson));
-            ColorAdjust afk_color = new ColorAdjust();
-            ColorAdjust active_color = new ColorAdjust();
-            afk_color.setBrightness(0);
-            active_color.setBrightness(-0.5);
-            
-            for(int i = 0 ; i < 1 ; i++)
-            {
-                ImageView tb2 = (ImageView) anchorPane.lookup("#"+i+"_gui");
-                tb2.setImage(new Image("Images/gui/"+i+"_gui_afk.png"));
-                tb2.setEffect(afk_color);
-            }
-            
-            ImageView tb = (ImageView) anchorPane.lookup("#"+moteur.joueurs[moteur.joueurCourant].couleur+"_gui");
-            tb.setImage(new Image("Images/gui/"+moteur.joueurs[moteur.joueurCourant].couleur+"_gui_active.png"));
-            tb.setEffect(active_color);
-            
-            Timeline fadeOutTimeline = new Timeline();
-            fadeOutTimeline.setCycleCount(1);
-            fadeOutTimeline.setAutoReverse(false);
-            final KeyValue kv = new KeyValue(afk_color.brightnessProperty(), -0.5, Interpolator.LINEAR);
-            final KeyFrame kf = new KeyFrame(Duration.millis(300), kv);
-            fadeOutTimeline.getKeyFrames().add(kf);
-            fadeOutTimeline.play();
-            
-            Timeline fadeInTimeline = new Timeline();
-            fadeInTimeline.setCycleCount(1);
-            fadeInTimeline.setAutoReverse(false);
-            final KeyValue kv2 = new KeyValue(active_color.brightnessProperty(), 0, Interpolator.LINEAR);
-            final KeyFrame kf2 = new KeyFrame(Duration.millis(300), kv2);
-            fadeInTimeline.getKeyFrames().add(kf2);
-            fadeInTimeline.play();
-                    
-            //joueurPrec = navigation.moteur.joueurCourant;
-            
-           
-        
-    }
-     public void  montrerDernierCoup(Deplacement dep)
-    {
-        System.out.println("ya houlou");
+    
+    public void  montrerDernierCoup(Deplacement dep)
+    {     
         String idCasePinguoin = indicesToId(dep.ligneDest, dep.colonneDest,DEBUTIDTUILE);
-        ImageView pingouinCourant = (ImageView)anchorPane.lookup("#"+idCasePinguoin);
-        
+        ImageView pingouinCourant = (ImageView)anchorPane.lookup("#"+idCasePinguoin);       
         
         String idCaseSource = indicesToId(dep.ligneSrc, dep.colonneSrc,DEBUTIDTUILE);
         tuileFantome = (ImageView)anchorPane.lookup("#"+idCaseSource);
-        Image image = new Image("Images/fantomes/tuilevierge.png") ;
-        
-        //tuileFantome.setImage(image);
-        
+
         String idCaseSourcePinguouin = indicesToId(dep.ligneSrc, dep.colonneSrc,DEBUTIDPINGOUIN);
         pingouinFantome = (ImageView)anchorPane.lookup("#"+idCaseSourcePinguouin);
-        Image image2 = new  Image("Images/fantomes/" + moteur.joueurCourant + "_0_6.png") ;        
-        //pingouinFantome.setImage(image2);
-
-        
         
         double xDep = pingouinCourant.getLayoutX() + pingouinCourant.getFitWidth()/2;
         double yDep = pingouinCourant.getLayoutY() + pingouinCourant.getFitHeight()/2;
         double xArr = tuileFantome.getLayoutX() + tuileFantome.getFitWidth()/2;
-        double yArr = tuileFantome.getLayoutY() + tuileFantome.getFitHeight()/2;
-        
+        double yArr = tuileFantome.getLayoutY() + tuileFantome.getFitHeight()/2;   
 
         lineFantome.setStartX(xDep);
         lineFantome.setStartY(yDep);
         lineFantome.setEndX(xArr);
         lineFantome.setEndY(yArr);
-        lineFantome.setStroke(Constantes.couleurJoueur(moteur.joueurs[moteur.joueurCourant]));
-        lineFantome.setVisible(true);
-        
+        lineFantome.setStroke(Constantes.couleurJoueur(moteur.joueurs[moteur.joueurPrecedent]));
+        lineFantome.setVisible(true);   
     }
+         
+    
     private void onTranslateDuPinguoin(Deplacement dep, ArrayList<Point> nouveauxPingouinsBloques) {
-        estEnAttente.set(true);
-       
+
         if(pingouinFantome != null)
         {
             pingouinFantome.setImage(null);  
@@ -609,13 +474,13 @@ public class ControleurTutoriel extends ControleurBase
             tuileFantome.setImage(null); 
             Point coordonneesTuile = idToIndices(tuileFantome.getId());
             miseAJourTuile(coordonneesTuile.ligne, coordonneesTuile.colonne);
-            //Point coordonneesPingouin = idToIndices(pingouinFantome.getId());
-            //miseAJourPingouin(coordonneesPingouin.ligne, coordonneesPingouin.colonne);
+            Point coordonneesPingouin = idToIndices(pingouinFantome.getId());
+            miseAJourPingouin(coordonneesPingouin.ligne, coordonneesPingouin.colonne);
             /*tuileFantome.setImage(null); 
             tuileFantome.setVisible(false);*/
             lineFantome.setVisible(false);
         }
-         montrerDernierCoup(dep);
+        montrerDernierCoup(dep);
         String idPingouin = indicesToId(dep.ligneSrc, dep.colonneSrc,DEBUTIDPINGOUIN);
         ImageView pingouinGraphique = (ImageView)anchorPane.lookup("#"+idPingouin);
         
@@ -624,7 +489,7 @@ public class ControleurTutoriel extends ControleurBase
         ImageView caseDest = (ImageView)anchorPane.lookup("#"+idCaseDest);
         
         
-        Case tuile =moteur.plateau.plateau[dep.ligneDest][dep.colonneDest];
+        Case tuile = moteur.plateau.plateau[dep.ligneDest][dep.colonneDest];
         String nomImage = Constantes.nomImagePingouin(moteur.joueurs[tuile.numJoueurPingouin()]);
         Image image = new Image(nomImage);
       
@@ -662,6 +527,7 @@ public class ControleurTutoriel extends ControleurBase
         
         ParallelTransition parallelTransition = new ParallelTransition(animationPingouin, animationLine, translateLine);
         lineFantome.setVisible(true);
+        pingouinGraphique.setImage(null);
         parallelTransition.play();
         
         
@@ -673,7 +539,7 @@ public class ControleurTutoriel extends ControleurBase
                 pingouinMvt.setImage(null);
                 pingouinMvt.setVisible(false);
                 miseAJourPingouin(dep.ligneDest, dep.colonneDest);
-               onCouleDuPingouin(nouveauxPingouinsBloques);
+                onCouleDuPingouin(nouveauxPingouinsBloques);                
 
             }
         });
@@ -681,7 +547,6 @@ public class ControleurTutoriel extends ControleurBase
     }
        
      private void onCouleDuPingouin(ArrayList<Point> nouveauxPingouinsBloques){
-        estEnAttente.set(true);
         miseAjourPoints(nouveauxPingouinsBloques);   
         ParallelTransition parallelTransition = new ParallelTransition();
         for(Point point : nouveauxPingouinsBloques)
@@ -719,16 +584,46 @@ public class ControleurTutoriel extends ControleurBase
 
             @Override
             public void handle(ActionEvent event) {
-                miseAjourPoints(nouveauxPingouinsBloques);         
-                miseAJourInfoJeu();
-                estEnAttente.set(false);
-               
-
+                miseAjourPoints(nouveauxPingouinsBloques);                       
             }
         });
         parallelTransition.play();
      }
-     
+
+    @FXML
+    private void clicChoixPartie() {
+        navigation.enReseau = false;
+        navigation.changerVue(ControleurChoixJoueurs.class);
+    }
+     @FXML
+    private void retourMenu(ActionEvent event)
+    {
+        navigation.changerVue(ControleurMenuPrincipal.class);
+    }
+    @FXML
+    private void clicSuivant(ActionEvent event){
+        nextPhrase();
+        labelTitre.setText(tab[etape]);  
+    }
+
+    private void showTuilePlaceble() {
+        for(int i=0;i<4;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                
+                Case tuile = moteur.plateau.plateau[i][j];
+                if(tuile.peutPlacerPingouin())
+                {
+                    ImageView accessible = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDCASEACCESSIBLE));
+                    Image imageAccessible = new Image(Constantes.nomImageCaseAccessible(moteur.joueurs[moteur.joueurCourant]));
+                    accessible.setImage(imageAccessible);
+                    accessible.setVisible(true); 
+                    casesAccessibles.add(new Point(i,j));
+                }
+            }
+        }
+    }
      
 }
 

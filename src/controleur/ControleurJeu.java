@@ -34,6 +34,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
@@ -1378,7 +1379,7 @@ public class ControleurJeu  extends ControleurBase {
                 titrePlacementOuDeplacement.setLayoutX(294);
             }
             titrePlacementOuDeplacement.setFill(Color.WHITE);
-            titrePlacementOuDeplacement.setFont(Font.font("Calibri",FontWeight.BOLD,15));
+            titrePlacementOuDeplacement.setFont(Font.font("Calibri",FontWeight.BOLD,Region.USE_COMPUTED_SIZE));
         } else {
             titrePlacementOuDeplacement.setText("");
         }

@@ -48,7 +48,7 @@
     <SimpleImageView  fx:id="image0" url="Images/tuilevierge.png" layoutX="50" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#selectEmplacement"/>
     <Text fx:id="date0" layoutX="60" layoutY="95" text="Date : " mouseTransparent="true" />
     <Text fx:id="nom0" layoutX="60" layoutY="125" text="Nom : " mouseTransparent="true"/>
-    <Text fx:id="vide0" layoutX="90" layoutY="120" text="Sauvegarde  vide" mouseTransparent="true"/>
+    <Text fx:id="vide0" layoutX="80" layoutY="120" text="SAUVEGARDE VIDE" mouseTransparent="true"/>
     <SimpleImageView fx:id="selected0" url="Images/accessible3.png" layoutX="50" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" smooth="true" visible="false" />
     <SimpleImageView fx:id="trash0" url="Images/trash.png" layoutX="138" layoutY="150" fitHeight="25" fitWidth="25" pickOnBounds="false" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#showDialogTrash"/>
 
@@ -57,8 +57,7 @@
     <SimpleImageView fx:id="image1" url="Images/tuilevierge.png" layoutX="300" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#selectEmplacement"/>
     <Text  fx:id="date1" layoutX="310" layoutY="95" text="Date : " mouseTransparent="true"/>   
     <Text fx:id="nom1" layoutX="310" layoutY="125" text="Nom : " mouseTransparent="true"/>
-    <Text fx:id="vide1" layoutX="340" layoutY="120" text="Sauvegarde  vide" mouseTransparent="true"/>
-
+    <Text fx:id="vide1" layoutX="330" layoutY="120" text="SAUVEGARDE VIDE" mouseTransparent="true"/>
     <SimpleImageView fx:id="selected1" url="Images/accessible3.png" layoutX="300" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true"  smooth="true" visible="false" />
     <SimpleImageView fx:id="trash1" url="Images/trash.png" layoutX="388" layoutY="150" fitHeight="25" fitWidth="25" pickOnBounds="false" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#showDialogTrash"/>
 
@@ -66,7 +65,7 @@
     <SimpleImageView fx:id="image2" url="Images/tuilevierge.png" layoutX="550" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#selectEmplacement"/>
     <Text fx:id="date2" layoutX="560" layoutY="95" text="Date : " mouseTransparent="true"/>     
     <Text fx:id="nom2" layoutX="560" layoutY="125" text="Nom : " mouseTransparent="true"/>
-    <Text fx:id="vide2" layoutX="590" layoutY="120" text="Sauvegarde  vide" mouseTransparent="true"/>
+    <Text fx:id="vide2" layoutX="580" layoutY="120" text="SAUVEGARDE VIDE" mouseTransparent="true"/>
     <SimpleImageView fx:id="selected2" url="Images/accessible3.png" layoutX="550" layoutY="50.0" fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true"  smooth="true" visible="false" />
     <SimpleImageView fx:id="trash2" url="Images/trash.png" layoutX="638" layoutY="150" fitHeight="25" fitWidth="25" pickOnBounds="false" preserveRatio="true" visible="true" smooth="true" onMouseClicked="#showDialogTrash" />
 

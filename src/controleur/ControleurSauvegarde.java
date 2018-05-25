@@ -25,6 +25,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -141,6 +144,8 @@ public abstract class ControleurSauvegarde extends ControleurBase
     public void showTuileEmpty(int i)
     {
         Text invalide = (Text)anchorPane.lookup("#"+getVideId(i));
+        invalide.setFont(Font.font(null, 15));
+        invalide.setFill(Color.rgb(102, 102, 102));
         invalide.setVisible(true);
         Text nom = (Text)anchorPane.lookup("#"+getNomId(i));
         nom.setVisible(false);

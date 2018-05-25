@@ -75,8 +75,17 @@
     <Text fx:id="nouveauNomText" layoutX="250" layoutY="400" text="Nom : " />
     <MyTextField  fx:id="nouveauNomInput" layoutX="300" layoutY="380" />
     <Text fx:id="message" layoutX="275" layoutY="575" />
-    <MyButton layoutX="10.0" layoutY="550.0" mnemonicParsing="false" prefWidth="150.0" text="Retour au jeu" onAction="#retourJeu" />
-    <MyButton fx:id="btnSauvegarder" layoutX="640.0" layoutY="550.0" mnemonicParsing="false" prefWidth="150.0" text="Sauvegarder" onAction="#sauvegarder" />
+    <MyButton  fx:id="retourJeu" mnemonicParsing="false" styleClass="btn" layoutX="15.0" layoutY="535.0" onAction="#retourJeu">
+        <graphic>
+             <SimpleImageView  url="Images/retourJeu.png" fitHeight="56" fitWidth="197" pickOnBounds="true" preserveRatio="true"/>
+        </graphic>
+    </MyButton>
+    
+    <MyButton fx:id="btnSauvegarder"  mnemonicParsing="false" styleClass="btn" layoutX="570.0" layoutY="535.0"  onAction="#sauvegarder">
+        <graphic>
+             <SimpleImageView  url="Images/sauvegarder.png" fitHeight="56" fitWidth="197" pickOnBounds="true" preserveRatio="true"/>
+        </graphic>
+    </MyButton>
     <PanelSonManager fx:id="panelSonManager"/>
     </children>
     

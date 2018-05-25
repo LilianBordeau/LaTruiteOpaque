@@ -90,7 +90,12 @@ public class ControleurJeu  extends ControleurBase {
     public AnchorPane anchorPane;
     
     @FXML
-    public Label titreFinPartie, titrePlacementOuDeplacement;
+    public Label titreFinPartie;
+    
+    @FXML
+    public Text titrePlacementOuDeplacement;
+    
+            
      
     @FXML
     public ImageView sablier,fondFinPartie;
@@ -1366,13 +1371,13 @@ public class ControleurJeu  extends ControleurBase {
             if(!navigation.moteur.pingouinsPlaces())
             {
                 titrePlacementOuDeplacement.setText("Placez vos pingouins !");
-                titrePlacementOuDeplacement.setLayoutX(320);
+                titrePlacementOuDeplacement.setLayoutX(305);
             } else
             {
                 titrePlacementOuDeplacement.setText("Déplacez vos pingouins !");
-                titrePlacementOuDeplacement.setLayoutX(312);
+                titrePlacementOuDeplacement.setLayoutX(294);
             }
-            titrePlacementOuDeplacement.setTextFill(Color.WHITE);
+            titrePlacementOuDeplacement.setFill(Color.WHITE);
             titrePlacementOuDeplacement.setFont(Font.font(null,FontWeight.BOLD,15));
         } else {
             titrePlacementOuDeplacement.setText("");

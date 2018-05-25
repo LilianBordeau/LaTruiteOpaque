@@ -125,7 +125,9 @@ public class ControleurJeu  extends ControleurBase {
         transitionSablier.play();
         pingouinMvt =  new ImageView();
         lineFantome = new Line();
+        lineFantome.setVisible(false);
         lineAmpoule = new Line();
+        lineAmpoule.setVisible(false);
         lineAmpoule.setMouseTransparent(true);
         lineAmpoule.setOpacity(0.5);
         lineAmpoule.setStrokeWidth(5);

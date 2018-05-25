@@ -55,6 +55,7 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
         nouveauNomInput.clear();
         nouveauNomInput.charactereInvalides = "[/\\<>|\"*_:]";
         setMessage("Veuillez choisir un emplacement de sauvegarde !");
+        message.setLayoutX(255.0);
         disableSaisie();
        
    
@@ -94,6 +95,7 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
         {
             tuileSelectionne = -1;
             setMessage("Veuillez choisir un emplacement de sauvegarde valide ! ");
+            message.setLayoutX(250.0);
             disableSaisie();
             System.out.println("Tuile occupée");
         }
@@ -115,6 +117,7 @@ public class ControleurSauvegarderPartie extends ControleurSauvegarde
         if( nouveauNomInput.getText().trim().isEmpty())
         {
             super.setMessage("Nom de sauvegarde incorrect");
+            message.setLayoutX(295.0);
         }
         else
         {

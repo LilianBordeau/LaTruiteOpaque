@@ -43,8 +43,17 @@
             <Label fx:id="membre5_metier" styleClass="texte_equipe" layoutX="525" layoutY="66" prefHeight="30" prefWidth="200" />
             <Label fx:id="membre6_metier" styleClass="texte_equipe" layoutX="575" layoutY="166" prefHeight="30" prefWidth="200"/>
             
-            <MyButton layoutX="10" layoutY="550" prefWidth="150" text="Retour au menu" onAction="#retourMenu" />
-            <MyButton fx:id="boutonCredits" layoutX="640" layoutY="550" prefWidth="150" text="La communauté" onAction="#suivantMenu" />
+            <MyButton fx:id="retourMenu2" styleClass="btn" layoutX="15.0" layoutY="535.0"  onAction="#retourMenu" >
+                <graphic>
+                    <SimpleImageView  url="Images/retourMenu.png" fitHeight="56" fitWidth="197" pickOnBounds="true" preserveRatio="true"/>
+                </graphic>
+            </MyButton>
+            
+            <MyButton fx:id="boutonCredits"  styleClass="btn" layoutX="560.0" layoutY="535.0"  onAction="#suivantMenu">
+                <graphic>
+                    <SimpleImageView  url="Images/communaute.png" fitHeight="56" fitWidth="197" pickOnBounds="true" preserveRatio="true"/>
+                </graphic>
+            </MyButton>
             <PanelSonManager fx:id="panelSonManager"/>
             
             

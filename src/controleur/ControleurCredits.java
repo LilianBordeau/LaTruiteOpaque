@@ -115,7 +115,10 @@ public class ControleurCredits extends ControleurBase
         
         remerciements.setOpacity(1);
         labelCredits.setOpacity(1);
-        boutonCredits.setText("La communauté");
+        ImageView imgv = new ImageView(new Image("Images/communaute.png"));
+         imgv.setFitHeight(56);
+         imgv.setFitWidth(197);
+         boutonCredits.setGraphic(imgv);
         
         membre1.setText("Adel Mouss");
         membre1.setTextFill(Color.valueOf("d80000"));
@@ -230,7 +233,11 @@ public class ControleurCredits extends ControleurBase
          //remerciements.setVisible(false);
          //equipe.setVisible(true);
          credits_equipe = false;
-         boutonCredits.setText("Histoire");
+         //boutonCredits.setText("Histoire");
+         ImageView imgv = new ImageView(new Image("Images/histoire.png"));
+         imgv.setFitHeight(56);
+         imgv.setFitWidth(197);
+         boutonCredits.setGraphic(imgv);
          
          for(int i = 1; i <= 6; i++)
          {
@@ -286,7 +293,11 @@ public class ControleurCredits extends ControleurBase
          //remerciements.setVisible(true);
          //equipe.setVisible(false);
          credits_equipe = true;
-         boutonCredits.setText("La communauté");
+         //boutonCredits.setText("La communauté");
+         ImageView imgv = new ImageView(new Image("Images/communaute.png"));
+         imgv.setFitHeight(56);
+         imgv.setFitWidth(197);
+         boutonCredits.setGraphic(imgv);
          
          for(int i = 1; i <= 6; i++)
          {

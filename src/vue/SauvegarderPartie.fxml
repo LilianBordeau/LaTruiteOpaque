@@ -81,7 +81,7 @@
         </graphic>
     </MyButton>
     
-    <MyButton fx:id="btnSauvegarder"  mnemonicParsing="false" styleClass="btn" layoutX="560.0" layoutY="535.0"  onAction="#sauvegarder">
+    <MyButton fx:id="btnSauvegarder"  mnemonicParsing="false" styleClass="btn" layoutX="570.0" layoutY="535.0"  onAction="#sauvegarder">
         <graphic>
              <SimpleImageView  url="Images/sauvegarder.png" fitHeight="56" fitWidth="197" pickOnBounds="true" preserveRatio="true"/>
         </graphic>

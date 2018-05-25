@@ -1379,7 +1379,7 @@ public class ControleurJeu  extends ControleurBase {
                 titrePlacementOuDeplacement.setLayoutX(294);
             }
             titrePlacementOuDeplacement.setFill(Color.WHITE);
-            titrePlacementOuDeplacement.setFont(Font.font("Calibri",FontWeight.BOLD,Region.USE_COMPUTED_SIZE));
+            titrePlacementOuDeplacement.setFont(Font.font("Calibri",FontWeight.BOLD,15));
         } else {
             titrePlacementOuDeplacement.setText("");
         }

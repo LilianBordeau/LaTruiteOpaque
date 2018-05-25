@@ -77,13 +77,13 @@
     <Text fx:id="message" layoutX="275" layoutY="575" />
     <MyButton  fx:id="retourJeu" mnemonicParsing="false" styleClass="btn" layoutX="15.0" layoutY="535.0" onAction="#retourJeu">
         <graphic>
-             <SimpleImageView  url="Images/retourJeu.png" fitHeight="56" fitWidth="197" pickOnBounds="true" preserveRatio="true"/>
+             <SimpleImageView  url="Images/retourJeu.png" fitHeight="52" fitWidth="197" pickOnBounds="true" preserveRatio="true"/>
         </graphic>
     </MyButton>
     
     <MyButton fx:id="btnSauvegarder"  mnemonicParsing="false" styleClass="btn" layoutX="570.0" layoutY="535.0"  onAction="#sauvegarder">
         <graphic>
-             <SimpleImageView  url="Images/sauvegarder.png" fitHeight="56" fitWidth="197" pickOnBounds="true" preserveRatio="true"/>
+             <SimpleImageView  url="Images/sauvegarder.png" fitHeight="52" fitWidth="197" pickOnBounds="true" preserveRatio="true"/>
         </graphic>
     </MyButton>
     <PanelSonManager fx:id="panelSonManager"/>

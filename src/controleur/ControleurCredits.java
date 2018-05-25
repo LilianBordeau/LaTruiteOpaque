@@ -74,6 +74,9 @@ public class ControleurCredits extends ControleurBase
     @FXML
     private Button boutonCredits;
     
+    @FXML
+    private Button histoire;
+    
     boolean fullscreen;
     boolean credits_equipe;
   
@@ -115,10 +118,9 @@ public class ControleurCredits extends ControleurBase
         
         remerciements.setOpacity(1);
         labelCredits.setOpacity(1);
-        ImageView imgv = new ImageView(new Image("Images/communaute.png"));
-         imgv.setFitHeight(56);
-         imgv.setFitWidth(197);
-         boutonCredits.setGraphic(imgv);
+
+         boutonCredits.setVisible(true);
+         histoire.setVisible(false);
         
         membre1.setText("Adel Mouss");
         membre1.setTextFill(Color.valueOf("d80000"));
@@ -234,10 +236,8 @@ public class ControleurCredits extends ControleurBase
          //equipe.setVisible(true);
          credits_equipe = false;
          //boutonCredits.setText("Histoire");
-         ImageView imgv = new ImageView(new Image("Images/histoire.png"));
-         imgv.setFitHeight(56);
-         imgv.setFitWidth(197);
-         boutonCredits.setGraphic(imgv);
+         boutonCredits.setVisible(false);
+         histoire.setVisible(true);
          
          for(int i = 1; i <= 6; i++)
          {
@@ -294,10 +294,8 @@ public class ControleurCredits extends ControleurBase
          //equipe.setVisible(false);
          credits_equipe = true;
          //boutonCredits.setText("La communauté");
-         ImageView imgv = new ImageView(new Image("Images/communaute.png"));
-         imgv.setFitHeight(56);
-         imgv.setFitWidth(197);
-         boutonCredits.setGraphic(imgv);
+         boutonCredits.setVisible(true);
+         histoire.setVisible(false);
          
          for(int i = 1; i <= 6; i++)
          {

@@ -75,10 +75,30 @@
     -fx-scale-y: 1;
     -fx-padding: 0 0 0 -2;
 }
-#retourMenu2:hover, #boutonCredits:hover, #btnSauvegarder:hover, #retourJeu:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 0, 0, 2, 0) ;
-    -fx-scale-x: 1.1;
-    -fx-scale-y: 1.1;
+
+#retourMenu2:hover
+{
+    -fx-graphic: url('../hover_images/retour_hover.png');
+    -fx-padding: 0 0 0 0;
+}
+#boutonCredits:hover
+{
+    -fx-graphic: url('../hover_images/communaute_hover.png');
+    -fx-padding: 0 0 0 0;
+}
+#btnSauvegarder:hover
+{
+    -fx-graphic: url('../hover_images/sauvegarder_hover.png');
+    -fx-padding: 0 0 0 0;
+}
+#retourJeu:hover
+{
+    -fx-graphic: url('../hover_images/retourJeu_hover.png');
+    -fx-padding: 0 0 0 0;
+}
+#histoire:hover
+{
+    -fx-graphic: url('../hover_images/histoire_hover.png');
     -fx-padding: 0 0 0 0;
 }
 

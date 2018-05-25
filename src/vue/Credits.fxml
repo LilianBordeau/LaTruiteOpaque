@@ -45,13 +45,19 @@
             
             <MyButton fx:id="retourMenu2" styleClass="btn" layoutX="15.0" layoutY="535.0"  onAction="#retourMenu" >
                 <graphic>
-                    <SimpleImageView  url="Images/retourMenu.png" fitHeight="56" fitWidth="197" pickOnBounds="true" preserveRatio="true"/>
+                    <SimpleImageView  url="Images/retour.png" fitHeight="52" fitWidth="197" pickOnBounds="true" preserveRatio="true"/>
                 </graphic>
             </MyButton>
             
             <MyButton fx:id="boutonCredits"  styleClass="btn" layoutX="560.0" layoutY="535.0"  onAction="#suivantMenu">
                 <graphic>
-                    <SimpleImageView  url="Images/communaute.png" fitHeight="56" fitWidth="197" pickOnBounds="true" preserveRatio="true"/>
+                    <SimpleImageView  url="Images/communaute.png" fitHeight="52" fitWidth="197" pickOnBounds="true" preserveRatio="true"/>
+                </graphic>
+            </MyButton>
+            
+            <MyButton fx:id="histoire"  styleClass="btn" layoutX="560.0" layoutY="535.0"  onAction="#suivantMenu" visible="false">
+                <graphic>
+                    <SimpleImageView  url="Images/histoire.png" fitHeight="52" fitWidth="197" pickOnBounds="true" preserveRatio="true"/>
                 </graphic>
             </MyButton>
             <PanelSonManager fx:id="panelSonManager"/>

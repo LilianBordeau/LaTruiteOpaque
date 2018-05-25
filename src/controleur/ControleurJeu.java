@@ -259,7 +259,7 @@ public class ControleurJeu  extends ControleurBase {
         btnUndo.setDisable(navigation.moteur.coupJoues.isEmpty() || navigation.moteur.estEnReseau);
         btnRedo.setDisable(navigation.moteur.coupAnnules.isEmpty() || navigation.moteur.estEnReseau);
         boolean estJoueurCourantHumain = navigation.moteur.joueurs[navigation.moteur.joueurCourant] instanceof JoueurHumain;
-        btnIndice.setDisable(!estJoueurCourantHumain);
+        btnIndice.setDisable(!estJoueurCourantHumain || navigation.moteur.estPartieTerminee());
         Scene scene = anchorPane.getScene();
         if(scene != null && !estJoueurCourantHumain)
         {

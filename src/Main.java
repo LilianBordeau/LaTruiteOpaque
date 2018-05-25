@@ -88,15 +88,15 @@ public class Main extends Application {
         sablier.setLayoutY(215);
         
         ImageView panneau = new ImageView(new Image("Images/panneauPlacementDeplacement.png"));
-        panneau.setLayoutX(250);
+        panneau.setLayoutX(225);
         panneau.setLayoutY(400);
         panneau.setFitHeight(75);
-        panneau.setFitWidth(300);
+        panneau.setFitWidth(350);
         
         Label message = new Label("Pêchage de truites en cours ...");
         message.setFont(Font.font(null,FontWeight.BOLD,15));
         message.setTextFill(Color.WHITE);
-        message.setLayoutX(295);
+        message.setLayoutX(270);
         message.setLayoutY(425);
         
         

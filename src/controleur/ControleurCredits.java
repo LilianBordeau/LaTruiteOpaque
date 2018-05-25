@@ -135,17 +135,16 @@ public class ControleurCredits extends ControleurBase
         membre3_metier.setText("Artisan du bois");
         membre4_metier.setText("Interfaceur codeur");
         membre5_metier.setText("Sculpteur de pingouins");
-        membre6_metier.setText("Génie du réseau");
+        membre6_metier.setText("Seigneur des réseaux");
         
         equipe.setOpacity(0);
         labelCredits.setText("Il y a très très longtemps, sur une banquise très très lointaine...\n"
                 + "Un jeu fut forgé par Alvydas Jakeliunas et Günter Cornett. Un jeu pour les gouverner tous. "
                 + "En l'an de grâce 2006, la légendaire maison d'édition Phalanx Games décide d'en faire un jeu de plateau. "
                 + "Douze ans plus tard, alors que tout espoir est perdu, une jeune équipe d'irréductibles codeurs décide de s'attaquer à l'impossible : "
-                + "retranscrire ce chef-d'oeuvre dans la matrice. "
-                + "Dans cette quête ils furent accompagnés par Thomas Lavocat qui les aida grandement.\n"
-                + "Cette page raconte leur histoire...");
-
+                + "retranscrire ce chef-d'oeuvre dans la matrice. "                
+                + "Cette page raconte leur histoire...\n"
+                + "Remerciements à notre tuteur, Thomas Lavocat.");
     
         
         anchorPane.setOnKeyReleased(new EventHandler<KeyEvent>() {

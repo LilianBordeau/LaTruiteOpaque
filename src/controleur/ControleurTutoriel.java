@@ -354,24 +354,21 @@ public class ControleurTutoriel extends ControleurBase
     }
     public void Rule_of_game(){
         Tab = new String[8];
-        Tab[0] = "L'objectif du jeu est que chaque joueur essaie d’attraper un maximum de poissons avec ses pingouins "
-                 +"avant d’être définitivement isolé sur la banquise.";
+        Tab[0] = "Bonjour, jeune padawan. Je suis Obikwak Kenobi et je vais te former à l'art d'amasser du poisson.\n"
+                + "L'objectif du jeu est simple : chaque joueur doit attraper un maximum de poissons avec ses pingouins. "
+                 +"Mais attention ! Si un pingouin est isolé sur une banquise il ne peut plus jouer et devient par conséquent inutile.";
         
-        Tab[1] = "Chaque joueur place tour à tour un de ses pingouins sur un bloc de glace qui contenant un et un seul poisson."
-                + " Il ne peut y avoir qu’un seul pingouin par bloc de glace." ;
-                
-        Tab[2] = "Pour mieur comprendre cela, cliquez sur une case avec UN POISSON pour placer vos pingouins.";
+        Tab[1] = "Chaque joueur place tour à tour un de ses pingouins sur un bloc de glace contenant un et un seul poisson."
+                + " Il ne peut y avoir qu’un seul pingouin par bloc de glace. Pour mieux comprendre cela, clique sur une case avec un poisson pour placer un pingouin.";
 
-        Tab[3] = "Le deplacement doit respecer les contraintes suivantes :";
-      
-        Tab[4] = "* Le pingouin doit se déplacer en ligne droite dans une des 6 directions qui entoure son bloc de glace.";
-             
-        Tab[5] = "* Le pingouin peut avancer d’autant de cases que le joueur le souhaite.\n"
-                +"* Enfin un pingouin ne peut pas franchir d’obtacle.";
+        Tab[2] = "Le deplacement doit respecter les contraintes suivantes :\n"
+                + "* Un pingouin doit se déplacer en ligne droite dans une des 6 directions qui entoure son bloc de glace.\n"
+                + "* Un pingouin peut avancer d’autant de cases que le joueur le souhaite.\n"
+                + "* Enfin un pingouin ne peut pas franchir d’obtacle.\n";
         
-        Tab[6] = "Tour à tour, chaque joueur doit déplacer ces pingouin, sélectionne le en cliquant dessus puis clique sur la case où vous voulez le déplacer.";
+        Tab[3] = "Tour à tour, chaque joueur doit déplacer ces pingouin, sélectionne le en cliquant dessus puis clique sur la case où tu veux le déplacer.";
    
-        Tab[7] ="Vous pouvez commencer à jouer." ;
+        Tab[4] ="Tu es fin prêt, tu peux commencer à jouer. Et surtout n'oublie pas : une truite vaut mieux que deux tu l'auras." ;
     }
 
     private Point idToIndices(String id)

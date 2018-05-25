@@ -19,11 +19,10 @@
                     <Image url="Images/cj_background.png" />
                 </image>    
             </ImageView>
-            <Label fx:id="labelTitre" layoutX="275" layoutY="50"   prefWidth="250" text="Rejoindre une partie en ligne" />
-            <Label layoutX="200" layoutY="170"   prefWidth="250" text="Saisir une adresse IP d'un hebergeur" />
+            <Label layoutX="200" layoutY="170"   prefWidth="250" text="Saisir l'adresse IP d'un hébergeur" />
             <TextField fx:id="champIp" text="10.186.8.152" layoutX="200" layoutY="200" prefWidth="400" />
             <Label layoutX="200" layoutY="250"   prefWidth="250" text="Nom" />
-            <TextField fx:id="champNom" text="Moi" layoutX="200" layoutY="300" prefWidth="400" />
+            <TextField fx:id="champNom" text="Moi" layoutX="200" layoutY="280" prefWidth="400" />
             
             <MyButton  fx:id="commencer" layoutX="640" layoutY="550" prefWidth="1"  onAction="#clicCommencer"/>
             <MyButton fx:id="btnCommencer" styleClass="btn" layoutX="560.0" layoutY="535.0" mnemonicParsing="false" prefWidth="150.0" onAction="#clicCommencer" >

@@ -32,8 +32,6 @@ import javafx.util.Duration;
 
 public class ControleurRejoindreReseau extends ControleurBase
 {    
-    @FXML
-    public Label labelTitre;
     
     @FXML
     public TextField champIp;
@@ -66,7 +64,6 @@ public class ControleurRejoindreReseau extends ControleurBase
         transitionSablier.setByAngle(359);
         transitionSablier.setCycleCount(Transition.INDEFINITE);
         transitionSablier.play();
-        labelTitre.setAlignment(Pos.CENTER);
     }
     
     @Override
@@ -92,7 +89,7 @@ public class ControleurRejoindreReseau extends ControleurBase
     
     public void changerCurseur(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)
     {
-                Scene scene = labelTitre.getScene();
+                Scene scene = champIp.getScene();
                 if(scene != null)
                 {
                     scene.setCursor(boutonActifSurvole.get() ? Cursor.HAND : (sablier.visibleProperty().get() ? Cursor.WAIT : Cursor.DEFAULT));

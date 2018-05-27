@@ -177,6 +177,7 @@ public class ControleurJeu  extends ControleurBase {
         btnPause.setDisable(navigation.moteur.estEnReseau);
         recommencer.setDisable(navigation.moteur.estEnReseau);
         save.setDisable(navigation.moteur.estEnReseau);
+        lineAmpoule.setVisible(false);
         jeuInterrompu.set(false);
         Case[][] plateau = navigation.moteur.plateau.plateau;
         for(int i = 0 ; i < plateau.length ; i++)

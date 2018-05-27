@@ -123,7 +123,7 @@ public class ControleurChoixJoueurs extends ControleurBase
         {
             String message =  this.typeJoueur[ typesJoueur[couleur] ];
             nomCouleur.getChildren().get(0).setVisible(false);
-            if(typesJoueur[couleur] == IAFACILE || typesJoueur[couleur] == IAMOYENNE || typesJoueur[couleur] == IADIFFICILE )
+            if(typesJoueur[couleur] == IAFACILE || typesJoueur[couleur] == IAMOYENNE || typesJoueur[couleur] == IADIFFICILE  || typesJoueur[couleur] == JOUEURRESEAU )
             { 
                 message += " " +  COULEUR[couleur]  ; 
             }
@@ -169,7 +169,7 @@ public class ControleurChoixJoueurs extends ControleurBase
             {
                 typeJoueur[i] = TYPEJOUEURHORSRESEAU[i];
             }
-            typeJoueur[typesJoueur.length-1] = "JOUEUR EN RESEAU";
+            typeJoueur[typeJoueur.length-1] = "JOUEUR EN RESEAU";
             setJoueur(JAUNE,imagesJaune,nomJaune,JOUEURRESEAU);
         }
         else

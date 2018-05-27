@@ -20,7 +20,7 @@
                 </image>    
             </ImageView>
             <Label layoutX="200" layoutY="170"   prefWidth="250" text="Saisir l'adresse IP d'un hébergeur" />
-            <TextField fx:id="champIp" text="10.186.8.152" layoutX="200" layoutY="200" prefWidth="400" />
+            <TextField fx:id="champIp" text="123.123.123.123" layoutX="200" layoutY="200" prefWidth="400" />
             <Label layoutX="200" layoutY="250"   prefWidth="250" text="Nom" />
             <TextField fx:id="champNom" text="Moi" layoutX="200" layoutY="280" prefWidth="400" />
             

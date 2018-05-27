@@ -108,7 +108,9 @@ public abstract class ControleurSauvegarde extends ControleurBase
         try
         {
             ObjectInputStream oos = new ObjectInputStream(new FileInputStream(f));
-            return  (Moteur)oos.readObject();  
+            Moteur moteur = (Moteur)oos.readObject();  
+            oos.close();
+            return moteur;
           
        
          }   

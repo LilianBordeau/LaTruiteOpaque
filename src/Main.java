@@ -32,6 +32,7 @@ import javafx.util.Duration;
 import modele.DonneesDebutPartie;
 import modele.Joueur;
 import modele.JoueurReseau;
+import modele.Plateau;
 import reseau.ConnexionServeur;
 import vue.Navigation;
 
@@ -219,6 +220,10 @@ public class Main extends Application {
         
     public static void main(String[] args)
     {
+        if(args.length >= 1)
+        {
+            Plateau.fichierNiveau = args[0];
+        }
         launch(args);
     }
 

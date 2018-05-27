@@ -13,15 +13,16 @@ public class Plateau implements Serializable,Cloneable
     public static final int NBCASES1POISSONMIN = 9;
     public static final int NBTUILES3POISSONS = 10;
     public static final int NBTUILES2POISSONS = 20;
+    public static String fichierNiveau = null;
     
     public Plateau()
     {
         plateau = new Case[NBLIGNES][NBLIGNES];
-        String fichierNiveau = null;
-        //String fichierNiveau = "rsc/niveau.txt";
-        //String fichierNiveau = "rsc/niveauCoupNonPerdantTrouve.txt";
-        //String fichierNiveau = "rsc/niveauIsole.txt";
-        //String fichierNiveau = "rsc/niveauIADifficilePerd.txt";        
+        // fichierNiveau = null;
+        // fichierNiveau = "rsc/niveau.txt";
+        // fichierNiveau = "rsc/niveauCoupNonPerdantTrouve.txt";
+        // fichierNiveau = "rsc/niveauIsole.txt";
+        // fichierNiveau = "rsc/niveauIADifficilePerd.txt";        
         if(fichierNiveau == null)
         {
             int[][] plateauInt = GenerateurNiveau.genererNiveau();

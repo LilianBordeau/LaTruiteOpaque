@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import modele.DonneesDebutPartie;
@@ -75,7 +76,8 @@ public class ControleurChoixJoueurs extends ControleurBase
     private Label labelMessageNbJoueurs;
     @FXML
     private Label labelMessageReseau;
-    
+    @FXML
+    private Label labelFichierNiveau;
     @FXML
     private Button precedentRouge,suivantRouge,precedentVert,suivantVert,precedentBleu,suivantBleu,precedentJaune,suivantJaune;
     
@@ -135,6 +137,7 @@ public class ControleurChoixJoueurs extends ControleurBase
     @Override
     public void onAppearing()
     {  
+        labelFichierNiveau.setFont(new Font(null,12));
         panelSonManager.imageMusique.changerCurseur = false;
         panelSonManager.imageSon.changerCurseur = false;
         panelSonManager.screen.changerCurseur = false;

@@ -18,6 +18,7 @@ import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -288,7 +289,29 @@ public class ControleurTutoriel extends ControleurBase
     }
 
     
+    @FXML
+    private void survolTuile(MouseEvent event)
+    {
+        Scene scene = anchorPane.getScene();
+        ImageView tuileGraphique = (ImageView)event.getSource();
+        Point coordonnees = idToIndices(tuileGraphique.getId()); 
+        if(scene != null && moteur.joueurs[moteur.joueurCourant] instanceof JoueurHumain
+           && (moteur.placementPossible(coordonnees.ligne, coordonnees.colonne) || casesAccessibles.contains(coordonnees)
+                || (moteur.pingouinsPlaces() && moteur.contientJoueurCourant(coordonnees.ligne, coordonnees.colonne))))
+        {
+            scene.setCursor(Cursor.HAND);
+        }
+    }
     
+    @FXML
+    private void sortieTuile(MouseEvent event)
+    {
+        Scene scene = anchorPane.getScene();
+        if(scene != null)
+        {
+            scene.setCursor(Cursor.DEFAULT);
+        }
+    }
 
     
     public void nextPhrase(){
@@ -321,7 +344,7 @@ public class ControleurTutoriel extends ControleurBase
         tab = new String[8];
         tab[0] = "Bonjour, jeune padawan. Je suis Obikwak Kenobi et je vais te former à l'art d'amasser du poisson.\n"
                 + "L'objectif du jeu est simple : chaque joueur doit attraper un maximum de poissons avec ses pingouins. "
-                 +"Mais attention ! Si un pingouin est isolé sur une banquise il ne peut plus jouer et devient par conséquent inutile.";
+                 +"Mais attention ! Si un pingouin n'est entouré d'aucun bloc de glace libre et non coulé, il ne peut plus jouer et devient par conséquent inutile.";
         
         tab[1] = "Chaque joueur place tour à tour un de ses pingouins sur un bloc de glace contenant un et un seul poisson."
                 + " Il ne peut y avoir qu’un seul pingouin par bloc de glace. Pour mieux comprendre cela, clique sur une case avec un poisson pour placer un pingouin.";
@@ -354,16 +377,22 @@ public class ControleurTutoriel extends ControleurBase
     {
         
         String idPingouin = indicesToId(i, j, DEBUTIDPINGOUIN);
+        String idCaseAccessible = indicesToId(i, j, DEBUTIDCASEACCESSIBLE);
         ImageView pingouinGraphique = (ImageView)anchorPane.lookup("#"+idPingouin);
+        ImageView caseAccessible = (ImageView)anchorPane.lookup("#"+idCaseAccessible);
         Case tuile = moteur.plateau.plateau[i][j];
-        Image image = null;
+        Image image = null;        
+        Image imageAccessible = null;
         if(tuile.estOccupee() && !tuile.pingouin.estBloque)
         {
             String nomImage = Constantes.nomImagePingouin(moteur.joueurs[tuile.numJoueurPingouin()]);
             image = new Image(nomImage);
+            imageAccessible = new Image(Constantes.nomImageCaseAccessible(moteur.joueurs[moteur.joueurCourant]));
         }
         pingouinGraphique.setImage(image);
         pingouinGraphique.setVisible(true);
+        caseAccessible.setImage(imageAccessible);
+        caseAccessible.setVisible(true);
     }
     private void miseAJourTuile(int i, int j)
     {

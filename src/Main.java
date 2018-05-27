@@ -13,22 +13,30 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+import modele.Constantes;
 import modele.DonneesDebutPartie;
 import modele.Joueur;
 import modele.JoueurReseau;
@@ -144,60 +152,88 @@ public class Main extends Application {
                          primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                             @Override
                             public void handle(WindowEvent t) 
-                            {  
-                                navigation.fermerToutesLesConnexions();
-                                primaryStage.setOnCloseRequest(null);
+                            {
                                 t.consume();
-                                ImageView imageExit = new ImageView(new Image("Images/goodbye.gif"));
-                                //ImageView bulle = new ImageView(new Image("Images/goodbyeBulle.png"));
-                                imageExit.setX(165);
-                                imageExit.setY(180);
-                                //bulle.setX(300);
-                                //bulle.setY(100);
+                                final Stage dialog = new Stage();
+                                dialog.initModality(Modality.APPLICATION_MODAL);        
+                                VBox dialogVbox = new VBox(20);
+                                HBox hBoxButtons = new HBox();
+                                Text message = new Text("Quitter le jeu ? ");    
+                                Text message2 = new Text("(Toute progression non sauvegardée sera perdue)");  
+                                Button valider = new Button("Oui");
+                                Button annuler = new Button("Non");
+                                hBoxButtons.getChildren().addAll(annuler,valider);
+                                hBoxButtons.setSpacing(100);
+                                hBoxButtons.setAlignment(Pos.CENTER);        
+                                dialogVbox.getChildren().addAll(message,message2);
+                                dialogVbox.getChildren().add(hBoxButtons);
+                                dialogVbox.setAlignment(Pos.CENTER);
+                                Scene dialogScene = new Scene(dialogVbox, Constantes.POPUPWIDTH, Constantes.POPUPHEIGHT);       
+                                dialog.setScene(dialogScene);
+                                dialog.show();
+                                annuler.setOnMouseClicked(new EventHandler<MouseEvent>() {            
+                                    @Override
+                                    public void handle(MouseEvent event) {
+                                        dialog.close();
+                                    }
+                                });        
+                                valider.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                    @Override
+                                    public void handle(MouseEvent event) {
+                                                        dialog.close();
+                                                        navigation.fermerToutesLesConnexions();
+                                                        primaryStage.setOnCloseRequest(null);
+                                                        t.consume();
+                                                        ImageView imageExit = new ImageView(new Image("Images/goodbye.gif"));
+                                                        //ImageView bulle = new ImageView(new Image("Images/goodbyeBulle.png"));
+                                                        imageExit.setX(165);
+                                                        imageExit.setY(180);
+                                                        //bulle.setX(300);
+                                                        //bulle.setY(100);
 
-                                Rectangle rect = new Rectangle (0, 0, 800, 600);
-                                //Rectangle rect2 = new Rectangle (0, 600, 800, 1);
+                                                        Rectangle rect = new Rectangle (0, 0, 800, 600);
+                                                        //Rectangle rect2 = new Rectangle (0, 600, 800, 1);
 
-                                noeudRacine.getChildren().add(rect);
-                                //noeudRacine.getChildren().add(rect2);
-                                //noeudRacine.getChildren().add(bulle);
-                                noeudRacine.getChildren().add(imageExit);
+                                                        noeudRacine.getChildren().add(rect);
+                                                        //noeudRacine.getChildren().add(rect2);
+                                                        //noeudRacine.getChildren().add(bulle);
+                                                        noeudRacine.getChildren().add(imageExit);
 
 
-                                rect.setFill(Color.BLACK);
-                                //rect2.setFill(Color.BLACK);
+                                                        rect.setFill(Color.BLACK);
+                                                        //rect2.setFill(Color.BLACK);
 
-                                //ScaleTransition tt = new ScaleTransition(Duration.seconds(2), rect);
-                                //tt.setByY(350f);
+                                                        //ScaleTransition tt = new ScaleTransition(Duration.seconds(2), rect);
+                                                        //tt.setByY(350f);
 
-                                FadeTransition tt = new FadeTransition(Duration.seconds(0.5), rect);
-                                tt.setInterpolator(Interpolator.LINEAR);
-                                tt.setCycleCount(1);
-                                tt.setAutoReverse(false);
-                                tt.setFromValue(0);
-                                tt.setToValue(1);
-                                
-                                ScaleTransition ImageExitTransition = new ScaleTransition(Duration.seconds(1.5), imageExit);
-                                TranslateTransition ImageExitTransition2 = new TranslateTransition(Duration.seconds(1.5), imageExit);
-                                ImageExitTransition.setByY(0.2f);
-                                ImageExitTransition.setByX(0.2f);
-                                ImageExitTransition2.setByX(30f);
-                                ImageExitTransition2.setByY(5f);
+                                                        FadeTransition tt = new FadeTransition(Duration.seconds(0.5), rect);
+                                                        tt.setInterpolator(Interpolator.LINEAR);
+                                                        tt.setCycleCount(1);
+                                                        tt.setAutoReverse(false);
+                                                        tt.setFromValue(0);
+                                                        tt.setToValue(1);
 
-                                //ScaleTransition tt2 = new ScaleTransition(Duration.seconds(2), rect2);
-                                //tt2.setByY(-350f);
-                                //tt.setOnFinished(e -> {Platform.exit();});
-                                //tt.play();
-                                //tt2.play();
-                                ImageExitTransition2.setOnFinished(e -> {Platform.exit();});
-                                tt.play();
-                                ImageExitTransition.play();
-                                ImageExitTransition2.play();
+                                                        ScaleTransition ImageExitTransition = new ScaleTransition(Duration.seconds(1.5), imageExit);
+                                                        TranslateTransition ImageExitTransition2 = new TranslateTransition(Duration.seconds(1.5), imageExit);
+                                                        ImageExitTransition.setByY(0.2f);
+                                                        ImageExitTransition.setByX(0.2f);
+                                                        ImageExitTransition2.setByX(30f);
+                                                        ImageExitTransition2.setByY(5f);
 
-                               }
+                                                        //ScaleTransition tt2 = new ScaleTransition(Duration.seconds(2), rect2);
+                                                        //tt2.setByY(-350f);
+                                                        //tt.setOnFinished(e -> {Platform.exit();});
+                                                        //tt.play();
+                                                        //tt2.play();
+                                                        ImageExitTransition2.setOnFinished(e -> {Platform.exit();});
+                                                        tt.play();
+                                                        ImageExitTransition.play();
+                                                        ImageExitTransition2.play();
+                                    }
+                                });
+                            }
                         }); 
-                        navigation.changerVue(ControleurMenuPrincipal.class);
-                        
+                        navigation.changerVue(ControleurMenuPrincipal.class);                        
                     }
                 });
             }                       
@@ -211,7 +247,7 @@ public class Main extends Application {
         //primaryStage.setWidth(LARGEURFENETREFXML); // remplacer par LARGEURFENETREINIT avant le rendu
         //primaryStage.setHeight(HAUTEURFENETREFXML); // remplacer par HAUTEURFENETREINIT avant le rendu 
     
-        primaryStage.setTitle("La Truite Opaque");
+        primaryStage.setTitle("Les pingouins");
         /*Image image2 = new Image("Images/mouse2.gif");
         scene.setCursor(new ImageCursor(image2));*/
         

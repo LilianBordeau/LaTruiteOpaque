@@ -23,6 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -34,12 +35,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import modele.Case;
 import modele.Constantes;
@@ -279,8 +284,39 @@ public class ControleurJeu  extends ControleurBase {
     @FXML
     private void retourMenu(ActionEvent event)
     {
-        jeuInterrompu.set(true);
-        navigation.changerVue(ControleurMenuPrincipal.class);
+        //jeuInterrompu.set(true);
+        pause();
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);        
+        VBox dialogVbox = new VBox(20);
+        HBox hBoxButtons = new HBox();
+        Text message = new Text("Revenir au menu principal ? ");    
+        Text message2 = new Text("(Toute progression non sauvegardée sera perdue)");  
+        Button valider = new Button("Oui");
+        Button annuler = new Button("Non");
+        hBoxButtons.getChildren().addAll(annuler,valider);
+        hBoxButtons.setSpacing(100);
+        hBoxButtons.setAlignment(Pos.CENTER);        
+        dialogVbox.getChildren().addAll(message,message2);
+        dialogVbox.getChildren().add(hBoxButtons);
+        dialogVbox.setAlignment(Pos.CENTER);
+        Scene dialogScene = new Scene(dialogVbox, Constantes.POPUPWIDTH, Constantes.POPUPHEIGHT);       
+        dialog.setScene(dialogScene);
+        dialog.show();
+        annuler.setOnMouseClicked(new EventHandler<MouseEvent>() {            
+            @Override
+            public void handle(MouseEvent event) {
+                dialog.close();
+                reprendre();
+            }
+        });        
+        valider.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                 dialog.close();
+                 navigation.changerVue(ControleurMenuPrincipal.class);
+            }
+        });
     }
     
     private Point idToIndices(String id)
@@ -809,23 +845,53 @@ public class ControleurJeu  extends ControleurBase {
     
     @FXML
     private void clicRecommencer(ActionEvent event)
-    {
-        
+    {        
         if(!navigation.moteur.estEnReseau)
         {
-            hideFinPartie();
-            jeuInterrompu.set(true);
-            System.out.println(navigation.moteur.plateau.plateau == navigation.moteur.sauvegardeDebutPartie.plateau.plateau);
-            System.out.println(navigation.moteur.plateau.plateau[0][0] == navigation.moteur.sauvegardeDebutPartie.plateau.plateau[0][0]);
-            navigation.moteur = navigation.moteur.sauvegardeDebutPartie;            
-            navigation.moteur.sauvegarderDebutPartie();
-            pingouinFantome = null;
-            pingouinSel = null;
-            effacerAmpoule();
-            miseAJourAnnulerRefaireIndiceActive();
-            miseAJourPlateau();
-            jeuInterrompu.set(false);
-            reprendre(); 
+            pause();
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);        
+            VBox dialogVbox = new VBox(20);
+            HBox hBoxButtons = new HBox();
+            Text message = new Text("Recommencer la partie en cours ?");        
+            Text message2 = new Text("(Toute progression non sauvegardée sera perdue)");  
+            Button valider = new Button("Oui");
+            Button annuler = new Button("Non");
+            hBoxButtons.getChildren().addAll(annuler,valider);
+            hBoxButtons.setSpacing(100);
+            hBoxButtons.setAlignment(Pos.CENTER);        
+            dialogVbox.getChildren().addAll(message, message2);
+            dialogVbox.getChildren().add(hBoxButtons);
+            dialogVbox.setAlignment(Pos.CENTER);
+            Scene dialogScene = new Scene(dialogVbox, Constantes.POPUPWIDTH, Constantes.POPUPHEIGHT);       
+            dialog.setScene(dialogScene);
+            dialog.show();
+            annuler.setOnMouseClicked(new EventHandler<MouseEvent>() {            
+                @Override
+                public void handle(MouseEvent event) {
+                    dialog.close();
+                    reprendre();
+                }
+            });        
+            valider.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                     dialog.close();
+                     hideFinPartie();
+                    jeuInterrompu.set(true);
+                    System.out.println(navigation.moteur.plateau.plateau == navigation.moteur.sauvegardeDebutPartie.plateau.plateau);
+                    System.out.println(navigation.moteur.plateau.plateau[0][0] == navigation.moteur.sauvegardeDebutPartie.plateau.plateau[0][0]);
+                    navigation.moteur = navigation.moteur.sauvegardeDebutPartie;            
+                    navigation.moteur.sauvegarderDebutPartie();
+                    pingouinFantome = null;
+                    pingouinSel = null;
+                    effacerAmpoule();
+                    miseAJourAnnulerRefaireIndiceActive();
+                    miseAJourPlateau();
+                    jeuInterrompu.set(false);
+                    reprendre(); 
+                }
+            });
         }
         else
         {

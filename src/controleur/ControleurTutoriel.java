@@ -358,7 +358,7 @@ public class ControleurTutoriel extends ControleurBase
    
         tab[4] ="Essayes de ramasser un maximum de poissons ! " ;
 
-        tab[5] ="Tu es fin prêt, tu peux commencer à jouer. Et surtout n'oublie pas : une truite vaut mieux que deux tu l'auras." ;
+        tab[5] ="Tu es fin prêt, tu peux commencer à jouer. Si tu veut jouer avec un niveau stocké dans un fichier, précise le nom du fichier en premier argument du programme en ligne de commande. Et surtout n'oublie pas : une truite vaut mieux que deux tu l'auras." ;
     }
 
     private Point idToIndices(String id)

@@ -27,7 +27,6 @@
                 </image>    
         </ImageView>
 
-            <Label fx:id="labelFichierNiveau" layoutX="10.0" layoutY="0.0" text="Jouez avec un niveau stocké dans un fichier en mettant son nom en premier argument du programme en ligne de commande" />
 
 
         <!-- <Label layoutX="342.0" layoutY="33.0" text="Choix des joueurs" /> -->

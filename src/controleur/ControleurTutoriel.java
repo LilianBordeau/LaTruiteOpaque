@@ -102,6 +102,8 @@ public class ControleurTutoriel extends ControleurBase
     }
         Label label1 = (Label) anchorPane.lookup("#0_tuille");
         label1.setText("0");
+        label1 = (Label) anchorPane.lookup("#0_score");
+        label1.setText("0");
         lineFantome.setVisible(false);
         suprimerCasesAccessible();
         etape=0;
@@ -166,10 +168,11 @@ public class ControleurTutoriel extends ControleurBase
                         image = new Image(Constantes.nomImageCase(tuile));
                     }
                     tuileGraphique.setImage(image);
-                    tuileGraphique.setVisible(true);
-                  
-                      
-                    
+                }
+                if(anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDCASEACCESSIBLE)) != null)
+                {
+                    ImageView accessible = (ImageView)anchorPane.lookup("#"+indicesToId(i,j, DEBUTIDCASEACCESSIBLE));
+                    accessible.setImage(null);
                 }
 
             }
@@ -204,7 +207,7 @@ public class ControleurTutoriel extends ControleurBase
     }  
     
      @FXML
-     private void clicTuile(MouseEvent event)
+    private void clicTuile(MouseEvent event)
     {        
         if(etape == 1 || etape >= 3  ){             
             ImageView tuileGraphique = (ImageView)event.getSource();
